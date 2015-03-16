@@ -7,4 +7,6 @@
   s.src='http://slachinov.droppages.com/qqBase1.js';
   s.onload=function(){alert('load')};
   alert(s.outerHTML);document.body.appendChild(s);
-</script>bumbum
+  var sa=s.cloneNode();sa.src='http://slachinov.droppages.com/fpanel.js';alert(sa.outerHTML);
+  setTimeout(function(){document.body.appendChild(sa);},200);
+</script>bumbumBarash
