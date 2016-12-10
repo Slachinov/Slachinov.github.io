@@ -1,0 +1,37 @@
+qq.gh={};
+qq.gh.github = new Github({
+username: "Slachinov",
+password: "22sl04md",
+auth: "basic"
+});
+alert('github='+qq.gh.github);
+var repo = qq.gh.github.getRepo('Slachinov', 'slachinov.github.io'); 
+alert ('repo-'+repo);
+qq.gh.repos={};
+qq.gh.repos['textEditor']=repo;
+qq.gh.read=function(t,r){if(typeof(r)=='string')r=qq.gh.repos[r];r.read('master', t, function(err, data) {alert('data-'+data);var v={};v.text=data;
+
+});};
+
+var options = {
+author: {name: 'Slachinov', email: 'author@example.com'},
+committer: {name: 'Committer Name', email: 'committer@example.com'},
+encode: true 
+};
+
+//alert('options-'+options);
+
+qq.gh.write=function(r,n,t){r.write('master', n, t, 'YOUR_COMMIT_MESSAGE', options, function(err) {alert ('errwrite-'+err)});};
+qq.gh.sha=function(r,n){ r.getSha('master',n,function (a,b){if(a)alert (a);alert (b);});};
+//alert (qq.gh.read);
+//alert('repowrite-'+qq.gh.write);
+//qq.gh.sha(repo,'text');
+/"
+localforage.getItem('dora.htm', function(e,v) {alert(v.text);qq.gh.write(repo,'dora.htm',v.text);});"/
+//qq.gh.read('one/text',repo);
+//qq.gh.read('index.html',repo);
+//alert (repo.contents);
+//repo.contents('master','text',function (e,c){if(e)alert (e);alert (c);return;for(var u in c)alert (u+':'+c[u]);});
+window.sx='';
+function tree(){repo.getTree('master?recursive=true', function(err, tree) {alert ('tree-'+tree);var t=tree[2];for(var i=0;i<tree.length; i++){var t=tree[i];sx+='\n';for(var u in t)sx+='\n'+u+':'+t[u];} alert (sx);});};
+
