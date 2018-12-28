@@ -1,2 +1,6 @@
-qq.app.elm=ce(div(),all(),bg('blue'),zi(5),abs(),t(150),fs(35),au(),cl(function(){this.hide()}));
-qq.app.elm.hide()
+eval(localStorage['githubauth0']);
+(async function(){
+await qq.gh.write(qq.repo,'2/1.js',localStorage['github2']);
+var a=await qq.gh.read(qq.repo,'2/1.js');
+alert(5);alert(a);
+})();
