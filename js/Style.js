@@ -37,3 +37,4 @@ var but=function (){var b=crs(arguments);return ce(tag('button'),b)};
  var lsg=function(a){return localStorage[a]};
  var lss= function(a,v){localStorage[a]=v};
  var all= function(){return {style: {top:"0px",left: "0px", right:"0px", bottom:"0px"}}};
+alert('endstyle');
