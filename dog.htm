@@ -22,6 +22,7 @@ if(!d1)d1=ce(div(),all(),zi(9),au(),bg('lightgray'),abs(),t(50),fs(35),ih(''));e
 inp=ce(tag('input'));
 ce(tag('button'),ih('load'),cl(function(){d.innerText=localStorage[inp.value]}));
 ce(tag('button'),ih('save'),bg('red'),cl(function(){localStorage[inp.value]=d.innerText}));//alert(6);
+                                   d=ce(div(),all(),bg('lightgreen'),zi(2),abs(),t(50),fs(35),au(),ed(true));//alert(4);
 ce(tag('button'),ih('del'),bg('red'),cl(function(){var dd=ce(all(),abs(),zi(5),bg('blue'));var bb1=ce(tag('button'),ih('yes'),par(dd),cl(function(){localStorage.removeItem(inp.value);this.d.hide();al();}));;var bb2=ce(tag('button'),ih('no'),par(dd),cl(function(){this.d.hide();al();}));bb1.d=dd;bb2.d=dd;;}));//alert(5);
 d=ce(div(),all(),bg('lightgreen'),zi(2),abs(),t(50),fs(35),au(),ed(true));//alert(4);
 };
