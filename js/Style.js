@@ -1,4 +1,4 @@
-undefined;;;console.log('style');
+alert('style');
  var csk= function(){
 var skin={};
 var m=arguments;
