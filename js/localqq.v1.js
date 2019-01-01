@@ -1,3 +1,4 @@
+alert('localqq');
 var localqq={};
 (function(){var db;
 var reg=indexedDB.open('localqq');
@@ -52,5 +53,5 @@ resolve(regp.result);
 };
 })};
 //---
-            }
+ alert('end');}
               
