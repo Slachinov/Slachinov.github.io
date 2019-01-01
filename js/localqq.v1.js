@@ -5,15 +5,17 @@ reg.onerror=function(){alert('error');};
 reg.onsuccess=function(event){alert('succ');
 db=event.target.result;
 localqq.db=db;
-var dd=db.version;dd++;
+/*var dd=db.version;dd++;
 var listst=db.objectStoreNames;
 for(var i=0;i<listst.length;i++)if(listst[i]=='localqqstore')return;
 db.close();
 reg=indexedDB.open('localqq',dd);
 reg.onupgradeneeded=function(event){var db = event.target.result;
-db.createObjectStore("localqqstore",{keyPath:"key"});}};
+db.createObjectStore("localqqstore",{keyPath:"key"});}};*/
+alert('beg');beg();
 })();
 //------
+function beg(){
 localqq.get=function(k){return new Promise(function(resolve, reject) {
 var tran = localqq.db.transaction(['localqqstore'], "readonly");
 var objst = tran.objectStore("localqqstore");//alert(objst);
@@ -49,3 +51,6 @@ regp.onsuccess = function(e) {
 resolve(regp.result);
 };
 })};
+//---
+            }
+              
