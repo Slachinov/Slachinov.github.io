@@ -1,4 +1,4 @@
-alert('localqq');
+alert('localqqmy');
 window.localqq={};
 //--
 localqq.f=function(){//alert(9);
@@ -20,7 +20,6 @@ db.createObjectStore("localqqstore",{keyPath:"key"});
 //--------------
 (async function (){
 let c=await localqq.f();
-alert('ccc='+c);
 localqq.get=function(k){return new Promise(function(resolve, reject) {
 var tran = localqq.db.transaction(['localqqstore'], "readonly");
 var objst = tran.objectStore("localqqstore");
