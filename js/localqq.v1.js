@@ -1,25 +1,29 @@
 alert('localqq');
-var localqq={};
-(function(){var db;
+window.localqq={};
+//--
+localqq.f=function(){//alert(9);
+return new Promise(function(resolve, reject) {//alert(99);
+var db;
 var reg=indexedDB.open('localqq');
 reg.onerror=function(){alert('error');};
-reg.onsuccess=function(event){alert('succ');
-db=event.target.result;
-localqq.db=db;
-/*var dd=db.version;dd++;
-var listst=db.objectStoreNames;
-for(var i=0;i<listst.length;i++)if(listst[i]=='localqqstore')return;
-db.close();
-reg=indexedDB.open('localqq',dd);
-reg.onupgradeneeded=function(event){var db = event.target.result;
-db.createObjectStore("localqqstore",{keyPath:"key"});}};*/
-alert('beg');beg();
-})();
-//------
-function beg(){
+reg.onsuccess=function(event){
+db=event.target.result;localqq.db=db;
+resolve(1);
+};
+//---
+reg.onupgradeneeded=function(event){alert('upg');var db = event.target.result;
+db.createObjectStore("localqqstore",{keyPath:"key"});
+};
+//--
+})
+};
+//--------------
+(async function (){
+let c=await localqq.f();
+alert('ccc='+c);
 localqq.get=function(k){return new Promise(function(resolve, reject) {
 var tran = localqq.db.transaction(['localqqstore'], "readonly");
-var objst = tran.objectStore("localqqstore");//alert(objst);
+var objst = tran.objectStore("localqqstore");
 var regp=objst.get(k);
 regp.onsuccess = function(e) {
 resolve(regp.result.data);
@@ -53,5 +57,12 @@ resolve(regp.result);
 };
 })};
 //---
- alert('end');}
-              
+localqq.getAll=function(k){return new Promise(function(resolve, reject) {
+var tran = localqq.db.transaction(['localqqstore'], "readonly");
+var objst = tran.objectStore("localqqstore");
+var regp=objst.getAll(k);
+regp.onsuccess = function(e) {
+resolve(regp.result);
+};
+})}
+})();
