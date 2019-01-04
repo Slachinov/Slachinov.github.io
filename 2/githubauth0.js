@@ -23,10 +23,14 @@ qq.gh.delete=function(r,n){return new Promise(function(resolve, reject) {r.delet
 //--
 })};
 //-------------------
-qq.gh.gettree=function(r){return new Promise(function(resolve, reject) {
-repo.getTree('master?recursive=true',async function(err,tree){if(err)reject(err);if(tree)resolve(tree);});
+qq.gh.gettree=function(r){return new Promise(function(resolve, reject) {alert(8);alert(repo);alert(repo.getTree);
+repo.getTree('master?recursive=true',asnc function(err,tree){alert(7);alert(err);alert(tree);if(err)reject(err);if(tree)resolve(tree);});
 //--
 })};
 //===============
+alert(5);
+let d=await qq.gh.gettree();
+alert(6);
+alert(d);
 alert('end');
 
