@@ -19,8 +19,9 @@
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
 <!-- Load our React component. -->
-<script>
-'use strict';
+  <br><button onclick='let d=document.getElementById('dd');alert(d);eval(d);>eval</button> 
+<div id=dd contentEditable=true>
+'use strict'
 
 const e = React.createElement;
 
@@ -45,7 +46,7 @@ return e(
 
 const domContainer = document.querySelector('#like_button_container');
 ReactDOM.render(e(LikeButton), domContainer);
-</script>
+</div>
 
 </body>
 </html>
