@@ -19,7 +19,9 @@
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
 <!-- Load our React component. -->
-  <br><button onclick="let d=document.getElementById('dd');alert(d);eval(d);">eval</button><button onclick="dd.innerHTML=''">clear</button> 
+<br><button onclick="let d=document.getElementById('dd');eval(d.innerText);">eval</button>
+<button onclick="dd.innerHTML=''">clear</button>
+<button onclick="dd.innerText='tratata'">get</button>
 <div id=dd style="border:1px solid black;background:lightgray;" contentEditable=true>
 'use strict'
 
