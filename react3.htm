@@ -5,13 +5,12 @@
 <title>Add React in One Minute</title>
 </head>
 <body>
-  <div id='my' style='left:0px;right:0px;height:150px;border:1px solid black;background:lightgray'></div>
-<h2>Add React in One Minute</h2>
-<p>This page demonstrates using React with no build tooling.</p>
-<p>React is loaded as a script tag.</p>
+  <div id='my' style='left:0px;right:0px;height:200px;border:1px solid black;background:lightgray'><div id="like_button_container"></div>
+  </div>
+
 
 <!-- We will put our React component inside this div. -->
-<div id="like_button_container"></div>
+
 
 <!-- Load React. -->
 <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
@@ -23,7 +22,8 @@
 <button onclick="dd.innerHTML=''">clear</button>
 <button onclick="dd.innerText=localStorage[inp.value]">get</button>
 <input id='inp' />
-<div id=dd style='left:0px;right:0px;height:150px;border:1px solid black;background:lightgreen'" contentEditable=true>
+<button style="background:red;" onclick="localStorage[inp.value]=dd.innerText">set</button>
+<div id=dd style='left:0px;right:0px;height:250px;border:1px solid black;background:lightgreen;overflow:auto;'" contentEditable=true>
 'use strict'
 
 const e = React.createElement;
