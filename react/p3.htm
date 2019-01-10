@@ -6,7 +6,7 @@
 <title>Add React in One Minute</title>
 </head>
 <body>
-  <div id='my' style='left:0px;right:0px;height:300px;border:1px solid black;background:lightgray'><div id="like_button_container"></div>
+  <div id='my' style='left:0px;right:0px;height:300px;border:1px solid black;background:lightgray;position:relative'><div id="like_button_container"></div>
   </div>
 
 
@@ -25,7 +25,7 @@
 <button onclick="dd.innerText=localStorage[inp.value]">get</button>
 <input id='inp' />
 <button style="background:red;" onclick="localStorage[inp.value]=dd.innerText">set</button>
-<div id=dd style='left:0px;right:0px;bottom:250px;border:1px solid black;background:lightgreen;overflow:auto;position:relative;' contentEditable=true>
+<div id=dd style='left:0px;right:0px;bottom:250px;border:1px solid black;background:lightgreen;overflow:auto;;' contentEditable=true>
 
 
 const e = React.createElement;
