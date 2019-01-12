@@ -127,6 +127,6 @@ qq.loadscript=function(url) {return new Promise(function(resolve, reject) {
 var el=document.createElement('script');
 el.src=url;
 el.addEventListener('load',function(){resolve(url)},false);
-el.addEventListener('error',function(e){alert('err'):alert(e);reject(e)},false);
+el.addEventListener('error',function(e){alert('err');alert(e);reject(e)},false);
 document.head.appendChild(el);
 })};
