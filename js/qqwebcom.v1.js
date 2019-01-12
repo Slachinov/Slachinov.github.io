@@ -14,6 +14,7 @@ inp=qq.f.crElem({tag:'input'},par);
 let get=qq.f.crElem(tmb,{it:'get',event:{click:function(){edit.innerText=localStorage[inp.value];}}});
 let set=qq.f.crElem(tmb,red,{it:'set',event:{click:function(){localStorage[inp.value]=edit.innerText}}});
 let del=qq.f.crElem(tmb,red,{it:'del',event:{click:function(){localStorage.removeItem([inp.value]);edit.innerHTML='';inp.value='';}}});
+qq.f.crElem(tmb,{it:'eval',event:{click:function(){eval(edit.innerText);='';}}});
 let cl=qq.f.crElem(tmb,{it:'clear',event:{click:function(){edit.innerHTML='';edit.setAttribute('contentEditable',true);}}});
 let all=qq.f.crElem(tmb,{it:'all',event:{click:function(){edit.setAttribute('contentEditable',false);inp.value='';edit.innerText='';for(let u in localStorage){qq.f.crElem({tag:"div",style:{border:'1px solid black',background:'orange'},prop:{u:u},event:{click:function(){edit.setAttribute('contentEditable',true);inp.value=this.u;edit.innerText=localStorage[this.u]}},it:u,parent:edit});};}}});
 }};
