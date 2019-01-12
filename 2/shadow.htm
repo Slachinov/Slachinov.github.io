@@ -1,6 +1,6 @@
 <div style='width:50%;height:50%;'><x-demo>
   <button>Кнопка без атрибута slot</button>
-  <p slot="red">my 2 Параграф для красного блока</p>
+  <p slot="red">my 3 Параграф для красного блока</p>
   <article slot="black">Артикл для чёрной секции</article>
   <button slot="red">Ещё один элемент в красную секцию</button>
                          </x-demo></div>
@@ -19,8 +19,8 @@ class Demo extends HTMLElement {
       <section id="yellow"><slot name="yellow">${noContent}</slot></section>
       <style>
         :host {
-          width: 100vw;
-          height: 100vh;
+          width: 50vw;
+          height: 50vh;
           display: flex;
           flex-wrap: wrap;        
         }
