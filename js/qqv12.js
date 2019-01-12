@@ -123,12 +123,10 @@ qq.ls={};
 qq.ls.run=function (a){eval(localStorage['script/'+a]);};
 qq.f.for=function (a){var s='';for(var u in a)s+=u+':'+a[u]+'\n';alert(s);return s;};
 //
-qq.closing ={};
-qq.temp={};
-qq.closing.t1='qq.temp.a=function (){eval(arguments[0].e);if(arguments[0].r){return eval(arguments[0].r); }else{if(arguments[0].f){eval(qq.closing.t2);return qq.temp.b}}}';
-qq.closing.t2='qq.temp.b=function (){eval(arguments[0].e);if(arguments[0].r){return eval(arguments[0].r); }else{if(arguments[0].f){eval(qq.closing.t1);return  qq.temp.a}}};';
-qq.closing.f=function (){eval(arguments[0].e);eval(qq.closing.t1);return qq.temp.a};
-//--
-qq.ns={};
-qq.ns.m=qq.closing.f({e:'',f:1});
-//alert("new qq v1-1");
+qq.loadscript=function(url) {return new Promise(function(resolve, reject) {
+var el=document.createElement('script');
+el.src=url;
+el.addEventListener('load',function(){resolve(url)},false);
+el.addEventListener('error',function(e){reject(e)},false);
+document.head.appendChild(el);
+})};
