@@ -3,6 +3,7 @@ let au=auth||{};
 let gh=new Github(au);
 let user=gh.getUser();
 //======GIST====================
+this.github=gh;
 this.gists=function(){return new Promise(function(resolve, reject) {
 user.gists(function(e,d){if(e)reject(e);if(d)resolve(d)})})};
 //---
