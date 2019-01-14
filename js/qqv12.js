@@ -128,5 +128,8 @@ var el=document.createElement('script');
 el.src=url;
 el.addEventListener('load',function(){resolve(url)},false);
 el.addEventListener('error',function(e){alert('err');alert(e);reject(e)},false);
-document.head.appendChild(el);
+document.head.appendChild(el);})};
+qq.f.initgithub=async function(){return new Promise(function(resolve, reject) {
+async function f(){
+let url;if(!window.Github) url=await qq.loadscript('http://Slachinov.github.io/js/github.js');if(!qq.f.github)url=await qq.loadscript('http://Slachinov.github.io/js/qq.github.v1.js');let gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});resolve(gh)};f();
 })};
