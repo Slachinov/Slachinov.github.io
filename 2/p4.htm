@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<script src='../js/qqv12.js'></script>
+<title></title>
+</head>
+<body>
+  <div id='my' style='left:0px;right:0px;height:300px;border:1px solid black;background:lightgray;position:relative'><div id="like_button_container"></div>
+  </div>
+
+<br><button onclick="let d=document.getElementById('dd');eval(d.innerText);">eval</button>
+<button onclick="dd.innerHTML=''">clear</button>
+<button onclick="dd.innerText=localStorage[inp.value]">get</button>
+<input id='inp' />
+<button style="background:red;" onclick="localStorage[inp.value]=dd.innerText">set</button>
+<div id=dd style='left:0px;right:0px;bottom:250px;border:1px solid black;background:lightgreen;overflow:auto;;' contentEditable=true>
+
+</div>
+
+</body>
+</html>
