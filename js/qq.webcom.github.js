@@ -3,15 +3,12 @@ constructor() {
 super();
 let that=this;
 var gh; 
-
-alert(55+qq.f.github);alert(this);alert(this.outerHTML);
-gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});alert('gh='+gh);
+gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});
 let inp,edit,el,bts;
-el=qq.f.crElem({tag:"div",style:{width:'600px',height:'400px',overflow:'hidden',background:'orange'}, parent:that});alert(7777+el);
+el=qq.f.crElem({tag:"div",style:{width:'600px',height:'400px',overflow:'hidden',background:'orange'}, parent:that});
 bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"Github "});
 let h0=el.offsetHeight;let h1=bts.offsetHeight;
 edit=qq.f.crElem({tag:"div",attr:{contentEditable:true},style:{'font-size':'18px',left:'0px',right:'0px',height:(h0-h1)+'px',background:'lightgreen',overflow:'auto'}, parent:el});
-alert(el);
 let par={parent:bts};
 let tmb={tag:'button',parent:bts};
 let red={style:{background:'red'}};
