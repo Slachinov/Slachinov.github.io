@@ -50,6 +50,7 @@ let f=await repo.remove(n);alert(f);}}});
 let move=qq.f.crElem(tmb,{it:'move',event:{click:async function(){}}});
 qq.f.crElem(par,{tag:'br'});
 qq.f.crElem(par,{tag:'span',it:' editor '});
+h0=el.offsetHeight;h1=bts.offsetHeight;edit.style.height=h0-h1+'px';
 let cl=qq.f.crElem(tmb,{it:'clear',event:{click:function(){edit.innerHTML='';}}});
 let ev=qq.f.crElem(tmb,{it:'eval',event:{click:function(){eval(edit.innerText);}}});
 //--
