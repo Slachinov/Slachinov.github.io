@@ -90,20 +90,4 @@ this.getrepo=function(a,b){return new  getRepo(a,b)};
 };
 //=======================
 alert('end qq.github.v3.js');
-/*
-//this.write = function(branch, path, content, message, options, cb) {
-//this.move = function(branch, path, newPath, cb) {
-//this.remove = function(branch, path, cb) {
-//this.delete = this.remove;
-//this.read = function(branch, path, cb) {
- this.postTree = function(tree, cb) {
-this.postBlob = function(content, cb) {
- this.updateTree = function(baseTree, path, blob, cb) {
- this.getSha = function(branch, path, cb) {
- this.getBlob = function(sha, cb) {
-this.listBranches = function(cb) 
-this.deleteRepo = function(cb) {
-this.createRepo = function(options, cb) {
- function updateTree(branch, cb) {
 
-*/
