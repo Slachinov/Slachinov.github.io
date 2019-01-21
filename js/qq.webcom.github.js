@@ -47,7 +47,9 @@ let cre=qq.f.crElem(tmb,red,{it:'create',event:{click:function(){}}});
 let del=qq.f.crElem(tmb,red,{it:'del',event:{click:async function(){let repo=gh.getrepo('Slachinov','slachinov.github.io');let n=inp.value;alert(n);
 let f=await repo.remove(n);alert(f);}}});
 //==========MOVE========================
-let move=qq.f.crElem(tmb,{it:'move',event:{click:async function(){}}});
+let move=qq.f.crElem(tmb,{it:'move',event:{click:async function(){let repo=gh.getrepo('Slachinov','slachinov.github.io');let n=inp.value;alert(n);
+let n1='old/'+n;alert(n1);
+let f=await repo.move(n,n1);}}});
 qq.f.crElem(par,{tag:'br'});
 qq.f.crElem(par,{tag:'span',it:' editor '});
 h0=el.offsetHeight;h1=bts.offsetHeight;edit.style.height=h0-h1+'px';
