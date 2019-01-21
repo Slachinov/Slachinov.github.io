@@ -67,15 +67,15 @@ var options={author:{name:'slach',email:'pser@mail.ru',commiter:{name:'slach',em
 let message='qq file';
 repo.write('master',path,content, message, options,function(e,d){if(e)reject(e);if(d)resolve(d)})})};
 //------
-this.reporemove =function(path){return new Promise(function(resolve, reject) {
-repo.remove('master',path,function(e,d){if(e)reject(e);if(d)resolve(d)})})};
+this.remove =function(path){return new Promise(function(resolve, reject) {
+repo.remove('master',path,function(e,d){alert(e);alert(d);if(e)reject(e);if(d)resolve(d)})})};
 //------
-this.repodelete = this.reporemove;
+this.delete = this.remove;
 //---
 /*this.repomove =function(path, newPath){return new Promise(function(resolve, reject) {
 repo.move('master',path, newPath,function(e,d){if(e)reject(e);if(d)resolve(d)})})};*/
 //------
-this.repomove =function(path, newPath){return new Promise(function(resolve, reject) {
+this.move =function(path, newPath){return new Promise(function(resolve, reject) {
 (async function(){
 let cont=await self.reporead(path);
 await self.repowrite(newPath,cont);
