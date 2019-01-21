@@ -1,0 +1,325 @@
+//alert(8);
+
+ var e=localStorage[ "Idb0"];
+
+
+ eval(e);
+ eval( localStorage ["Style"]);
+ var repo, preloader, fileText, fileName='',  topFileName, device,storage;
+ var base, panelButtons, templateButton, 
+ templatePanel, panel
+;;;init:
+ //alert(90);
+qq.idb.open("myDb1",ff);
+ function ff(a){//alert(a);
+
+ app.ind={};
+ app.ind.db=a;
+ app.ind.nst="edit";
+$f($a)}
+;;qq.gh={};
+qq.gh.github = new Github({
+username: "Slachinov",
+password: "22sl04md",
+auth: "basic"
+});
+
+base=ce (div(), all(),t(25),fx(),bg('red'),zi(7));
+ topFileName= ce(span(),fx(),ih(""),t(0),l(0), zi(8),fs(22),h(25), bg("white"),brd());
+topFileName.info=function(){this.innerText=device+":"+fileName};
+ //alert(base);alert(b);
+ panel=ce(div(), abs(), zi(5), l(0), r(0), t(0), bg("orange"), brd(), par(base),au(),fs(26));
+ panel.clear= function(){this.innerHTML='';};
+ 
+ panelButtons= ce(div(),zi(1), abs(), l(0),r(0) ,b(0), par(base), brd(), bg("gray"));
+
+panelButtons.clear=function(){this.innerHTML='';};
+templateButton= csk(tag("button"), par(panelButtons), fs(28));
+templatePanel = csk(div(),bg("rgba(200,200,145,1)"), par(panel), brd(), fs(34));
+ 
+  preloader= qq.f.crElem( {tag:"div",style:{
+    position: "fixed",
+    left: "0px",
+    top: "0px",
+    "z-index": 999,
+    width: "100%",
+    height: "100%",
+    overflow: "visible",
+    background: "rgba(100,100,100,.9) url('//cdnjs.cloudflare.com/ajax/libs/file-uploader/3.7.0/processing.gif') no-repeat center center"}, event: {click: function(){this.hide()}}
+});preloader.hide();
+$f($a, "buttonsInit");
+$f($a, "clickDevice")
+;;buttonsInit: panelButtons.clear();
+$f($a,"buttonHide");$f($a,"buttonDevice");$f($a, "heightPanel")
+
+;;buttonsEdit:
+//alert("edit");
+panelButtons.clear();
+$f($a,"buttonHide"); $f($a, "buttonNoSave");
+$f($a,"buttonSaveAs"); $f($a,"buttonSave"); $f($a, "heightPanel")
+;;heightPanel:
+var hpan=base.offsetHeight-
+ panelButtons.offsetHeight;
+//alert(bpan);
+ce(panel,h(hpan))
+;;buttonHide:
+ ce(templateButton,ih("exit"), cl(function(){base.hide(); topFileName.hide();}));;buttonDevice:
+ ce(templateButton,ih("device"), cl(function(){ $f($a,"clickDevice")}))
+;;buttonSave:
+ ce(templateButton,ih("save"), bg("red"), cl(function(){ $f($a,"clickSave")}))
+;;buttonSaveAs:
+ ce(templateButton,ih("saveAs"), bg("red"), cl(function(){ $f($a,"clickSaveAs")}))
+;;buttonNoSave:
+ ce(templateButton,ih("noSave"), cl(function(){ $f($a,"clickNoSave")}));;clickDevice:
+$f($a, "buttonsInit");
+ panel.clear(); 
+ device=''; storage='';topFileName.info();
+ce(panel, ed(false));
+ var dev=["localStorage", "indexedDB","gitHub", "Gist", "cloneGitHub"];//alert(dev);
+ dev.forEach(function(t){var el= ce(div(), par(panel), bg("lightgray"), brd(), fs(37), ih(t), cl(function(){device=this.d;$f($a, "click"+this.innerText); //alert(topFileName);
+fileName='';topFileName.info() })); el.d=t;})
+;;clickNoSave:
+ var t="click"+device;
+//alert(t);
+$f($a,t)
+;;clicklocalStorage: //alert(88);
+$f($a, "buttonsInit");
+ panel.clear();
+fileName=''; topFileName.info();
+ ce(panel,ed(false));
+ for(var u in localStorage){ce(templatePanel, ih(u),cl(function(){  $f($a, "buttonsEdit"); panel.clear(); ce(panel,ed(true));
+ fileName=this.innerText; topFileName.info();
+//alert(localStorage[this.innerText]);
+ panel.innerText= localStorage[this.innerText]})) }
+;;clickindexedDB: //alert(88);
+$f($a, "buttonsInit");
+ panel.clear();
+fileName=''; topFileName.info();
+ ce(panel,ed(false));
+//alert(6);alert(qq.ind.keys);
+qq.ind.keys(function(a){//alert(7);alert(a);
+$a.v=a; $f($a,"v0");})
+
+;;clickgitHub: //alert(88);
+$f($a, "buttonsInit");
+ panel.clear();
+fileName=''; topFileName.info();
+ ce(panel,ed(false));
+//
+
+qq.gh={};
+qq.gh.github = new Github({
+username: "Slachinov",
+password: "22sl04md",
+auth: "basic"
+});
+//alert('github='+qq.gh.github);
+
+repo = qq.gh.github.getRepo('Slachinov', 'slachinov.github.io'); 
+
+/*repo = qq.gh.github.getRepo('github-tools', 'github'); */
+function tree(){repo.getTree('master?recursive=true', function(err, tree) {//alert ('tree-'+tree);
+ preloader.hide();
+ qq.ind.set("copygitHub", tree, function(){});
+ $a.v=tree; $f($a,"v1");});};
+ //alert(tree);
+ preloader.show();
+tree();
+
+;;clickcloneGitHub:
+//alert(789);
+
+$f($a, "buttonsInit");
+ panel.clear();
+fileName=''; topFileName.info();
+ ce(panel,ed(false));
+ qq.ind.get("copygitHub", function(a){//alert(a);
+$a.v=a; $f($a, "v2")})
+
+;;clickGist:
+//alert(789);
+
+$f($a, "buttonsInit");
+ panel.clear();
+fileName=''; topFileName.info();
+ ce(panel,ed(false));
+ preloader.show();
+var user= new Github.User();
+ user.userGists("Slachinov",function(a,b){preloader.hide(); $a.r=b; alert(b);$f($a,"v3");})
+;;v3:var m=$a.r;
+ //alert(m);
+for(var i=0; i<m.length; i++){var u1=m[i].files;
+ for(var u in u1)
+ //alert(u);
+ var el=
+ce(templatePanel, ih(u),cl(function(){alert(this.id);  }));el.id=m[i].id;}
+;;v2://alert(90);
+
+ var m=$a.v.val;
+for(var i=0; i<m.length; i++){var u=m[i].path;
+
+ce(templatePanel, ih(u),cl(function(){  $f($a, "buttonsEdit"); panel.clear();
+ fileName=this.innerText; topFileName.info();
+//alert(repo);
+
+ })) }
+;;v0:
+ var m=$a.v;//alert(m)
+for(var i=0; i<m.length; i++){var u=m[i];if(typeof(u.val)=="string"){
+ce(templatePanel, ih(u.nm),cl(function(){  $f($a, "buttonsEdit"); panel.clear(); ce(panel,ed(true));
+ fileName=this.innerText; topFileName.info(); qq.ind.get(this.innerText, function(a){panel.innerText= a.val;});
+ })) }}
+;;v1:
+//alert($a.v)
+var m=$a.v;//alert(m)
+for(var i=0; i<m.length; i++){var u=m[i].path;
+if(u.split("/").length >0){
+ce(templatePanel, ih(u),cl(function(){  $f($a, "buttonsEdit"); panel.clear(); ce(panel,ed(true));
+ fileName=this.innerText; topFileName.info();
+//alert(repo);
+repo.read('master',  fileName,  function(err, data) {alert('data-'+data);panel.innerText=data});
+ })) }}
+;;clickSave:
+//alert(fileName);
+ //alert(panel.innerText);
+ //alert(device);
+$f($a,"save"+device)
+;;savelocalStorage:
+ //alert(7777);
+ alert(fileName);
+ alert(panel.innerText);
+ localStorage [fileName]= panel.innerText;
+ alert( localStorage [fileName]);
+var t="click"+device;
+$f($a,t)
+;;saveindexedDB:
+var t="click"+device;
+ //alert(7777);
+ //alert(fileName);
+ qq.ind.set( fileName, panel.innerText, function(e){//alert("err-"+e);
+$f($a,t);
+})
+;;savegitHub:
+ alert(7777);
+qq.gh={};
+qq.gh.github = new Github({
+username: "Slachinov",
+password: "22sl04md",
+auth: "basic"
+});
+//alert('github='+qq.gh.github);
+
+repo = qq.gh.github.getRepo('Slachinov', 'slachinov.github.io'); alert(repo);
+var options = {
+author: {name: 'Slachinov', email: 'author@exampel.com'},
+committer: {name: 'Committer Name', email: 'committer@example.com'},
+encode: true 
+};
+var t="click"+device;
+repo.write('master', fileName, panel.innerText, 'YOUR_COMMIT_MESSAGE', options, function(err) {alert ('errwrite-'+err); $f($a,t)
+});
+ 
+;;
+
+;;prepare:
+//alert(78);
+ ce(tbt,ih("prepare"),cl(function(){ $q.f(0,"clickPrepare");}));$q.f();
+;;save://alert(8);
+ ce(tbt,ih("save"), bg("red"),cl(function(){$q.f(0, "clickSave");}));$q.f()
+ ;;files:ce(tbt,ih("files"), cl(function(){$q.f(0, "clickFiles");}));$q.f();;saveAs:save://alert(8);
+ ce(tbt,ih("save as"), bg("red"),cl(function(){$q.f(0, "clickSaveAs");}));$q.f()
+ ;;panel:pan1=ce(l(0),r(0),t(0),fs(27),zi(3),au(),bg("lightgreen"), div(),abs(), par(base)); $q.f();;panelHeight:
+ qq.f.crElem(pan1,{style:{height:(base.offsetHeight-buttons.offsetHeight-3)+"px"},attr:{contentEditable: true}});$q.f(1, "nameFile");
+//alert(pan1.offsetHeight)
+
+;;clickPrepare:
+ 
+ q=new qq.f.fpsl(fileText,3); ce(topFileName,{ih:fileName});
+ pan1.innerHTML='';var tel=csk(div(),l(0),r(0),fs(27),brd(),par(pan1));
+ var cnt=ce(tel,bg("red"),ih("context"),cl(function(){pan1.innerText=this.m;base.i=-1;  ce(topFileName,{ih:fileName+':context'}); }));cnt.m=q.e;
+ //alert(q.m.length);
+ for(var i=0;i<q.m.length;i++){var m=q.m[i];var uu='';
+ for(var u in q.ls)if(q.ls[u]==i)uu=u;
+ var el=ce(div(),l(0),r(0),fs(27),brd(),par(pan1),ih("# "+i+":"+uu),bg("orange"),cl (function(){pan1.innerHTML='';pan1.innerText= this.m;base.i=this.i; ce(topFileName,{ih:fileName+'#'+this.i+ ':'+this.u}) }));el.m=m;el.i=i;el.u=uu };;clickSaver:
+ //alert(7);
+var txt=pan1.innerText;
+ if(txt[0]==";")txt=" "+txt;if (txt[txt.length-1] ==";") txt+=" ";
+var y;if(base.i<0)y=txt;else y=q.e;//alert(y+1);
+var t=y+";"+";"+";";
+ for(var i=0; i<q.m.length;i++){
+//alert("#"+txt+"#");
+if(i==base.i){if(txt)t+= txt+";"+";";}else{ t+=q.m[i]+";";if(i<q.m.length-1)t+=";";}};
+ fileText=t;
+ //alert(8);
+$q.f("filesave", "nameFile")
+;;clickSaveAs:
+//alert(9);
+ var d,inp;
+ //d=document.zi93;
+ d=ce(div(),all(),abs(),bg("blue"),zi(93));
+ //alert(d);
+ ce(tag("button"), ih("save"),fs(30),abs(),t(120),l(50),par(d),cl( function(){fileName= inp.value;d.hide();prepinp();$f($a, "clickSave");}));
+ce(tag("button"), ih("NO"),fs(30),abs(),t(120),l(140),par(d),cl( function(){d.hide()}));
+  inp=ce(tag( "input"),abs(), par(d), fs(35),t(60),l(10))
+ d.show()
+ function prepinp(){var t=inp.value;//alert(t);
+ var s=t.split(":");//alert(s);
+ var ss=s[0];alert(ss);
+ if(ss=="idb")device="indexedDB";if(ss=="gh")device="gitHub"; if(ss=="ls")device="localStorage";fileName=s[1];
+};
+;;clickFiles:
+//alert(78);
+ pan1.innerHTML='';
+ var m=["ls:Style", "ls:028" , "ls:030", "ls:031", "ls:032" , "ind:xxc","ls:load0", "ls:load1"];
+//alert(m);alert(ce);
+ for(var i=0; i<m.length; i++){
+ var t=m[i];
+ var n=t.split(':')[1];
+ var el=qq.f.crElem({ tag:"div",style:{ background: "yellow", border: "1px solid black"}, event: {click: function(){//alert(99);
+fileName=this.t; $q.f(0,"nameFile");}}, ih:t, parent:pan1}); el.t=t;
+//alert(el.outerHTML);
+
+};;nameFile:
+ var s=$q.r;
+//alert("#"+s);
+ var op='';
+ if(s=="filesave")op="Save";
+ //alert(9);
+var dd=fileName.split (":");var u=dd[0];
+ var u1=dd[1];
+ //alert(u+op);
+ $q.f(u1,u+op)
+;;ls:
+ //alert(2253);
+ var u1=$q.r;//alert(u1);
+ fileText=
+localStorage[u1];
+ //alert(fileText);
+ $q.f(0,"clickPrepare");;lsSave:var nf=$q.r;
+ //alert(fileText);
+ localStorage[nf] = fileText;
+$q.f(nf,"ls")
+;;ind://alert("idb");
+ var u=$q.r;//alert(u);
+qq.ind.get(u,f);
+ function f(a){//alert(a.val);
+fileText=a.val;$q.f(0, "clickPrepare")}
+
+
+;;indSave:
+//alert(99);
+ //alert(fileName);
+ //alert(fileText);
+ var nm=$q.r;
+ //alert(nm);
+ qq.ind.set(nm, fileText,f);
+ function f(){//alert("good");
+
+ $q.f(nm,"ind")}
+
+
+
+
+
+;;
+;;
