@@ -49,7 +49,7 @@ let f=await repo.remove(n);}}});
 //==========MOVE========================
 let move=qq.f.crElem(tmb,{it:'move',event:{click:async function(){let repo=gh.getrepo('Slachinov','slachinov.github.io');let n=inp.value;alert(n);
 let n1='old/'+n;alert(n1);
-let f=await repo.move(n,n1);}}});
+let f=await repo.move(n,n1);alert(n+'moved to '+n1);}}});
 qq.f.crElem(par,{tag:'br'});
 qq.f.crElem(par,{tag:'span',it:' editor '});
 h0=el.offsetHeight;h1=bts.offsetHeight;edit.style.height=h0-h1+'px';
