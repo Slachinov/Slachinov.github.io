@@ -68,7 +68,7 @@ let message='qq file';
 repo.write('master',path,content, message, options,function(e,d){if(e)reject(e);if(d)resolve(d)})})};
 //------
 this.remove =function(path){return new Promise(function(resolve, reject) {
-repo.remove('master',path,function(e,d){alert(e);alert(d);if(e)reject(e);if(d)resolve(d)})})};
+repo.remove('master',path,function(e,d){if(e)reject(e);if(d)resolve(d)})})};
 //------
 this.delete = this.remove;
 //---
@@ -77,9 +77,9 @@ repo.move('master',path, newPath,function(e,d){if(e)reject(e);if(d)resolve(d)})}
 //------
 this.move =function(path, newPath){return new Promise(function(resolve, reject) {
 (async function(){
-let cont=await self.reporead(path);
-await self.repowrite(newPath,cont);
-await self.repodelete(path);resolve('move god');
+let cont=await self.read(path);
+await self.write(newPath,cont);
+await self.delete(path);resolve('move god');
 })()
 })};
 //=======================
