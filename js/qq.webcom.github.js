@@ -26,14 +26,7 @@ qq.f.crElem({tag:'div',style:{background:'lightgray', border:'1px solid black'},
 //--
 }}});
 
-//======================
-let get2=qq.f.crElem(tmb,{it:'!__',event:{click:async function(){if(!edit.tree)return;let rep=edit.tree;qq.f.crElem(edit,{attr:{contentEditable:false},ih:''});edit.innerHTML='';
-//---
-for(let i=0;i<rep.length;i++){
-qq.f.crElem({tag:'div',style:{background:'lightgray', border:'1px solid black'},prop:{path:rep[i].path},event:{click:async function(){let repo=gh.github.getRepo('Slachinov','slachinov.github.io');qq.f.crElem(edit,{attr:{contentEditable:true}});let n=this.path;repo.read('master',n,function(err,b){if(err)alert(err);if(b)edit.innerText=b;})}},it:rep[i].path,parent:edit});
-}; 
-//--
- }}});
+
 //===========WRITE=========
 let set=qq.f.crElem(tmb,red,{it:'write',event:{click:async function(){
 //--
