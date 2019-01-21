@@ -1,4 +1,4 @@
-alert('localqqmy');
+//alert('localqqmy');
 window.localqq={};
 //--
 localqq.f=function(){//alert(9);
