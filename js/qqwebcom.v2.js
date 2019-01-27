@@ -3,7 +3,7 @@ constructor() {
 super();
 let that=this;
 let inp,edit,el,bts,sh;
-el=qq.f.crElem({tag:"div",style:{height:'200px',overflow:'hidden',background:'orange'}, parent:that});
+el=qq.f.crElem({tag:"div",style:{height:'400px',overflow:'hidden',background:'orange'}, parent:that});
 bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"localStorage."});
 let h0=el.offsetHeight;let h1=bts.offsetHeight;
 edit=qq.f.crElem({tag:"div",attr:{contentEditable:true},style:{'font-size':'18px',left:'0px',right:'0px',height:(h0-h1)+'px',background:'lightgreen',overflow:'auto'}, parent:el});
