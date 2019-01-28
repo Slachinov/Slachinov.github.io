@@ -1,16 +1,3 @@
-// from lib Prototype
-
-String.prototype.escapeHTML=function () {
-    return this.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  };
-String.prototype.stripTags= function() {
-    return this.replace(/<\/?[^>]+>/gi, '');}
-String.prototype.unescapeHTML=function () {
-    return this.stripTags().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-  };
-String.prototype.trim=function () {
-    return this.replace(/^\s+/, '').replace(/\s+$/, '');
-  };
 //-------begin qq
 
 window.qq={};
