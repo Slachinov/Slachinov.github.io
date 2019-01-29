@@ -12,6 +12,9 @@ edit=qq.f.crElem({tag:"div",attr:{contentEditable:true},style:{'font-size':'18px
 let par={parent:bts};
 let tmb={tag:'button',parent:bts};
 let red={style:{background:'red'}};
+let br={tag:'br',parent:bts};
+let user=qq.f.crElem({tag:'input'},par);
+let buser=(tmb,{it:'user',event:{click:async function(){qq.f.crElem(edit,{attr:{contentEditable:false},ih:''});edit.innerHTML='';let repos=await gh.userrepos();alert(repos);}}});
 let auth=qq.f.crElem(tmb,{it:'auth',event:{click:async function(){let main=qq.f.crElem({tag:"div",style:{position:'absolute','z-index':95,top:'0px',left:'0px',width:'60%',height:'60%',overflow:'hidden',background:'lightgray'}, it:'that'});}}});
 inp=qq.f.crElem({tag:'input'},par);
 //------------GET------------------
