@@ -15,7 +15,7 @@ let red={style:{background:'red'}};
 let br={tag:'br',parent:bts};
 qq.f.crElem(br);
 let user=qq.f.crElem({tag:'input'},par);
-let buser=qq.f.crElem(tmb,{it:'user',event:{click:async function(){qq.f.crElem(edit,{attr:{contentEditable:false},ih:''});edit.innerHTML='';}}});
+let buser=qq.f.crElem(tmb,{it:'user',event:{click:async function(){qq.f.crElem(edit,{attr:{contentEditable:false},ih:''});edit.innerHTML='';let repos=await gh.userrepos(user.value);alert(repos);for(let i=0;i<repos.length;i++){qq.f.crElem(tmb,{it:repos[i].name});}}}});
 qq.f.crElem(br);
 let auth=qq.f.crElem(tmb,{it:'auth',event:{click:async function(){let main=qq.f.crElem({tag:"div",style:{position:'absolute','z-index':95,top:'0px',left:'0px',width:'60%',height:'60%',overflow:'hidden',background:'lightgray'}, it:'that'});}}});
 inp=qq.f.crElem({tag:'input'},par);
