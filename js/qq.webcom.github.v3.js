@@ -6,7 +6,7 @@ var gh; 
 gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});
 let inp,edit,el,bts;
 el=qq.f.crElem({tag:"div",style:{width:document.documentElement.clientWidth-50+'px',height:document.documentElement.clientHeight-50+'px',overflow:'hidden',background:'orange'}, parent:that});
-bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"Github "});
+bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"Github1 "});
 let h0=el.offsetHeight;let h1=bts.offsetHeight;
 edit=qq.f.crElem({tag:"div",attr:{contentEditable:true},style:{'font-size':'18px',left:'0px',right:'0px',height:(h0-h1)+'px',background:'lightgreen',overflow:'auto'}, parent:el});
 let par={parent:bts};
@@ -15,7 +15,8 @@ let red={style:{background:'red'}};
 let br={tag:'br',parent:bts};
 qq.f.crElem(br);
 let user=qq.f.crElem({tag:'input'},par);
-let buser=qq.f.crElem(tmb,{it:'user',event:{click:async function(){qq.f.crElem(edit,{attr:{contentEditable:false},ih:''});edit.innerHTML='';let repos=await gh.userrepos(user.value);alert(repos);for(let i=0;i<repos.length;i++){qq.f.crElem(tmb,{it:repos[i].name});}}}});
+let buser=qq.f.crElem(tmb,{it:'user',event:{click:async function(){qq.f.crElem(edit,{attr:{contentEditable:false},ih:''});edit.innerHTML='';
+let _user=user.value;let repos=await gh.userrepos(user.value);alert(repos);for(let i=0;i<repos.length;i++){qq.f.crElem({tag:'div',style:{border:'1px solid black',background:'lightgray'},prop:{user:_user,repo:repos[i].name},event:{click:async function(){alert(5);alert(this.user);alert(this.repo);}},it:repos[i].name,parent:edit});}}}});
 qq.f.crElem(br);
 let auth=qq.f.crElem(tmb,{it:'auth',event:{click:async function(){let main=qq.f.crElem({tag:"div",style:{position:'absolute','z-index':95,top:'0px',left:'0px',width:'60%',height:'60%',overflow:'hidden',background:'lightgray'}, it:'that'});}}});
 inp=qq.f.crElem({tag:'input'},par);
