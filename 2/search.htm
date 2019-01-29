@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <script src='../js/qqv12.js'></script>
+<script src='../js/qqwebcom.v2.js'></script>
 <title>SEARCH</title>
 </head>
 <body>
-<script>eval(localStorage['search'])</script>
+<qq-ls></qq-ls>
+<script>eval(localStorage['search']);
+customElements.define("qq-ls", qqLocalstorage);
+</script>
 </body>
 </html>
