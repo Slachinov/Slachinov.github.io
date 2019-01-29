@@ -41,13 +41,7 @@ this.userrepos =function(un){return new Promise(function(resolve, reject) {
 user.userRepos(un,function(e,d){if(e)reject(e);if(d)resolve(d)})})};
 //=========REPOS===============
 
-/*this.getrepo=function(a){return new Promise(function(resolve, reject) {
-let repo=gh.getRepo(a);//qq.f.obj(repo,1);
-repo.listBranches(function(e,d){if(e)reject(e);if(d)resolve(d)});
-repo.getTree('master?recursive=true',async function(err,tree){if(err){alert('err='+err);reject(err);};resolve(tree);
-});
-repo.show(function(e,d){//alert(e);qq.f.obj(e,1);alert(d);
-if(e)reject(e);if(d)resolve(d)})})};*/
+
 //=========REPO================
 
 let getRepo= function(a,b){//alert(a);alert(b);
