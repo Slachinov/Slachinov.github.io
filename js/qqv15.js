@@ -121,4 +121,5 @@ let url;if(!window.Github) url=await qq.loadscript('http://Slachinov.github.io/j
 qq.parallel=function(m,any){if(any) return  Promise.any(m).then(ress => {return ress});
 else return  Promise.all(m).then(ress => {return ress});
 };
+qq.crelem=qq.f.crElem;
 
