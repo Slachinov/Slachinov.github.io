@@ -89,5 +89,5 @@ this.getrepo=function(a,b){return new  getRepo(a,b)};
 //---
 };
 //=======================
-alert('end qq.github.v3.js');
+
 
