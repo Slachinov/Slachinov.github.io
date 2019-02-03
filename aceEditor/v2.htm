@@ -3,13 +3,7 @@
 <head>
 <title>ACE in Action</title>
 <style type="text/css" media="screen">
-    #editor5 { 
-        position: absolute;
-        top: 0;
-        right:0;
-        bottom:0;
-        left: 0;
-    }
+   
 </style>
 </head>
 <body>
@@ -32,7 +26,7 @@
     editor2.setTheme("ace/theme/monokai");
     editor2.session.setMode("ace/mode/javascript");
 </script>
-<script>let txt=localStorage['fetch/usergists'];alert(txt);editor.setValue(txt);
+<script>let txt=localStorage['fetch/usergists'];alert('txt');editor.setValue(txt);
 get.addEventListener('click',function(){alert(editor.getValue())},false);
 set.addEventListener('click',function(){},false)
 </script>
