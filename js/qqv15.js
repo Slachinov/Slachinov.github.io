@@ -1,6 +1,6 @@
 //-------begin qq
 
-var qq={};
+export var qq={};
 var app={};
 app.els={};
 qq.vers=1;
