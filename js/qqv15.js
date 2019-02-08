@@ -1,6 +1,6 @@
 //-------begin qq
 
-window.qq={};
+var qq={};
 var app={};
 app.els={};
 qq.vers=1;
@@ -114,10 +114,6 @@ el.src=url;
 el.addEventListener('load',function(){resolve(url)},false);
 el.addEventListener('error',function(e){alert('err');alert(e);reject(e)},false);
 document.head.appendChild(el);})};
-qq.f.initgithub=async function(){return new Promise(function(resolve, reject) {
-async function f(){
-let url;if(!window.Github) url=await qq.loadscript('http://Slachinov.github.io/js/github.js');if(!qq.f.github)url=await qq.loadscript('http://Slachinov.github.io/js/qq.github.v3.js');let gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});resolve(gh)};f();
-})};
 qq.parallel=function(m,any){if(any) return  Promise.any(m).then(ress => {return ress});
 else return  Promise.all(m).then(ress => {return ress});
 };
@@ -125,5 +121,5 @@ qq.b64encode = function(str) {
          return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
             return String.fromCharCode('0x' + p1);
          }));};
-qq.crelem=qq.f.crElem;
+qq.ce=qq.f.crElem;
 
