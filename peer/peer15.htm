@@ -14,7 +14,7 @@
 var win = window.frames[0];alert('frames='+win+win.name);
        // win=win['peer'];
         alert(win.postMessage);
-  win.postMessage("сообщение",'http://slachinov.github.io/peer/peer15.htm');        
+  win.postMessage("сообщение",'https://slachinov.github.io/peer/peer15.htm');        
 var ls=localStorage;//ls['peer_reg']='';
 
 function reg(){var a=ls['peer_reg'];
@@ -34,16 +34,7 @@ function pon(){//if(pid)alert(pid);
 peer.on('open', function(peerID) {alert(peerID)//передать идентификатор партнеру
 document.getElementById('myid').innerHTML=peerID;pid=peerID;
 
-var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {var mp=this.responseText;//alert(mp);
-               document.getElementById("dt").innerHTML = this.responseText;
-               pcnn1();pcnn(this.responseText);
-            }
-        }
-        xmlhttp.open("GET", "mypeer.txt?_=" + new Date().getTime(), true);
-        xmlhttp.send();
-        
+
 });};
 function pcnn(id){
 const conn = peer.connect(id);
