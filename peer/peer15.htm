@@ -11,8 +11,9 @@
         <iframe src='https://pser54.000webhostapp.com/html/peerframe.htm' name='peer'></iframe>
 <br>
 <script>
-var win = window.frames;alert('frames='+win+win.length);
-        win=win['peer'];alert(win);
+var win = window.frames;alert('frames='+win+win.name);
+       // win=win['peer'];
+        alert(win.postMessage);
   win.postMessage("сообщение");        
 var ls=localStorage;//ls['peer_reg']='';
 
