@@ -1,5 +1,5 @@
-<script>window.onload = function () {alert(20);
-	var iframeWin = document.getElementById("da-iframe");let b='';for(var u in iframeWin)b+=' '+u;alert(b);iframeWin=window.frames[0];alert(iframeWin);
+<script>window.onload = function () {alert(30);
+	var iframeWin = document.getElementById("da-iframe");let b='';for(var u in iframeWin)b+=' '+u+'='+iframeWin[u];alert(b);iframeWin=window.frames[0];alert(iframeWin);
 		var form = document.getElementById("the-form"),
 		myMessage = document.getElementById("my-message");alert(1);alert(form);alert(myMessage);
 //alert('win='+iframeWin);
