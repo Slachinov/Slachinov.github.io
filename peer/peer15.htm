@@ -10,10 +10,10 @@
 <input id=otherPeerId type=text placeholder="otherPeerId" >  <button onclick="pcnn(document.getElementById('otherPeerId').value,'hellow my')">conn</button><br><input id="oth" value='hi!'><div id='dt'></div>
         <iframe src='https://pser54.000webhostapp.com/html/peerframe.htm' name='peer'></iframe>
 <br>
-<script>alert(19);
-var win = window.frames[0];alert('frames='+win+win.name);
+<script>alert(29);
+var win = window.frames[0];alert('frames='+win);
        // win=win['peer'];
-        alert(win.postMessage);
+        alert('post='+win.postMessage);
   win.postMessage("сообщение",'https://slachinov.github.io/peer/peer15.htm');        
 var ls=localStorage;//ls['peer_reg']='';
 
