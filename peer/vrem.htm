@@ -1,7 +1,7 @@
-<script>window.onload = function () {
+<script>window.onload = function () {alert(0);
 	var iframeWin = document.getElementById("da-iframe").contentWindow,
 		form = document.getElementById("the-form"),
-		myMessage = document.getElementById("my-message");
+		myMessage = document.getElementById("my-message");alert(1);
 alert('win='+iframeWin);
 	myMessage.select();
 
@@ -14,4 +14,4 @@ alert('win='+iframeWin);
 
 <form id="the-form">
 <input id='my-message'><input type='submit' value='postmessage'>
-</form><input id='my-message'><iframe id='da-iframe' src='https://pser54.000webhostapp.com/html/fram.htm'><iframe>
+</form><iframe id='da-iframe' src='https://pser54.000webhostapp.com/html/fram.htm'><iframe>
