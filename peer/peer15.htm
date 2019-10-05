@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Connect</title>
+<script src = "https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
+</head>
+<body><div id='nreg'>необходимо зарегестрироваться<input id="myname"><button onclick=coninfo()> Введите имя </button></div><div id='nregg'> Здравствуй <span style="color:green" id='reg'></span><span id='ccc'>x</span></div>
+<h3>Мой ID: </h3><span id='myid' ></span>
+<input id=otherPeerId type=text placeholder="otherPeerId" >  <button onclick="pcnn(document.getElementById('otherPeerId').value,'hellow my')">conn</button><br><input id="oth" value='hi!'><div id='dt'></div>
+
+<br>
+<script>
+var ls=localStorage;//ls['peer_reg']='';
+
+function reg(){var a=ls['peer_reg'];
+if(a){document.getElementById('nreg').style.display='none';document.getElementById('nregg').style.display='block';document.getElementById('reg').innerText=a+' ';
+}else{document.getElementById('nreg').style.display='block';document.getElementById('nregg').style.display='none';};};
+reg();
+function coninfo(){var c=document.getElementById('myname').value;
+ls['peer_reg']=c;reg();};
+//--------
+var peer= new Peer({label:'stasrud'});//alert(peer);
+peer.on ('error', function (err) {alert('peererr= '+err)});
+var pid;
+pon();
+//alert(Util);
+var conn;
+function pon(){//if(pid)alert(pid);
+peer.on('open', function(peerID) {alert(peerID)//передать идентификатор партнеру
+document.getElementById('myid').innerHTML=peerID;pid=peerID;
+
+var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {var mp=this.responseText;//alert(mp);
+               document.getElementById("dt").innerHTML = this.responseText;
+               pcnn1();pcnn(this.responseText);
+            }
+        }
+        xmlhttp.open("GET", "mypeer.txt?_=" + new Date().getTime(), true);
+        xmlhttp.send();
+        
+});};
+function pcnn(id){
+const conn = peer.connect(id);
+conn.on('open', () => {//alert(999);
+  conn.send('<br>'+pid);
+  document.getElementById('dt').innerHTML=document.getElementById('dt').innerHTML+'<font color=green>'+document.getElementById('oth').value+'</font><br>';
+});};
+function pcnn1(id){
+ alert(333+peer);   
+    peer.on('connection', (conn) => {alert('conn');
+  conn.on('data', (data) => {alert(data);
+  var b='';for(var u in conn)b+=u+' ';var c='';for(var u in peer)c+=u+' ';
+   document.getElementById('dt').innerHTML=document.getElementById('dt').innerHTML+'<br>label--'+peer.id+c+'--'+b+'=='+conn.peer+'='+peer.options.label;
+  });
+});};
+
+</script>
+</body>
