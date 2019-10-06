@@ -1,4 +1,4 @@
-<script>window.onload = function () {alert(50);
+<script>window.onload = function () {alert(150);
 	var iframeWin = window.frames;alert(iframeWin);alert(iframeWin.length); //iframeWin = iframeWin[0];
 				     alert(iframeWin);alert(iframeWin.postMessage);
 		var form = document.getElementById("the-form"),
@@ -6,8 +6,8 @@
 //alert('win='+iframeWin);
 	myMessage.select();
 
-	form.onsubmit = function () {alert('submit');
-		iframeWin.postMessage(myMessage.value, "https://github.com");
+	form.onsubmit = function () {alert('submit');alert(myMessage.value);
+		iframeWin.postMessage(myMessage.value, "https://slachinov.github.io");
 		return false;
 	};
 };</script>
