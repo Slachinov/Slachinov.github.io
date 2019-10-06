@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>PeerJS Обмен сообщениями</title>
+     <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+</head>
+<body>
+	<h3>Мой ID: <span id=myid ></span></h3>
+	<input id=otherPeerId type=text placeholder="otherPeerId" ><button onclick="connectToNode(document.getElementById('otherPeerId').value)">Соединиться</button>
+	<div id=messages style="width:400px;height:60vh; background:#ADD8E6;margin:5px;">
+	</div><br>
+	<textarea id=mess style="width:400px;height:15vh" ></textarea><br>
+	<button onclick="sendMess(document.getElementById('mess'))">Отправить</button>
+	<script>
+		var messList=[];		
+		function addMess(mess) {
+			messList.push(mess);
+			document.getElementById('messages').innerHTML=messList.join("");
+		}
+		var peer=new Peer(); 		
+		var conn; //переменная, хранящая соединение
+		peer.on('open', function(peerID) {
+			document.getElementById('myid').innerHTML=peerID;			
+		});
+		peer.on('connection', function(c) { //входящее соединение...
+			conn=c;
+			initConn();
+		});
+		function connectToNode(partnerPeer) { //исходящее соединение...
+			conn = peer.connect(partnerPeer);
+			initConn();
+		}
+		function initConn() {
+			conn.on ('open', function () { //открыто соединение
+				  addMess("<div><h4>Соединение установлено</h4></div>");
+				  conn.on ('data', function (data) { //прилетело сообщение
+					 addMess("<div><b>Партнер: </b>"+data+"</div>");
+				  });
+			});
+			conn.on('close',function() {addMess('-----------Соединение разорвано-------------');});
+		}
+		function sendMess(elem) {
+			addMess("<div><b>Я: </b>"+elem.value+"</div>");
+			conn.send(elem.value);
+			elem.value="";
+		}
+	</script>
+</body>    
