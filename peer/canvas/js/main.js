@@ -16,8 +16,9 @@ canvas.height = 360;
 
 const button = document.querySelector('button');
 button.onclick = function() {//alert(video.videoWidth);
-  canvas.width = video.videoWidth/4;alert(video.videoWidth+':'+canvas.width);
+  canvas.width = video.videoWidth/4;//alert(video.videoWidth+':'+canvas.width);
   canvas.height = video.videoHeight/4;
+  canvas.style.width='350px';
   canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 };
 
