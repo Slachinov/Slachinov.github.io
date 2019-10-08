@@ -9,15 +9,15 @@
 'use strict';
 
 // Put variables in global scope to make them available to the browser console.
-const video = document.querySelector('video');video.style.width='350px';alert(99);alert(video.videoWidth);
+const video = document.querySelector('video');video.style.width='350px';//alert(99);alert(video.videoWidth);
 const canvas = window.canvas = document.querySelector('canvas');
 canvas.width = 480;
 canvas.height = 360;
 
 const button = document.querySelector('button');
 button.onclick = function() {alert(video.videoWidth);
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
+  canvas.width = video.videoWidth/4;
+  canvas.height = video.videoHeight/4;
   canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 };
 
