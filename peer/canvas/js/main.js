@@ -15,7 +15,7 @@ canvas.width = 480;
 canvas.height = 360;
 
 const button = document.querySelector('button');
-button.onclick = function() {alert(video.videoWidth);
+button.onclick = function() {//alert(video.videoWidth);
   canvas.width = video.videoWidth/4;
   canvas.height = video.videoHeight/4;
   canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
