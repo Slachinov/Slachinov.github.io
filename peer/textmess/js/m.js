@@ -53,7 +53,7 @@ function createConnection() {
 
   window.remoteConnection = remoteConnection = new RTCPeerConnection(servers);
   console.log('Created remote peer connection object remoteConnection');
- sendChannel2 = remoteConnection.createDataChannel('sendDataChannel');
+ sendChannel2 = remoteConnection.createDataChannel('sendDataChannel2');
   console.log('Created send data channel');
   remoteConnection.onicecandidate = e => {
     onIceCandidate(remoteConnection, e);
