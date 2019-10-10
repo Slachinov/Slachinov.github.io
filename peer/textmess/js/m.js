@@ -16,12 +16,14 @@ const dataChannelSend = document.querySelector('textarea#dataChannelSend');
 const dataChannelReceive = document.querySelector('textarea#dataChannelReceive');
 const startButton = document.querySelector('button#startButton');
 const sendButton = document.querySelector('button#sendButton');
+const sendButton2 = document.querySelector('button#sendButton2');
 const closeButton = document.querySelector('button#closeButton');
 const dd = document.querySelector('div#dd');
 const dr = document.querySelector('div#dr');
 
 startButton.onclick = createConnection;
 sendButton.onclick = sendData;
+sendButton2.onclick = sendData2;
 closeButton.onclick = closeDataChannels;
 
 function enableStartButton() {
@@ -30,6 +32,7 @@ function enableStartButton() {
 
 function disableSendButton() {
   sendButton.disabled = true;
+  sendButton2.disabled = true;
 }
 
 function createConnection() {
@@ -49,7 +52,8 @@ function createConnection() {
 
   window.remoteConnection = remoteConnection = new RTCPeerConnection(servers);
   console.log('Created remote peer connection object remoteConnection');
-
+ sendChannel2 = remoteConnection.createDataChannel('sendDataChannel');
+  console.log('Created send data channel');
   remoteConnection.onicecandidate = e => {
     onIceCandidate(remoteConnection, e);
   };
@@ -72,7 +76,11 @@ function sendData() {
   sendChannel.send(data);
   console.log('Sent Data: ' + data);
 }
-
+function sendData2() {
+  const data = dataChannelSend.value;
+  sendChannel.send(data);
+  console.log('Sent Data2: ' + data);
+}
 function closeDataChannels() {
   console.log('Closing data channels');
   sendChannel.close();
