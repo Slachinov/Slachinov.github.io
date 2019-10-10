@@ -33,7 +33,7 @@ function enableStartButton() {
 
 function disableSendButton() {
   sendButton.disabled = true;
-  sendButton2.disabled = true;
+  //sendButton2.disabled = true;
 }
 
 function createConnection() {
@@ -78,7 +78,7 @@ function sendData() {
   sendChannel.send(data);
   console.log('Sent Data: ' + data);
 }
-function sendData2() {
+function sendData2() {alert(2);
   const data = dataChannelSend.value;
   receiveChannel.send(data);
   console.log('Sent Data2: ' + data);
