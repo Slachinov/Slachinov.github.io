@@ -85,15 +85,7 @@ function createConnection() {
   );
   startButton.disabled = true;
   closeButton.disabled = false;
-   try {
-    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-    console.log('Received local stream');
-    localVideo.srcObject = stream;
-    localStream = stream;
-    
-  } catch (e) {
-    alert(`getUserMedia() error: ${e.name}`);
-  }
+  
 }
 
 function onCreateSessionDescriptionError(error) {
