@@ -7,7 +7,9 @@
  */
 
 'use strict';
-
+let startTime;
+const localVideo = document.getElementById('localVideo');
+const remoteVideo = document.getElementById('remoteVideo');
 let localConnection;
 let remoteConnection;
 let sendChannel;
@@ -35,6 +37,21 @@ function enableStartButton() {
 function disableSendButton() {
   sendButton.disabled = true;
   //sendButton2.disabled = true;
+}
+let localStream;
+let pc1;
+let pc2;
+const offerOptions = {
+  offerToReceiveAudio: 1,
+  offerToReceiveVideo: 1
+};
+
+function getName(pc) {
+  return (pc === pc1) ? 'pc1' : 'pc2';
+}
+
+function getOtherPc(pc) {
+  return (pc === pc1) ? pc2 : pc1;
 }
 
 function createConnection() {
@@ -68,6 +85,15 @@ function createConnection() {
   );
   startButton.disabled = true;
   closeButton.disabled = false;
+   try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+    console.log('Received local stream');
+    localVideo.srcObject = stream;
+    localStream = stream;
+    
+  } catch (e) {
+    alert(`getUserMedia() error: ${e.name}`);
+  }
 }
 
 function onCreateSessionDescriptionError(error) {
@@ -79,7 +105,7 @@ function sendData() {
   sendChannel.send(data);
   console.log('Sent Data: ' + data);
 }
-function sendData2() {alert(22);
+function sendData2() {alert(6);
   const data = dataChannelReceive.value;
   receiveChannel.send(data);
   console.log('Sent Data2: ' + data);
