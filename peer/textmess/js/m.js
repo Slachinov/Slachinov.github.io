@@ -17,6 +17,8 @@ const dataChannelReceive = document.querySelector('textarea#dataChannelReceive')
 const startButton = document.querySelector('button#startButton');
 const sendButton = document.querySelector('button#sendButton');
 const closeButton = document.querySelector('button#closeButton');
+const dd = document.querySelector('div#dd');
+const dr = document.querySelector('div#dr');
 
 startButton.onclick = createConnection;
 sendButton.onclick = sendData;
@@ -145,6 +147,7 @@ function receiveChannelCallback(event) {
 function onReceiveMessageCallback(event) {
   console.log('Received Message');
   dataChannelReceive.value = event.data;
+  dr.innerText=event.data;
 }
 
 function onSendChannelStateChange() {
