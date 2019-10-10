@@ -50,6 +50,7 @@ function createConnection() {
   };
   sendChannel.onopen = onSendChannelStateChange;
   sendChannel.onclose = onSendChannelStateChange;
+  sendChannel.onmessage = onSendMessageCallback;
 
   window.remoteConnection = remoteConnection = new RTCPeerConnection(servers);
   console.log('Created remote peer connection object remoteConnection');
@@ -79,7 +80,7 @@ function sendData() {
 }
 function sendData2() {
   const data = dataChannelSend.value;
-  sendChannel.send(data);
+  receiveChannel.send(data);
   console.log('Sent Data2: ' + data);
 }
 function closeDataChannels() {
@@ -155,8 +156,13 @@ function receiveChannelCallback(event) {
 
 function onReceiveMessageCallback(event) {
   console.log('Received Message');
-  dataChannelReceive.value = event.data;
+  //dataChannelReceive.value = event.data;
   dr.innerText=event.data;
+}
+function onSendMessageCallback(event) {
+  console.log('Received Message');
+ // dataChannelReceive.value = event.data;
+  dd.innerText=event.data;
 }
 
 function onSendChannelStateChange() {
@@ -177,4 +183,5 @@ function onSendChannelStateChange() {
 function onReceiveChannelStateChange() {
   const readyState = receiveChannel.readyState;
   console.log(`Receive channel state is: ${readyState}`);
+  dataChannelReceive.disabled=false;
 }
