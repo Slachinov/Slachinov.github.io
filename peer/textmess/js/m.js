@@ -26,6 +26,7 @@ startButton.onclick = createConnection;
 sendButton.onclick = sendData;
 sendButton2.onclick = sendData2;
 closeButton.onclick = closeDataChannels;
+sendButton2.disabled = false;
 
 function enableStartButton() {
   startButton.disabled = false;
