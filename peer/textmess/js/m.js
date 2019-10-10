@@ -11,6 +11,7 @@
 let localConnection;
 let remoteConnection;
 let sendChannel;
+let sendChannel2;
 let receiveChannel;
 const dataChannelSend = document.querySelector('textarea#dataChannelSend');
 const dataChannelReceive = document.querySelector('textarea#dataChannelReceive');
