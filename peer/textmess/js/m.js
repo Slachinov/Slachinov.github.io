@@ -85,7 +85,20 @@ function createConnection() {
   );
   startButton.disabled = true;
   closeButton.disabled = false;
-  
+  start22();
+}
+async function start22() {
+  console.log('Requesting local stream');
+  startButton.disabled = true;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+    console.log('Received local stream');
+    localVideo.srcObject = stream;
+    localStream = stream;
+    callButton.disabled = false;
+  } catch (e) {
+    alert(`getUserMedia() error: ${e.name}`);
+  }
 }
 
 function onCreateSessionDescriptionError(error) {
@@ -97,7 +110,7 @@ function sendData() {
   sendChannel.send(data);
   console.log('Sent Data: ' + data);
 }
-function sendData2() {alert(6);
+function sendData2() {alert(61);
   const data = dataChannelReceive.value;
   receiveChannel.send(data);
   console.log('Sent Data2: ' + data);
