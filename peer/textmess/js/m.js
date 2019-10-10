@@ -79,8 +79,8 @@ function sendData() {
   sendChannel.send(data);
   console.log('Sent Data: ' + data);
 }
-function sendData2() {alert(2);
-  const data = dataChannelSend.value;
+function sendData2() {alert(22);
+  const data = dataChannelReceive.value;
   receiveChannel.send(data);
   console.log('Sent Data2: ' + data);
 }
