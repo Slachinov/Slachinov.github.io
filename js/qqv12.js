@@ -101,7 +101,7 @@ var eventBase={prop:{hide:function(){this.style.display='none'},show:function(){
 //--------
 
 if(!window.$)var $=function(id){return document.getElementById(id.split('#')[1])};
-
+qq.ce=qq.f.crElem;
 qq.f.reg=function(name,val){if(!val)return qq.app.els[name];qq.app.els[name]=val;};
 
 qq.sh={};
