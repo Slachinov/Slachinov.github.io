@@ -52,7 +52,7 @@ if((txt=='event')||ell[1].getAttribute('t')){gv.setAttribute('t',1)};
 }
 };
 //alert(html.outerHTML);
-let prj1=await qq.reg.get('ind').get(bb.project);//alert(prj1);alert(prj1.val.els);
+let prj1=await qq.reg.get('ind str0').get(bb.project);//alert(prj1);alert(prj1.val.els);
 let nmm=bb.name;
 //alert(nmm);//let prj={};prj.els={};
 let prj;if(prj1){prj=prj1.val;}else{alert(9999);prj={};prj.els={};};
@@ -60,7 +60,7 @@ let prj;if(prj1){prj=prj1.val;}else{alert(9999);prj={};prj.els={};};
 
 prj.els[nmm]={};prj.els[nmm]['html']=html.outerHTML;
 //prj.els[bb.name]['html']=html.outerHTML;
-await qq.reg.get('ind').set(bb.project,prj);//alert('set');
+await qq.reg.get('ind str0').set(bb.project,prj);//alert('set');
 return html.outerHTML
 };
 qq.reg.set('tabletohtml',tabletohtml)
