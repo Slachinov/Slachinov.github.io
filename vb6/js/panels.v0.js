@@ -36,7 +36,7 @@ let p4=qq.f.crElem({tag :'div',style:{background:'green',width:'100%',height:h4+
 let p5=qq.f.crElem({tag :'div',style:{background:'orange',width:'100%',height:h5+'px',overflow:'auto'},parent:left});
 //---
 let f=async function(p){//alert(111);
-let ks=await qq.reg.get('ind').keys();//alert('ks='+ks);
+let ks=await qq.reg.get('ind str0').keys();//alert('ks='+ks);
 //alert(ks.length);
 for(let i=0;i<ks.length;i++){let el=qq.ce({tag :'div',style:{border:'1px solid black', background:'rgba(222,222,222,.5)'},event:{click:function(){let u=this.u;let c=qq.reg.get('current');c.project=u;let f=qq.reg.get('els');f(u);}} ,it:ks[i].nm,parent:p5});el.u=ks[i].nm}};f();
 //---
