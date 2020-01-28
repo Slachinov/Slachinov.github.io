@@ -1,5 +1,5 @@
 {let b=async function(nm){//alert(nm);
-let proj=await qq.reg.get('ind').get(nm);
+let proj=await qq.reg.get('ind str0').get(nm);
 
 let f=qq.reg.get('div toggle 1');//alert(f);
 let d=qq.reg.get('panels').elements;//alert(d);
