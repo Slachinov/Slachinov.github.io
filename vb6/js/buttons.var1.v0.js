@@ -9,7 +9,7 @@ let pn=qq.reg.get('panels').top;//alert(pn);
 
 let f=qq.reg.get('htmltoskin');//alert(f);
 let c=qq.reg.get('current');let ppp=c.project;
-let v=await qq.reg.get('ind').get(ppp);//alert(v);
+let v=await qq.reg.get('ind str0').get(ppp);//alert(v);
 
 for(let u in v.val.els){let ht=v.val.els[u]['html'];
 let sk=await f(ht);if(!sk.par){sk.parent=pn;}else {sk.parent=aa[sk.par];};
