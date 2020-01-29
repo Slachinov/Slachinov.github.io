@@ -98,7 +98,7 @@ let bs=qq.f.crElem({tag :'div',style:{ background:'red','font-size':'15px'},even
 //---
 let el1=qq.f.crElem({tag :'div',style:{border:'1px solid black', background:'gray',left:'1px',right:'1px','font-size':'15px'},event:{click:async function(e){el2.toggle();}},it:txt,parent:bs});
 //---
-let el2=qq.f.crElem({tag :'div',attr:{contentEditable:true},style:{border:'1px solid black', background:'lightgray',left:'1px',right:'1px','font-size':'15px'},event:{dblclick:async function(e){let pan=await qq.reg.get('panels').edit;pan.innerText=txt1;}},it:txt1,parent:bs});};
+let el2=qq.f.crElem({tag :'div',attr:{contentEditable:true},style:{border:'1px solid black', background:'lightgray',left:'1px',right:'1px','font-size':'15px'},event:{dblclick:async function(e){let pan=await qq.reg.get('panels').edit;pan.innerText=txt1;pan.elem=this.elem}},it:txt1,parent:bs});el2.elem=el2;};
 //----
 };
 qq.reg.set('htmltotable',beg);
