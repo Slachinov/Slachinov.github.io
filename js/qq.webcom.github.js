@@ -3,7 +3,8 @@ constructor() {
 super();
 let that=this;
 var gh; 
-gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});
+//gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});
+gh=new qq.f.github({token:'36181f79e9e11f09029462488b426885d1e5007d'});
 let inp,edit,el,bts;
 el=qq.f.crElem({tag:"div",style:{width:document.documentElement.clientWidth-50+'px',height:document.documentElement.clientHeight-50+'px',overflow:'hidden',background:'orange'}, parent:that});
 bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"Github "});
