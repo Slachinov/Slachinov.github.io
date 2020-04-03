@@ -24,6 +24,13 @@ qq.f.extend=function(destination, source) {
   };
 
 qq.f.getStyle=function(style,elem){return  document.defaultView.getComputedStyle(elem,null).getPropertyValue(style)};
+//------------
+qq.skin={};
+qq.skin.inputtext={prop:{get:function(){return this.value;},set:function(a){this.value=a},clear:function(){this.value='';}}};
+qq.skin.panel={prop:{clear:function(){this.innerHTML=''},get:function(html){if(html)return this.innerHTML;return this.innerText},set:function(v,html){if(html)this.innerHTML=v;else this.innerText=v;}}};
+qq.skin.textarea={};
+qq.skin.f=function(e){if((e.tagName=='INPUT')&&(!e.getAttribute('type')||e.getAttribute('type')=='text')){let el=qq.ce(e,qq.skin.inputtext);return el};if(e.tagName=='SPAN'||'DIV')return qq.ce(e,qq.skin.panel);}
+//--------
 
 qq.f.createSkin=function(){
 var skin={};
@@ -99,12 +106,7 @@ return qq.skin.f(el);
 
 var eventBase={prop:{hide:function(){this.style.display='none'},show:function(){this.style.display='block';},toggle:function(){if(this.style.display!='none')this.hide();else this.show()},getStyle:function(style){return document.defaultView.getComputedStyle(this,null).getPropertyValue(style)}}};
 //----
-qq.skin={};
-qq.skin.inputtext={prop:{get:function(){return this.value;},set:function(a){this.value=a},clear:function(){this.value='';}}};
-qq.skin.panel={prop:{clear:function(){this.innerHTML=''},get:function(html){if(html)return this.innerHTML;return this.innerText},set:function(v,html){if(html)this.innerHTML=v;else this.innerText=v;}}};
-qq.skin.textarea={};
-qq.skin.f=function(e){if((e.tagName=='INPUT')&&(!e.getAttribute('type')||e.getAttribute('type')=='text')){let el=qq.ce(e,qq.skin.inputtext);return el};if(e.tagName=='SPAN'||'DIV')return qq.ce(e,qq.skin.panel);}
-//--------
+
 qq.ce=qq.f.crElem;
 qq.freg=function(){let r={};this.get=function(n){return r[n]};this.set=function(n,p){r[n]=p;};this.setp=function(){};};
 qq.reg=new qq.freg();
