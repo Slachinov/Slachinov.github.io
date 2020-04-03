@@ -28,8 +28,8 @@ qq.skin={};
 qq.skin.inputtext={prop:{get:function(){return this.value;},set:function(a){this.value=a},clear:function(){this.value='';}}};
 qq.skin.panel={prop:{clear:function(){this.innerHTML=''},get:function(html){if(html)return this.innerHTML;return this.innerText},set:function(v,html){if(html)this.innerHTML=v;else this.innerText=v;}}};
 qq.skin.textarea={};
-qq.skin.f=function(e){if((e.tagName=='INPUT')&&(!e.getAttribute('type')||(e.getAttribute('type')=='text'))){for(var u in qq.skin.inputtext)
-e[u]=qq.skin.inputtext[u]}else if(e.tagName=='SPAN'||'DIV'){for(var u in qq.skin.panel)
+qq.skin.f=function(e){if((e.tagName=='INPUT')&&(!e.getAttribute('type')||(e.getAttribute('type')=='text'))){for(var u in qq.skin.inputtext.prop)
+e[u]=qq.skin.inputtext[u]}else if(e.tagName=='SPAN'||'DIV'){for(var u in qq.skin.panel.prop)
 e[u]=qq.skin.panel[u]};return e}
 //--------
 
