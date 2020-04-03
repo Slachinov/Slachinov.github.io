@@ -29,7 +29,7 @@ qq.skin.inputtext={prop:{get:function(){return this.value;},set:function(a){this
 qq.skin.panel={prop:{clear:function(){this.innerHTML=''},get:function(html){if(html)return this.innerHTML;return this.innerText},set:function(v,html){if(html)this.innerHTML=v;else this.innerText=v;}}};
 qq.skin.textarea={};
 qq.skin.f=function(e){if((e.tagName=='INPUT')&&(!e.getAttribute('type')||(e.getAttribute('type')=='text'))){for(var u in qq.skin.inputtext)
-e[u]=sqq.skin.inputtext[u]}else if(e.tagName=='SPAN'||'DIV'){for(var u in qq.skin.panel)
+e[u]=qq.skin.inputtext[u]}else if(e.tagName=='SPAN'||'DIV'){for(var u in qq.skin.panel)
 e[u]=qq.skin.panel[u]};return e}
 //--------
 
