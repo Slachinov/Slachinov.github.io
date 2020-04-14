@@ -13,19 +13,15 @@
     const noContent = `У меня нет содержимого :(`;
     
     this.attachShadow({mode: "open"});
-    this.shadowRoot.innerHTML = `
-      <section id="red"><slot name="red">${noContent}</slot></section>
-      <section id="white"><slot>${noContent}</slot></section>
-      <section id="black"><slot name="black">${noContent}</slot></section>
-      <section id="yellow"><slot name="yellow">${noContent}</slot></section>
-      <style>
-        :host {
+    this.shadowRoot.innerHTML = `<section id="red"><slot name='red'>tut and</slot></section><section id="white"><slot name='white'></slot></section><section id="black"><slot name="black"></slot></section><section id="yellow"><slot name="yellow"></slot></section><style><style>
+     :host {
           width: 100vw;
           height: 100vh;
           display: flex;
-          flex-wrap: wrap;        
+          flex-wrap: wrap; 
+                 
         }
-        section {
+        section {background:orange;
           height: 50%;
           width: 50%;
         }
@@ -42,8 +38,7 @@
         #yellow {
           background-color: yellow;
         }
-      </style>
-    `;
+      </style> `;
 
 
     this.shadowRoot.querySelector("button").addEventListener("click", () => {
