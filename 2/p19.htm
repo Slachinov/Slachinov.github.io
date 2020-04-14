@@ -2,10 +2,65 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>Empty</title>
+<title>webcomponent</title>
 </head>
 <body>
-<script>eval(localStorage['p19']);
+<script>class Demo extends HTMLElement {
+  constructor() {
+    super();
+
+
+    const noContent = `У меня нет содержимого :(`;
+    
+    this.attachShadow({mode: "open"});
+    this.shadowRoot.innerHTML = `
+      <section id="red"><slot name="red">${noContent}</slot></section>
+      <section id="white"><slot>${noContent}</slot></section>
+      <section id="black"><slot name="black">${noContent}</slot></section>
+      <section id="yellow"><slot name="yellow">${noContent}</slot></section>
+      <style>
+        :host {
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          flex-wrap: wrap;        
+        }
+        section {
+          height: 50%;
+          width: 50%;
+        }
+        #white {
+          background-color: white;
+        }
+        #red {
+          background-color: red;
+        }
+        #black {
+          background-color: black;
+          color: white;
+        }
+        #yellow {
+          background-color: yellow;
+        }
+      </style>
+    `;
+
+
+    this.shadowRoot.querySelector("button").addEventListener("click", () => {
+      this.opened = !this.opened;
+    });
+  }
+}
+
+
+customElements.define("x-demo", Demo);
+
+
 </script>
-</body>Empty
+</body><x-demo>
+  <button>Кнопка без атрибута slot</button>
+  <p slot="red">Параграф для красного блкоа</p>
+  <article slot="black">Артикл для чёрной секции</article>
+  <button slot="red">Ещё один элемент в красную секцию</button>
+</x-demo>
 </html>
