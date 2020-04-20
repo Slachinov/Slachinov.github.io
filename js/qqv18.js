@@ -25,7 +25,7 @@ qq.f.extend=function(destination, source) {
 qq.f.getStyle=function(style,elem){return  document.defaultView.getComputedStyle(elem,null).getPropertyValue(style)};
 //------------
 qq.skin={};
-qq.skin.inputtext={prop:{get:function(){return this.getAttribute('value');},set:function(a){this.setAttribute('value',a)},clear:function(){this.value='';}}};
+qq.skin.inputtext={prop:{get:function(){return this.getAttribute('value');},set:function(a){this.setAttribute('value',a)},clear:function(){this.setAttribute('value','')}}};
 qq.skin.panel={prop:{clear:function(){this.innerHTML=''},get:function(html){if(html)return this.innerHTML;return this.innerText},set:function(v,html){if(html)this.innerHTML=v;else this.innerText=v;}}};
 qq.skin.textarea={};
 qq.skin.f=function(e){if((e.tagName=='INPUT')&&(!e.getAttribute('type')||(e.getAttribute('type')=='text'))){for(var u in qq.skin.inputtext.prop)
