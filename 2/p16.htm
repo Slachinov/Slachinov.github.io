@@ -6,7 +6,92 @@
 <title>Visual Langvich v1.0</title>
 </head>
 <body>
-<script>eval(localStorage['p16']);
+<script>{let idb={};let panl,br;
+let begin=async function (e){alert(99);};
+{//------pannel----------------------
+
+br=function(){qq.ce({tag:'br',parent:panl})};
+let br1=function(){qq.ce({tag:'br',parent:pan})};
+let pan=qq.ce({tag:'div',attr:{},style:{position:'absolute',width:'600px',height:'600px',background:'lightgray',border: '1px solid gray'}});
+//---------------url---------------
+
+qq.ce({tag:'span',attr:{},style:{},it:'URL : ',event:{},parent:pan});
+
+let inpurl=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+br1();
+//----------------name
+qq.ce({tag:'span',attr:{},style:{},it:'Name : ',event:{},parent:pan});
+let inpname=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+br1();
+//----------------tags
+qq.ce({tag:'span',attr:{},style:{},it:'Tags : ',event:{},parent:pan});
+let inptags=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+br1();
+//-----------buttons
+let bop=qq.ce({tag:'button',attr:{},style:{},it:'put',event:{click:async function(){let a={};a.name=inpname.value;a.url=inpurl.value;a.tags=inptags.value;idb.put(a)}},parent:pan});
+//---
+let crs=qq.ce({tag:'button',attr:{},style:{},it:'get',event:{click:async function(){let v=inpname.value;idb.get(v);}},parent:pan});
+//------------------
+qq.ce({tag:'button',attr:{},style:{},it:'cursor',event:{click:async function(){idb.cursor();}},parent:pan});
+panl=qq.ce({tag:'div',attr:{},style:{background:'lightgreen',border:'1px solid black'},event:{},parent:pan});
+}//--------------end panel
+
+{//--------------idb------------------------------------------------
+let db;
+let dbName='iqq';
+let request = indexedDB.open(dbName);
+request.onerror = function(event) {
+alert('errors.');
+};
+//----
+request.onsuccess = function(event) {//alert('succ');
+let sts=request.result.objectStoreNames;//alert(sts[0]);
+db=request.result;begin();
+
+};
+//----
+request.onupgradeneeded = function(event) {alert('upg');
+var db = event.target.result;
+var objectStore = db.createObjectStore("qlinks", { keyPath: "name" });
+objectStore.createIndex("url", "url", { unique: true });
+objectStore.createIndex("tags", "tags", { unique: false });
+}//------------end upgrade;
+//-----------idb get-----
+idb.get=async function(val){const objectStore = db.transaction(['qlinks'], "readwrite").objectStore('qlinks');
+const objectStoreTitleRequest = objectStore.get(val);
+objectStoreTitleRequest.onsuccess = function()  {
+const data = objectStoreTitleRequest.result;alert(data.tags);alert(data.url);};}
+//----
+idb.put=async function(val){const objectStore = db.transaction(['qlinks'], "readwrite").objectStore('qlinks');
+const objectStoreTitleRequest = objectStore.put(val);
+objectStoreTitleRequest.onsuccess = function()  {
+alert('put');};
+objectStoreTitleRequest.onerror = function()  {
+alert('error');};
+};
+//-----
+idb.del=async function(val){const objectStore = db.transaction(['qlinks'], "readwrite").objectStore('qlinks');
+const objectStoreTitleRequest = objectStore.delete(val);
+objectStoreTitleRequest.onsuccess = function()  {
+alert('delete');};}
+//------------cursor-------
+idb.cursor=async function(){//alert(7);
+panl.innerHTML='';const objectStore = db.transaction(['qlinks'], "readonly").objectStore('qlinks');
+
+objectStore.openCursor().onsuccess = function(event) {//alert(77);
+var cursor = event.target.result;br();
+if(cursor) {qq.ce({tag:'a',attr:{href:cursor.value.url,target:'_blank'},style:{},it:cursor.value.name,parent:panl});qq.ce({tag:'button',attr:{nam:cursor.value.name},style:{},it:'del',event:{click:async function(){idb.del(this.getAttribute('nam'));idb.cursor();}},parent:panl});qq.ce({tag:'button',attr:{},style:{},it:'update',event:{click:async function(){idb.upd();}},parent:panl});
+
+
+cursor.continue();
+} else {
+//alert('Entries all displayed.');
+}
+};}
+
+}//---------------------------end idb---------------------
+
+}
 </script>
 </body>
 </html>
