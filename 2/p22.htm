@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<script src='../js/qqv18.js'></script>
+<title>my links</title>
+</head>
+<body>
+<script>var q={};
+var br=function(p){qq.ce({tag:'br',parent:p})};
+{//-----------panels----------
+let qbody=qq.ce({tag:"div",style:{position:'absolute',top:'0px',left:'0px',width:document.documentElement.clientWidth-5+'px',height:document.documentElement.clientHeight-5+'px',overflow:'hidden',background:'orange'}});
+let qa=300;
+let qb=300;
+let qs=400;
+let qh1=200;
+let qh2=300;
+let qinput=qq.ce({tag:"div",style:{position:'absolute',top:'0px',left:'0px',width:qa+'px',height:qh1+'px',overflow:'hidden',background:'lightgray'},parent:qbody});
+let qtags=qq.ce({tag:"div",style:{position:'absolute',top:'0px',left:qa+'px',width:qb+'px',height:qh1+'px',overflow:'hidden',background:'lightgreen'},parent:qbody});
+let qsearch=qq.ce({tag:"div",style:{position:'absolute',top:'0px',left:qa+qb+'px',width:qs+'px',height:qh1+'px',overflow:'hidden',background:'lightgray'},parent:qbody});
+let qsearchlist=qq.ce({tag:"div",style:{position:'absolute',top:qh1+'px',left:qa+qb+'px',width:qs+'px',height:qh2+'px',overflow:'hidden',background:'white'},parent:qbody});
+let qlist=qq.ce({tag:"div",style:{position:'absolute',top:'0px',left:'0px',top:qh1+'px',width:qa+qb+'px',height:qh2+'px',overflow:'auto',background:'yellow'},parent:qbody});
+q.pan={};
+q.pan.input=qinput;
+q.pan.search=qsearch;
+q.pan.slist=qsearchlist;
+q.pan.tags=qtags;
+q.pan.list=qlist;
+alert(q);
+}//----------end panels-------
+//=====================================
+{//---panel input--------------
+let pan=q.pan.input;
+//---------------url---------------
+qq.ce({tag:'span',attr:{},style:{},it:'URL  : ',event:{},parent:pan});
+let inpurl=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+br(pan);
+
+//----------------name
+qq.ce({tag:'span',attr:{},style:{},it:'Name : ',event:{},parent:pan});
+let inpname=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+br(pan);
+//----------------tags
+qq.ce({tag:'span',attr:{},style:{},it:'Tags  : ',event:{},parent:pan});
+let inptags=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+br(pan);
+//-----------buttons
+
+qq.ce({tag:'button',attr:{},style:{},it:'put',event:{click:async function(){let a={};a.name=inpname.value;a.url=inpurl.value;a.tags=inptags.value;q.idb.put(a)}},parent:pan});
+//----
+qq.ce({tag:'button',attr:{},style:{},it:'list',event:{click:async function(){let tgs={};let n=0;for(let d in q.a){n++;let a=q.a[d];let ts=a.tags;if(ts.length>0){let tt=ts.split(',');for(let i=0;i<tt.length;i++){if(tt[i]){if(!tgs[tt[i]])tgs[tt[i]]=1;else tgs[tt[i]]++}}};qq.ce({tag:'a',attr:{href:a.url,target:'_blank'},event:{},style:{},it:a.name,parent:q.pan.list});br(q.pan.list);};q.tags=tgs;
+//for(let d in tgs)alert(d);
+}},parent:pan});
+//----------button tags-
+
+
+qq.ce({tag:'button',attr:{},style:{},it:'tags',event:{click:async function(){for(let d in q.tags){let m=q.tags[d];let h=17;qq.ce({tag:'span',attr:{},style:{'font-size':h+m*2+'px'},it:' '+m+d,event:{click:function(){let d=this.d;let pan2=q.pan.input.js.tags;pan2.value+=d+',';}},prop:{d:d},parent:q.pan.tags});}}},parent:pan});
+//==========
+q.sp=qq.ce({tag:'span',attr:{},style:{},it:'span  : ',event:{},parent:pan});
+//===========
+q.pan.input.js={};
+q.pan.input.js.tags=inptags;
+}//--------end panel input----
+//==========================================
+{//-------------panel search------------
+let pan=q.pan.search;
+let pans=q.pan.slist;
+let inpsearch=qq.ce({tag:'input',attr:{},style:{},event:{},parent:pan});
+qq.ce({tag:'button',attr:{},style:{},it:'search',event:{click:async function(){pans.innerHTML='';let val=inpsearch.value;let mval=val.length;let n=0;for(let d in q.a){if(n>-1){let a=q.a[d];let nm=a.name.length;let mm=0;while(nm-mm>=mval){let x=a.name.substr(mm,mval);if (x==val){
+br(pans);qq.ce({tag:'a',attr:{href:a.url,target:'_blank'},event:{},style:{},it:a.name,parent:pans});};mm++}};n++}}},parent:pan});
+}//------------end panel search------------
+//================================================
+{//--------------idb------------------------------------------------
+
+let db;
+let idb={};
+q.a={};
+let dbName='iqq';
+//--------db open--------
+let request = indexedDB.open(dbName);
+request.onerror = function(event) {
+alert('errors.');
+};
+//----
+request.onsuccess = function(event) {//alert('succ');
+let sts=request.result.objectStoreNames;//alert(sts[0]);
+db=request.result;idb.cursor();
+
+};
+//----
+request.onupgradeneeded = function(event) {alert('upg');
+var db = event.target.result;
+var objectStore = db.createObjectStore("qlinks", { keyPath: "name" });
+objectStore.createIndex("url", "url", { unique: true });
+objectStore.createIndex("tags", "tags", { unique: false });
+}//------------end db open;
+
+//-----------idb get-----
+idb.get=async function(val){const objectStore = db.transaction(['qlinks'], "readonly").objectStore('qlinks');
+const objectStoreTitleRequest = objectStore.get(val);
+objectStoreTitleRequest.onsuccess = function()  {
+const data = objectStoreTitleRequest.result;alert(data.tags);alert(data.url);};}
+//----
+idb.put=async function(val){const objectStore = db.transaction(['qlinks'], "readwrite").objectStore('qlinks');
+const objectStoreTitleRequest = objectStore.put(val);
+objectStoreTitleRequest.onsuccess = function()  {
+alert('put');};
+objectStoreTitleRequest.onerror = function()  {
+alert('error');};
+};
+//-----
+idb.del=async function(val){const objectStore = db.transaction(['qlinks'], "readwrite").objectStore('qlinks');
+const objectStoreTitleRequest = objectStore.delete(val);
+objectStoreTitleRequest.onsuccess = function()  {
+alert('delete');};
+objectStoreTitleRequest.onerror = function()  {
+alert('error');};
+
+};
+//------------cursor-------
+idb.cursor=async function(){//alert(7);
+const objectStore = db.transaction(['qlinks'], "readonly").objectStore('qlinks');
+//alert(objectStore);
+//=============
+let tgs={};let n=0;
+//====================
+objectStore.openCursor().onsuccess = function(event) {
+var cursor = event.target.result;//q.sp.innerText=q.sp.innerText+cursor.value.name;
+if(cursor) {q.a[cursor.value.name]=cursor.value;
+//=================
+n++;let a=cursor.value;let ts=a.tags;if(ts.length>0){let tt=ts.split(',');for(let i=0;i<tt.length;i++){if(tt[i]){if(!tgs[tt[i]])tgs[tt[i]]=1;else tgs[tt[i]]++}}};
+
+//================
+cursor.continue();
+} else {q.tags=tgs;
+//alert('Entries all displayed.');
+}
+};};
+
+q.idb=idb;
+}//---------------------------end idb---------------------
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
