@@ -22,7 +22,7 @@
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 <!-- Load our React component. -->
 <br><button onclick="let d=document.getElementById('dd');eval(d.innerText);">eval</button>
-<button onclick="dd.innerHTML=''">clear</button>
+<button onclick="alert(observer);dd.innerHTML=''">oclear</button>
 <button onclick="dd.innerText=localStorage[inp.value]">get</button>
 <input id='inp' />
 <button style="background:red;" onclick="localStorage[inp.value]=dd.innerText">set</button>
