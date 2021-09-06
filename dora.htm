@@ -15,15 +15,15 @@
 
 var d,inp,d1,al;
 ce(tag('button'),fs(45),ih('eval'),cl(function(){eval(d.innerText)}));
-ce(tag('button'),ih('clear'),cl(function(){d.innerHTML=''}));//alert(9);
-ce(tag('button'),ih('all'),cl(function(){al();}));//alert(8);
+ce(tag('button'),fs(45),ih('clear'),cl(function(){d.innerHTML=''}));//alert(9);
+ce(tag('button'),fs(45),ih('all'),cl(function(){al();}));//alert(8);
 al=function(){inp.value='';var ls=localStorage;
-if(!d1)d1=ce(div(),all(),zi(9),au(),bg('lightgray'),abs(),t(50),fs(35),ih(''));else d1.show();d1.innerHTML='';var gg='';for(var u in ls){var dd=ce(tag('button'),bg('orange'),ih(u),par(d1),cl(function(){d1.hide();d.innerText=ls[this.u];inp.value=this.u;}));dd.u=u;ce(tag('br'),par(d1))};};//alert(7);
+if(!d1)d1=ce(div(),all(),zi(9),au(),bg('lightgray'),abs(),t(80),fs(35),ih(''));else d1.show();d1.innerHTML='';var gg='';for(var u in ls){var dd=ce(tag('button'),bg('orange'),ih(u),par(d1),cl(function(){d1.hide();d.innerText=ls[this.u];inp.value=this.u;}));dd.u=u;ce(tag('br'),par(d1))};};//alert(7);
 inp=ce(tag('input'));inp.value=localStorage['current'];
-ce(tag('button'),ih('load'),cl(function(){d.innerText=localStorage[inp.value];localStorage['current']=inp.value;}));
-ce(tag('button'),ih('save'),bg('red'),cl(function(){localStorage[inp.value]=d.innerText}));//alert(65);
+ce(tag('button'),fs(45),ih('load'),cl(function(){d.innerText=localStorage[inp.value];localStorage['current']=inp.value;}));
+ce(tag('button'),fs(45),ih('save'),bg('red'),cl(function(){localStorage[inp.value]=d.innerText}));//alert(65);
 d=ce(div(),all(),bg('lightgreen'),zi(2),abs(),t(50),fs(35),au());//alert(4);
-ce(tag('button'),ih('del'),bg('red'),cl(function(){var dd=ce(all(),abs(),zi(5),bg('blue'));var bb1=ce(tag('button'),ih('yes'),par(dd),cl(function(){localStorage.removeItem(inp.value);this.d.hide();al();}));;var bb2=ce(tag('button'),ih('no'),par(dd),cl(function(){this.d.hide();al();}));bb1.d=dd;bb2.d=dd;;}));//alert(5);
+ce(tag('button'),fs(45),ih('del'),bg('red'),cl(function(){var dd=ce(all(),abs(),zi(5),bg('blue'));var bb1=ce(tag('button'),ih('yes'),par(dd),cl(function(){localStorage.removeItem(inp.value);this.d.hide();al();}));;var bb2=ce(tag('button'),ih('no'),par(dd),cl(function(){this.d.hide();al();}));bb1.d=dd;bb2.d=dd;;}));//alert(5);
 d=ce(div(),all(),bg('lightgreen'),zi(2),abs(),t(50),fs(35),au(),ed(true));//alert(4);
 };
 </script>
