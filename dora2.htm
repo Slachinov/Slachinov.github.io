@@ -24,7 +24,7 @@ qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){ed.innerText=
 
 let d1;let d=ed;
 let al=function(){inp.value='';let ls=localStorage;
-if(!d1){d1=qq.ce({tag:'div',style:{left:'0px',right:'0px', bottom :'0px','z-index':9,top:'50px',background:'lightgray', position:'absolute', 'font-size':'35px'}});}else{ d1.show()};d1.innerHTML='';var gg='';for(var i=0;i<localStorage.length;i++ ){ let u =localStorage.key(i); let dd=qq.ce({tag:'button',style:{background:'orange'},ih:u,parent:d1,event:{click:function(){d1.hide();d.innerText=ls[this.u];inp.value=this.u;}}});dd.u=u;
+if(!d1){d1=qq.ce({tag:'div',style:{left:'0px',right:'0px', bottom :'0px','z-index':9,top:'50px',background:'lightgray', position:'absolute', 'font-size':'35px'}});}else{ d1.show()};d1.innerHTML='';for(var i=0;i<localStorage.length;i++ ){ let u =localStorage.key(i); alert(u);let dd=qq.ce({tag:'button',style:{background:'orange'},ih:u,parent:d1,event:{click:function(){d1.hide();d.innerText=ls[this.u];inp.value=this.u;}}});dd.u=u;
 qq.ce({tag:'br', parent:d1});
 }};
 
