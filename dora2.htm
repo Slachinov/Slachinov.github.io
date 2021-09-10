@@ -20,10 +20,10 @@ qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){ed.innerHTML=
 qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){alert(8)}},it:'all',parent:et});
 
 
-qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){ed.innerText=localStorage[inp.value];}},it:'load',parent:et});
+qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){ed.innerText=localStorage[inp.value];   localStorage['current']=inp.value;}},it:'load',parent:et});
 
 
-inp=qq.ce({tag:'input', style:{'font-size':hb},parent:et});
+inp=qq.ce({tag:'input', style:{'font-size':hb},parent:et});inp.value=localStorage['current'];
 
 qq.ce({tag:'button',style:{'font-size':hb,background:'red'},event:{click:function(){localStorage[inp.value]=ed.innerText; }},it:'save',parent:et});
 
