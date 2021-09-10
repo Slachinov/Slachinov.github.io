@@ -17,11 +17,16 @@ qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){eval(ed.inner
 
 qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){ed.innerHTML='';}},it:'clear',parent:et});
 
-qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){alert(8)}},it:'all',parent:et});
+qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){al()}},it:'all',parent:et});
 
 
 qq.ce({tag:'button',style:{'font-size':hb},event:{click:function(){ed.innerText=localStorage[inp.value];   localStorage['current']=inp.value;}},it:'load',parent:et});
 
+let d1;let d=ed;
+let al=function(){inp.value='';let ls=localStorage;
+if(!d1){d1=qq.ce({tag:'div',style:{left:'0px',right:'0px', bottom :'0px','z-index':9,top:'50px',background:'lightgray', position:'absolute', 'font-size':'35px'}});}else{ d1.show()};d1.innerHTML='';var gg='';for(var i=0;i<localStorage.length;i++ ){ let u =localStorage.key(i); let dd=qq.ce({tag:'button',style:{background:'orange'},ih:u,parent:d1,event:{click:function(){d1.hide();d.innerText=ls[this.u];inp.value=this.u;}}});dd.u=u;
+qq.ce({tag:'br', parent:d1});
+}};
 
 inp=qq.ce({tag:'input', style:{'font-size':hb},parent:et});inp.value=localStorage['current'];
 
