@@ -105,6 +105,11 @@ qq.reg=new qq.freg();
 qq.sh={};
 qq.sh.panel =function (){ var b=qq.f.createSkin(arguments);return qq.f.crElem ({tag:'div',style:{top:'200px',left:'2px',width:'80%',height:'20%',position:'absolute', background:'lightgray' }},b);};
 
+
+qq.ls=function (a){return localStorage[a]};
+qq.ev=function (a){let t="var f="+qq.ls(a);eval(t);return f};
+
+
 qq.loadscript=function(url) {return new Promise(function(resolve, reject) {
 var el=document.createElement('script');
 el.src=url;
@@ -115,3 +120,7 @@ qq.f.initgithub=async function(){return new Promise(function(resolve, reject) {
 async function f(){
 let url;if(!window.Github) url=await qq.loadscript('https://Slachinov.github.io/js/github.js');if(!qq.f.github)url=await qq.loadscript('https://Slachinov.github.io/js/qq.github.v1.js');let gh=new qq.f.github({username :localStorage['username'], password:localStorage['password']});resolve(gh)};f();
 })};
+
+
+
+
