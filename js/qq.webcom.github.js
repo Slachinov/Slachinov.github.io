@@ -35,8 +35,10 @@ let f=await repo.write(n,edit.innerText);alert(f);
 //--
 }}});
 //======================================
-//let cre=qq.f.crElem(tmb,red,{it:'create',event:{click:function(){}}});
+let cre=qq.f.crElem(tmb,red,{it:'create',event:{click:function(){}}});
 //=========DELETE================
+
+
 qq.f.crElem(tmb,{it:'empty'});//e
 let del=qq.f.crElem(tmb,red,{it:'del',event:{click:async function(){let repo=gh.getrepo('Slachinov','slachinov.github.io');let n=inp.value;alert(n);
 let f=await repo.remove(n);alert('deleted '+n);}}});
