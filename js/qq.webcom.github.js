@@ -6,7 +6,7 @@ var gh; 
 gh=new qq.f.github({token:localStorage['gid0']});
 let inp,edit,el,bts;
 el=qq.f.crElem({tag:"div",style:{width:document.documentElement.clientWidth-50+'px',height:document.documentElement.clientHeight-50+'px',overflow:'hidden',background:'orange'}, parent:that});
-bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"Github "});
+bts=qq.f.crElem({tag:"div",style:{left:'0px',right:'0px',top:'0px',background:'yellow'}, parent:el,it:"Git5hub "});
 let h0=el.offsetHeight;let h1=bts.offsetHeight;
 edit=qq.f.crElem({tag:"div",attr:{contentEditable:true},style:{'font-size':'18px',left:'0px',right:'0px',height:(h0-h1)+'px',background:'lightgreen',overflow:'auto'}, parent:el});
 let par={parent:bts};
