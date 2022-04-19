@@ -1,4 +1,4 @@
-alert('idb');
+//alert('idb');
 qq.idb={};
 qq.idb.bn='locqq';
 qq.idb.sn='locqqstore';
