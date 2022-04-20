@@ -1,7 +1,10 @@
 .red {
-   background-color: red;
+background-color: red;
 }
 
+.lred {
+background-color: lightred;
+}
 .gray {
-   background-color: gray;
+background-color: gray;
 }
