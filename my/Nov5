@@ -1,0 +1,29 @@
+//alert(qq.f.github);
+//alert(qq.ls);alert(qq.ls('token'));
+{let gh,ed,fed, fgh,fs={style:{'font-size':'15px'}},sw=150;;
+
+
+let t=qq.ce({tag:'div', style:{position :'absolute',top:'0px', },event: {click:async function (){}},});
+
+
+let b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px',border:'1px solid black'},it:'bottom'});
+
+
+
+fed=function (){ed=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+'px', background :'lightgreen',overflow :'auto'}, attr:{contentEditable:true},})};
+
+fgh= async function (){let inp;
+qq.ce(fs,{tag:'button',event:{click:function (){ed.innerText =qq.ls(inp.value)} },it:'load',parent :t});
+inp=qq.ce(fs,{tag:'input',style:{width:sw+'px'},parent:t});
+qq.ce(fs,{tag:'button', style:{background: 'red'}, event:{click: async function (){await qq.repo.write('my/'+inp.value,ed.innerText)}},it: 'save' , parent :t});fed();
+};
+
+(async function (){
+gh=new qq.f.github({token: qq.ls('token')});qq.repo=gh.getrepo('Slachinov',
+'Slachinov.github.io');fgh();
+//alert(gh);
+})();
+
+
+
+};
