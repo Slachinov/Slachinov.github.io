@@ -1,4 +1,5 @@
-{let gh,ed,all, inp,inpcb,fed,fall, fgh,fb,fs={style:{'font-size':'20px'}},sw=110;;
+{alert(77);
+let gh,ed,all, inp,inpcb,fed,fall, fgh,fb,fs={style:{'font-size':'20px'}},sw=110;;
 
 let t=qq.ce({tag:'div', style:{position :'absolute',top:'0px', background :'yellow'},event: {click:async function (){}},});
 
