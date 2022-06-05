@@ -1,18 +1,23 @@
 {
-let t,b,ed,all,f={},fsv='22px',fsed='26px',sw='140px';;
+let t,b,ed,all,f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
+ed=qq.ce({tag:'div'});
 
-t=qq.ce({tag:'div', style:{position :'absolute',top:'0px', background :'yellow'}});
+t=qq.ce({tag:'div', style:{position :'absolute',top:'0px', background :'yellow'},prop:{clear:function (){this.innerHTML='';}}});
 
 b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px' }});
 
-f.ed=function (){ ed=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgreen',overflow :'auto','font-size':'22px'}, attr:{contentEditable:true},})};
+f.ed=function (){ ed=qq.ce(ed,{tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgreen',overflow :'auto','font-size':'22px'}, attr:{contentEditable:true},})};
 
 f.all=function (){all=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgray',overflow :'auto','font-size':'22px','z-index':1}, attr:{},});
 all.clear=function (){all.innerHTML='';};all.hide();};
 
-f.gh= async function (){
-let inp=qq.ce(fs,{tag:'input',style:{},parent:t});
+f.ls= async function (){
+t.clear();let inp;t.style.background='yellow';
+qq.ce(fs,{tag:'button',event:{click:function (){inp.value='';} },it:'cl',parent :t});
+
+
+inp=qq.ce(fs,{tag:'input',style:{width:sw},parent:t});
 
 
 qq.ce(fs,{tag:'button',event:{click:function (){ed.innerText =qq.ls(inp.value)} },it:'load',parent :t});
@@ -39,15 +44,31 @@ qq.ce(aa,{style:{right :'100px'},event:{click :function (){all.hide();}}});
 qq.ce(aa,{style:{left:'100px'}, event:{click :function (){all.hide();localStorage.removeItem(inp.value);}},it:'yes'});}},it: 'del' , parent :t});
 
 
-qq.ce(fs,{tag:'button', style:{background: 'red'}, event:{click: async function (){alert(8);alert(qq.repo);await qq.repo.write('my/'+inp.value,ed.innerText)}},it: 'save gh' , parent :b});};
-
+qq.ce(fs,{tag:'button', style:{background: 'red'}, event:{click: async function (){await qq.repo.write('my/'+inp.value,ed.innerText)}},it: 'save gh' , parent :t});};
+//-----###
+f.gh= function (){
+t.clear();
+let inp=qq.ce({tag:'input',parent:t});
+t.style.background='orange';
+qq.ce(fs,{tag:'button',event:{click:async function (){let a=await qq.repo.gettree();all.show();
+a.forEach(function (e){qq.ce({tag:'div', style:{border: '1px solid black'}, event:{click: async function (){all.hide();inp.value=this.p;let a=await qq.repo.read(this.p);ed.innerText=a;}},prop:{p:e.path},parent:all, it:e.path});});
+}},it:'all',parent :t});
+};
+//--=---=##
 f.b=function (){
 qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){eval(ed.innerText)}},it: 'eval' , parent :b});
 
-qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){ed.innerHTML='';}},it: 'clear' , parent :b});};
+qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){ed.innerHTML='';}},it: 'clear' , parent :b});
 
-(async function (){alert(9);
- let gh=new qq.f.github({token: qq.ls('token')});alert(gh);alert(gh.getrepo);qq.repo=gh.getrepo('Slachinov','Slachinov.github.io');alert('-'+qq.repo);f.all();f.gh();f.b();f.ed();
-alert(qq.repo);
+
+qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.ls();f.ed();}},it: 'localS' , parent :b});
+
+qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.gh();f.ed();}},it: 'github' , parent :b});
+
+};
+
+(async function (){
+ let gh=new qq.f.github({token: qq.ls('token')});qq.repo=gh.getrepo('Slachinov','Slachinov.github.io');f.all();f.ls();f.b();f.ed();
+//alert(qq.repo);
 })();
 };
