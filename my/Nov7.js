@@ -1,4 +1,4 @@
-{//alert(77);
+{
 let t,b,ed,all,f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
 ed=qq.ce({tag:'div'});
@@ -56,7 +56,7 @@ a.forEach(function (e){qq.ce({tag:'div', style:{border: '1px solid black'}, even
 }},it:'all',parent :t});
 
 
-qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){all.clear();all.show();qq.ce({tag:'a',parent:all,it:inp.value,attr:{href:'https://slachinov.github.io/'+inp.value}})}},it: 'hrf' , parent :t});
+qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){all.clear();all.show();qq.ce({tag:'a',parent:all,it:inp.value,attr:{href:'https://slachinov.github.io/'+inp.value}})}},it: 'href' , parent :t});
 
 
 qq.ce(fs,{tag:'button', style:{background :'red'}, event:{click: async function (){await qq.repo.write(inp.value,ed.innerText);}},it: 'write' , parent :t});
