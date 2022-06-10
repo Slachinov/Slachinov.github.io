@@ -13,7 +13,8 @@ f.all=function (){all=qq.ce({tag:'div', style:{position :'absolute',top:t.offset
 all.clear=function (){all.innerHTML='';};all.hide();};
 
 f.ls= async function (){
-t.clear();let inp;t.style.background='yellow';
+t.clear();
+let inp;t.style.background='yellow';
 qq.ce(fs,{tag:'button',event:{click:function (){inp.value='';} },it:'cl',parent :t});
 
 
@@ -56,6 +57,9 @@ a.forEach(function (e){qq.ce({tag:'div', style:{border: '1px solid black'}, even
 
 
 qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){all.clear();all.show();qq.ce({tag:'a',parent:all,it:inp.value,attr:{href:'https://slachinov.github.io/'+inp.value}})}},it: 'href' , parent :t});
+
+
+qq.ce(fs,{tag:'button', style:{background :'red'}, event:{click: async function (){await qq.repo.write(inp.value,ed.innerText);}},it: 'write' , parent :t});
 
 
 };
