@@ -1,4 +1,4 @@
-{
+{alert(77);
 let t,b,ed,all,f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
 ed=qq.ce({tag:'div'});
