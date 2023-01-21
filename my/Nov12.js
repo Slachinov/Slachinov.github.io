@@ -66,33 +66,7 @@ qq.ce(fs,{tag:'button', style:{background :'red'}, event:{click: async function 
 
 };
 //--=---=##
-f.at=function (){t.clear();
-
-qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){
-let tab= new qq.table({parent:all});;
-
-tab.cp("table two");
-tab.th(["symbol","last","low","high"]);
-//alert(all.innerHTML);return;
-var xhr = new XMLHttpRequest();
-//alert(xhr);
-let url="https://api.ataix.kz/api/symbols";
-//url="https://api.ataix.kz/api/currencies";
-url="https://api.ataix.kz/api/prices";
-//alert(url);
-xhr.open("GET", url,false);
-xhr.onreadystatechange = function () {//alert(this.readyState);
-//alert(this.status);
-let rt=this.responseText;//alert(rt);
-let obj=JSON.parse(rt).result;
-//alert(obj.length);
-
-for(let i=0;i<obj.length;i++){
-tab.app([obj[i].symbol,obj[i].last,obj[i].low,obj[i].high]);};
-};//alert(123);
-xhr.send();
-}},it: 'symbols' , parent :t});
-
+f.at=function (){
 
 
 }
