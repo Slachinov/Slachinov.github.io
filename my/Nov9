@@ -1,4 +1,4 @@
-{eval(qq.ls('Table'));
+{//eval(qq.ls('Table'));
 //alert(qq.table);
 
 let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
