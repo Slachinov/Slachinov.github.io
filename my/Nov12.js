@@ -1,6 +1,6 @@
 {//eval(qq.ls('Table'));
 //alert(qq.table);
-alert(78);
+//alert(78);
 
 let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
