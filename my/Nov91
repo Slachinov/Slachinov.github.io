@@ -6,8 +6,8 @@ let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
 ed=qq.ce({tag:'div'});
 document.ed=ed;
-
-t=qq.ce({tag:'div', style:{position :'absolute',top:'0px',left:'0px', background :'yellow',border:'1px solid orange'},prop:{clear:function (){this.innerHTML='';}}});
+let br=function(){qq.ce ({tag:'br',parent:t});};
+t=qq.ce({tag:'div', style:{position :'absolute',top:'0px',left:'0px',right:'0px', background :'yellow',border:'1px solid orange'},prop:{clear:function (){this.innerHTML='';}}});
 
 b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px' }});
 
@@ -67,6 +67,34 @@ qq.ce(fs,{tag:'button', style:{background :'red'}, event:{click: async function 
 
 
 };
+
+
+//-----###
+f.idb= function (){
+let inpk,inpts;
+t.clear();
+f.ed();
+qq.ce(fs,{tag:'button',it:'all',parent:t,event:{click:async function(){let m=await qq.idb.getAll();f.all();all.show ();
+m.forEach(function(a){qq.ce({tag:'div',it:a[0],prop:{a:a},event:{click:function(){all.hide();f.ed();ed.innerText=this.a[1].val;inpk.value=a[0];}},parent:all,style:{border :'1px solid black'}})})
+}}});
+br();
+ inpk=qq.ce(fs,{tag:'input',style:{width:sw},parent:t});
+qq.ce(fs,{tag:'button',parent:t,it:'key'});
+br();
+qq.ce(fs,{tag:'button',parent:t, it:'load',event:{click:async function(){let a=await qq.idb.get(inpk.value);alert(a);}}});
+qq.ce(fs,{tag:'button',parent:t, it:'save',style:{background:'red'},event:{click:async function(){await qq.idb.set(inpk.value,{tags:inpts.value,val:ed.innerText})}}});
+
+
+qq.ce(fs,{tag:'button',parent:t, it:'delete',style:{background:'red'},event:{click:async function(){await qq.idb.delete(inpk.value)}}});
+
+
+br();
+inpts=qq.ce(fs,{tag:'input',style:{width:sw},parent:t});
+qq.ce(fs,{tag:'button',parent:t,it:'tags'});
+
+
+}
+//-------
 //--=---=##
 f.at=function (){
 
@@ -83,9 +111,9 @@ qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){ed.innerHTML='
 qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){all.hide();f.ls();f.ed();}},it: 'localS' , parent :b});
 
 qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){all.hide();f.gh();f.ed();}},it: 'github' , parent :b});
+//alert(qq.idb.set);
 
-
-qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.at();f.all();f.ed();all.show();}},it: 'ataix' , parent :b});
+qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.idb();}},it: 'indexDb', parent :b});
 
 };
 
