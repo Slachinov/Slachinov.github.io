@@ -14,6 +14,7 @@ resolve(1);
 //---
 reg.onupgradeneeded=function(event){alert('upg');var db = event.target.result;
 db.createObjectStore(qq.idb.sn,{keyPath:"key"});
+db.createObjectStore('st1',{keyPath:"key"});
 };
 //--
 })
