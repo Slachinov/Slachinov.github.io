@@ -1,5 +1,5 @@
 qq.idb={};
-qq.idb.bn='locqq';
+qq.idb.bn='locqq1';
 qq.idb.sn='locqqstore';
 //--
 qq.idb.f=function(){//alert(9);
