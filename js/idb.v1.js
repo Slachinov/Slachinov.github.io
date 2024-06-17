@@ -1,6 +1,7 @@
 qq.idb={};
 qq.idb.bn='locqq1';
 qq.idb.sn='locqqstore';
+qq.idb.dbs={};
 //--
 qq.idb.f=function(){//alert(9);
 return new Promise(function(resolve, reject) {//alert(99);
