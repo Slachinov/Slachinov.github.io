@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+
+<html>
+
+
+<head>
+
+
+<meta charset=»UTF-8″>
+
+
+<title>Speech Detection Example</title>
+
+
+</head>
+
+
+<body>
+
+
+<button id=»startButton»>Начать распознавание</button>
+
+
+<div id=»output»></div>
+
+
+<script>
+
+
+if (‘webkitSpeechRecognition’ in window) {
+
+
+const recognition = new webkitSpeechRecognition();
+
+
+recognition.continuous = true;
+
+
+recognition.interimResults = true;
+
+
+const startButton = document.getElementById(‘startButton’);
+
+
+const output = document.getElementById(‘output’);
+
+
+startButton.addEventListener(‘click’, () => {
+
+
+recognition.start();
+
+
+});
+
+
+recognition.onresult = function(event) {
+
+
+for (let i = event.resultIndex; i < event.results.length; i++) {
+
+
+if (event.results[i].isFinal) {
+
+
+const recognizedText = event.results[i][0].transcript;
+
+
+output.textContent = recognizedText;
+
+
+}
+
+
+}
+
+
+};
+
+
+} else {
+
+
+console.log(‘Web Speech API не поддерживается в данном браузере’);
+
+
+}
+
+
+</script>
+
+
+</body>
+
+
+</html>
