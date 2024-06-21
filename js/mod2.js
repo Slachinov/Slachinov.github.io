@@ -1,0 +1,1 @@
+import {sayHi} from 'js/mod.js';alert(sayHi); sayHi('John');
