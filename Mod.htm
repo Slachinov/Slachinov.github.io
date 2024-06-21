@@ -1,6 +1,11 @@
 <!doctype html>
 <script type="module">
-  import {sayHi} from './say.js';
 
-  document.body.innerHTML = sayHi('John');
+export function sayHi(user) {
+  alert(`Hello, ${user}!`);
+}</script>
+<script type="module">
+import {sayHi} from './say.js';
+
+document.body.innerHTML = sayHi('John');
 </script>
