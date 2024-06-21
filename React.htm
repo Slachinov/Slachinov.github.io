@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>My first React app</title>
-	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<meta charset="UTF-8">
+<title>My first React app</title>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
-	<div id="root"></div>
+<div id="root"></div>
+<div id="root2"></div>
+<div id="root5"></div>
+
+<script type="text/babel">
+  ReactDOM.render(<h1>Hello world mse</h1>, document.querySelector("#root"));
+  
+const name = 'Michael';
+var nameUser = () => "Franklin";
+const element = <h1>Здравствуй, {name}</h1>;
+const element_2 = <h1>Здравствуй, {nameUser()}</h1>;
 
 
-	<script type="text/babel">
-  		ReactDOM.render(<h1>Hello world</h1>, document.querySelector("#root"));
-  	</script>
+ReactDOM.render(element, document.getElementById("root5"));
+ReactDOM.render(element_2, document.getElementById("root_2"));
+</script>
+
 </body>
 </html>
