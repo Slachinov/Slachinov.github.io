@@ -1,7 +1,7 @@
 {let p3;
 let pan=qq.ce({tag:'div',style:{position:'absolute',top:'0px',left:'0px',right:'0px',bottom:'0px', background:'lightgray'}});
 let p2=qq.ce({tag:'div',parent:pan});
-
+document.body.ipan=pan;
 qq.ce({tag:'button',it:'click',event:{click:function(){qq.idb.f('my',{op:'init'});qq.idb.f('locqq0',{op:'init'});qq.idb.f('locqq1',{op:'init'});}}, parent:pan});
 
 
