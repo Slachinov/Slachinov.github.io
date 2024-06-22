@@ -6,6 +6,7 @@ let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
 ed=qq.ce({tag:'div'});
 document.ed=ed;document.b=b;
+document.t=t;
 let br=function(){qq.ce ({tag:'br',parent:t});};
 t=qq.ce({tag:'div', style:{position :'absolute',top:'0px',left:'0px',right:'0px', background :'yellow',border:'1px solid orange'},prop:{clear:function (){this.innerHTML='';}}});
 
