@@ -1,7 +1,6 @@
 //-------begin qq
 window.qq={};
 qq.f={};
-alert (9)
 qq.o={ bg:function(a){//alert(1);
  return {style:{background:a}} }, r:function(a){return {style:{right :a+'px'}}},
 t:function(a){return {style:{top :a+'px'}}},b:function(a){return {style:{bottom :a+'px'}}},w:function(a){return {style:{ width:a+'px'}}},
