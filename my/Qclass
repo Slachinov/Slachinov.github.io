@@ -1,0 +1,60 @@
+{qq.o={ bg:function(a){//alert(1);
+ return {style:{background:a}} }, r:function(a){return {style:{right :a+'px'}}},
+t:function(a){return {style:{top :a+'px'}}},
+
+b:function(a){return {style:{bottom :a+'px'}}},
+
+w:function(a){return {style:{ width:a+'px'}}},
+
+h:function(a){return {style:{height :a+'px'}}},
+l: function(a){return {style:{left:a+'px'}}},
+//==
+fs:function(a){return {style:{'font-size':a+'px'}}},
+zi:function(a){return {style:{'z-index':a}}},abs:function(a){return {style:{'position':'absolute'}}}
+//==
+};
+
+
+//alert (qq.o);
+let ddd=qq.ce ({tag:'div',
+qclass: 't(0) l(0) r(0) b(0) bg(gray) zi(500) abs',event:{click:function(){return;this.outerHTML=''}}}); 
+
+
+let b=qq.ce({tag:'button', it:'click',event:{click:function(){ddd.outerHTML='';}},style:{}, qclass:'bg(red) l(200) t(200) abs zi(4) fs(45)', parent:ddd});// alert (b);
+
+let pn;
+let dd=qq.ce({tag:'div',parent:ddd,qclass:'abs bg(green) l(100) t(100) h(50) w(150) zi(56)' ,event:{pan:function(e){ 
+ let l=(e.center.x-50)+'px';
+//e.target.getBoundingClientRect().left
++'px';
+dd.style.top=(e.center.y-30)+'px';dd.style.left=l;
+pn.innerText+=e.type;
+//l+'__'+e.center.y;
+//+'__'+e.target[e.type];
+//e.stopPropagation();
+
+}}});
+
+
+ pn=qq.ce({tag:'div',parent:ddd,qclass:'abs bg(white) l(150) t(10) h(50) w(150) zi(89)' });
+
+
+
+
+
+//===
+//alert(qq.f.getStyle('z-index',ddd))
+/*
+fs:function(a){return {style:{'font-size ':a+'px'}}},
+
+zi:function(a){return {style:{'z-index ':a}}},
+
+b:function(a){return {style:{bottom :a+'px'}}},
+
+w:function(a){return {style:{ width:a+'px'}}},
+
+h:function(a){return {style:{height :a+'px'}}},
+
+*/
+//=====
+}
