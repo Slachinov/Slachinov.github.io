@@ -12,12 +12,12 @@
 <div id='my' style='overflow:auto;left:0px;right:0px;height:30px;border:1px solid black;background:lightgray;position:relative'><div id="like_button_container"></div>
 </div>
 
-<br><button onclick="let d=document.getElementById('dd');eval(d.innerText);">eval</button>
-<button onclick="dd.innerHTML=''">clear</button>
+
 <button onclick="dd.innerText=localStorage[inp.value]">get</button>
 <input id='inp' />
 <button style="background:red;" onclick="localStorage[inp.value]=dd.innerText">set</button>
-<div id=dd style='left:0px;right:0px;height:250px;border:1px solid black;background:lightgreen;overflow:auto;;' contentEditable=true></div>
-<script></script>
+<div id=dd style='left:0px;right:0px;height:250px;border:1px solid black;background:lightgreen;overflow:auto;;' contentEditable=true></div><br><button id=bbb onclick="let d=document.getElementById('dd');eval(d.innerText);" >eval</button>
+<button onclick="dd.innerHTML=''">clear</button>
+<script>qq.ce(bbb,{qclass:'fs(30'})</script>
 </body>
 </html>
