@@ -1,4 +1,4 @@
-alert(44555);
+alert(4);window.a ='myqq';
 
 
 export function sayHi(user) {
