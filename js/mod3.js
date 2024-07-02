@@ -1,4 +1,4 @@
-alert(4);window.a ='myqq';
+alert('mod3');
 
 
 export function qqf(user) {
