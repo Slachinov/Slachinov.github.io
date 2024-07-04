@@ -1,4 +1,5 @@
-alert(4);window.a ='myqq';
+//alert(4);
+window.a ='myqq';
 
 
 export function sayHi(user) {
