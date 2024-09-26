@@ -21,6 +21,7 @@ let all=qq.ce({ qclass:'div l(0) r(0) bg(gray) fs(25) zi(6) abs',event:{click:fu
 alert (all);
 
 const observer = new ResizeObserver(function(entries) {
+alert(m.getStyle('bottom'));
 all.style.bottom=m.offsetTop+m.offsetHeight+'px';
 all.style.top=m.offsetTop +'px';alert(all.outerHTML);
 });
