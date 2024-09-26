@@ -17,12 +17,10 @@ qq.ce({ qclass:'but fs(25) bg(lightgray)',it:'edit',parent:bts, event:{click:fun
 edit.style.bottom=bts.offsetHeight+'px';
 main.edit=edit;
 //====
-let all=qq.ce({ qclass:'div l(0) r(0) bg(gray) fs(25) zi(6) abs',event:{click:function(){this.hide()}}});
-alert (all);
+let all=qq.ce({ qclass:'div l(0) r(0) bg(orange) fs(25) zi(6) abs',event:{click:function(){this.hide()}}});
 
 const observer = new ResizeObserver(function(entries) {
-alert(m.getStyle('bottom'));
 all.style.bottom= m.getStyle('bottom');
-all.style.top=m.offsetTop +'px';alert(all.outerHTML);
+all.style.top=m.offsetTop +'px';
 });
 observer.observe(m);
