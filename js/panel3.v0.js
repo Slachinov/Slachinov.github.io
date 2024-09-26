@@ -20,4 +20,4 @@ observer.observe(b);
 observer.observe(t)
 
 };
-export {t,m,b}
+//export {t,m,b}
