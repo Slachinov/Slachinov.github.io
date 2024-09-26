@@ -1,4 +1,4 @@
-import {main} from('main');
+import {main} from('main.js');
 {alert(5);alert(main);
 let t=qq.ce({ qclass:'abs div zi(5) t(0) l(0) r(0) bg(yellow)',it:'top'});
 main.top=t;
