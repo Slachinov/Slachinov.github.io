@@ -18,9 +18,10 @@ edit.style.bottom=bts.offsetHeight+'px';
 main.edit=edit;
 //====
 let all=qq.ce({ qclass:'div l(0) r(0) bg(gray) fs(25) zi(6) abs',event:{click:function(){this.hide()}}});
+alert (all);
 
 const observer = new ResizeObserver(function(entries) {
 all.style.bottom=m.offsetBottom+'px';
-all.style.top=m.offsetTop +'px';
+all.style.top=m.offsetTop +'px';alert(all.style.top);
 });
 observer.observe(m);
