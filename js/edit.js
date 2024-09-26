@@ -22,7 +22,7 @@ alert (all);
 
 const observer = new ResizeObserver(function(entries) {
 alert(m.getStyle('bottom'));
-all.style.bottom=m.offsetTop+m.offsetHeight+'px';
+all.style.bottom= m.getStyle('bottom');
 all.style.top=m.offsetTop +'px';alert(all.outerHTML);
 });
 observer.observe(m);
