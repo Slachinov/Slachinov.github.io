@@ -3,7 +3,7 @@ import {main} from '/js/main.js';
 let t=qq.ce({ qclass:'abs div zi(5) t(0) l(0) r(0) bg(yellow)',it:'top'});
 main.top=t;
 
-let b=qq.ce({qclass:'abs div zi(5) b(0) l(0) r(0) bg(gray)',it:'bottom'});
+let b=qq.ce({qclass:'abs div zi(5) b(0) l(0) r(0) bg(gray)'});
 
 let m=qq.ce({ qclass:'abs div zi(5) l(0) r(0) bg(blue)',style:{}});
 //>>>>>>
