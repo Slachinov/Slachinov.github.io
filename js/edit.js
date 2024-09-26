@@ -1,6 +1,6 @@
 import {m} from '/js/panel3.v7.js';
 import {main} from '/js/main.js';
-alert('mmm='+main+m);
+//alert('mmm='+main+m);
 //====
 let edit=qq.ce({ qclass:'fs(20) abs div zi(5) l(0) r(0) t(0) bg(lightblue)',style:{overflow:'auto'}, parent:m});
 
