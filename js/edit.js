@@ -22,6 +22,6 @@ alert (all);
 
 const observer = new ResizeObserver(function(entries) {
 all.style.bottom=m.offsetBottom+'px';
-all.style.top=m.offsetTop +'px';alert(all.style.top);
+all.style.top=m.offsetTop +'px';alert(all.outerHTML);
 });
 observer.observe(m);
