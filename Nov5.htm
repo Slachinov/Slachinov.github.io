@@ -33,8 +33,8 @@ function builtinRead(x)
 }
 
 
-function runit() {
-   var prog = document.getElementById("yourcode").value;
+function runit() {alert(5);
+   var prog = document.getElementById("yourcode").value;alert(prog);
    var mypre = document.getElementById("output");
    mypre.innerHTML = '';
    Sk.configure({output:outf,
@@ -47,7 +47,7 @@ function runit() {
    }
 }
 </script>
-<h3>Try This</h3>
+<h3>Try This v1</h3>
 <form>
 <textarea edit_id="eta_5" id="yourcode">
 print "Hello World"
