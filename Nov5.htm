@@ -27,7 +27,7 @@ function outf(text) {
 
 function builtinRead(x)
 {alert('bu');
-//alert(x);alert(Sk.builtinFiles):
+alert(Sk.builtinFiles):
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
         throw "File not found: '" + x + "'";alert(77);
     return Sk.builtinFiles["files"][x];
@@ -42,13 +42,13 @@ function runit() {alert(5);
            read: builtinRead
               });
    try {
-      Sk.importMainWithBody("<stdin>",false,prog);
+      Sk.importMainWithBody("<stdin>",false,prog);alert('good');
    } catch (e) {
       alert(e);
    }
 }
 </script>
-<h3>Try This v8</h3>
+<h3>Try This v10</h3>
 <form>
 <textarea edit_id="eta_5" id="yourcode">
 print "Hello World"
