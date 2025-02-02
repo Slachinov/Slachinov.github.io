@@ -4,11 +4,61 @@
 <link rel="stylesheet" type="text/css" href='qq.css' />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="js/hammer.js"></script>
-<script src="js/github.js"></script>
-<script src="js/qqv24.js"></script>
-<script src='../js/qq.github.v3.js'></script>
-<script src="js/idb.v1.js"></script>
-<script></script></head>
+
+
+
+
+
+
+<script src="skulpt.min.js" type="text/javascript"></script>
+<script src="skulpt-stdlib.js" type="text/javascript"></script>
+
+
+</head>
+
+
 <body>
-<script>eval(qq.ls('Nov5'))</script>
+<script type="text/javascript">
+function outf(text) {
+   var mypre = document.getElementById("output");
+   mypre.innerHTML = mypre.innerHTML + text;
+}
+
+
+function builtinRead(x)
+{
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+        throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+}
+
+
+function runit() {
+   var prog = document.getElementById("yourcode").value;
+   var mypre = document.getElementById("output");
+   mypre.innerHTML = '';
+   Sk.configure({output:outf,
+           read: builtinRead
+              });
+   try {
+      Sk.importMainWithBody("<stdin>",false,prog);
+   } catch (e) {
+      alert(e);
+   }
+}
+</script>
+<h3>Try This</h3>
+<form>
+<textarea edit_id="eta_5" id="yourcode">
+print "Hello World"
+</textarea>
+<button onclick="runit()" type="button">Run</button>
+</form>
+
+
+<pre id="output"></pre>
+
+
+</body>
+</html>
+
