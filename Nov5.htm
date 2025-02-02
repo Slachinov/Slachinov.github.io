@@ -26,29 +26,28 @@ function outf(text) {
 
 
 function builtinRead(x)
-{alert('bu');
-//alert(Sk.builtinFiles):
+{
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-        throw "File not found: '" + x + "'";alert(77);
+        throw "File not found: '" + x + "'";
     return Sk.builtinFiles["files"][x];
 }
 
 
-function runit() {alert(5);
-   var prog = document.getElementById("yourcode").value;alert(prog);
+function runit() {
+   var prog = document.getElementById("yourcode").value;
    var mypre = document.getElementById("output");
    mypre.innerHTML = 'tratata';
    Sk.configure({output:outf,
            read: builtinRead
               });
    try {
-      Sk.importMainWithBody("<stdin>",false,prog);alert('good');
+      Sk.importMainWithBody("<stdin>",false,prog);
    } catch (e) {
       alert(e);
    }
 }
 </script>
-<h3>Try This v1</h3>
+<h3>Try This v0</h3>
 <form>
 <textarea edit_id="eta_5" id="yourcode">
 print "Hello World"
