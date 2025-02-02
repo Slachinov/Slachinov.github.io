@@ -11,7 +11,7 @@
 <script type="text/javascript" src="https://skulpt.org/js/skulpt-stdlib.js"></script>
 <script type="text/javascript">
 function runit() {
-  var code = document.getElementById("code").value;
+  var code = document.getElementById("code").value;alert(code);alert(Sk);
   var output = document.getElementById("output");
 
 
@@ -26,7 +26,7 @@ function runit() {
   Sk.misceval.asyncToPromise(function() {
     return Sk.importMain("<stdin>", false, code, new Sk.builtin.dict());
   }).then(function(result) {
-    // Обработка успешного выполнения
+    // Обработка успешного 
   }, function(error) {
     // Обработка ошибок
     output.innerHTML += error.toString();
@@ -37,7 +37,7 @@ function runit() {
 <body>
 
 
-<h1>Skulpt Example</h1>
+<h1>Skulpt Example v1</h1>
 
 
 <textarea id="code" rows="10" cols="50">
