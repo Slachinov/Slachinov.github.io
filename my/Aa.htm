@@ -25,8 +25,8 @@
 
       const topBlueSection = document.createElement('div');
       topBlueSection.style.backgroundColor = 'blue';
-      topBlueSection.style.width = '0'; // Изначально нулевая ширина (теперь это не так важно, но оставим)
-      topBlueSection.style.height = '30px';
+      topBlueSection.style.width = '100%'; // На всю ширину
+      topBlueSection.style.height = '0';   // Изначально нулевая высота
       topBlueSection.style.display = 'flex';
       topBlueSection.style.alignItems = 'center';
       topBlueSection.style.paddingLeft = '10px';
@@ -118,13 +118,16 @@
         // Создаем новую кнопку "cl"
         const closeButton = document.createElement('button');
         closeButton.textContent = 'cl';
-        closeButton.style.fontSize = '1em'; // Можно задать стили по желанию
-        closeButton.style.marginLeft = '10px'; // Небольшой отступ слева
+        closeButton.style.fontSize = '1em';
+        closeButton.style.marginLeft = '10px';
         topBlueSection.appendChild(closeButton); // Добавляем кнопку в верхнюю панель
 
 
-        // Обновляем высоту средней панели, хотя в данном случае это может быть и не нужно,
-        // так как добавление кнопки не меняет высоту верхней панели.
+        // Увеличиваем высоту верхней панели, чтобы кнопка стала видна
+        topBlueSection.style.height = 'auto'; // Или можно задать фиксированную высоту, например '30px'
+
+
+        // Обновляем высоту средней панели
         updateMiddleSectionHeight();
       });
 
