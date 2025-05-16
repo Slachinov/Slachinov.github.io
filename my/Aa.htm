@@ -25,11 +25,12 @@
 
       const topBlueSection = document.createElement('div');
       topBlueSection.style.backgroundColor = 'blue';
-      topBlueSection.style.width = '100%';
+      topBlueSection.style.width = '0'; // Изначально нулевая ширина (теперь это не так важно, но оставим)
       topBlueSection.style.height = '30px';
-      topBlueSection.style.display = 'flex'; // Чтобы кнопки располагались в ряд
-      topBlueSection.style.alignItems = 'center'; // Вертикальное выравнивание по центру
-      topBlueSection.style.paddingLeft = '10px'; // Небольшой отступ слева
+      topBlueSection.style.display = 'flex';
+      topBlueSection.style.alignItems = 'center';
+      topBlueSection.style.paddingLeft = '10px';
+      topBlueSection.style.overflow = 'hidden';
 
 
       const bottomRedSection = document.createElement('div');
@@ -114,19 +115,17 @@
       const localLsButton = buttonsBottom[0];
       localLsButton.addEventListener('click', () => {
         console.log('Кнопка "localLs" была нажата!');
-        // Функция для добавления кнопок в верхнюю панель
-        function addButtonsToTopPanel() {
-          const button1 = document.createElement('button');
-          button1.textContent = 'Save';
-          button1.style.marginRight = '10px';
-          topBlueSection.appendChild(button1);
+        // Создаем новую кнопку "cl"
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'cl';
+        closeButton.style.fontSize = '1em'; // Можно задать стили по желанию
+        closeButton.style.marginLeft = '10px'; // Небольшой отступ слева
+        topBlueSection.appendChild(closeButton); // Добавляем кнопку в верхнюю панель
 
 
-          const button2 = document.createElement('button');
-          button2.textContent = 'Load';
-          topBlueSection.appendChild(button2);
-        }
-        addButtonsToTopPanel(); // Вызываем функцию при клике на "localLs"
+        // Обновляем высоту средней панели, хотя в данном случае это может быть и не нужно,
+        // так как добавление кнопки не меняет высоту верхней панели.
+        updateMiddleSectionHeight();
       });
 
 
