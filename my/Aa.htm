@@ -208,9 +208,8 @@
         updateMiddleSectionHeight();
 
 
-        const clButton = topPanel.querySelector('button');
-        const inputElement = topPanel.querySelector('input[type="text"]');
-        const loadButtonElement = topPanel.querySelectorAll('button')[2];alert(2);alert(loadButton);
+        const clButton = closeButton;
+        const inputElement = inputField;
         const editingPanel = middleLightGreenSection;
 
 
@@ -219,12 +218,12 @@
             inputElement.value = '';
           });
         }
-alert(editingPanel);
-        if (loadButtonElement && inputElement && editingPanel) {alert('a'+localStorage.length);
-          loadButton.addEventListener ('click', () => {alert(9);alert(inputElement);
-            const key = inputElement.value;alert(2);
-alert(key);
-            const value = localStorage.getItem(key);alert(value);
+
+
+        if (loadButton && inputElement && editingPanel) {
+          loadButton.addEventListener('click', () => {
+            const key = inputElement.value;
+            const value = localStorage.getItem(key);
             editingPanel.textContent = value !== null ? value : '';
           });
         }
