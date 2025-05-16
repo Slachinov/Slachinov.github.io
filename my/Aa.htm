@@ -60,6 +60,7 @@
 
 
       const middleLightGreenSection = document.createElement('div');
+      middleLightGreenSection.id = 'editingPanel';
       middleLightGreenSection.style.backgroundColor = 'lightgreen';
       middleLightGreenSection.style.flexGrow = '1';
       middleGreenSection.appendChild(middleLightGreenSection);
@@ -130,7 +131,7 @@
         inputField.style.marginBottom = '5px';
         inputField.style.display = 'inline-block';
         inputField.style.fontSize = '1.3em';
-        inputField.style.width = '60%';
+        inputField.style.width = '57%';
         topPanel.appendChild(inputField);
 
 
@@ -210,11 +211,22 @@
 
         const clButton = topPanel.querySelector('button');
         const inputElement = topPanel.querySelector('input[type="text"]');
+        const loadButtonElement = topPanel.querySelectorAll('button')[2]; // Кнопка "load" - третий элемент (индекс 2)
+        const editingPanel = document.getElementById('editingPanel');
 
 
         if (clButton && inputElement) {
           clButton.addEventListener('click', () => {
             inputElement.value = '';
+          });
+        }
+
+
+        if (loadButtonElement && inputElement && editingPanel) {
+          loadButtonElement.addEventListener('click', () => {
+            const key = inputElement.value;
+            const value = localStorage.getItem(key);
+            editingPanel.textContent = value !== null ? value : '';
           });
         }
       });
