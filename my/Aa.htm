@@ -4,14 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Простое приложение</title>
-  <style>
-    body { margin: 0; }
-    #topBlueSection button, #topBlueSection input[type="text"], #topBlueSection input[type="checkbox"] {
-      margin-right: 5px;
-      margin-bottom: 5px;
-      display: inline-block;
-    }
-  </style>
 </head>
 <body>
 
@@ -85,6 +77,7 @@
         button.textContent = buttonTextsMiddle[i];
         middleBrownSection.appendChild(button);
         button.style.marginRight = '10px';
+        button.style.fontSize = '1em';
       }
 
 
@@ -116,76 +109,117 @@
       bottomObserver.observe(bottomRedSection);
 
 
-      // Получаем кнопку "localLs" (первую кнопку в bottomRedSection)
       const localLsButton = buttonsBottom[0];
       localLsButton.addEventListener('click', () => {
-        console.log('Кнопка "localLs" была нажата!');
         const topPanel = document.getElementById('topBlueSection');
-        topPanel.innerHTML = ''; // Очищаем содержимое
+        topPanel.innerHTML = '';
 
 
-        // Кнопка "cl"
         const closeButton = document.createElement('button');
         closeButton.textContent = 'cl';
+        closeButton.style.marginRight = '5px';
+        closeButton.style.marginBottom = '5px';
+        closeButton.style.display = 'inline-block';
+        closeButton.style.fontSize = '1.3em';
         topPanel.appendChild(closeButton);
 
 
-        // Инпут
         const inputField = document.createElement('input');
         inputField.type = 'text';
+        inputField.style.marginRight = '5px';
+        inputField.style.marginBottom = '5px';
+        inputField.style.display = 'inline-block';
+        inputField.style.fontSize = '1.3em';
+        inputField.style.width = '60%';
         topPanel.appendChild(inputField);
 
 
-        // Кнопки "load" и "all"
         const loadButton = document.createElement('button');
         loadButton.textContent = 'load';
+        loadButton.style.marginRight = '5px';
+        loadButton.style.marginBottom = '5px';
+        loadButton.style.display = 'inline-block';
+        loadButton.style.fontSize = '1.3em';
         topPanel.appendChild(loadButton);
 
 
         const allButton = document.createElement('button');
         allButton.textContent = 'all';
+        allButton.style.marginRight = '5px';
+        allButton.style.marginBottom = '5px';
+        allButton.style.display = 'inline-block';
+        allButton.style.fontSize = '1.3em';
         topPanel.appendChild(allButton);
 
 
-        // Переход на новую строку
         const br = document.createElement('br');
         topPanel.appendChild(br);
 
 
-        // Чекбокс
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.style.marginRight = '5px';
+        checkbox.style.marginBottom = '5px';
+        checkbox.style.display = 'inline-block';
+        checkbox.style.fontSize = '1.3em';
         topPanel.appendChild(checkbox);
 
 
-        // Кнопки второго ряда
         const searchButton = document.createElement('button');
         searchButton.textContent = 'search';
+        searchButton.style.marginRight = '5px';
+        searchButton.style.marginBottom = '5px';
+        searchButton.style.display = 'inline-block';
+        searchButton.style.fontSize = '1.3em';
         topPanel.appendChild(searchButton);
 
 
         const writeButton = document.createElement('button');
         writeButton.textContent = 'write';
+        writeButton.style.marginRight = '5px';
+        writeButton.style.marginBottom = '5px';
+        writeButton.style.display = 'inline-block';
+        writeButton.style.fontSize = '1.3em';
+        writeButton.style.color = 'red';
         topPanel.appendChild(writeButton);
 
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'delete';
+        deleteButton.style.marginRight = '5px';
+        deleteButton.style.marginBottom = '5px';
+        deleteButton.style.display = 'inline-block';
+        deleteButton.style.fontSize = '1.3em';
+        deleteButton.style.color = 'red';
         topPanel.appendChild(deleteButton);
 
 
         const writeGhButton = document.createElement('button');
         writeGhButton.textContent = 'write gh';
+        writeGhButton.style.marginRight = '5px';
+        writeGhButton.style.marginBottom = '5px';
+        writeGhButton.style.display = 'inline-block';
+        writeGhButton.style.fontSize = '1.3em';
+        writeGhButton.style.color = 'red';
         topPanel.appendChild(writeGhButton);
 
 
-        // Увеличиваем высоту ве
         topPanel.style.height = 'auto';
         updateMiddleSectionHeight();
+
+
+        const clButton = topPanel.querySelector('button');
+        const inputElement = topPanel.querySelector('input[type="text"]');
+
+
+        if (clButton && inputElement) {
+          clButton.addEventListener('click', () => {
+            inputElement.value = '';
+          });
+        }
       });
 
 
-      // Создаем верхнюю жел
       const topYellowPanel = document.createElement('div');
       topYellowPanel.style.backgroundColor = 'yellow';
       topYellowPanel.style.position = 'absolute';
@@ -194,12 +228,8 @@
       topYellowPanel.style.width = '100%';
       topYellowPanel.style.height = '100%';
       topYellowPanel.style.zIndex = '1';
+      topYellowPanel.style.display = 'none';
       document.body.appendChild(topYellowPanel);
-
-
-      topYellowPanel.addEventListener('click', () => {
-        topYellowPanel.style.display = 'none';
-      });
 
 
       return {
