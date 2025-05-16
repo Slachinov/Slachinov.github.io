@@ -52,14 +52,21 @@
       middleGreenSection.style.position = 'absolute';
       middleGreenSection.style.top = topBlueSection.offsetHeight + 'px';
       middleGreenSection.style.bottom = bottomRedSection.offsetHeight + 'px';
-      middleGreenSection.style.display = 'flex'; // Используем flex для размещения дочерних элементов по горизонтали
+      middleGreenSection.style.display = 'flex'; // Используем flex для вертикального расположения
+
+
+      // Создаем верхнюю светло-зеленую панель
+      const middleLightGreenSection = document.createElement('div');
+      middleLightGreenSection.style.backgroundColor = 'lightgreen';
+      middleLightGreenSection.style.flexGrow = '1'; // Занимает все доступное вертикальное пространство
+      middleGreenSection.appendChild(middleLightGreenSection);
 
 
       // Создаем нижнюю коричневую панель в средней секции
       const middleBrownSection = document.createElement('div');
       middleBrownSection.style.backgroundColor = 'brown';
-      // Ширина будет определяться содержимым
       middleGreenSection.appendChild(middleBrownSection);
+      // Ширина будет определяться содержимым
 
 
       // Добавляем кнопки в коричневую панель
@@ -70,13 +77,6 @@
         middleBrownSection.appendChild(button);
         button.style.marginRight = '10px';
       }
-
-
-      // Создаем светло-зеленую панель, занимающую оставшееся пространство
-      const middleLightGreenSection = document.createElement('div');
-      middleLightGreenSection.style.backgroundColor = 'lightgreen';
-      middleGreenSection.appendChild(middleLightGreenSection);
-      middleLightGreenSection.style.flexGrow = '1'; // Занимает все доступное пространство
 
 
       grayPanel.appendChild(topBlueSection);
