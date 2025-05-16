@@ -6,6 +6,14 @@
   <title>Простое приложение</title>
   <style>
     body { margin: 0; }
+    #topBlueSection button, #topBlueSection input[type="text"], #topBlueSection input[type="checkbox"] {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+    #topBlueSection .red-button {
+      color: red;
+    }
   </style>
 </head>
 <body>
@@ -24,9 +32,13 @@
 
 
       const topBlueSection = document.createElement('div');
+      topBlueSection.id = 'topBlueSection';
       topBlueSection.style.backgroundColor = 'blue';
       topBlueSection.style.width = '100%';
-      topBlueSection.style.height = '30px';
+      topBlueSection.style.height = '0';
+      topBlueSection.style.paddingLeft = '10px';
+      topBlueSection.style.paddingTop = '5px';
+      topBlueSection.style.overflow = 'hidden';
 
 
       const bottomRedSection = document.createElement('div');
@@ -36,13 +48,15 @@
       bottomRedSection.style.bottom = '0';
 
 
-      const buttonTextsBottom = ["localLs", "github", "indexedDb", "a4"]; // Убрали "a5"
+      const buttonTextsBottom = ["localLs", "github", "indexedDb", "a4"];
+      const buttonsBottom = [];
       for (let i = 0; i < buttonTextsBottom.length; i++) {
         const button = document.createElement('button');
         button.textContent = buttonTextsBottom[i];
         bottomRedSection.appendChild(button);
         button.style.marginRight = '5px';
         button.style.fontSize = '1.5em';
+        buttonsBottom.push(button);
       }
 
 
@@ -105,7 +119,69 @@
       bottomObserver.observe(bottomRedSection);
 
 
-      // Создаем верхнюю желтую панель
+      const localLsButton = buttonsBottom[0];
+      localLsButton.addEventListener('click', () => {
+        const topPanel = document.getElementById('topBlueSection');
+        topPanel.innerHTML = '';
+
+
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'cl';
+        topPanel.appendChild(closeButton);
+
+
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        topPanel.appendChild(inputField);
+
+
+        const loadButton = document.createElement('button');
+        loadButton.textContent = 'load';
+        topPanel.appendChild(loadButton);
+
+
+        const allButton = document.createElement('button');
+        allButton.textContent = 'all';
+        topPanel.appendChild(allButton);
+
+
+        const br = document.createElement('br');
+        topPanel.appendChild(br);
+
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        topPanel.appendChild(checkbox);
+
+
+        const searchButton = document.createElement('button');
+        searchButton.textContent = 'search';
+        topPanel.appendChild(searchButton);
+
+
+        const writeButton = document.createElement('button');
+        writeButton.textContent = 'write';
+        writeButton.classList.add('red-button');
+        topPanel.appendChild(writeButton);
+
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'delete';
+        deleteButton.classList.add('red-button');
+        topPanel.appendChild(deleteButton);
+
+
+        const writeGhButton = document.createElement('button');
+        writeGhButton.textContent = 'write gh';
+        writeGhButton.classList.add('red-button');
+        topPanel.appendChild(writeGhButton);
+
+
+        topPanel.style.height = 'auto';
+        updateMiddleSectionHeight();
+      });
+
+
       const topYellowPanel = document.createElement('div');
       topYellowPanel.style.backgroundColor = 'yellow';
       topYellowPanel.style.position = 'absolute';
@@ -113,14 +189,9 @@
       topYellowPanel.style.left = '0';
       topYellowPanel.style.width = '100%';
       topYellowPanel.style.height = '100%';
-      topYellowPanel.style.zIndex = '1'; // Делаем ее выше всех
+      topYellowPanel.style.zIndex = '1';
+      topYellowPanel.style.display = 'none';
       document.body.appendChild(topYellowPanel);
-
-
-      // Добавляем обработчик события click для скрытия желтой панели
-      topYellowPanel.addEventListener('click', () => {
-        topYellowPanel.style.display = 'none';
-      });
 
 
       return {
