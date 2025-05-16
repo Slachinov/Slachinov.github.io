@@ -62,6 +62,9 @@
       const middleLightGreenSection = document.createElement('div');
       middleLightGreenSection.style.backgroundColor = 'lightgreen';
       middleLightGreenSection.style.flexGrow = '1';
+      middleLightGreenSection.style.fontSize = '1.5em'; // Увеличиваем размер шрифта в 1.5 раза
+      middleLightGreenSection.style.overflowY = 'auto'; // Добавляем вертикальный скроллбар при необходимости
+      middleLightGreenSection.style.padding = '5px'; // Небольшой отступ для текста
       middleGreenSection.appendChild(middleLightGreenSection);
 
 
@@ -130,7 +133,7 @@
         inputField.style.marginBottom = '5px';
         inputField.style.display = 'inline-block';
         inputField.style.fontSize = '1.3em';
-        inputField.style.width = '34.3%'; // Уменьшаем до 70% от текущих 49% (0.7 * 0.49 = 0.343)
+        inputField.style.width = '57%';
         topPanel.appendChild(inputField);
 
 
@@ -206,6 +209,38 @@
 
         topPanel.style.height = 'auto';
         updateMiddleSectionHeight();
+
+
+        const clButton = closeButton;
+        const inputElement = inputField;
+        const editingPanel = middleLightGreenSection;
+        const loadButtonElement = loadButton;
+        const writeButtonElement = writeButton;
+
+
+        if (clButton && inputElement) {
+          clButton.addEventListener('click', () => {
+            inputElement.value = '';
+          });
+        }
+
+
+        if (loadButtonElement && inputElement && editingPanel) {
+          loadButtonElement.addEventListener('click', () => {
+            const key = inputElement.value;
+            const value = localStorage.getItem(key);
+            editingPanel.textContent = value !== null ? value : '';
+          });
+        }
+
+
+        if (writeButtonElement && inputElement && editingPanel) {
+          writeButtonElement.addEventListener('click', () => {
+            const key = inputElement.value;
+            const value = editingPanel.textContent;
+            localStorage.setItem(key, value);
+          });
+        }
       });
 
 
