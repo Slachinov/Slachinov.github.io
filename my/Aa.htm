@@ -29,11 +29,12 @@
       topBlueSection.style.backgroundColor = 'blue';
       topBlueSection.style.width = '100%';
       topBlueSection.style.height = '0';
-      topBlueSection.style.display = 'flex';
-      topBlueSection.style.flexDirection = 'column';
+      topBlueSection.style.display = 'flex'; /* Изменили на row */
+      topBlueSection.style.alignItems = 'center'; /* Вертикальное выравнивание по центру */
       topBlueSection.style.paddingLeft = '10px';
       topBlueSection.style.paddingTop = '5px';
       topBlueSection.style.overflow = 'hidden';
+      topBlueSection.style.flexWrap = 'wrap'; /* Добавили перенос на новую строку, если не хватает места */
 
 
       const bottomRedSection = document.createElement('div');
@@ -143,11 +144,6 @@
         const allButton = document.createElement('button');
         allButton.textContent = 'all';
         topPanel.appendChild(allButton);
-
-
-        // Переход на новую строку
-        const br = document.createElement('br');
-        topPanel.appendChild(br);
 
 
         // Чекбокс
