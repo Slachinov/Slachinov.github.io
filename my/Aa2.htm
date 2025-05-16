@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Простое приложение</title>
+  <style>
+    body { margin: 0; }
+  </style>
+</head>
+<body>
+
+
+  <script>
+    function createColoredSectionsWithDynamicBottom() {
+      const grayPanel = document.createElement('div');
+      grayPanel.style.backgroundColor = 'lightgray';
+      grayPanel.style.position = 'absolute';
+      grayPanel.style.top = '0';
+      grayPanel.style.left = '0';
+      grayPanel.style.width = '100%';
+      grayPanel.style.height = '100%';
+      grayPanel.style.zIndex = '0';
+
+
+      const topBlueSection = document.createElement('div');
+      topBlueSection.style.backgroundColor = 'blue';
+      topBlueSection.style.width = '100%';
+      topBlueSection.style.height = '30px';
+
+
+      const bottomRedSection = document.createElement('div');
+      bottomRedSection.style.backgroundColor = 'red';
+      bottomRedSection.style.width = '100%';
+      bottomRedSection.style.position = 'absolute';
+      bottomRedSection.style.bottom = '0';
+
+
+      const buttonTextsBottom = ["localLs", "github", "indexedDb", "a4", "a5"];
+      for (let i = 0; i < 5; i++) {
+        const button = document.createElement('button');
+        button.textContent = buttonTextsBottom[i];
+        bottomRedSection.appendChild(button);
+        button.style.marginRight = '5px';
+        button.style.fontSize = '1.5em';
+      }
+
+
+      const middleGreenSection = document.createElement('div');
+      middleGreenSection.style.backgroundColor = 'green';
+      middleGreenSection.style.width = '100%';
+      middleGreenSection.style.position = 'absolute';
+      middleGreenSection.style.top = topBlueSection.offsetHeight + 'px';
+      middleGreenSection.style.bottom = bottomRedSection.offsetHeight + 'px';
+      middleGreenSection.style.display = 'flex'; // Используем flex для размещения дочерних элементов по горизонтали
+
+
+      // Создаем нижнюю коричневую панель в средней секции
+      const middleBrownSection = document.createElement('div');
+      middleBrownSection.style.backgroundColor = 'brown';
+      // Ширина будет определяться содержимым
+      middleGreenSection.appendChild(middleBrownSection);
+
+
+      // Добавляем кнопки в коричневую панель
+      const buttonTextsMiddle = ["File", "Edit", "View"];
+      for (let i = 0; i < buttonTextsMiddle.length; i++) {
+        const button = document.createElement('button');
+        button.textContent = buttonTextsMiddle[i];
+        middleBrownSection.appendChild(button);
+        button.style.marginRight = '10px';
+      }
+
+
+      // Создаем светло-зеленую панель, занимающую оставшееся пространство
+      const middleLightGreenSection = document.createElement('div');
+      middleLightGreenSection.style.backgroundColor = 'lightgreen';
+      middleGreenSection.appendChild(middleLightGreenSection);
+      middleLightGreenSection.style.flexGrow = '1'; // Занимает все доступное пространство
+
+
+      grayPanel.appendChild(topBlueSection);
+      grayPanel.appendChild(bottomRedSection);
+      grayPanel.appendChild(middleGreenSection);
+
+
+      document.body.appendChild(grayPanel);
+
+
+      function updateMiddleSectionHeight() {
+        const topHeight = topBlueSection.offsetHeight;
+        const bottomHeight = bottomRedSection.offsetHeight;
+        middleGreenSection.style.top = topHeight + 'px';
+        middleGreenSection.style.bottom = bottomHeight + 'px';
+      }
+
+
+      const topObserver = new ResizeObserver(entries => {
+        updateMiddleSectionHeight();
+      });
+      topObserver.observe(topBlueSection);
+
+
+      const bottomObserver = new ResizeObserver(entries => {
+        updateMiddleSectionHeight();
+      });
+      bottomObserver.observe(bottomRedSection);
+
+
+      return {
+        setTopHeight: function(newHeight) {
+          topBlueSection.style.height = newHeight + 'px';
+        }
+      };
+    }
+
+
+    window.onload = createColoredSectionsWithDynamicBottom;
+  </script>
+
+
+</body>
+</html>
+
