@@ -75,7 +75,7 @@
       middleBrownSection.style.width = '100%';
 
 
-      const buttonTextsMiddle = ["Clear", "Edit", "View"]; // Переименовали "File" в "Clear"
+      const buttonTextsMiddle = ["Clear", "Eval", "View"];
       const middleBrownButtons = [];
       for (let i = 0; i < buttonTextsMiddle.length; i++) {
         const button = document.createElement('button');
@@ -219,7 +219,8 @@
         const editingPanel = middleLightGreenSection;
         const loadButtonElement = loadButton;
         const writeButtonElement = writeButton;
-        const clearButtonElement = middleBrownButtons[0]; // Кнопка "Clear" - первый элемент
+        const clearButtonElement = middleBrownButtons[0];
+        const evalButtonElement = middleBrownButtons[1];
 
 
         if (clButton && inputElement) {
@@ -249,7 +250,18 @@
 
         if (clearButtonElement && editingPanel) {
           clearButtonElement.addEventListener('click', () => {
-            editingPanel.textContent = ''; // Очищаем содержимое панели редактирования
+            editingPanel.textContent = '';
+          });
+        }
+
+
+        if (evalButtonElement && editingPanel) {
+          evalButtonElement.addEventListener('click', () => {
+            try {
+              eval(editingPanel.textContent); // Выполняем eval, но результат никуда не помещаем
+            } catch (error) {
+              console.error('Ошибка Eval:', error); // Выводим ошибку в консоль
+            }
           });
         }
       });
