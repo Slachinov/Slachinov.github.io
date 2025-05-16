@@ -52,7 +52,8 @@
       middleGreenSection.style.position = 'absolute';
       middleGreenSection.style.top = topBlueSection.offsetHeight + 'px';
       middleGreenSection.style.bottom = bottomRedSection.offsetHeight + 'px';
-      middleGreenSection.style.display = 'flex'; // Используем flex для вертикального расположения
+      middleGreenSection.style.display = 'flex';
+      middleGreenSection.style.flexDirection = 'column'; // Располагаем дочерние элементы вертикально
 
 
       // Создаем верхнюю светло-зеленую панель
@@ -66,7 +67,7 @@
       const middleBrownSection = document.createElement('div');
       middleBrownSection.style.backgroundColor = 'brown';
       middleGreenSection.appendChild(middleBrownSection);
-      // Ширина будет определяться содержимым
+      middleBrownSection.style.width = '100%'; // На всю ширину средней панели
 
 
       // Добавляем кнопки в коричневую панель
