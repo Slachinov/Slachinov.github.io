@@ -115,8 +115,7 @@
       bottomObserver.observe(bottomRedSection);
 
 
-      const localLsButton = buttonsBottom[0];
-      localLsButton.addEventListener('click', () => {
+      function loadLocalLsPanel() {
         const topPanel = document.getElementById('topBlueSection');
         topPanel.innerHTML = '';
 
@@ -258,13 +257,17 @@
         if (evalButtonElement && editingPanel) {
           evalButtonElement.addEventListener('click', () => {
             try {
-              eval(editingPanel.textContent); // Выполняем eval, но результат никуда не помещаем
+              eval(editingPanel.textContent);
             } catch (error) {
-              console.error('Ошибка Eval:', error); // Выводим ошибку в консоль
+              console.error('Ошибка Eval:', error);
             }
           });
         }
-      });
+      }
+
+
+      // Вызываем функцию loadLocalLsPanel сразу после ее определения
+      loadLocalLsPanel();
 
 
       const topYellowPanel = document.createElement('div');
