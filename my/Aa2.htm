@@ -4,18 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Простое приложение</title>
-  <style>
-    body { margin: 0; }
-    #topBlueSection button, #topBlueSection input[type="text"], #topBlueSection input[type="checkbox"] {
-      margin-right: 5px;
-      margin-bottom: 5px;
-      display: inline-block;
-      font-size: 1.3em; /* Увеличиваем шрифт на 30% (1em - базовый размер) */
-    }
-    #topBlueSection .red-button {
-      color: red;
-    }
-  </style>
 </head>
 <body>
 
@@ -127,23 +115,42 @@
         topPanel.innerHTML = '';
 
 
+        const baseButtonStyle = {
+          marginRight: '5px',
+          marginBottom: '5px',
+          display: 'inline-block',
+          fontSize: '1.3em'
+        };
+
+
+        function applyStyles(element, styles) {
+          for (const key in styles) {
+            element.style[key] = styles[key];
+          }
+        }
+
+
         const closeButton = document.createElement('button');
         closeButton.textContent = 'cl';
+        applyStyles(closeButton, baseButtonStyle);
         topPanel.appendChild(closeButton);
 
 
         const inputField = document.createElement('input');
         inputField.type = 'text';
+        applyStyles(inputField, { marginRight: '5px', marginBottom: '5px', display: 'inline-block', fontSize: '1.3em' });
         topPanel.appendChild(inputField);
 
 
         const loadButton = document.createElement('button');
         loadButton.textContent = 'load';
+        applyStyles(loadButton, baseButtonStyle);
         topPanel.appendChild(loadButton);
 
 
         const allButton = document.createElement('button');
         allButton.textContent = 'all';
+        applyStyles(allButton, baseButtonStyle);
         topPanel.appendChild(allButton);
 
 
@@ -153,29 +160,31 @@
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        applyStyles(checkbox, { marginRight: '5px', marginBottom: '5px', display: 'inline-block', fontSize: '1.3em' });
         topPanel.appendChild(checkbox);
 
 
         const searchButton = document.createElement('button');
         searchButton.textContent = 'search';
+        applyStyles(searchButton, baseButtonStyle);
         topPanel.appendChild(searchButton);
 
 
         const writeButton = document.createElement('button');
         writeButton.textContent = 'write';
-        writeButton.classList.add('red-button');
+        applyStyles(writeButton, { ...baseButtonStyle, color: 'red' });
         topPanel.appendChild(writeButton);
 
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'delete';
-        deleteButton.classList.add('red-button');
+        applyStyles(deleteButton, { ...baseButtonStyle, color: 'red' });
         topPanel.appendChild(deleteButton);
 
 
         const writeGhButton = document.createElement('button');
         writeGhButton.textContent = 'write gh';
-        writeGhButton.classList.add('red-button');
+        applyStyles(writeGhButton, { ...baseButtonStyle, color: 'red' });
         topPanel.appendChild(writeGhButton);
 
 
