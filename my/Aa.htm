@@ -210,7 +210,7 @@
 
         const clButton = topPanel.querySelector('button');
         const inputElement = topPanel.querySelector('input[type="text"]');
-        const loadButtonElement = topPanel.querySelectorAll('button')[2];alert(2);alert(loadButtonElement);
+        const loadButtonElement = topPanel.querySelectorAll('button')[2];alert(3);alert(loadButtonElement);
         const editingPanel = middleLightGreenSection;
 
 
@@ -221,7 +221,7 @@
         }
 alert(editingPanel);
         if (loadButtonElement && inputElement && editingPanel) {alert(45);
-          loadButtonElement.addEventListeer ('click', () => {alert(9);alert(inputElement);
+          loadButtonElement.addEventListener ('click', () => {alert(9);alert(inputElement);
             const key = inputElement.value;alert(2);
 alert(key);
             const value = localStorage.getItem(key);alert(value);
