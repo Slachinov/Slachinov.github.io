@@ -1,12 +1,64 @@
-        const loadButton = topPanel.querySelectorAll('button')[2]; // Кнопка "load" - третий элемент (индекс 2)
-        const editingPanel = middleLightGreenSection;
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Простое приложение</title>
+</head>
+<body>
 
 
-        if (loadButton && inputElement && editingPanel) {
-          loadButton.addEventListener('click', () => {
-            const key = inputElement.value;
-            const value = localStorage.getItem(key);
-            editingPanel.textContent = value !== null ? value : '';
-          });
-        }
+  <script>
+    function createColoredSectionsWithDynamicBottom() {
+      const grayPanel = document.createElement('div');
+      grayPanel.style.backgroundColor = 'lightgray';
+      grayPanel.style.position = 'absolute';
+      grayPanel.style.top = '0';
+      grayPanel.style.left = '0';
+      grayPanel.style.width = '100%';
+      grayPanel.style.height = '100%';
+      grayPanel.style.zIndex = '0';
+
+
+      const topBlueSection = document.createElement('div');
+      topBlueSection.id = 'topBlueSection';
+      topBlueSection.style.backgroundColor = 'blue';
+      topBlueSection.style.width = '100%';
+      topBlueSection.style.height = '0';
+      topBlueSection.style.paddingLeft = '10px';
+      topBlueSection.style.paddingTop = '5px';
+      topBlueSection.style.overflow = 'hidden';
+
+
+      const bottomRedSection = document.createElement('div');
+      bottomRedSection.style.backgroundColor = 'red';
+      bottomRedSection.style.width = '100%';
+      bottomRedSection.style.position = 'absolute';
+      bottomRedSection.style.bottom = '0';
+
+
+      const buttonTextsBottom = ["localLs", "github", "indexedDb", "a4"];
+      const buttonsBottom = [];
+      for (let i = 0; i < buttonTextsBottom.length; i++) {
+        const button = document.createElement('button');
+        button.textContent = buttonTextsBottom[i];
+        bottomRedSection.appendChild(button);
+        button.style.marginRight = '5px';
+        button.style.fontSize = '1.5em';
+        buttonsBottom.push(button);
+      }
+
+
+      const middleGreenSection = document.createElement('div');
+      middleGreenSection.style.backgroundColor = 'green';
+      middleGreenSection.style.width = '100%';
+      middleGreenSection.style.position = 'absolute';
+      middleGreenSection.style.top = topBlueSection.offsetHeight + 'px';
+      middleGreenSection.style.bottom = bottomRedSection.offsetHeight + 'px';
+      middleGreenSection.style.display = 'flex';
+      middleGreenSection.style.flexDirection = 'column';
+
+
+      const middleLightGreenSection = document.createElement('div');
+      middleLightGreenSection.
 
