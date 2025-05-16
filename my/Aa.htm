@@ -36,9 +36,10 @@
       bottomRedSection.style.bottom = '0';
 
 
-      for (let i = 1; i <= 5; i++) {
+      const buttonTexts = ["localLs", "github", "indexedDb", "a4", "a5"]; // Обновленные названия кнопок
+      for (let i = 0; i < 5; i++) {
         const button = document.createElement('button');
-        button.textContent = `a${i}`;
+        button.textContent = buttonTexts[i];
         bottomRedSection.appendChild(button);
         button.style.marginRight = '5px';
       }
