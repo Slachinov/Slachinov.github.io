@@ -6,7 +6,11 @@
   <title>Простое приложение</title>
   <style>
     body { margin: 0; }
-    #topBlueSection button { margin-right: 5px; }
+    #topBlueSection button, #topBlueSection input[type="text"], #topBlueSection input[type="checkbox"] {
+      margin-right: 5px;
+      margin-bottom: 5px; /* Для небольшого отступа между строками */
+      display: inline-block; /* Чтобы элементы шли в строку и можно было задавать margin */
+    }
   </style>
 </head>
 <body>
@@ -29,12 +33,9 @@
       topBlueSection.style.backgroundColor = 'blue';
       topBlueSection.style.width = '100%';
       topBlueSection.style.height = '0';
-      topBlueSection.style.display = 'flex'; /* Изменили на row */
-      topBlueSection.style.alignItems = 'center'; /* Вертикальное выравнивание по центру */
       topBlueSection.style.paddingLeft = '10px';
       topBlueSection.style.paddingTop = '5px';
       topBlueSection.style.overflow = 'hidden';
-      topBlueSection.style.flexWrap = 'wrap'; /* Добавили перенос на новую строку, если не хватает места */
 
 
       const bottomRedSection = document.createElement('div');
@@ -146,68 +147,6 @@
         topPanel.appendChild(allButton);
 
 
-        // Чекбокс
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        topPanel.appendChild(checkbox);
-
-
-        // Кнопки второго ряда
-        const searchButton = document.createElement('button');
-        searchButton.textContent = 'search';
-        topPanel.appendChild(searchButton);
-
-
-        const writeButton = document.createElement('button');
-        writeButton.textContent = 'write';
-        topPanel.appendChild(writeButton);
-
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'delete';
-        topPanel.appendChild(deleteButton);
-
-
-        const writeGhButton = document.createElement('button');
-        writeGhButton.textContent = 'write gh';
-        topPanel.appendChild(writeGhButton);
-
-
-        // Увеличиваем высоту верхней панели
-        topPanel.style.height = 'auto';
-        updateMiddleSectionHeight();
-      });
-
-
-      // Создаем верхнюю желтую панель
-      const topYellowPanel = document.createElement('div');
-      topYellowPanel.style.backgroundColor = 'yellow';
-      topYellowPanel.style.position = 'absolute';
-      topYellowPanel.style.top = '0';
-      topYellowPanel.style.left = '0';
-      topYellowPanel.style.width = '100%';
-      topYellowPanel.style.height = '100%';
-      topYellowPanel.style.zIndex = '1';
-      document.body.appendChild(topYellowPanel);
-
-
-      topYellowPanel.addEventListener('click', () => {
-        topYellowPanel.style.display = 'none';
-      });
-
-
-      return {
-        setTopHeight: function(newHeight) {
-          topBlueSection.style.height = newHeight + 'px';
-        }
-      };
-    }
-
-
-    window.onload = createColoredSectionsWithDynamicBottom;
-  </script>
-
-
-</body>
-</html>
+        // Переход на новую строку
+        const br = document.createElement('br');
 
