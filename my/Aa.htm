@@ -6,6 +6,7 @@
   <title>Простое приложение</title>
   <style>
     body { margin: 0; }
+    #topBlueSection button { margin-right: 5px; } /* Отступ между кнопками в верхней панели */
   </style>
 </head>
 <body>
@@ -24,12 +25,14 @@
 
 
       const topBlueSection = document.createElement('div');
+      topBlueSection.id = 'topBlueSection'; // Добавим ID для удобства
       topBlueSection.style.backgroundColor = 'blue';
-      topBlueSection.style.width = '100%'; // На всю ширину
-      topBlueSection.style.height = '0';   // Изначально нулевая высота
+      topBlueSection.style.width = '100%';
+      topBlueSection.style.height = '0';
       topBlueSection.style.display = 'flex';
-      topBlueSection.style.alignItems = 'center';
+      topBlueSection.style.flexDirection = 'column'; // Располагаем элементы по колонкам
       topBlueSection.style.paddingLeft = '10px';
+      topBlueSection.style.paddingTop = '5px'; // Небольшой отступ сверху
       topBlueSection.style.overflow = 'hidden';
 
 
@@ -115,19 +118,74 @@
       const localLsButton = buttonsBottom[0];
       localLsButton.addEventListener('click', () => {
         console.log('Кнопка "localLs" была нажата!');
-        // Создаем новую кнопку "cl"
+        const topPanel = document.getElementById('topBlueSection');
+        topPanel.innerHTML = ''; // Очищаем содержимое перед добавлением новых элементов
+
+
+        // Кнопка "cl"
         const closeButton = document.createElement('button');
         closeButton.textContent = 'cl';
-        closeButton.style.fontSize = '1em';
-        closeButton.style.marginLeft = '10px';
-        topBlueSection.appendChild(closeButton); // Добавляем кнопку в верхнюю панель
+        topPanel.appendChild(closeButton);
 
 
-        // Увеличиваем высоту верхней панели, чтобы кнопка стала видна
-        topBlueSection.style.height = 'auto'; // Или можно задать фиксированную высоту, например '30px'
+        // Инпут
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        inputField.style.marginLeft = '10px';
+        topPanel.appendChild(inputField);
 
 
-        // Обновляем высоту средней панели
+        // Кнопки "load" и "all"
+        const loadButton = document.createElement('button');
+        loadButton.textContent = 'load';
+        loadButton.style.marginLeft = '10px';
+        topPanel.appendChild(loadButton);
+
+
+        const allButton = document.createElement('button');
+        allButton.textContent = 'all';
+        allButton.style.marginLeft = '5px';
+        topPanel.appendChild(allButton);
+
+
+        // Переход на новую строку
+        const br = document.createElement('br');
+        topPanel.appendChild(br);
+
+
+        // Чекбокс
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        topPanel.appendChild(checkbox);
+
+
+        // Кнопки второго ряда
+        const searchButton = document.createElement('button');
+        searchButton.textContent = 'search';
+        searchButton.style.marginLeft = '5px';
+        topPanel.appendChild(searchButton);
+
+
+        const writeButton = document.createElement('button');
+        writeButton.textContent = 'write';
+        writeButton.style.marginLeft = '5px';
+        topPanel.appendChild(writeButton);
+
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'delete';
+        deleteButton.style.marginLeft = '5px';
+        topPanel.appendChild(deleteButton);
+
+
+        const writeGhButton = document.createElement('button');
+        writeGhButton.textContent = 'write gh';
+        writeGhButton.style.marginLeft = '5px';
+        topPanel.appendChild(writeGhButton);
+
+
+        // Увеличиваем высоту верхней панели, чтобы все элементы стали видны
+        topPanel.style.height = 'auto';
         updateMiddleSectionHeight();
       });
 
