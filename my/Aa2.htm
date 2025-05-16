@@ -62,9 +62,10 @@
       const middleLightGreenSection = document.createElement('div');
       middleLightGreenSection.style.backgroundColor = 'lightgreen';
       middleLightGreenSection.style.flexGrow = '1';
-      middleLightGreenSection.style.fontSize = '1.5em'; // Увеличиваем размер шрифта в 1.5 раза
-      middleLightGreenSection.style.overflowY = 'auto'; // Добавляем вертикальный скроллбар при необходимости
-      middleLightGreenSection.style.padding = '5px'; // Небольшой отступ для текста
+      middleLightGreenSection.style.fontSize = '1.5em';
+      middleLightGreenSection.style.overflowY = 'auto';
+      middleLightGreenSection.style.padding = '5px';
+      middleLightGreenSection.contentEditable = true; // Делаем панель редактируемой
       middleGreenSection.appendChild(middleLightGreenSection);
 
 
