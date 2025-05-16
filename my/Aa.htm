@@ -27,6 +27,9 @@
       topBlueSection.style.backgroundColor = 'blue';
       topBlueSection.style.width = '100%';
       topBlueSection.style.height = '30px';
+      topBlueSection.style.display = 'flex'; // Чтобы кнопки располагались в ряд
+      topBlueSection.style.alignItems = 'center'; // Вертикальное выравнивание по центру
+      topBlueSection.style.paddingLeft = '10px'; // Небольшой отступ слева
 
 
       const bottomRedSection = document.createElement('div');
@@ -36,12 +39,15 @@
       bottomRedSection.style.bottom = '0';
 
 
-      const buttonTexts = ["localLs", "github", "indexedDb", "a4", "a5"]; // Обновленные названия кнопок
-      for (let i = 0; i < 5; i++) {
+      const buttonTextsBottom = ["localLs", "github", "indexedDb", "a4"];
+      const buttonsBottom = [];
+      for (let i = 0; i < buttonTextsBottom.length; i++) {
         const button = document.createElement('button');
-        button.textContent = buttonTexts[i];
+        button.textContent = buttonTextsBottom[i];
         bottomRedSection.appendChild(button);
         button.style.marginRight = '5px';
+        button.style.fontSize = '1.5em';
+        buttonsBottom.push(button);
       }
 
 
@@ -51,6 +57,29 @@
       middleGreenSection.style.position = 'absolute';
       middleGreenSection.style.top = topBlueSection.offsetHeight + 'px';
       middleGreenSection.style.bottom = bottomRedSection.offsetHeight + 'px';
+      middleGreenSection.style.display = 'flex';
+      middleGreenSection.style.flexDirection = 'column';
+
+
+      const middleLightGreenSection = document.createElement('div');
+      middleLightGreenSection.style.backgroundColor = 'lightgreen';
+      middleLightGreenSection.style.flexGrow = '1';
+      middleGreenSection.appendChild(middleLightGreenSection);
+
+
+      const middleBrownSection = document.createElement('div');
+      middleBrownSection.style.backgroundColor = 'brown';
+      middleGreenSection.appendChild(middleBrownSection);
+      middleBrownSection.style.width = '100%';
+
+
+      const buttonTextsMiddle = ["File", "Edit", "View"];
+      for (let i = 0; i < buttonTextsMiddle.length; i++) {
+        const button = document.createElement('button');
+        button.textContent = buttonTextsMiddle[i];
+        middleBrownSection.appendChild(button);
+        button.style.marginRight = '10px';
+      }
 
 
       grayPanel.appendChild(topBlueSection);
@@ -79,6 +108,43 @@
         updateMiddleSectionHeight();
       });
       bottomObserver.observe(bottomRedSection);
+
+
+      // Получаем кнопку "localLs" (первую кнопку в bottomRedSection)
+      const localLsButton = buttonsBottom[0];
+      localLsButton.addEventListener('click', () => {
+        console.log('Кнопка "localLs" была нажата!');
+        // Функция для добавления кнопок в верхнюю панель
+        function addButtonsToTopPanel() {
+          const button1 = document.createElement('button');
+          button1.textContent = 'Save';
+          button1.style.marginRight = '10px';
+          topBlueSection.appendChild(button1);
+
+
+          const button2 = document.createElement('button');
+          button2.textContent = 'Load';
+          topBlueSection.appendChild(button2);
+        }
+        addButtonsToTopPanel(); // Вызываем функцию при клике на "localLs"
+      });
+
+
+      // Создаем верхнюю желтую панель
+      const topYellowPanel = document.createElement('div');
+      topYellowPanel.style.backgroundColor = 'yellow';
+      topYellowPanel.style.position = 'absolute';
+      topYellowPanel.style.top = '0';
+      topYellowPanel.style.left = '0';
+      topYellowPanel.style.width = '100%';
+      topYellowPanel.style.height = '100%';
+      topYellowPanel.style.zIndex = '1';
+      document.body.appendChild(topYellowPanel);
+
+
+      topYellowPanel.addEventListener('click', () => {
+        topYellowPanel.style.display = 'none';
+      });
 
 
       return {
