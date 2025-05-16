@@ -6,7 +6,7 @@
   <title>Простое приложение</title>
   <style>
     body { margin: 0; }
-    #topBlueSection button { margin-right: 5px; } /* Отступ между кнопками в верхней панели */
+    #topBlueSection button { margin-right: 5px; }
   </style>
 </head>
 <body>
@@ -25,14 +25,14 @@
 
 
       const topBlueSection = document.createElement('div');
-      topBlueSection.id = 'topBlueSection'; // Добавим ID для удобства
+      topBlueSection.id = 'topBlueSection';
       topBlueSection.style.backgroundColor = 'blue';
       topBlueSection.style.width = '100%';
       topBlueSection.style.height = '0';
       topBlueSection.style.display = 'flex';
-      topBlueSection.style.flexDirection = 'column'; // Располагаем элементы по колонкам
+      topBlueSection.style.flexDirection = 'column';
       topBlueSection.style.paddingLeft = '10px';
-      topBlueSection.style.paddingTop = '5px'; // Небольшой отступ сверху
+      topBlueSection.style.paddingTop = '5px';
       topBlueSection.style.overflow = 'hidden';
 
 
@@ -119,7 +119,7 @@
       localLsButton.addEventListener('click', () => {
         console.log('Кнопка "localLs" была нажата!');
         const topPanel = document.getElementById('topBlueSection');
-        topPanel.innerHTML = ''; // Очищаем содержимое перед добавлением новых элементов
+        topPanel.innerHTML = ''; // Очищаем содержимое
 
 
         // Кнопка "cl"
@@ -184,7 +184,7 @@
         topPanel.appendChild(writeGhButton);
 
 
-        // Увеличиваем высоту верхней панели, чтобы все элементы стали видны
+        // Увеличиваем высоту верхней панели
         topPanel.style.height = 'auto';
         updateMiddleSectionHeight();
       });
