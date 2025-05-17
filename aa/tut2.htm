@@ -9,16 +9,23 @@
 <script src="js/qqv24.js"></script>
 <script src='../js/qq.github.v3.js'></script>
 <script src="js/idb.v1.js"></script>
-<script>alert(23)</script></head>
+<script></script></head>
 <body>
-<script>alert('n='+102)</script>
+<script>alert('n='+3)</script>
 <script type='module' src='../Lib/pan/1all.js' ></script>
 <script type='module'>
 
 
 import { createFullscreenPanel } from '../Lib/pan/1all.js';alert(77);
+alert(createFullscreenPanel);
 
 
+
+
+
+
+const grayPanel = createFullscreenPanel({ backgroundColor: 'lightgray', zIndex: '0' });
+const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: '1', overflow: 'auto', visibility: 'hidden' });
 
 
 </script>
