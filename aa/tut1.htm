@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('n='+0);
+<script>alert('n='+1);
 
 
 </script>
@@ -20,10 +20,11 @@ alert(77);
 alert(m);
 
 
-const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'red'}});
-alert(grayPanel);
+const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}});
 
-const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});alert(yellowPanel.style.background);
+
+const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
+//alert(yellowPanel.style.background);
 
 </script>
 
