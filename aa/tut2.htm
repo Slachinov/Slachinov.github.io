@@ -11,7 +11,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('n='+5)</script>
+<script>alert('n='+6)</script>
 <script type='module' src='../Lib/pan/1all.js' ></script>
 <script type='module'>
 
@@ -27,6 +27,7 @@ alert(createFullscreenPanel);
 
 const grayPanel = createFullscreenPanel({ background: 'red'});
 alert(grayPanel.style.background);
+document.body.appendChild(grayPanel);
 
 
 
