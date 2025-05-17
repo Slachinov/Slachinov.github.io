@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href='qq.css' />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="js/hammer.js"></script>
+<script src="js/github.js"></script>
+<script src="js/qqv24.js"></script>
+<script src='../js/qq.github.v3.js'></script>
+<script src="js/idb.v1.js"></script>
+<script></script></head>
+<body>
+<script type='module'>alert(8);
+
+
+/**
+ * Создает панель, занимающую всю область видимости браузера, с заданными стилями.
+ *
+ * @param {object} params - Объект с CSS-свойствами и другими настройками панели.
+ * Например: { backgroundColor: 'lightgray', zIndex: '0', overflow: 'hidden', visibility: 'hidden' }.
+ * @returns {HTMLDivElement} - Созданный HTML-элемент div.
+ */
+export function createFullscreenPanel(params) {
+  const panel = document.createElement('div');
+  panel.style.position = 'absolute';
+  panel.style.top = '0';
+  panel.style.left = '0';
+  panel.style.width = '100%';
+  panel.style.height = '100%';
+
+
+  
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      panel.style[key] = params[key];
+    }
+  }
+
+
+  return panel;
+}
+
+
+
+
+</script>
+<script type='module'>alert(85);
+
+
+import { createFullscreenPanel } from './base_ui.js';
+
+
+const grayPanel = createFullscreenPanel({ backgroundColor: 'lightgray', zIndex: '0' });
+const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: '1', overflow: 'auto', visibility: 'hidden' });
+
+
+</script>
