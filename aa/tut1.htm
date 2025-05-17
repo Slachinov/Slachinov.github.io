@@ -11,5 +11,13 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script type='module' src='Lib/pan/1all.js'></script>
-<script type='module'>alert(85)</script>
+<script type='module' src= 'Lib/pan/1all.js' ></script>
+<script type='module'>alert(856);
+
+
+import { createFullscreenPanel } from './Lib/pan/1all.js';
+const grayPanel = createFullscreenPanel({ backgroundColor: 'lightgray', zIndex: '0' });
+const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: '1', overflow: 'auto', visibility: 'hidden' });
+
+
+</script>
