@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+6);
+<script>alert('version='+7);
 
 
 </script>
@@ -25,6 +25,9 @@ alert(createTopBottomMiddleLayout);
 
 const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}});
 
+
+
+createTopBottomMiddleLayout(grayPanel,{},{},{})
 
 const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
 //alert(yellowPanel.style.background);
