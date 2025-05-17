@@ -9,50 +9,16 @@
 <script src="js/qqv24.js"></script>
 <script src='../js/qq.github.v3.js'></script>
 <script src="js/idb.v1.js"></script>
-<script></script></head>
+<script>alert(23)</script></head>
 <body>
-<script type='module'>alert(8);
+<script>alert('n='+102)</script>
+<script type='module' src='../Lib/pan/1all.js' ></script>
+<script type='module'>
 
 
-/**
- * Создает панель, занимающую всю область видимости браузера, с заданными стилями.
- *
- * @param {object} params - Объект с CSS-свойствами и другими настройками панели.
- * Например: { backgroundColor: 'lightgray', zIndex: '0', overflow: 'hidden', visibility: 'hidden' }.
- * @returns {HTMLDivElement} - Созданный HTML-элемент div.
- */
-export function createFullscreenPanel(params) {
-  const panel = document.createElement('div');
-  panel.style.position = 'absolute';
-  panel.style.top = '0';
-  panel.style.left = '0';
-  panel.style.width = '100%';
-  panel.style.height = '100%';
+import { createFullscreenPanel } from '../Lib/pan/1all.js';alert(77);
 
 
-  
-  for (const key in params) {
-    if (params.hasOwnProperty(key)) {
-      panel.style[key] = params[key];
-    }
-  }
-
-
-  return panel;
-}
-
-
-
-
-</script>
-<script type='module'>alert(85);
-
-
-import { createFullscreenPanel } from './base_ui.js';
-
-
-const grayPanel = createFullscreenPanel({ backgroundColor: 'lightgray', zIndex: '0' });
-const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: '1', overflow: 'auto', visibility: 'hidden' });
 
 
 </script>
