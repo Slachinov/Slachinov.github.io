@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+8);
+<script>alert('version='+9);
 
 
 </script>
@@ -27,7 +27,8 @@ const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}}
 
 
 
-createTopBottomMiddleLayout (grayPanel,{},{style:{background:'red'}},{})
+let mm=createTopBottomMiddleLayout (grayPanel,{},{style:{background:'red'}},{});alert(mm[0]);
+qq.ce({tag:'button',it:'tratata',value:12345,parent:mm[0]});
 
 const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
 //alert(yellowPanel.style.background);
