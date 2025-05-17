@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('n='+8);alert(qq.ce);
+<script>alert('n='+9);alert(qq.ce);
 
 
 </script>
@@ -23,7 +23,7 @@ const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'red'}})
 alert(grayPanel);
 
 
-const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: 1, overflow: 'auto'});alert(yellowPanel.style.background);
+const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});alert(yellowPanel.style.background);
 
 
 
