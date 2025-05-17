@@ -9,16 +9,27 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('n='+5);alert(qq.ce);
-window.onload=function(){alert(19);alert(window.qq);}
+<script>alert('n='+6);alert(qq.ce);
+
 
 </script>
 <script type='module'>
 
 
-import { createFullscreenPanel } from '../Lib/pan/1all.js';alert(77);
-const grayPanel = createFullscreenPanel({ backgroundColor: 'lightgray', zIndex: '0' });
-const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: '1', overflow: 'auto', visibility: 'hidden' });
+
+
+import { createFullscreenPanel } from '/Lib/pan/1all1.js';
+alert(77);alert(window.qq.ce);
+alert(createFullscreenPanel);
+
+
+const grayPanel = createFullscreenPanel({ background: 'red'});
+alert(grayPanel.style.background);
+
+
+const yellowPanel = createFullscreenPanel({ backgroundColor: 'yellow', zIndex: 1, overflow: 'auto'});alert(yellowPanel.style.background);
+
+
 
 
 
