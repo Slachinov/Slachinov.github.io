@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+15);
+<script>alert('version='+16);
 
 
 
@@ -155,7 +155,27 @@ createLocalStorageControls();
 
 
 function allLsButton() {
-  // Здесь буд
+  if (m.yellow) {
+    m.yellow.innerHTML = '';
+    m.yellow.show();
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const keyDiv = window.qq.ce({
+        tag: 'div',
+        parent: m.yellow,
+        style: {
+          width: '100%',
+          borderBottom: '1px solid lightgray',
+          fontSize: '1.2em',
+          padding: '5px'
+        },
+        it: key
+      });
+      // Здесь позже добавим обработчик для keyDiv
+    }
+  } else {
+    console.error('Ошибка: m.yellow не определена.');
+  }
 }
 
 
