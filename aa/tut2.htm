@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+6);
+<script>alert('version='+7);
 
 
 </script>
@@ -19,9 +19,6 @@ import {m,ls,gh,db} from '/Lib/pan/main.js';
 alert(77);
 import {createTopBottomMiddleLayout} from  '/Lib/pan/3pv2.js';
 
-//alert(m);
-//alert(createTopBottomMiddleLayout);
-
 
 const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}});
 
@@ -30,12 +27,15 @@ const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}}
 let mm=createTopBottomMiddleLayout (grayPanel,{style:{background:'blue'}},{style:{background:'green'}},{style:{background:'red'}});
 //alert(mm[0]);
 m.top=mm[0];
+m.blue=mm[0];
+m.red=mm[1];
+m.green=mm[2];
 qq.ce({tag:'button',it:'tratata345',parent:mm[0]});
 
 
 qq.ce({tag:'button',it:'tratata',parent:mm[1]});
 
-
+//111
 import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
 //alert('*-'+ createBottomTopLayout);
 let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
@@ -87,7 +87,7 @@ const evalButton = window.qq.ce(evalButtonParams);
 /* Теперь clearButton и evalButton добавлены в brownPanel и имеют обработчики событий */
 
 
-//
+//222
 
 const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
 //alert(yellowPanel.style.background);
