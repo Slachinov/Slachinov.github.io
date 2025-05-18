@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+28);
+<script>alert('version='+29);
 
 
 
@@ -151,7 +151,60 @@ function createLocalStorageControls () {
       }
     }
   });
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'delete', style: { color: 'red', marginLeft: '5px' } });
+  window.qq.ce({
+    tag: 'button',
+    parent: m.top,
+    it: 'delete',
+    style: { color: 'red', marginLeft: '5px' },
+    event: {
+      click: function() {
+        if (m && m.yellow) {
+          m.yellow.innerHTML = ''; // Очищаем желтую панель
+          m.yellow.show();        // Показываем желтую панель
+
+
+          // Создаем кнопку "Yes"
+          const yesButton = window.qq.ce({
+            tag: 'button',
+            parent: m.yellow,
+            it: 'Yes',
+            style: { marginRight: '10px' },
+            event: {
+              click: function() {
+                if (ls && ls.input && m && m.yellow) {
+                  const keyToDelete = ls.input.value.trim();
+                  localStorage.removeItem(keyToDelete);
+                  m.edit.innerText = `Ключ "${keyToDelete}" удален.`; // Сообщение об удалении
+                  m.yellow.hide();
+                } else {
+                  console.error('Ошибка: один из необходимых элементов не определен (в обработчике Yes).');
+                }
+              }
+            }
+          });
+
+
+          // Создаем кнопку "No"
+          const noButton = window.qq.ce({
+            tag: 'button',
+            parent: m.yellow,
+            it: 'No',
+            event: {
+              click: function() {
+                if (m && m.yellow) {
+                  m.yellow.hide(); // Просто скрываем желтую панель
+                } else {
+                  console.error('Ошибка: m.yellow не определена (в обработчике No).');
+                }
+              }
+            }
+          });
+        } else {
+          console.error('Ошибка: m или m.yellow не определены (при нажатии delete).');
+        }
+      }
+    }
+  });
   window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red', marginLeft: '5px' } });
 }
 
