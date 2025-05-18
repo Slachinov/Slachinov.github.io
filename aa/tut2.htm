@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+27);
+<script>alert('version='+28);
 
 
 
@@ -181,7 +181,7 @@ function allLsButton() {
         event: {
           click: function() {
             if (ls && ls.input && m && m.edit && m.yellow) {
-              const clickedKey = this.it;
+              const clickedKey = this.innerText;
               const value = localStorage.getItem(clickedKey);
               ls.input.value = clickedKey;
               m.edit.innerText = value;
