@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+17);
+<script>alert('version='+19);
 
 
 
@@ -165,13 +165,14 @@ function allLsButton() {
         parent: m.yellow,
         style: {
           width: '100%',
-          borderBottom: '1px solid lightgray',
+          'border-bottom': '1px solid lightgray',
           fontSize: '1.2em',
-          padding: '5px'
+          padding: '5px',
+          backgroundColor: 'lightgray'
         },
         it: key
       });
-      // Здесь позже добавим обра
+      // Здесь позже добавим обработчик для keyDiv
     }
   } else {
     console.error('Ошибка: m.yellow не определена.');
