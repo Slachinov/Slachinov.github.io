@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+10);
+<script>alert('version='+11);
 
 
 
@@ -26,10 +26,6 @@ import {createEditButton} from  '/aa/edit2.js';
 import {createTopBottomMiddleLayout} from  '/Lib/pan/3pv2.js';
 
 
-
-
-
-
 const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}});
 
 
@@ -41,12 +37,9 @@ m.green=mm[2];
 qq.ce({tag:'button',it:'tratata345',parent:mm[0]});
 
 
-
-
 qq.ce({tag:'button',it:'tratata',parent:mm[1]});
 
 
-//111
 import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
 let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
 createEditButton(m0);
@@ -56,19 +49,10 @@ m.edit=m0[1];alert(m.edit);
 const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
 
 
-
-
-//begin
-
-
 function createLocalStorageControls () {
-  /* Очищаем содержимое верхней панели перед добавлением новых элементов */
   m.top.innerHTML = '';
 
 
-
-
-  /* Кнопка "cl" */
   const clearButtonSkin = {
     tag: 'button',
     parent: m.top,
@@ -81,7 +65,6 @@ function createLocalStorageControls () {
 
 
 alert(ls);
-  /* Инпут для значения */
   const inputSkin = {
     tag: 'input',
     parent: m.top,
@@ -92,7 +75,7 @@ alert(ls);
       marginLeft: '5px',
       marginRight: '5px',
       fontSize: '1em',
-      width: '60%' /* Примерная ширина */
+      width: '60%'
     }
   };
   const valueInput = window.qq.ce(inputSkin);
@@ -100,9 +83,6 @@ alert(ls);
   ls.input = valueInput;
 
 
-
-
-  /* Кнопка "load" */
   const loadButtonSkin = {
     tag: 'button',
     parent: m.top,
@@ -117,7 +97,7 @@ alert(ls);
           const key = ls.input.value.trim();
           const value = localStorage.getItem(key);
           if (value !== null) {
-            m.edit.innerText = value; /* Выводим содержимое в панель редактирования */
+            m.edit.innerText = value;
           }
         } else {
           console.error('Ошибка: ls, ls.input или m.edit не определены.');
@@ -128,9 +108,6 @@ alert(ls);
   const loadButton = window.qq.ce(loadButtonSkin, { it: 'load' });
 
 
-
-
-  /* Кнопка "all" */
   const allButtonSkin = {
     tag: 'button',
     parent: m.top,
@@ -142,19 +119,11 @@ alert(ls);
   const allButton = window.qq.ce(allButtonSkin, { it: 'all' });
 
 
-  /* Переход на новую строку */
   window.qq.ce({ tag: 'br', parent: m.top });
 
 
-  /* Кнопка "search" */
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'search' });
-
-
-  /* Чекбокс */
   window.qq.ce({ tag: 'input', parent: m.top, attr: { type: 'checkbox' } });
-
-
-  /* Кнопка "write" (красный текст) */
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'search', marginLeft: '5px' });
   window.qq.ce({
     tag: 'button',
     parent: m.top,
@@ -172,17 +141,9 @@ alert(ls);
       }
     }
   });
-
-
-  /* Кнопка "delete" (красный текст) */
   window.qq.ce({ tag: 'button', parent: m.top, it: 'delete', style: { color: 'red', marginLeft: '5px' } });
-
-
-  /* Кнопка "write gh" (красный текст) */
   window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red', marginLeft: '5px' } });
 }
-
-
 
 
 createLocalStorageControls();
