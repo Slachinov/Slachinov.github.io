@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+3);
+<script>alert('version='+4);
 
 
 </script>
@@ -41,11 +41,11 @@ qq.ce({tag:'button',it:'tratata',parent:mm[1]});
 import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
 //alert('*-'+ createBottomTopLayout);
 let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
+/*
 qq.ce({tag:'button',it:2345, parent:m0[0]});
 let brownPanel =m0[0];
 let editPanel =m0[1];
-//
-/* Предполагается, что brownPanel и editPanel уже существуют и являются DOM-элементами */
+
 
 
 const clearButtonParams = {
@@ -58,7 +58,7 @@ const clearButtonParams = {
   parent: brownPanel,
   event: {
     click: function() {
-      editPanel.innerHTML = ''; /* Очищаем содержимое editPanel */
+      editPanel.innerHTML = ''; 
     }
   }
 };
@@ -75,16 +75,16 @@ const evalButtonParams = {
   event: {
     click: function() {
       try {
-        eval(editPanel.innerText); /* Выполняем содержимое editPanel как JavaScript код */
+        eval(editPanel.innerText); 
       } catch (error) {
         console.error('Ошибка при выполнении:', error);
-        /* Здесь можно добавить отображение ошибки пользователю */
+        
       }
     }
   }
 };
 const evalButton = window.qq.ce(evalButtonParams);
-
+*/
 
 /* Теперь clearButton и evalButton добавлены в brownPanel и имеют обработчики событий */
 
