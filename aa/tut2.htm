@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+32);
+<script>alert('version='+33);
 
 
 
@@ -221,10 +221,9 @@ function createLocalStorageControls () {
     }
   });
   window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red', marginLeft: '5px' } });
-}
 
 
-createLocalStorageControls();
+
 
 
 function allLsButton() {
@@ -337,6 +336,8 @@ function searchLsButton() {
     console.error('Ошибка: m, m.yellow или ls.input не определены (в searchLsButton).');
   }
 }
+}
+createLocalStorageControls();
 
 
 </script>
