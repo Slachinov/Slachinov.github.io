@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+31);
+<script>alert('version='+32);
 
 
 
@@ -133,7 +133,10 @@ function createLocalStorageControls () {
 
 
   window.qq.ce({ tag: 'input', parent: m.top, attr: { type: 'checkbox' },marginLeft: '5px' });
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'search', marginLeft: '5px' });
+  const searchButton = window.qq.ce({
+    tag: 'button', parent: m.top, it: 'search', marginLeft: '5px',
+    event: { click: searchLsButton }
+  });
   window.qq.ce({
     tag: 'button',
     parent: m.top,
@@ -260,6 +263,78 @@ function allLsButton() {
     }
   } else {
     console.error('Ошибка: m.yellow не определена.');
+  }
+}
+
+
+function searchLsButton() {
+  if (m && m.yellow && ls && ls.input) {
+    const searchTerm = ls.input.value.trim();
+    const searchByValue = m.top.querySelector('input[type="checkbox"]').checked; // Получаем состояние чекбокса
+    const results = [];
+
+
+    m.yellow.innerHTML = ''; // Очищаем желтую панель
+    m.yellow.show();        // Показываем желтую панель
+
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+
+
+      if (searchByValue) {
+        if (value && value.includes(searchTerm)) {
+          results.push(key);
+        }
+      } else {
+        if (key.includes(searchTerm)) {
+          results.push(key);
+        }
+      }
+    }
+
+
+    if (results.length > 0) {
+      results.forEach(key => {
+        const keyDiv = window.qq.ce({
+          tag: 'div',
+          parent: m.yellow,
+          style: {
+            width: '100%',
+            border: '1px solid black',
+            fontSize: '1.2em',
+            padding: '5px',
+            backgroundColor: 'lightgray',
+            minHeight: '1px',
+            cursor: 'pointer'
+          },
+          it: key,
+          event: {
+            click: function() {
+              if (ls && ls.input && m && m.edit && m.yellow) {
+                const clickedKey = this.innerText;
+                const storedValue = localStorage.getItem(clickedKey);
+                ls.input.value = clickedKey;
+                m.edit.innerText = storedValue;
+                m.yellow.hide();
+              } else {
+                console.error('Ошибка: один из необходимых элементов не определен (при клике на результат поиска).');
+              }
+            }
+          }
+        });
+      });
+    } else {
+      window.qq.ce({
+        tag: 'div',
+        parent: m.yellow,
+        it: 'Ничего не найдено.',
+        style: { padding: '10px', fontSize: '1.1em' }
+      });
+    }
+  } else {
+    console.error('Ошибка: m, m.yellow или ls.input не определены (в searchLsButton).');
   }
 }
 
