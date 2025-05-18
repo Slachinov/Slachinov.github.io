@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+19);
+<script>alert('version='+20);
 
 
 
@@ -60,6 +60,11 @@ function createLocalStorageControls () {
     style: {
       marginRight: '5px',
       fontSize: '0.8em'
+    },
+    event: {
+      click: function() {
+        // Действие кнопки clear
+      }
     }
   };
   const clearButton = window.qq.ce(clearButtonSkin, { it: 'cl' });
@@ -121,7 +126,7 @@ function createLocalStorageControls () {
       }
     }
   };
-  const allButton = window.qq.ce(allButtonSkin, { it: 'all' ,event:{click:allLsButton}});
+  const allButton = window.qq.ce(allButtonSkin, { it: 'all' });
 
 
   window.qq.ce({ tag: 'br', parent: m.top });
