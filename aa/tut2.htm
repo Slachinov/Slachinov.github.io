@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+12);
+<script>alert('version='+14);
 
 
 
@@ -113,6 +113,11 @@ function createLocalStorageControls () {
     style: {
       marginLeft: '5px',
       fontSize: '0.8em'
+    },
+    event: {
+      click: function() {
+        allLsButton(); // Вызываем функцию allLsButton при клике
+      }
     }
   };
   const allButton = window.qq.ce(allButtonSkin, { it: 'all' });
@@ -148,6 +153,10 @@ function createLocalStorageControls () {
 createLocalStorageControls();
 
 
+function allLsButton() {
+  // Здесь будет код для обработки нажатия кнопки "all"
+}
+
+
 </script>
-""")
 
