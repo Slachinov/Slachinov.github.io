@@ -11,7 +11,7 @@ export function createLocalStorageControls () {
       fontSize: '0.8em'
     },
     event: {
-      click: function() {}
+      click: function() {ls.input.value='';}
     }
   };
   const clearButton = window.qq.ce(clearButtonSkin, { it: 'cl' });
