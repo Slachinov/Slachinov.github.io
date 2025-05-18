@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+26);
+<script>alert('version='+27);
 
 
 
@@ -174,11 +174,24 @@ function allLsButton() {
           fontSize: '1.2em',
           padding: '5px',
           backgroundColor: 'lightgray',
-          minHeight: '1px'
+          minHeight: '1px',
+          cursor: 'pointer'
         },
-        it: key
+        it: key,
+        event: {
+          click: function() {
+            if (ls && ls.input && m && m.edit && m.yellow) {
+              const clickedKey = this.it;
+              const value = localStorage.getItem(clickedKey);
+              ls.input.value = clickedKey;
+              m.edit.innerText = value;
+              m.yellow.hide();
+            } else {
+              console.error('Ошибка: один из необходимых элементов не определен.');
+            }
+          }
+        }
       });
-      // Здесь позже добавим обработчик для keyDiv
     }
   } else {
     console.error('Ошибка: m.yellow не определена.');
