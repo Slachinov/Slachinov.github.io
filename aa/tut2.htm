@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+8);
+<script>alert('version='+9);
 
 
 
@@ -96,6 +96,8 @@ function createLocalStorageControls () {
     }
   };
   const valueInput = window.qq.ce(inputSkin);
+  if (!ls) window.ls = {};
+  ls.input = valueInput;
 
 
 
@@ -108,6 +110,19 @@ function createLocalStorageControls () {
       marginLeft: '5px',
       marginRight: '5px',
       fontSize: '0.8em'
+    },
+    event: {
+      click: function() {
+        if (ls && ls.input && m && m.edit) {
+          const key = ls.input.value.trim();
+          const value = localStorage.getItem(key);
+          if (value !== null) {
+            m.edit.innerText = value; /* Выводим содержимое в панель редактирования */
+          }
+        } else {
+          console.error('Ошибка: ls, ls.input или m.edit не определены.');
+        }
+      }
     }
   };
   const loadButton = window.qq.ce(loadButtonSkin, { it: 'load' });
@@ -135,16 +150,36 @@ function createLocalStorageControls () {
   window.qq.ce({ tag: 'button', parent: m.top, it: 'search' });
 
 
+  /* Чекбокс */
+  window.qq.ce({ tag: 'input', parent: m.top, attr: { type: 'checkbox' } });
+
+
   /* Кнопка "write" (красный текст) */
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'write', style: { color: 'red' } });
+  window.qq.ce({
+    tag: 'button',
+    parent: m.top,
+    it: 'write',
+    style: { color: 'red', marginLeft: '5px' },
+    event: {
+      click: function() {
+        if (ls && ls.input && m && m.edit) {
+          const key = ls.input.value.trim();
+          const value = m.edit.innerText;
+          localStorage.setItem(key, value);
+        } else {
+          console.error('Ошибка: ls, ls.input или m.edit не определены.');
+        }
+      }
+    }
+  });
 
 
   /* Кнопка "delete" (красный текст) */
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'delete', style: { color: 'red' } });
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'delete', style: { color: 'red', marginLeft: '5px' } });
 
 
   /* Кнопка "write gh" (красный текст) */
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red' } });
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red', marginLeft: '5px' } });
 }
 
 
