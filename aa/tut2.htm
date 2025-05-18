@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+11);
+<script>alert('version='+12);
 
 
 
@@ -43,7 +43,7 @@ qq.ce({tag:'button',it:'tratata',parent:mm[1]});
 import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
 let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
 createEditButton(m0);
-m.edit=m0[1];alert(m.edit);
+m.edit=m0[1];
 
 
 const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
@@ -64,7 +64,6 @@ function createLocalStorageControls () {
   const clearButton = window.qq.ce(clearButtonSkin, { it: 'cl' });
 
 
-alert(ls);
   const inputSkin = {
     tag: 'input',
     parent: m.top,
@@ -122,7 +121,7 @@ alert(ls);
   window.qq.ce({ tag: 'br', parent: m.top });
 
 
-  window.qq.ce({ tag: 'input', parent: m.top, attr: { type: 'checkbox' } });
+  window.qq.ce({ tag: 'input', parent: m.top, attr: { type: 'checkbox' },marginLeft: '5px' });
   window.qq.ce({ tag: 'button', parent: m.top, it: 'search', marginLeft: '5px' });
   window.qq.ce({
     tag: 'button',
@@ -147,8 +146,8 @@ alert(ls);
 
 
 createLocalStorageControls();
-//end
 
 
 </script>
+""")
 
