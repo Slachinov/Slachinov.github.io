@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+7);
+<script>alert('version='+8);
 
 
 
@@ -125,6 +125,26 @@ function createLocalStorageControls () {
     }
   };
   const allButton = window.qq.ce(allButtonSkin, { it: 'all' });
+
+
+  /* Переход на новую строку */
+  window.qq.ce({ tag: 'br', parent: m.top });
+
+
+  /* Кнопка "search" */
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'search' });
+
+
+  /* Кнопка "write" (красный текст) */
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'write', style: { color: 'red' } });
+
+
+  /* Кнопка "delete" (красный текст) */
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'delete', style: { color: 'red' } });
+
+
+  /* Кнопка "write gh" (красный текст) */
+  window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red' } });
 }
 
 
