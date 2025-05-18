@@ -9,7 +9,7 @@
 <script src="js/idb.v1.js"></script>
 <script></script></head>
 <body>
-<script>alert('version='+16);
+<script>alert('version='+17);
 
 
 
@@ -121,7 +121,7 @@ function createLocalStorageControls () {
       }
     }
   };
-  const allButton = window.qq.ce(allButtonSkin, { it: 'all' });
+  const allButton = window.qq.ce(allButtonSkin, { it: 'all' ,event:{click:allLsButton}});
 
 
   window.qq.ce({ tag: 'br', parent: m.top });
@@ -171,7 +171,7 @@ function allLsButton() {
         },
         it: key
       });
-      // Здесь позже добавим обработчик для keyDiv
+      // Здесь позже добавим обра
     }
   } else {
     console.error('Ошибка: m.yellow не определена.');
