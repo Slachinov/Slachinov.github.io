@@ -11,7 +11,7 @@
   </head>
   <body>
     <script>
-      alert('version=' + 36);
+      alert('version=' + 37);
     </script>
     <script type='module'>
       import { createFullscreenPanel } from '/Lib/pan/1all1.js';
@@ -52,11 +52,12 @@
         style: {
           background: 'yellow',
           'z-index': 1,
-          overflow: 'auto'
+          overflow: 'auto',
+           display:'none'
         },
         event: {
           click: function () {
-            this.hide();
+            
           }
         }
       });
