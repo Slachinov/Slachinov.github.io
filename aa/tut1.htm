@@ -1,97 +1,71 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="../js/github.js"></script>
-<script src="../js/qqv26.js"></script>
-<script src='../js/qq.github.v3.js'></script>
-<script src="js/idb.v1.js"></script>
-<script></script></head>
-<body>
-<script>alert('version='+5);
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="../js/github.js"></script>
+    <script src="../js/qqv26.js"></script>
+    <script src="../js/qq.github.v3.js"></script>
+    <script src="js/idb.v1.js"></script>
+    <script></script>
+  </head>
+  <body>
+    <script>
+      alert('version=' + 36);
+    </script>
+    <script type='module'>
+      import { createFullscreenPanel } from '/Lib/pan/1all1.js';
+      import { m, ls, gh, db } from '/Lib/pan/main.js';
+      import { createEditButton } from '/aa/edit2.js';
+      import { createTopBottomMiddleLayout } from '/Lib/pan/3pv2.js';
 
 
-</script>
-<script type='module'>
-import { createFullscreenPanel } from '/Lib/pan/1all1.js';
-import {m,ls,gh,db} from '/Lib/pan/main.js';
-alert(77);
-import {createTopBottomMiddleLayout} from  '/Lib/pan/3pv2.js';
-
-alert(m);
-alert(createTopBottomMiddleLayout);
-
-
-const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}});
-
+      const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } });
+      let mm = createTopBottomMiddleLayout(
+        grayPanel,
+        { style: { background: 'blue' } },
+        { style: { background: 'green' } },
+        { style: { background: 'red' } }
+      );
+      m.top = mm[0];
+      m.blue = mm[0];
+      m.red = mm[1];
+      m.green = mm[2];
 
 
-let mm=createTopBottomMiddleLayout (grayPanel,{style:{background:'blue'}},{style:{background:'green'}},{style:{background:'red'}});alert(mm[0]);
-qq.ce({tag:'button',it:'tratata',value:12345,parent:mm[0]});
+      qq.ce({ tag: 'button', it: 'tratata345', parent: mm[0] });
+      qq.ce({ tag: 'button', it: 'tratata', parent: mm[1] });
 
 
-qq.ce({tag:'button',it:'tratata',parent:mm[1]});
+      import { createBottomTopLayout } from '/Lib/pan/2pv0.js';
+      let m0 = createBottomTopLayout(
+        mm[2],
+        { style: { background: 'brown' } },
+        { style: { background: 'lightgreen' } }
+      );
+      createEditButton(m0);
+      m.edit = m0[1];
 
 
-import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
-alert('*-'+ createBottomTopLayout);
-let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
-qq.ce({tag:'button',it:2345, parent:m0[0]});
-let brownPanel =m0[0];
-let editPanel =m0[1];
-//
-/* Предполагается, что brownPanel и editPanel уже существуют и являются DOM-элементами */
+      const yellowPanel = createFullscreenPanel({
+        tag: 'div',
+        style: {
+          background: 'yellow',
+          'z-index': 1,
+          overflow: 'auto'
+        },
+        event: {
+          click: function () {
+            this.hide();
+          }
+        }
+      });
+      m.yellow = yellowPanel;
 
 
-const clearButtonParams = {
-  tag: 'button',
-  it: 'Clear',
-  style: {
-    marginRight: '10px',
-    fontSize: '1em'
-  },
-  parent: brownPanel,
-  event: {
-    click: function() {
-      editPanel.innerHTML = ''; /* Очищаем содержимое editPanel */
-    }
-  }
-};
-const clearButton = window.qq.ce(clearButtonParams);
-
-
-const evalButtonParams = {
-  tag: 'button',
-  it: 'Eval',
-  style: {
-    fontSize: '1em'
-  },
-  parent: brownPanel,
-  event: {
-    click: function() {
-      try {
-        eval(editPanel.innerText); /* Выполняем содержимое editPanel как JavaScript код */
-      } catch (error) {
-        console.error('Ошибка при выполнении:', error);
-        /* Здесь можно добавить отображение ошибки пользователю */
-      }
-    }
-  }
-};
-const evalButton = window.qq.ce(evalButtonParams);
-
-
-/* Теперь clearButton и evalButton добавлены в brownPanel и имеют обработчики событий */
-
-
-//
-
-const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
-//alert(yellowPanel.style.background);
-
-</script>
-
-
-
-
+      import { createLocalStorageControls } from '/aa/lsv0.js';
+      alert(88);
+      createLocalStorageControls();
+    </script>
+  </body>
+</html>
