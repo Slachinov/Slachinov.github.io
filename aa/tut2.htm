@@ -42,55 +42,6 @@ import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
 //alert('*-'+ createBottomTopLayout);
 let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
 createEditButton(m0);
-/*
-qq.ce({tag:'button',it:2345, parent:m0[0]});
-let brownPanel =m0[0];
-let editPanel =m0[1];
-
-
-
-const clearButtonParams = {
-  tag: 'button',
-  it: 'Clear',
-  style: {
-    marginRight: '10px',
-    fontSize: '1em'
-  },
-  parent: brownPanel,
-  event: {
-    click: function() {
-      editPanel.innerHTML = ''; 
-    }
-  }
-};
-const clearButton = window.qq.ce(clearButtonParams);
-
-
-const evalButtonParams = {
-  tag: 'button',
-  it: 'Eval',
-  style: {
-    fontSize: '1em'
-  },
-  parent: brownPanel,
-  event: {
-    click: function() {
-      try {
-        eval(editPanel.innerText); 
-      } catch (error) {
-        console.error('Ошибка при выполнении:', error);
-        
-      }
-    }
-  }
-};
-const evalButton = window.qq.ce(evalButtonParams);
-*/
-
-/* Теперь clearButton и evalButton добавлены в brownPanel и имеют обработчики событий */
-
-
-//222
 
 const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
 //alert(yellowPanel.style.background);
