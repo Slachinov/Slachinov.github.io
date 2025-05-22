@@ -1,111 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>WebGL2 Треугольник</title>
   <style>
-    body { margin: 0; }
-    canvas { width: 100vw; height: 100vh; display: block; }
+    canvas { border: 1px solid black; }
   </style>
 </head>
 <body>
-<canvas id="glcanvas"></canvas>
+  <canvas id="glcanvas" width="500" height="500"></canvas>
+  <script>alert(11);
+    const canvas = document.getElementById('glcanvas');
+    const gl = canvas.getContext('webgl2');
+    if (!gl) {
+      alert("WebGL2 не поддерживается.");
+      throw new Error("WebGL2 не поддерживается.");
+    }
 
 
-<script>
-const canvas = document.getElementById('glcanvas');
-const gl = canvas.getContext('webgl2');
+    // Вершинный шейдер
+    const vsSource = `#version 300 es
+    in vec2 a_position;
+    in vec3 a_color;
+    out vec3 v_color;
+    void main() {
+      gl_Position = vec4(a_position, 0.0, 1.0);
+      v_color = a_color;
+    }`;
 
 
-if (!gl) {
-  alert("WebGL2 не поддерживается в этом браузере.");
-  throw new Error("WebGL2 не поддерживается.");
-}
+    // Фрагментный шейдер
+    const fsSource = `#version 300 es
+    precision mediump float;
+    in vec3 v_color;
+    out vec4 outColor;
+    void main() {
+      outColor = vec4(v_color, 1.0);
+    }`;
 
 
-// Вершинный шейдер
-const vsSource = `#version 300 es
-in vec2 a_position;
-in vec3 a_color;
-out vec3 v_color;
-void main() {
-  gl_Position = vec4(a_position, 0.0, 1.0);
-  v_color = a_color;
-}`;
+    function compileShader(gl, source, type) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        alert('Ошибка компиляции шейдера: ' + gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
 
 
-// Фрагментный шейдер
-const fsSource = `#version 300 es
-precision mediump float;
-in vec3 v_color;
-out vec4 outColor;
-void main() {
-  outColor = vec4(v_color, 1.0);
-}`;
+    const vertexShader = compileShader(gl, vsSource, gl.VERTEX_SHADER);
+    const fragmentShader = compileShader(gl, fsSource, gl.FRAGMENT_SHADER);
 
 
-// Компиляция шейдера
-function compileShader(gl, source, type) {
-  const shader = gl.createShader(type);
-  gl.shaderSource(shader, source);
-  gl.compileShader(shader);
-  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    alert('Ошибка компиляции шейдера: ' + gl.getShaderInfoLog(shader));
-    gl.deleteShader(shader);
-    return null;
-  }
-  return shader;
-}
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      alert('Ошибка линковки программы: ' + gl.getProgramInfoLog(program));
+    }
 
 
-// Создание программы
-const vertexShader = compileShader(gl, vsSource, gl.VERTEX_SHADER);
-const fragmentShader = compileShader(gl, fsSource, gl.FRAGMENT_SHADER);
-const program = gl.createProgram();
-gl.attachShader(program, vertexShader);
-gl.attachShader(program, fragmentShader);
-gl.linkProgram(program);
+    // Данные треугольника
+    const vertices = new Float32Array([
+      // x, y,     r, g, b
+       0,  1,     1, 0, 0,
+      -1, -1,     0, 1, 0,
+       1, -1,     0, 0, 1,
+    ]);
 
 
-if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-  alert('Ошибка линковки программы: ' + gl.getProgramInfoLog(program));
-}
+    const vao = gl.createVertexArray();
+    gl.bindVertexArray(vao);
 
 
-// Координаты вершин + цвета
-const vertices = new Float32Array([
-  0,  1,   1, 0, 0, // вершина A (красный)
- -1, -1,   0, 1, 0, // вершина B (зеленый)
-  1, -1,   0, 0, 1, // вершина C (синий)
-]);
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
 
-const vao = gl.createVertexArray();
-gl.bindVertexArray(vao);
+    const posLoc = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 20, 0);
 
 
-const buffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    const colorLoc = gl.getAttribLocation(program, 'a_color');
+    gl.enableVertexAttribArray(colorLoc);
+    gl.vertexAttribPointer(colorLoc, 3, gl.FLOAT, false, 20, 8);
 
 
-const aPosition = gl.getAttribLocation(program, 'a_position');
-gl.enableVertexAttribArray(aPosition);
-gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 20, 0);
-
-
-const aColor = gl.getAttribLocation(program, 'a_color');
-gl.enableVertexAttribArray(aColor);
-gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 20, 8);
-
-
-gl.clearColor(0, 0, 0, 1);
-gl.clear(gl.COLOR_BUFFER_BIT);
-
-
-gl.useProgram(program);
-gl.bindVertexArray(vao);
-gl.drawArrays(gl.TRIANGLES, 0, 3);
-</script>
+    gl.useProgram(program);
+    gl.bindVertexArray(vao);
+    gl.clearColor(0, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  </script>
 </body>
 </html>
