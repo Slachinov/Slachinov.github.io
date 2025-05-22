@@ -9,7 +9,7 @@
 </head>
 <body>
   <canvas id="glcanvas" width="500" height="500"></canvas>
-  <script>alert(12);
+  <script>alert(14);
     const canvas = document.getElementById('glcanvas');
     const gl = canvas.getContext('webgl2');
     if (!gl) {
@@ -26,7 +26,7 @@ out vec3 v_color;
 void main() {
 gl_Position = vec4(a_position, 0.0, 1.0);
 v_color = a_color;
-    }`;
+}`;
 
 
     // Фрагментный шейдер
