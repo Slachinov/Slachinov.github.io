@@ -1,64 +1,36 @@
-<!doctype html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href='qq.css' />
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WebGPU Test</title>
+  </head>
+  <body>
+    <canvas id="gpu-canvas" width="300" height="300"></canvas>
+    <script type="module">
+      const canvas = document.getElementById("gpu-canvas");
+      const adapter = await navigator.gpu.requestAdapter();
+      const device = await adapter.requestDevice();
+      const context = canvas.getContext("webgpu");
 
 
+      const format = navigator.gpu.getPreferredCanvasFormat();
+      context.configure({
+        device: device,
+        format: format
+      });
 
 
-
-
-<script src="https://skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
-<script src="https://skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
-
-
-</head>
-
-
-<body>
-<script type="text/javascript">
-function outf(text) {
-   var mypre = document.getElementById("output");
-   mypre.innerHTML = mypre.innerHTML + text;
-}
-
-
-function builtinRead(x)
-{
-    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-        throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
-}
-
-
-function runit() {
-   var prog = document.getElementById("yourcode").value;
-   var mypre = document.getElementById("output");
-   mypre.innerHTML = '';
-   Sk.configure({output:outf,
-           read: builtinRead
-              });
-   try {
-      Sk.importMainWithBody("<stdin>",false,prog);
-   } catch (e) {
-      alert(e);
-   }
-}
-</script>
-<h3>Try This  Python</h3>
-
-<textarea edit_id="eta_5" rows=10 cols=30 id="yourcode">
-print "Hello World"
-</textarea>
-<button onclick="runit()" type="button">Run</button>
-
-
-
-<pre id="output"></pre>
-
-
-</body>
+      const encoder = device.createCommandEncoder();
+      const pass = encoder.beginRenderPass({
+        colorAttachments: [{
+          view: context.getCurrentTexture().createView(),
+          loadOp: 'clear',
+          storeOp: 'store',
+          clearValue: { r: 0.2, g: 0.4, b: 0.6, a: 1 }
+        }]
+      });
+      pass.end();
+      device.queue.submit([encoder.finish()]);
+    </script>
+  </body>
 </html>
-
