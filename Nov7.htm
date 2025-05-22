@@ -5,7 +5,7 @@
   <title>WebGPU Test</title>
 </head>
 <body>
-  <script type="module">
+  <script type="module">alert(0);
     async function initWebGPU() {
       if (!navigator.gpu) {
         alert("WebGPU не поддерживается");
@@ -25,8 +25,8 @@
 
 
       // Выведем немного инфы
-      console.log("Adapter:", adapter);
-      console.log("Device:", device);
+      alert("Adapter:", adapter);
+      alert("Device:", device);
     }
 
 
