@@ -6,11 +6,11 @@
   </head>
   <body>
     <canvas id="gpu-canvas" width="300" height="300"></canvas>
-    <script type="module">alert(9);
+    <script type="module">alert(11);
       const canvas = document.getElementById("gpu-canvas");alert(canvas);
       const adapter = await navigator.gpu.requestAdapter();
 alert('adapter='+adapter);
-      const device = await adapter.requestDevice();alert(9)
+      const device = await adapter.requestDevice();alert(9);
       const context = canvas.getContext("webgpu");
 
 
