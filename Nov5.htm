@@ -6,7 +6,7 @@
   </head>
   <body>
     <canvas id="gpu-canvas" width="300" height="300"></canvas>
-    <script type="module">alert(7);
+    <script type="module">alert(8);
       const canvas = document.getElementById("gpu-canvas");alert();
       const adapter = await navigator.gpu.requestAdapter();
 alert('adapter');
@@ -19,7 +19,7 @@ alert('adapter');
         device: device,
         format: format
       });
-
+alert(format);
 
       const encoder = device.createCommandEncoder();
       const pass = encoder.beginRenderPass({
