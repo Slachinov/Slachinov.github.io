@@ -1,14 +1,36 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" type="text/css" href='qq.css' />
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="js/hammer.js"></script>
-<script src="js/github.js"></script>
-<script src="js/qqv24.js"></script>
-<script src='../js/qq.github.v3.js'></script>
-<script src="js/idb.v1.js"></script>
-<script></script></head>
+  <meta charset="UTF-8">
+  <title>WebGPU Test</title>
+</head>
 <body>
-<script>eval(qq.ls('Nov7'))</script>
+  <script type="module">
+    async function initWebGPU() {
+      if (!navigator.gpu) {
+        alert("WebGPU не поддерживается");
+        return;
+      }
+
+
+      const adapter = await navigator.gpu.requestAdapter();
+      if (!adapter) {
+        alert("Адаптер не найден");
+        return;
+      }
+
+
+      const device = await adapter.requestDevice();
+      alert("WebGPU работает!");
+
+
+      // Выведем немного инфы
+      console.log("Adapter:", adapter);
+      console.log("Device:", device);
+    }
+
+
+    initWebGPU();
+  </script>
+</body>
+</html>
