@@ -11,7 +11,7 @@
 <canvas id="glcanvas" width="500" height="500"></canvas>
 
 
-<script>alert(0);
+<script>alert(1);
 const canvas = document.getElementById('glcanvas');
 const gl = canvas.getContext('webgl2');
 
@@ -45,7 +45,7 @@ void main() {
 alert(fsSource);
 
 function compileShader(gl, source, type) {
-  const shader = gl.createShader(type);
+  const shader = gl.createShader(type);alert(shader);
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
