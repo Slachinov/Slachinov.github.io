@@ -9,13 +9,25 @@
 </head>
 <body>
   <canvas id="glcanvas" width="500" height="500"></canvas>
-  <script>alert(16);
+  <script>alert(17);
     const canvas = document.getElementById('glcanvas');
     const gl = canvas.getContext('webgl2');
     if (!gl) {
       alert("WebGL2 не поддерживается.");
       throw new Error("WebGL2 не поддерживается.");
     }
+
+
+function createRotationMatrix(angle) {
+  const c = Math.cos(angle);
+  const s = Math.sin(angle);
+  return new Float32Array([
+    c, -s, 0,
+    s,  c, 0,
+    0,  0, 1
+  ]);
+}
+
 
 
     // Вершинный шейдер
