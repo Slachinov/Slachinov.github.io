@@ -1,6 +1,6 @@
 {//eval(qq.ls('Table'));
 //alert(qq.table);
-alert(7755);
+alert(77777);
 
 let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
@@ -122,7 +122,7 @@ qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.idb();}},it:
 
 };
 alert('_56__');
-(async function (){alert('×××';
+(async function (){
  let gh=new qq.f.github({token: qq.ls('token')});qq.repo=gh.getrepo('Slachinov','Slachinov.github.io');
 f.ls();f.b();f.ed();f.all();alert('++++');
 //alert(qq.repo);
