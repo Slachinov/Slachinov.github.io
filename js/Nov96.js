@@ -1,6 +1,6 @@
 {//eval(qq.ls('Table'));
 //alert(qq.table);
-alert(786);
+alert(77);
 
 let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
@@ -13,7 +13,7 @@ t=qq.ce({tag:'div', style:{position :'absolute',top:'0px',left:'0px',right:'0px'
 b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px' }});alert(b);
 
 f.ed=function (){ ed=qq.ce(ed,{style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgreen',overflow :'auto','font-size':'22px'}, attr:{contentEditable:true},})};alert('ed');
-
+alert(f.all);
 f.all=function (){all=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgray',overflow :'auto','font-size':'22px','z-index':1}, attr:{},});alert('all');
 all.clear=function (){all.innerHTML='';};all.viv=function (tt){qq.ce({tag:'div',it:tt,parent:all});};all.hide();};
 
