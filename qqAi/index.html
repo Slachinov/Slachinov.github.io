@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Мини ИИ на TensorFlow.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <h1>ИИ: Определение цвета из команды</h1>
+  <p>Открой консоль браузера (F12 или через меню), чтобы увидеть результат обучения и предсказания.</p>
+  <script>
+    const examples = [
+      {
+        input: "панель 0 цвет зелёный добавить кнопку и инпут",
+        output: { panel: 0, color: "green", add: ["button", "input"] }
+      },
+      {
+        input: "панель 1 цвет красный добавить кнопку",
+        output: { panel: 1, color: "red", add: ["button"] }
+      }
+    ];
+
+
+    function tokenize(text) {
+      return text.toLowerCase().split(/\s+/);
+    }
+
+
+    const vocab = {};
+    let index = 1;
+
+
+    examples.forEach(({ input }) => {
+      tokenize(input).forEach(token => {
+        if (!vocab[token]) vocab[token] = index++;
+      });
+    });
+
+
+    function textToSequence(text) {
+      return tokenize(text).map(token => vocab[token]);
+    }
+
+
+    const model = tf.sequential();
+    model.add(tf.layers.embedding({ inputDim: index, outputDim: 8, inputLength: 10 }));
+    model.add(tf.layers.flatten());
+    model.add(tf.layers.dense({ units: 16, activation: 'relu' }));
+    model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));
+
+
+    model.compile({ loss: 'categoricalCrossentropy', optimizer: 'adam' });
+
+
+    const colors = { green: 0, red: 1, blue: 2 };
+
+
+    function colorToOneHot(color) {
+      const arr = [0, 0, 0];
+      arr[colors[color]] = 1;
+      return arr;
+    }
+
+
+    const xs = tf.tensor2d(examples.map(e => {
+      const seq = textToSequence(e.input);
+      while (seq.length < 10) seq.push(0);
+      return seq;
+    }));
+
+
+    const ys = tf.tensor2d(examples.map(e => colorToOneHot(e.output.color)));
+
+
+    async function trainAndPredict() {
+      await model.fit(xs, ys, {
+        epochs: 50,
+        callbacks: {
+          onEpochEnd: (epoch, logs) =>
+            console.log(`Epoch ${epoch + 1}: loss=${logs.loss.toFixed(4)}`)
+        }
+      });
+
+
+      const inputText = "панель 0 цвет зелёный добавить кнопку";
+      let seq = textToSequence(inputText);
+      while (seq.length < 10) seq.push(0);
+      const input = tf.tensor2d([seq]);
+      const prediction = model.predict(input);
+      const idx = prediction.argMax(-1).dataSync()[0];
+      const colorNames = Object.keys(colors);
+      console.log(`Распознанный цвет: ${colorNames[idx]}`);
+    }
+
+
+    trainAndPredict();
+  </script>
+</body>
+</html>
