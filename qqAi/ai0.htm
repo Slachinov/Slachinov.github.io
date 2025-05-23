@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>QQ AI Panel Trainer</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.18.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <h1>QQ AI Panel Trainer</h1>
+  <pre id="log"></pre>
+
+
+  <script>
+    const log = (...args) => {
+      document.getElementById("log").textContent += args.join(" ") + "\n";
+      console.log(...args);
+    };
+
+
+    const examples = [
+      { input: "трёхпанельная", output: 1 },
+      { input: "грэй", output: 0 },
+      { input: "синяя длинная", output: 2 },
+      { input: "трёх панель", output: 1 },
+      { input: "панель серого цвета", output: 0 }
+    ];
+
+
+    function tokenize(text) {
+      return text.toLowerCase()
+        .replace(/[\(\)\[\]\.,\-]/g, '')
+        .split(/\s+/)
+        .filter(Boolean);
+    }
+
+
+    const vocab = {};
+    let index = 1;
+
+
+    examples.forEach(({ input }) => {
+      tokenize(input).forEach(token => {
+        if (!vocab[token]) vocab[token] = index++;
+      });
+    });
+
+
+    log("Словарь токенов:", vocab);
+
+
+    function textToSequence(text) {
+      return tokenize(text).map(token => vocab[token] || 0);
+    }
+
+
+    const maxLen = 5;
+
+
+    function pad(seq, len = maxLen) {
+      const padded = new Array(len).fill(0);
+      for (let i = 0; i < Math.min(seq.length, len); i++) {
+        padded[i] = seq[i];
+      }
+      return padded;
+    }
+
+
+    const xs = tf.tensor2d(examples.map(e => pad(textToSequence(e.input))));
+    const ys = tf.tensor1d(examples.map(e => e.output), "int32");
+
+
+    log("Входы (xs):");
+    xs.print();
+    log("Выходы (ys):");
+    ys.print();
+  </script>
+</body>
+</html>
