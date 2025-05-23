@@ -9,7 +9,7 @@
 <script src="js/qqv27.js"></script>
 <script src='../js/qq.github.v3.js'></script>
 <script src="js/idb.v2.js"></script>
-<script>alert(2)</script></head>
+<script>alert(3)</script></head>
 <body>qq
 <script>
 
@@ -62,7 +62,7 @@ border:'4px',
     },event:{click:function(){m.hide()}},
     parent: gr
   });
-  qq.ce({
+  let prp=qq.ce({
     tag: 'div',
     style: {
       top: '100px',
@@ -88,18 +88,18 @@ border:'4px',
     parent: m,
     event: {
       swipeup: function(e) {
-        ns.purple.show();
+        prp.show();
       },
       swipedown: function(e) {
-        ns.purple.hide();
+        prp.hide();
       },
       swiperight: function(e) {
-        ns.purple.style.transition = 'width 3s';
-        ns.purple.style.width = '45%';
+        prp.style.transition = 'width 3s';
+        prp.style.width = '45%';
       },
       swipeleft: function(e) {
-        ns.purple.style.transition = 'width 3s';
-        ns.purple.style.width = '20%';
+        prp.style.transition = 'width 3s';
+        prp.style.width = '20%';
       }
     }
   });
