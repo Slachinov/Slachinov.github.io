@@ -14,7 +14,7 @@ b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px' }});alert(b);
 
 f.ed=function (){ ed=qq.ce(ed,{style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgreen',overflow :'auto','font-size':'22px'}, attr:{contentEditable:true},})};
 
-f.all=function (){all=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgray',overflow :'auto','font-size':'22px','z-index':1}, attr:{},});
+f.all=function (){all=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgray',overflow :'auto','font-size':'22px','z-index':1}, attr:{},});alert('all');
 all.clear=function (){all.innerHTML='';};all.viv=function (tt){qq.ce({tag:'div',it:tt,parent:all});};all.hide();};
 
 f.ls= async function (){
@@ -124,3 +124,7 @@ f.ls();f.b();f.ed();f.all();
 //alert(qq.repo);
 })();
 };
+alert('end');
+
+
+
