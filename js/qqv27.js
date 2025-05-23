@@ -3,6 +3,14 @@ window.qq = {};
 qq.f = {};
 
 
+qq.o={ bg:function(a){//alert(1);
+ return {style:{background:a}} }, r:function(a){return {style:{right :a+'px'}}},
+t:function(a){return {style:{top :a+'px'}}},b:function(a){return {style:{bottom :a+'px'}}},w:function(a){return {style:{ width:a+'px'}}},
+h:function(a){return {style:{height :a+'px'}}},
+l: function(a){return {style:{left:a+'px'}}},
+fs:function(a){return {style:{'font-size':a+'px'}}} ,
+zi:function(a){return {style:{'z-index':a}}},abs:function(a){return {style:{'position':'absolute'}}} ,div:function(a){return{tag:'div'}} ,but:function(a){return{tag:'button'}} ,inp:function(a){return{tag:'input'}} 
+//==
 qq.f.isObject = function(o) {
   return o && typeof o === 'object' && o.toString() === '[object Object]';
 };
