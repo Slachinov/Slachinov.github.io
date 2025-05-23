@@ -40,23 +40,34 @@ qq.f.getStyle = function(style, elem) {
 };
 
 
-qq.f.createSkin = function() {
-  let skin = {};
-  let m = arguments[0];
-  let i0 = Array.isArray(m) ? 1 : 0;
-  if (!m.length) return {};
-  if (qq.f.isObject(m[0])) i0 = 0;
-
-
-  for (let i = i0; i < m.length; i++) {
-    qq.f.extend(skin, m[i]);
-  }
-
-
-  return skin;
+qq.f.createSkin =function(){
+var skin={};
+var i0=1;
+var m=arguments[0];
+var l=m.length;
+if(!l)return {};
+if(qq.f.isObject(m[0]))i0=0;
+for(var i=i0;i<m.length;i++)
+qq.f.extend(skin,m[i]);
+//==
+if(skin.qclass){let b=skin.qclass;
+let t=b.split(' ');
+//alert(t.length);
+t.forEach (function (cc){let c=cc.trim();if(!c)return;let v;
+let m=ff(c);
+//alert(m);
+if(m[1])v=qq.o[m[0]](m[1]);else v=qq.o[m[0]](); qq.f.extend(skin,v);});
+function ff(aa){let a =aa.trim();
+if(a.split('(').length==1){return [a]}else{let f=a.split('(')[0].trim();
+let n=a.split('(')[1].split(')')[0].trim();
+let b;let r=Number(n);
+if(r)b=r;else b=n;
+return [f,b]}};
 };
 
-
+//==
+return skin};
+//======
 qq.f.crElem = function() {
   let skin = qq.f.createSkin(arguments);
   let el;
