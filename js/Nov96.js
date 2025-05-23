@@ -124,7 +124,7 @@ qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.idb();}},it:
 
 (async function (){
  let gh=new qq.f.github({token: qq.ls('token')});qq.repo=gh.getrepo('Slachinov','Slachinov.github.io');
-f.ls();f.b();f.ed();f.all();
+f.ls();f.b();f.ed();f.all();alert('++++');
 //alert(qq.repo);
 })();
 };
