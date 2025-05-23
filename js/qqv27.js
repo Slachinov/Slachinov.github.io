@@ -208,6 +208,6 @@ qq.loadscript = function(url) {
   });
 };
 
-
+alert(11);
 qq.ce = qq.f.crElem;
 qq.cs = qq.f.createSkin;
