@@ -1,6 +1,5 @@
 {//eval(qq.ls('Table'));
-//alert(qq.table);
-alert(77777);
+
 
 let t,b,ed={},all={},f={},fsv='22px',fsed='26px',sw='240px';;
 let fs={style:{'font-size':fsv}};
@@ -10,16 +9,12 @@ document.t=t;
 let br=function(){qq.ce ({tag:'br',parent:t});};
 t=qq.ce({tag:'div', style:{position :'absolute',top:'0px',left:'0px',right:'0px', background :'yellow',border:'1px solid orange'},prop:{clear:function (){this.innerHTML='';}}});
 
-b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px' }});alert(b);
+b=qq.ce({tag:'div', style:{position :'absolute',bottom:'0px' }});
 
-f.ed=function (){ ed=qq.ce(ed,{style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgreen',overflow :'auto','font-size':'22px'}, attr:{contentEditable:true},})};alert('ed');
-alert(f.ed);
+f.ed=function (){ ed=qq.ce(ed,{style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgreen',overflow :'auto','font-size':'22px'}, attr:{contentEditable:true},})};
 
 f.all=function (){all=qq.ce({tag:'div', style:{position :'absolute',top:t.offsetHeight+2+'px',left:'0px',right :'0px',bottom:b.offsetHeight+2+'px', background :'lightgray',overflow :'auto','font-size':'22px','z-index':1}, attr:{},});
-alert(f.all);
-alert('all');
 all.clear=function (){all.innerHTML='';};all.viv=function (tt){qq.ce({tag:'div',it:tt,parent:all});};all.hide();};
-alert('m12');
 f.ls= async function (){
 t.clear();
 let inp;t.style.background='yellow';
@@ -45,7 +40,6 @@ let k0;if(inpcb.checked){k0= qq.ls(key);}else{k0=key};
 let k=k0.indexOf(v);if(k>-1){if(i1){i1=0;all.clear();all.show()};qq.ce({tag:'div',style:{border:'1px solid black',background :'cyan'},prop:{k:key},event:{click: function (){all.hide();inp.value=this.k;ed.innerText=qq.ls(inp.value);
 }},it:key,parent:all});}};
 }},it: 'se.h' , parent :t});
-alert('m14');
 qq.ce(fs,{tag:'button', style:{background: 'red'}, event:{click: function (){ localStorage[inp.value]=ed.innerText;}},it: 'save' , parent :t});
 
 qq.ce(fs,{tag:'button', style:{background: 'red'}, event:{click: function (){all.clear();all.show();let aa={tag:'div',style:{position :'absolute',background :'gray',top:'100px','font-size':'50px'},parent:all,it:'no'};
@@ -54,7 +48,7 @@ qq.ce(aa,{style:{left:'100px'}, event:{click :function (){all.hide();localStorag
 
 
 qq.ce(fs,{tag:'button', style:{background: 'red'}, event:{click: async function (){await qq.repo.write('my/'+inp.value,ed.innerText)}},it: 'save gh' , parent :t});};
-alert(f.ls);alert(f.all);
+
 //-----###
 f.gh= function (){
 t.clear();
@@ -121,14 +115,14 @@ qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){all.hide();f.g
 qq.ce(fs,{tag:'button', style:{}, event:{click: async function (){f.idb();}},it: 'indexDb', parent :b});
 
 };
-alert('_56__');
+
 (async function (){
  let gh=new qq.f.github({token: qq.ls('token')});qq.repo=gh.getrepo('Slachinov','Slachinov.github.io');
-f.ls();f.b();f.ed();f.all();alert('++++');
+f.ls();f.b();f.ed();f.all();
 //alert(qq.repo);
 })();
 };
-alert('end');
+
 
 
 
