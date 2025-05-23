@@ -165,6 +165,7 @@ qq.f._gesture = function(el, type, handler) {
   });
 };
 
+qq.ls=function (a){return localStorage[a]};
 
 qq.loadscript = function(url) {
   return new Promise(function(resolve, reject) {
