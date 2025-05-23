@@ -11,7 +11,7 @@
   <pre id="log"></pre>
 
 
-  <script>alert(1);
+  <script>alert(2);
 alert(tf);
     const log = (...args) => {
       document.getElementById("log").textContent += args.join(" ") + "\n";
@@ -47,6 +47,7 @@ alert(tf);
     });
 
 
+log("Словарь токенов: " + JSON.stringify(vocab));
     log("Словарь токенов:", vocab);
 
 
