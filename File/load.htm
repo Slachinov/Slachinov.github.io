@@ -16,7 +16,7 @@ qq.ce({tag:'button',it:'Загрузить файлы',parent:gray,style:{ 'marg
         {
           description: 'Текстовые файлы',
           accept: {
-            'text/plain': ['.txt', '.json', '.log','.htm']
+            'text/plain': ['.txt', '.json', '.log','.htm', 'text/html','.html']
           }
         }
       ],
@@ -27,7 +27,7 @@ qq.ce({tag:'button',it:'Загрузить файлы',parent:gray,style:{ 'marg
       const text = await file.text();
       output.innerText= text;} catch(err){output.innerText = 'Ошибка: ' + err.message;
 } }}
-});alert(15);
+});alert(16);
 
 
 output=qq.ce({tag:'div',style:{top:'100px',left:'0px',right:'0px',bottom:'0px',background:'lightgreen' ,position: 'absolute','z-index':5,overflow:'hidden'}, parent:gray, event:{click:function(){}}});
