@@ -9,7 +9,7 @@
 <script src='../js/qq.github.v3.js'></script></head>
 <body><script>
 let output;
-let gray=qq.ce({tag:'div',style:{top:'0px',left:'0px',right:'0px',bottom:'0px',background:'gray',position: 'absolute','z-index':5},name:'main',event:{click:function(){this.hide()}}});
+let gray=qq.ce({tag:'div',style:{top:'0px',left:'0px',right:'0px',bottom:'0px',background:'gray',position: 'absolute','z-index':5},name:'main',event:{click:function(){}}});
 
 
 qq.ce({tag:'button',it:'Загрузить файлы',parent:gray,style:{ 'margin-top':'50px' ,'margin-left':'100px', 'font-size':'25px'},event:{click:async function(){ try   {const [fileHandle] = await window.showOpenFilePicker({types: [
@@ -27,7 +27,7 @@ qq.ce({tag:'button',it:'Загрузить файлы',parent:gray,style:{ 'marg
       const text = await file.text();
       output.innerText= text;} catch(err){output.innerText = 'Ошибка: ' + err.message;
 } }}
-});alert(9);
+});alert(12);
 
 
 output=qq.ce({tag:'div',style:{top:'100px',left:'0px',right:'0px',bottom:'0px',background:'lightgreen' ,position: 'absolute','z-index':5,overflow:'hidden'}, parent:gray, event:{click:function(){}}});
