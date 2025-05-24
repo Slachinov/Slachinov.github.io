@@ -157,6 +157,7 @@ qq.f._gesture = function(el, type, handler) {
 };
 
 
+
 qq.gesture = function(el, config) {
   let pointerCache = [];
   let startX = 0, startY = 0, moved = false, panStarted = false;
@@ -176,15 +177,16 @@ qq.gesture = function(el, config) {
       moved = false;
       panStarted = false;
       touchStartTime = Date.now();
-
-
       if (config.longtap) {
         longTapTimer = setTimeout(() => {
           longTapTimer = null;
           config.longtap.call(el, e);
         }, 600);
       }
-    } else if (pointerCache.length === 2 && (config.pinch || config.rotate)) {
+    }
+
+
+    if (pointerCache.length === 2 && (config.pinch || config.rotate)) {
       const dx = pointerCache[1].clientX - pointerCache[0].clientX;
       const dy = pointerCache[1].clientY - pointerCache[0].clientY;
       initialDistance = Math.hypot(dx, dy);
@@ -220,13 +222,18 @@ qq.gesture = function(el, config) {
           config.panmove.call(el, e, { dx, dy });
         }
       }
-    } else if (pointerCache.length === 2) {
+    }
+
+
+    if (pointerCache.length === 2) {
       const dx = pointerCache[1].clientX - pointerCache[0].clientX;
       const dy = pointerCache[1].clientY - pointerCache[0].clientY;
       const currentDistance = Math.hypot(dx, dy);
       const currentAngle = Math.atan2(dy, dx) * 180 / Math.PI;
       const scale = currentDistance / initialDistance;
       const rotation = currentAngle - initialAngle;
+
+
       if (config.pinch) config.pinch.call(el, e, { scale });
       if (config.rotate) config.rotate.call(el, e, { rotation });
     }
@@ -235,8 +242,6 @@ qq.gesture = function(el, config) {
 
   el.addEventListener('pointerup', e => {
     pointerCache = pointerCache.filter(p => p.pointerId !== e.pointerId);
-
-
     const now = Date.now();
     const duration = now - touchStartTime;
 
@@ -255,7 +260,10 @@ qq.gesture = function(el, config) {
         }
         lastTapTime = now;
       }
-    } else if (panStarted && config.panend) {
+    }
+
+
+    if (panStarted && config.panend) {
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
       config.panend.call(el, e, { dx, dy });
@@ -271,7 +279,6 @@ qq.gesture = function(el, config) {
     }
   });
 };
-
 
 qq.ls = function(a) { return localStorage[a]; };
 qq.loadscript = function(url) {
