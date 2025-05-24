@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="../js/github.js"></script>
+    <script src="../js/qqv28.js"></script>
+    <script src="../js/qq.github.v3.js"></script>
+    <script src="js/idb.v1.js"></script>
+    <script></script>
+  </head>
+  <body>
+    <script>
+      alert('version=' + 4);
+    </script>
+    <script type='module'>
+import { m, ls, gh, db } from '/Lib/pan/main.js';
+
+
+      import { createFullscreenPanel } from '/Lib/pan/1all1.js';
+      
+      import { createEditButton } from '/aa/edit2.js';
+      import { createTopBottomMiddleLayout } from '/Lib/pan/3pv2.js';
+
+
+      const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } });
+      let mm = createTopBottomMiddleLayout(
+        grayPanel,
+        { style: { background: 'blue' } },
+        { style: { background: 'green' } },
+        { style: { background: 'red' } }
+      );
+      m.top = mm[0];
+      m.blue = mm[0];
+      m.red = mm[1];
+      m.green = mm[2];
+
+
+      qq.ce({ tag: 'button', it: 'tratata345', parent: mm[0] });
+      qq.ce({ tag: 'button', it: 'tratata', parent: mm[1] });
+
+
+      import { createBottomTopLayout } from '/Lib/pan/2pv0.js';
+      let m0 = createBottomTopLayout(
+        mm[2],
+        { style: { background: 'brown' } },
+        { style: { background: 'lightgreen' } }
+      );
+      createEditButton(m0);
+      m.edit = m0[1];
+
+
+      const yellowPanel = createFullscreenPanel({
+        tag: 'div',
+        style: {
+          background: 'yellow',
+          'z-index': 1,
+          overflow: 'auto',
+           display:'none'
+        },
+        event: {
+          click: function () {
+            
+          }
+        }
+      });
+      m.yellow = yellowPanel;
+
+
+      import { createLocalStorageControls } from '/aa/lsv0.js';
+      
+      createLocalStorageControls();
+    </script>
+  </body>
+</html>
