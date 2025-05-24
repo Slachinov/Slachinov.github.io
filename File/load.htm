@@ -60,8 +60,8 @@
             ]
           });
           const writable = await newHandle.createWritable();
-let tt=localStorage.getItem('App');
-          await writablewrite(tt);alert(tt);
+let tt= localStorage.getItem('App');
+          await writable.write(tt); alert(tt);
           await writable.close();
           output.innerText = 'Сохранено в новый файл!';
         } catch(err) {
@@ -72,7 +72,7 @@ let tt=localStorage.getItem('App');
   });
 
 
-  alert(35);
+  alert(36);
 
 
   output = qq.ce({
