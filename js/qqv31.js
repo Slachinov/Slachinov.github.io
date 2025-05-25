@@ -83,7 +83,7 @@ qq.f.crElem = function() {
       } else if (["tap", "doubletap", "panstart", "panmove", "panend","pinch","rotate"].includes(u)) {
         if (!el._qqGestureEvents) el._qqGestureEvents = {};
         el._qqGestureEvents[u] = skin.event[u];
-        qq.gesture(el, el._qqGestureEvents);
+        qq.gesture(el);
       } else {
         el.addEventListener(u, skin.event[u], false);
       }
