@@ -52,8 +52,12 @@ qq.f.crElem = function() {
 
   let eventBase = {
     prop: {
-      hide: function() { this.style.display = 'none'; },
-      show: function() { this.style.display = 'block'; },
+      hide: function() {
+        this.style.display = 'none';
+      },
+      show: function() {
+        this.style.display = 'block';
+      },
       toggle: function() {
         this.style.display = this.style.display !== 'none' ? 'none' : 'block';
       },
@@ -80,10 +84,10 @@ qq.f.crElem = function() {
     for (let u in skin.event) {
       if (["longtap", "press", "swipeup", "swipedown", "swipeleft", "swiperight"].includes(u)) {
         qq.f._gesture(el, u, skin.event[u]);
-      } else if (["tap", "doubletap", "panstart", "panmove", "panend","pinch","rotate"].includes(u)) {
+      } else if (["tap", "doubletap", "panstart", "panmove", "panend"].includes(u)) {
         if (!el._qqGestureEvents) el._qqGestureEvents = {};
         el._qqGestureEvents[u] = skin.event[u];
-        qq.gesture(el);
+        qq.gesture(el, el._qqGestureEvents);
       } else {
         el.addEventListener(u, skin.event[u], false);
       }
@@ -123,6 +127,8 @@ qq.f._gesture = function(el, type, handler) {
   let timer, startX, startY, isMoving = false;
   const threshold = 150;
   el.style.touchAction = 'none';
+
+
   el.addEventListener('pointerdown', e => {
     startX = e.clientX;
     startY = e.clientY;
@@ -133,6 +139,8 @@ qq.f._gesture = function(el, type, handler) {
       timer = setTimeout(() => handler.call(el, e), 500);
     }
   });
+
+
   el.addEventListener('pointermove', e => {
     let dx = e.clientX - startX;
     let dy = e.clientY - startY;
@@ -141,6 +149,8 @@ qq.f._gesture = function(el, type, handler) {
       clearTimeout(timer);
     }
   });
+
+
   el.addEventListener('pointerup', e => {
     clearTimeout(timer);
     if (!isMoving && (type === 'press' || type === 'longtap')) return;
@@ -157,22 +167,14 @@ qq.f._gesture = function(el, type, handler) {
 };
 
 
-
-
-qq.gesture = function(el) {
-  if (el._qqGestureInitialized) return;
-  el._qqGestureInitialized = true;
-
-
+qq.gesture = function(el, config) {
   let pointerCache = [];
   let startX = 0, startY = 0, moved = false, panStarted = false;
-  let initialDistance = 0, initialAngle = 0;
   let longTapTimer;
   let touchStartTime, lastTapTime = 0;
 
 
-  el.addEventListener('pointerdown', function(e) {
-    const config = el._qqGestureEvents;
+  el.addEventListener('pointerdown', e => {
     pointerCache.push(e);
     el.setPointerCapture(e.pointerId);
 
@@ -183,26 +185,20 @@ qq.gesture = function(el) {
       moved = false;
       panStarted = false;
       touchStartTime = Date.now();
-      if (config && config.longtap) {
+      if (config.longtap) {
         longTapTimer = setTimeout(() => {
-          config.longtap.call(el, e);
           longTapTimer = null;
+          config.longtap.call(el, e);
         }, 600);
       }
     }
 
 
-    if (pointerCache.length === 2 && config) {
-      const dx = pointerCache[1].clientX - pointerCache[0].clientX;
-      const dy = pointerCache[1].clientY - pointerCache[0].clientY;
-      initialDistance = Math.hypot(dx, dy);
-      initialAngle = Math.atan2(dy, dx) * 180 / Math.PI;
-    }
+    // Убрано: pinch и rotate - не обрабатываем
   });
 
 
-  el.addEventListener('pointermove', function(e) {
-    const config = el._qqGestureEvents;
+  el.addEventListener('pointermove', e => {
     for (let i = 0; i < pointerCache.length; i++) {
       if (pointerCache[i].pointerId === e.pointerId) {
         pointerCache[i] = e;
@@ -221,34 +217,22 @@ qq.gesture = function(el) {
           clearTimeout(longTapTimer);
           longTapTimer = null;
         }
-        if (!panStarted && config && config.panstart) {
+        if (!panStarted && config.panstart) {
           panStarted = true;
           config.panstart.call(el, e, { dx, dy });
         }
-        if (panStarted && config && config.panmove) {
+        if (panStarted && config.panmove) {
           config.panmove.call(el, e, { dx, dy });
         }
       }
     }
 
 
-    if (pointerCache.length === 2 && config) {
-      const dx = pointerCache[1].clientX - pointerCache[0].clientX;
-      const dy = pointerCache[1].clientY - pointerCache[0].clientY;
-      const currentDistance = Math.hypot(dx, dy);
-      const currentAngle = Math.atan2(dy, dx) * 180 / Math.PI;
-      const scale = currentDistance / initialDistance;
-      const rotation = currentAngle - initialAngle;
-
-
-      if (config.pinch) config.pinch.call(el, e, { scale });
-      if (config.rotate) config.rotate.call(el, e, { rotation });
-    }
+    // Убрано: pinch и rotate - не обрабатываем
   });
 
 
-  el.addEventListener('pointerup', function(e) {
-    const config = el._qqGestureEvents;
+  el.addEventListener('pointerup', e => {
     pointerCache = pointerCache.filter(p => p.pointerId !== e.pointerId);
     const now = Date.now();
     const duration = now - touchStartTime;
@@ -261,7 +245,7 @@ qq.gesture = function(el) {
 
 
     if (!moved && pointerCache.length === 0) {
-      if (duration < 300 && config) {
+      if (duration < 300) {
         if (config.tap) config.tap.call(el, e);
         if (config.doubletap && now - lastTapTime < 400) {
           config.doubletap.call(el, e);
@@ -271,7 +255,7 @@ qq.gesture = function(el) {
     }
 
 
-    if (panStarted && config && config.panend) {
+    if (panStarted && config.panend) {
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
       config.panend.call(el, e, { dx, dy });
@@ -279,7 +263,7 @@ qq.gesture = function(el) {
   });
 
 
-  el.addEventListener('pointercancel', function(e) {
+  el.addEventListener('pointercancel', e => {
     pointerCache = pointerCache.filter(p => p.pointerId !== e.pointerId);
     if (longTapTimer) {
       clearTimeout(longTapTimer);
@@ -290,6 +274,8 @@ qq.gesture = function(el) {
 
 
 qq.ls = function(a) { return localStorage[a]; };
+
+
 qq.loadscript = function(url) {
   return new Promise(function(resolve, reject) {
     let el = document.createElement('script');
@@ -303,3 +289,4 @@ qq.loadscript = function(url) {
 
 qq.ce = qq.f.crElem;
 qq.cs = qq.f.createSkin;
+alert(qq);
