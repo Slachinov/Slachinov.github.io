@@ -1,347 +1,75 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="../js/github.js"></script>
-<script src="../js/qqv26.js"></script>
-<script src='../js/qq.github.v3.js'></script>
-<script src="js/idb.v1.js"></script>
-<script></script></head>
-<body>
-<script>alert('version='+36);
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="../js/github.js"></script>
+    <script src="../js/qqv31.js"></script>
+    <script src="../js/qq.github.v3.js"></script>
+    <script src="js/idb.v1.js"></script>
+    <script></script>
+  </head>
+  <body>
+    <script>
+      alert('version=' + 89);
+    </script>
+    <script type='module'>
+import { m, ls, gh, db } from '/Lib/pan/main.js';
 
 
+      import { createFullscreenPanel } from '/Lib/pan/1all1.js';
+      
+      import { createEditButton } from '/aa/edit2.js';
+      import { createTopBottomMiddleLayout } from '/Lib/pan/3pv2.js';
 
 
-</script>
-<script type='module'>
-import { createFullscreenPanel } from '/Lib/pan/1all1.js';
-import {m,ls,gh,db} from '/Lib/pan/main.js';
+      const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } });
+      let mm = createTopBottomMiddleLayout(
+        grayPanel,
+        { style: { background: 'blue' } },
+        { style: { background: 'green' } },
+        { style: { background: 'red' } }
+      );
+      m.top = mm[0];
+      m.blue = mm[0];
+      m.red = mm[1];
+      m.green = mm[2];
 
 
-import {createEditButton} from  '/aa/edit2.js';
+      qq.ce({ tag: 'button', it: 'tratata345', parent: mm[0] });
+      qq.ce({ tag: 'button', it: 'tratata', parent: mm[1] });
 
 
-import {createTopBottomMiddleLayout} from  '/Lib/pan/3pv2.js';
+      import { createBottomTopLayout } from '/Lib/pan/2pv0.js';
+      let m0 = createBottomTopLayout(
+        mm[2],
+        { style: { background: 'brown' } },
+        { style: { background: 'lightgreen' } }
+      );
+      createEditButton(m0);
+      m.edit = m0[1];
 
 
-const grayPanel = createFullscreenPanel({tag:'div', style: {background: 'gray'}});
-
-
-let mm=createTopBottomMiddleLayout (grayPanel,{style:{background:'blue'}},{style:{background:'green'}},{style:{background:'red'}});
-m.top=mm[0];
-m.blue=mm[0];
-m.red=mm[1];
-m.green=mm[2];
-qq.ce({tag:'button',it:'tratata345',parent:mm[0]});
-
-
-qq.ce({tag:'button',it:'tratata',parent:mm[1]});
-
-
-import {createBottomTopLayout}  from '/Lib/pan/2pv0.js';
-let m0=createBottomTopLayout(mm[2] ,{style:{background:'brown'}},{style:{background:'lightgreen'}});
-createEditButton(m0);
-m.edit=m0[1];
-
-
-const yellowPanel = createFullscreenPanel({tag:'div', style:{ background: 'yellow', 'z-index': 1, overflow: 'auto'},event:{click:function(){this.hide()}}});
-m.yellow=yellowPanel;
-
-import {createLocalStorageControls} from 
-'/aa/lsv0.js';
-alert(88);
-createLocalStorageControls();
-function createLocalStorageControls1 () {
-  m.top.innerHTML = '';
-
-
-  const clearButtonSkin = {
-    tag: 'button',
-    parent: m.top,
-    style: {
-      marginRight: '5px',
-      fontSize: '0.8em'
-    },
-    event: {
-      click: function() {
-        // Действие кнопки clear
-      }
-    }
-  };
-  const clearButton = window.qq.ce(clearButtonSkin, { it: 'cl' });
-
-
-  const inputSkin = {
-    tag: 'input',
-    parent: m.top,
-    attr: {
-      type: 'text'
-    },
-    style: {
-      marginLeft: '5px',
-      marginRight: '5px',
-      fontSize: '1em',
-      width: '60%'
-    }
-  };
-  const valueInput = window.qq.ce(inputSkin);
-  if (!ls) window.ls = {};
-  ls.input = valueInput;
-
-
-  const loadButtonSkin = {
-    tag: 'button',
-    parent: m.top,
-    style: {
-      marginLeft: '5px',
-      marginRight: '5px',
-      fontSize: '0.8em'
-    },
-    event: {
-      click: function() {
-        if (ls && ls.input && m && m.edit) {
-          const key = ls.input.value.trim();
-          const value = localStorage.getItem(key);
-          if (value !== null) {
-            m.edit.innerText = value;
-          }
-        } else {
-          console.error('Ошибка: ls, ls.input или m.edit не определены.');
-        }
-      }
-    }
-  };
-  const loadButton = window.qq.ce(loadButtonSkin, { it: 'load' });
-
-
-  const allButtonSkin = {
-    tag: 'button',
-    parent: m.top,
-    style: {
-      marginLeft: '5px',
-      fontSize: '0.8em'
-    },
-    event: {
-      click: function() {
-        allLsButton(); // Вызываем функцию allLsButton при клике
-      }
-    }
-  };
-  const allButton = window.qq.ce(allButtonSkin, { it: 'all' });
-
-
-  window.qq.ce({ tag: 'br', parent: m.top });
-
-
-  window.qq.ce({ tag: 'input', parent: m.top, attr: { type: 'checkbox' },marginLeft: '5px' });
-  const searchButton = window.qq.ce({
-    tag: 'button', parent: m.top, it: 'search', marginLeft: '5px',
-    event: { click: searchLsButton }
-  });
-  window.qq.ce({
-    tag: 'button',
-    parent: m.top,
-    it: 'write',
-    style: { color: 'red', marginLeft: '5px' },
-    event: {
-      click: function() {
-        if (ls && ls.input && m && m.edit) {
-          const key = ls.input.value.trim();
-          const value = m.edit.innerText;
-          localStorage.setItem(key, value);
-        } else {
-          console.error('Ошибка: ls, ls.input или m.edit не определены.');
-        }
-      }
-    }
-  });
-  window.qq.ce({
-    tag: 'button',
-    parent: m.top,
-    it: 'delete',
-    style: { color: 'red', marginLeft: '5px' },
-    event: {
-      click: function() {
-        if (m && m.yellow) {
-          m.yellow.innerHTML = ''; // Очищаем желтую панель
-          m.yellow.style.display = 'flex'; // Используем flex для выравнивания по центру
-          m.yellow.style.flexDirection = 'column'; // Размещаем кнопки вертикально
-          m.yellow.style.alignItems = 'center'; // Выравниваем элементы по центру
-          m.yellow.style.justifyContent = 'center'; // Выравниваем содержимое по центру
-          m.yellow.show();        // Показываем желтую панель
-
-
-          const buttonStyle = {
-            fontSize: '2em',
-            padding: '15px 30px',
-            margin: '10px 20px'
-          };
-
-
-          // Создаем кнопку "Yes"
-          const yesButton = window.qq.ce({
-            tag: 'button',
-            parent: m.yellow,
-            it: 'Yes',
-            style: buttonStyle,
-            event: {
-              click: function() {
-                if (ls && ls.input && m && m.yellow) {
-                  const keyToDelete = ls.input.value.trim();
-                  localStorage.removeItem(keyToDelete);
-                  m.edit.innerText = `Ключ "${keyToDelete}" удален.`; // Сообщение об удалении
-                  m.yellow.hide();
-                } else {
-                  console.error('Ошибка: один из необходимых элементов не определен (в обработчике Yes).');
-                }
-              }
-            }
-          });
-
-
-          // Создаем кнопку "No"
-          const noButton = window.qq.ce({
-            tag: 'button',
-            parent: m.yellow,
-            it: 'No',
-            style: buttonStyle,
-            event: {
-              click: function() {
-                if (m && m.yellow) {
-                  m.yellow.hide(); // Просто скрываем желтую панель
-                } else {
-                  console.error('Ошибка: m.yellow не определена (в обработчике No).');
-                }
-              }
-            }
-          });
-        } else {
-          console.error('Ошибка: m или m.yellow не определены (при нажатии delete).');
-        }
-      }
-    }
-  });
-  window.qq.ce({ tag: 'button', parent: m.top, it: 'write gh', style: { color: 'red', marginLeft: '5px' } });
-
-
-
-
-
-function allLsButton() {
-  if (m.yellow) {
-    m.yellow.innerHTML = '';
-    m.yellow.show();
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const keyDiv = window.qq.ce({
+      const yellowPanel = createFullscreenPanel({
         tag: 'div',
-        parent: m.yellow,
         style: {
-          width: '100%',
-          border: '1px solid black',
-          fontSize: '1.2em',
-          padding: '5px',
-          backgroundColor: 'lightgray',
-          minHeight: '1px',
-          cursor: 'pointer'
+          background: 'yellow',
+          'z-index': 1,
+          overflow: 'auto',
+           display:'none'
         },
-        it: key,
         event: {
-          click: function() {
-            if (ls && ls.input && m && m.edit && m.yellow) {
-              const clickedKey = this.innerText;
-              const value = localStorage.getItem(clickedKey);
-              ls.input.value = clickedKey;
-              m.edit.innerText = value;
-              m.yellow.hide();
-            } else {
-              console.error('Ошибка: один из необходимых элементов не определен.');
-            }
+          click: function () {
+            
           }
         }
       });
-    }
-  } else {
-    console.error('Ошибка: m.yellow не определена.');
-  }
-}
+      m.yellow = yellowPanel;
 
 
-function searchLsButton() {
-  if (m && m.yellow && ls && ls.input) {
-    const searchTerm = ls.input.value.trim();
-    const searchByValue = m.top.querySelector('input[type="checkbox"]').checked; // Получаем состояние чекбокса
-    const results = [];
-
-
-    m.yellow.innerHTML = ''; // Очищаем желтую панель
-    m.yellow.show();        // Показываем желтую панель
-
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const value = localStorage.getItem(key);
-
-
-      if (searchByValue) {
-        if (value && value.includes(searchTerm)) {
-          results.push(key);
-        }
-      } else {
-        if (key.includes(searchTerm)) {
-          results.push(key);
-        }
-      }
-    }
-
-
-    if (results.length > 0) {
-      results.forEach(key => {
-        const keyDiv = window.qq.ce({
-          tag: 'div',
-          parent: m.yellow,
-          style: {
-            width: '100%',
-            border: '1px solid black',
-            fontSize: '1.2em',
-            padding: '5px',
-            backgroundColor: 'lightgray',
-            minHeight: '1px',
-            cursor: 'pointer'
-          },
-          it: key,
-          event: {
-            click: function() {
-              if (ls && ls.input && m && m.edit && m.yellow) {
-                const clickedKey = this.innerText;
-                const storedValue = localStorage.getItem(clickedKey);
-                ls.input.value = clickedKey;
-                m.edit.innerText = storedValue;
-                m.yellow.hide();
-              } else {
-                console.error('Ошибка: один из необходимых элементов не определен (при клике на результат поиска).');
-              }
-            }
-          }
-        });
-      });
-    } else {
-      window.qq.ce({
-        tag: 'div',
-        parent: m.yellow,
-        it: 'Ничего не найдено.',
-        style: { padding: '10px', fontSize: '1.1em' }
-      });
-    }
-  } else {
-    console.error('Ошибка: m, m.yellow или ls.input не определены (в searchLsButton).');
-  }
-}
-}
-
-
-
-</script>
-
+      import { createLocalStorageControls } from '/aa/lsv0.js';
+      
+      createLocalStorageControls();
+    </script>
+  </body>
+</html>
