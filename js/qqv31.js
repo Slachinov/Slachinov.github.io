@@ -159,73 +159,86 @@ qq.f._gesture = function(el, type, handler) {
 
 
 
-qq.gesture = function(el, config) {
-  let touchStartTime, lastTapTime = 0, tapTimeout;
+qq.gesture = function(el) {
+  if (el._qqGestureInitialized) return;
+  el._qqGestureInitialized = true;
+
+
+  let pointerCache = [];
   let startX = 0, startY = 0, moved = false, panStarted = false;
-  let longTapTimer;
   let initialDistance = 0, initialAngle = 0;
+  let longTapTimer;
+  let touchStartTime, lastTapTime = 0;
 
 
+  el.addEventListener('pointerdown', function(e) {
+    const config = el._qqGestureEvents;
+    pointerCache.push(e);
+    el.setPointerCapture(e.pointerId);
 
 
-  el.addEventListener('touchstart', e => {
-    if (e.touches.length === 1) {
-      const t = e.touches[0];
-      startX = t.clientX;
-      startY = t.clientY;
+    if (pointerCache.length === 1) {
+      startX = e.clientX;
+      startY = e.clientY;
       moved = false;
       panStarted = false;
       touchStartTime = Date.now();
-      if (config.longtap) {
+      if (config && config.longtap) {
         longTapTimer = setTimeout(() => {
-          longTapTimer = null;
           config.longtap.call(el, e);
+          longTapTimer = null;
         }, 600);
       }
-    } else if (e.touches.length === 2 && (config.pinch || config.rotate)) {
-      const dx = e.touches[1].clientX - e.touches[0].clientX;
-      const dy = e.touches[1].clientY - e.touches[0].clientY;
-      initialDistance = Math.sqrt(dx * dx + dy * dy);
+    }
+
+
+    if (pointerCache.length === 2 && config) {
+      const dx = pointerCache[1].clientX - pointerCache[0].clientX;
+      const dy = pointerCache[1].clientY - pointerCache[0].clientY;
+      initialDistance = Math.hypot(dx, dy);
       initialAngle = Math.atan2(dy, dx) * 180 / Math.PI;
     }
   });
 
 
+  el.addEventListener('pointermove', function(e) {
+    const config = el._qqGestureEvents;
+    for (let i = 0; i < pointerCache.length; i++) {
+      if (pointerCache[i].pointerId === e.pointerId) {
+        pointerCache[i] = e;
+        break;
+      }
+    }
 
 
-  el.addEventListener('touchmove', e => {
-    if (e.touches.length === 1) {
-      const t = e.touches[0];
-      const dx = t.clientX - startX;
-      const dy = t.clientY - startY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+    if (pointerCache.length === 1) {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      const dist = Math.hypot(dx, dy);
       if (dist > 5) {
         moved = true;
         if (longTapTimer) {
           clearTimeout(longTapTimer);
           longTapTimer = null;
         }
-        if (!panStarted && config.panstart) {
+        if (!panStarted && config && config.panstart) {
           panStarted = true;
           config.panstart.call(el, e, { dx, dy });
         }
-        if (panStarted && config.panmove) {
+        if (panStarted && config && config.panmove) {
           config.panmove.call(el, e, { dx, dy });
         }
       }
-    } else if (e.touches.length === 2) {
-      const dx = e.touches[1].clientX - e.touches[0].clientX;
-      const dy = e.touches[1].clientY - e.touches[0].clientY;
-      const currentDistance = Math.sqrt(dx * dx + dy * dy);
-      const scale = currentDistance / initialDistance;
+    }
 
 
-
-
+    if (pointerCache.length === 2 && config) {
+      const dx = pointerCache[1].clientX - pointerCache[0].clientX;
+      const dy = pointerCache[1].clientY - pointerCache[0].clientY;
+      const currentDistance = Math.hypot(dx, dy);
       const currentAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+      const scale = currentDistance / initialDistance;
       const rotation = currentAngle - initialAngle;
-
-
 
 
       if (config.pinch) config.pinch.call(el, e, { scale });
@@ -234,33 +247,47 @@ qq.gesture = function(el, config) {
   });
 
 
-
-
-  el.addEventListener('touchend', e => {
+  el.addEventListener('pointerup', function(e) {
+    const config = el._qqGestureEvents;
+    pointerCache = pointerCache.filter(p => p.pointerId !== e.pointerId);
     const now = Date.now();
     const duration = now - touchStartTime;
+
+
     if (longTapTimer) {
       clearTimeout(longTapTimer);
       longTapTimer = null;
     }
-    if (!moved) {
-      if (duration < 300) {
+
+
+    if (!moved && pointerCache.length === 0) {
+      if (duration < 300 && config) {
         if (config.tap) config.tap.call(el, e);
         if (config.doubletap && now - lastTapTime < 400) {
           config.doubletap.call(el, e);
         }
         lastTapTime = now;
       }
-    } else {
-      if (panStarted && config.panend) {
-        const t = e.changedTouches[0];
-        const dx = t.clientX - startX;
-        const dy = t.clientY - startY;
-        config.panend.call(el, e, { dx, dy });
-      }
+    }
+
+
+    if (panStarted && config && config.panend) {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      config.panend.call(el, e, { dx, dy });
+    }
+  });
+
+
+  el.addEventListener('pointercancel', function(e) {
+    pointerCache = pointerCache.filter(p => p.pointerId !== e.pointerId);
+    if (longTapTimer) {
+      clearTimeout(longTapTimer);
+      longTapTimer = null;
     }
   });
 };
+
 
 qq.ls = function(a) { return localStorage[a]; };
 qq.loadscript = function(url) {
