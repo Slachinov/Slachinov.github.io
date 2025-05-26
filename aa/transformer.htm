@@ -18,7 +18,7 @@
 
     const generator = await pipeline('text-generation', 'Xenova/distilgpt2');
 
-alert(5);
+alert(6);alert(generator);
     document.getElementById('generate').onclick = async () => {alert(1);
       const input = document.getElementById('input').value;
       const result = await generator(input, { max_new_tokens: 50 });alert(result);
