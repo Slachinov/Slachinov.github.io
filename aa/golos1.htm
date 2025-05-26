@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Распознавание речи</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    #top-panel {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: #333;
+      color: white;
+      padding: 10px;
+    }
+    #top-panel button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #bottom-panel {
+      flex: 1;
+      padding: 10px;
+      background: #f0f0f0;
+      overflow-y: auto;
+      font-size: 18px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div id="top-panel">
+    <button id="start">Start</button>
+    <button id="end">End</button>
+    <button id="clear">Clear</button>
+  </div>
+  <div id="bottom-panel"></div>
+
+
+  <script>
+    const startBtn = document.getElementById('start');
+    const endBtn = document.getElementById('end');
+    const clearBtn = document.getElementById('clear');
+    const output = document.getElementById('bottom-panel');
+
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'ru-RU';
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+
+    recognition.onresult = (event) => {
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          output.textContent += event.results[i][0].transcript + '\n';
+          output.scrollTop = output.scrollHeight;
+        }
+      }
+    };
+
+
+    startBtn.onclick = () => recognition.start();
+    endBtn.onclick = () => recognition.stop();
+    clearBtn.onclick = () => output.textContent = '';
+  </script>
+
+
+</body>
+</html>
