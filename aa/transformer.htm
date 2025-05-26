@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Локальный Tiny-чат</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
 
     const generator = await pipeline('text-generation', 'Xenova/distilgpt2');
 
-
+alert(0);
     document.getElementById('generate').onclick = async () => {
       const input = document.getElementById('input').value;
       const result = await generator(input, { max_new_tokens: 50 });
