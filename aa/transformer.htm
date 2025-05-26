@@ -18,10 +18,10 @@
 
     const generator = await pipeline('text-generation', 'Xenova/distilgpt2');
 
-alert(0);
-    document.getElementById('generate').onclick = async () => {
+alert(5);
+    document.getElementById('generate').onclick = async () => {alert(1);
       const input = document.getElementById('input').value;
-      const result = await generator(input, { max_new_tokens: 50 });
+      const result = await generator(input, { max_new_tokens: 50 });alert(result);
       document.getElementById('output').textContent = result[0].generated_text;
     };
   </script>
