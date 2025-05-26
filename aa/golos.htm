@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Голосовой помощник</title>
+</head>
+<body>
+  <h1>Голос слушается...</h1>
+
+
+  <script>
+    let started = false;
+
+
+    function startVoice() {
+      if (started) return;
+      started = true;
+
+
+      const rec = new webkitSpeechRecognition();
+      rec.continuous = true;
+      rec.interimResults = false;
+
+
+      rec.onresult = (e) => {
+        const t = e.results[e.results.length - 1][0].transcript;
+        alert("Распознано:", t);
+      };
+
+
+      rec.onerror = (e) => {
+        console.error("Ошибка:", e.error);
+      };
+
+
+      rec.onend = () => {
+        // Автоперезапуск
+        setTimeout(() => rec.start(), 500);
+      };
+
+
+      rec.start();
+      alert("Распознавание запущено");
+    }
+
+
+    // Первый жест пользователя запускает голос
+    window.addEventListener("keydown", startVoice, { once: true });
+    window.addEventListener("mousemove", startVoice, { once: true });
+  </script>
+</body>
+</html>
