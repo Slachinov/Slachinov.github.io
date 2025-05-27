@@ -46,17 +46,17 @@ min-height:200px;
   
 
 
-  <script>alert(6);
+  <script>alert(8);
 let fs={style:{'font-size':'25px',margin:'10px 20px',padding:'10px'}};
 let tp=document.getElementById ('top-panel');//alert(tp);alert(qq.ce);
-let startBtn =qq.ce({tag:'button',parent: tp, it:'Start',},fs);alert(startBtn);
+let startBtn =qq.ce({tag:'button',parent: tp, it:'Start',},fs);//alert(startBtn);
 
 let endBtn =qq.ce({tag:'button', parent:tp, it:'End'},fs);
 
 
 let clearBtn =qq.ce({tag:'button', parent:tp, it:'Clear'},fs);
     
-    const output =qq.ce({tag:'div' ,style:{background:'lightgreen','height':'50px','overflow-y': 'auto','font-size':'25px',border: '1px solid black'}});
+    const output =qq.ce({tag:'div' ,style:{background:'lightgreen','height': '350px','overflow-y': 'auto','font-size':'25px',border: '1px solid black'}});
 
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -71,6 +71,7 @@ let clearBtn =qq.ce({tag:'button', parent:tp, it:'Clear'},fs);
         if (event.results[i].isFinal) {
           output.textContent += event.results[i][0].transcript + '\n';
           output.scrollTop = output.scrollHeight;
+recognition.start();
         }
       }
     };
