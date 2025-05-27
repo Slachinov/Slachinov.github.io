@@ -40,7 +40,7 @@
   <div id="top-panel"></div>
 
 
-  <script>alert(0);
+  <script>alert(1);
     let fs = { style: { 'font-size': '25px', margin: '10px 20px', padding: '10px' } };
     let tp = document.getElementById('top-panel');
 
@@ -108,7 +108,7 @@ qq.ce({tag:'div',it:text,parent:output});
 
 
     recognition.onend = () => {
-      if (recognizing) {
+      if (recognizing) {return;
         recognition.start(); // перезапуск, если пользователь не нажал End
       }
     };
