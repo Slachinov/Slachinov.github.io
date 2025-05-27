@@ -40,7 +40,7 @@
   <div id="top-panel"></div>
 
 
-  <script>alert(1);
+  <script>alert(2);
     let fs = { style: { 'font-size': '25px', margin: '10px 20px', padding: '10px' } };
     let tp = document.getElementById('top-panel');
 
@@ -77,7 +77,7 @@
     recognition.interimResults = false;
 
 
-    startBtn.onclick = () => {
+    startBtn.onclick = () => {alert(!recognizing);
       if (!recognizing) {
         recognition.start();
         recognizing = true;
