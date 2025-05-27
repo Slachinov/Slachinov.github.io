@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../js/qqv30.js"></script>
+  <title>Распознавание речи</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    #top-panel {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: #333;
+      color: white;
+      padding: 10px;
+    }
+    #top-panel button {
+      padding: 10px 20px;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    #bottom-panel {
+      flex: 1;
+      padding: 10px;
+      background: #f0f0f0;
+      overflow-y: auto;
+      font-size: 28px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="top-panel"></div>
+
+
+  <script>
+    let fs = { style: { 'font-size': '25px', margin: '10px 20px', padding: '10px' } };
+    let tp = document.getElementById('top-panel');
+
+
+    let startBtn = qq.ce({ tag: 'button', parent: tp, it: 'Start' }, fs);
+    let endBtn = qq.ce({ tag: 'button', parent: tp, it: 'End' }, fs);
+    let clearBtn = qq.ce({ tag: 'button', parent: tp, it: 'Clear' }, fs);
+
+
+    const output = qq.ce({
+      tag: 'div',
+      parent: document.body,
+      style: {
+        background: 'lightgreen',
+        height: '350px',
+        'overflow-y': 'auto',
+        'font-size': '25px',
+        border: '1px solid black',
+        padding: '10px',
+        'white-space': 'pre-wrap'
+      }
+    });
+
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+
+    let recognizing = false;
+
+
+    recognition.lang = 'ru-RU';
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+
+    startBtn.onclick = () => {
+      if (!recognizing) {
+        recognition.start();
+        recognizing = true;
+      }
+    };
+
+
+    endBtn.onclick = () => {
+      recognizing = false;
+      recognition.stop();
+    };
+
+
+    clearBtn.onclick = () => {
+      output.textContent = '';
+    };
+
+
+    recognition.onresult = (event) => {
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          output.textContent += event.results[i][0].transcript + '\n';
+          output.scrollTop = output.scrollHeight;
+        }
+      }
+    };
+
+
+    recognition.onend = () => {
+      if (recognizing) {
+        recognition.start(); // перезапуск, если пользователь не нажал End
+      }
+    };
+
+
+    recognition.onerror = (event) => {
+      console.error('SpeechRecognition error:', event.error);
+    };
+  </script>
+</body>
+</html>
