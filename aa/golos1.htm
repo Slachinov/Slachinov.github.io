@@ -40,7 +40,7 @@
   <div id="top-panel"></div>
 
 
-  <script>
+  <script>alert(0);
     let fs = { style: { 'font-size': '25px', margin: '10px 20px', padding: '10px' } };
     let tp = document.getElementById('top-panel');
 
@@ -55,7 +55,7 @@
       parent: document.body,
       style: {
         background: 'lightgreen',
-        height: '350px',
+        height: '50px',
         'overflow-y': 'auto',
         'font-size': '25px',
         border: '1px solid black',
@@ -99,7 +99,7 @@
     recognition.onresult = (event) => {
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
-          let text= event.results[i][0].transcript ;
+          let text= event.results[i][0].transcript ;output.innerText ='';
 qq.ce({tag:'div',it:text,parent:output});
           output.scrollTop = output.scrollHeight;
         }
