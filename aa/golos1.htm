@@ -46,7 +46,7 @@ min-height:200px;
   
 
 
-  <script>alert(2);
+  <script>alert(3);
 let fs={style:{'font-size':'25px',margin:'10px 20px',padding:'10px'}};
 let tp=document.getElementById ('top-panel');//alert(tp);alert(qq.ce);
 let startBtn =qq.ce({tag:'button',parent: tp, it:'Start',},fs);alert(startBtn);
@@ -56,7 +56,7 @@ let endBtn =qq.ce({tag:'button', parent:tp, it:'End'},fs);
 
 let clearBtn =qq.ce({tag:'button', parent:tp, it:'Clear'},fs);
     
-    const output =qq.ce({tag:'div' ,style:{background:'lightgreen','min-height':'200px'}});
+    const output =qq.ce({tag:'div' ,style:{background:'lightgreen','min-height':'200px','overflow-y': 'auto'}});
 
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
