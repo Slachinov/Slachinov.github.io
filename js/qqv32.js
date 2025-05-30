@@ -71,19 +71,16 @@ qq.f.crElem = function() {
   qq.f.extend(skin, eventBase);
 
 
-if( skin.name )ns[ skin.name ]=el;
-if(skin.parent&&typeof skin.parent === 'string') el.parent=ns[skin.parent];
+if( skin.name )el.ns[ skin.name ]=el;
+if(skin.parent&&typeof skin.parent === 'string') el.parent=el.ns[skin.parent];
 
 
-if (skin.insb &&typeof skin.insb==='string'&& ns[skin.insb]) 
- skin.insb= ns[skin.insb];
-else if (skin.insa && typeof skin.insa==='string'&& ns[skin.insa]) 
-  skin.insa=ns[skin.insa];
+if (skin.insb &&typeof skin.insb==='string'&& el.ns[skin.insb]) 
+ skin.insb= el.ns[skin.insb];
+else if (skin.insa && typeof skin.insa==='string'&& el.ns[skin.insa]) 
+  skin.insa=el.ns[skin.insa];
 
-
-
-
-  if (skin.style) for (let u in skin.style) el.style[u] = skin.style[u];
+if (skin.style) for (let u in skin.style) el.style[u] = skin.style[u];
   if (skin.attr) for (let u in skin.attr) el.setAttribute(u, skin.attr[u]);
   if (skin.class) el.className = skin.class;
   if (skin.ih) el.innerHTML = skin.ih;
@@ -310,4 +307,4 @@ qq.ca = function(m) {
     qq.ce(el);
   });
 };
-alert(5555+qq);
+alert(777+qq);
