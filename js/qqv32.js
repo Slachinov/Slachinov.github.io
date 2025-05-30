@@ -72,12 +72,12 @@ qq.f.crElem = function() {
 
 
 if( skin.name )ns[ skin.name ]=el;
-if(skin.parent)el.parent=ns[skin.parent];
+if(skin.parent&&typeof skin.parent === 'string') el.parent=ns[skin.parent];
 
 
-if (skin.insb && ns && ns[skin.insb]) 
+if (skin.insb &&typeof skin.insb==='string'&& ns[skin.insb]) 
  skin.insb= ns[skin.insb];
-else if (skin.insa && ns && ns[skin.insa]) 
+else if (skin.insa && typeof skin.insa==='string'&& ns[skin.insa]) 
   skin.insa=ns[skin.insa];
 
 
@@ -310,4 +310,4 @@ qq.ca = function(m) {
     qq.ce(el);
   });
 };
-alert(qq);
+alert(5555+qq);
