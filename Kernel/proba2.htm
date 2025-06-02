@@ -1,0 +1,41 @@
+<h2>Сравнение CPU и GPU (GPU.js)</h2>
+<script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu-browser.min.js"></script>
+<script>
+async function comparePerformance() {
+  const gpu = new GPU.GPU();
+
+
+  const size = 1_000_000; // миллион элементов
+  const arr = new Array(size).fill(1).map((v, i) => i);
+
+
+  // CPU-вычисление
+  const t0 = performance.now();
+  const cpuResult = [];
+  for (let i = 0; i < size; i++) {
+    cpuResult[i] = arr[i] * 2;
+  }
+  const t1 = performance.now();
+
+
+  // GPU-вычисление
+  const kernel = gpu.createKernel(function(a) {
+    return a[this.thread.x] * 2;
+  }).setOutput([size]);
+
+
+  const t2 = performance.now();
+  const gpuResult = kernel(arr);
+  const t3 = performance.now();
+
+
+  alert(
+    `CPU время: ${(t1 - t0).toFixed(2)} мс\n` +
+    `GPU время: ${(t3 - t2).toFixed(2)} мс\n` +
+    `Проверка результата: CPU[0]=${cpuResult[0]}, GPU[0]=${gpuResult[0]}`
+  );
+}
+
+
+comparePerformance();
+</script>
