@@ -10,10 +10,10 @@ script.onload = () => {
 };
 
 
-script.onerror = () => {
-  alert('Ошибка загрузки GPU.js');
+script.onerror = (e) => {
+  alert('Ошибка загрузки GPU.js'+JSON.stringify(e));
 };
 
 
 document.head.appendChild(script);
-</script>12345
+</script>tratata
