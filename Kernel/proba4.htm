@@ -1,5 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu-browser.min.js"></script>
-<h1>Сравнение CPU и GPU 12</h1>
+<h1>Сравнение CPU и GPU 15</h1>
 <pre id="out">Загрузка...</pre>
 <script>alert(1);
   const out = document.getElementById('out');
@@ -30,7 +30,7 @@
 
 
   out.innerText =
-    'CPU: ' + (cpuEnd - cpuStart).toFixed(2) + ' ms\n' +
-    'GPU: ' + (gpuEnd - gpuStart).toFixed(2) + ' ms\n' +
-    'Пример результата: ' + gpuResult[0].toFixed(2) + ', ' + gpuResult[1].toFixed(2);
+    'CPU: ' + (cpuEnd - cpuStart ).toFixed(2) + ' ms\n' +
+    'GPU: ' + (gpuEnd - gpuStart ).toFixed(2) + ' ms\n' +
+    'Пример результата: ' + gpuResult[0].toFixed(2) + ', ' + gpuResult[1].toFixed(2)+'\n'+ cpuStart+'-'+cpuEnd+'\n'+gpuStart;
 </script>
