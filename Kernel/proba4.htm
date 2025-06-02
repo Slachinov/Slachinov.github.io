@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu-browser.min.js"></script>
 <h1>Сравнение CPU и GPU 50</h1>
 <pre id="out">Загрузка...</pre>
-<script>alert(5);
+<script>alert(6);
   const out = document.getElementById('out');
 
 
@@ -12,21 +12,27 @@
   const input = new Array(size).fill(0).map((_, i) => i);
 
 
+
+
+// GPU версия
+  const gpuKernel = gpu.createKernel(function (a) {
+    return Math.sqrt(a[this.thread.x] * a[this.thread.x] + 1);
+  }).setOutput([size]);
+
+
+
+
+  const gpuStart = performance.now();
+  const gpuResult = gpuKernel(input);
+  const gpuEnd = performance.now();
+
   // CPU версия
   const cpuStart = performance.now();
   const cpuResult = input.map(x => Math.sqrt(x * x + 1));
   const cpuEnd = performance.now();
 
 
-  // GPU версия
-  const gpuKernel = gpu.createKernel(function (a) {
-    return Math.sqrt(a[this.thread.x] * a[this.thread.x] + 1);
-  }).setOutput([size]);
-
-
-  const gpuStart = performance.now();
-  const gpuResult = gpuKernel(input);
-  const gpuEnd = performance.now();
+  
 
 
   out.innerText =
