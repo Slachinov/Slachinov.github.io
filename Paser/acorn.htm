@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>JS Parser</title>
+  <script src="https://unpkg.com/acorn@8.10.0/dist/acorn.js"></script>
+  <style>
+    textarea { width: 100%; height: 30vh; font-family: monospace; }
+    pre { background: #eee; white-space: pre-wrap; word-break: break-word; padding: 1em; }
+  </style>
+</head>
+<body>
+  <h3>Вставь JavaScript-код:</h3>
+  <textarea id="input">let x = 10 + 5;</textarea>
+  <button onclick="parseCode()">Разобрать</button>
+  <h3>AST:</h3>
+  <pre id="output"></pre>
+
+
+  <script>
+    function parseCode() {
+      const code = document.getElementById('input').value;
+      try {
+        const ast = acorn.parse(code, { ecmaVersion: 2020 });
+        document.getElementById('output').textContent = JSON.stringify(ast, null, 2);
+      } catch (e) {
+        document.getElementById('output').textContent = 'Ошибка: ' + e.message;
+      }
+    }
+  </script>
+</body>
+</html>
