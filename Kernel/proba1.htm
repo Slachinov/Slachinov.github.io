@@ -1,0 +1,19 @@
+<script>
+const script = document.createElement('script');
+script.src = 'https://cdn.jsdelivr.net/npm/gpu.js/dist/gpu.min.js';
+
+
+script.onload = () => {
+  console.log('GPU.js успешно загружен');
+  const gpu = new GPU();
+  // здесь можно использовать gpu
+};
+
+
+script.onerror = () => {
+  console.error('Ошибка загрузки GPU.js');
+};
+
+
+document.head.appendChild(script);
+</script>
