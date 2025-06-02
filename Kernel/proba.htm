@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu.min.js"></script>
+<script>
+const gpu = new GPU();
+
+
+/* Это kernel — функция, которая будет исполняться на GPU */
+const addArrays = gpu.createKernel(function(a, b) {
+  return a[this.thread.x] + b[this.thread.x];
+}).setOutput([4]);  // Размер выходного массива
+
+
+/* Входные массивы */
+const result = addArrays([1, 2, 3, 4], [10, 20, 30, 40]);
+
+
+alert(result); // [11, 22, 33, 44]
+</script>
