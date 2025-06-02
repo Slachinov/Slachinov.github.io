@@ -7,6 +7,15 @@ script.onload = () => {
   alert('GPU.js успешно загружен');
 let a='';/*for(let u in GPU)a=a+' '+u;alert(a);document.body.innerText=a;*/
   const gpu = new GPU.GPU();alert(gpu);
+
+
+const kernel = gpu.createKernel(function (x) {
+  return x[this.thread.x] * 2;
+}).setOutput([4]);
+
+
+const result = kernel([1, 2, 3, 4]);
+alert(77);alert(result);
   // здесь можно использовать gpu
 };
 
@@ -17,4 +26,4 @@ script.onerror = (e) => {
 
 
 document.head.appendChild(script);
-</script><h1>GPU 4</h1>
+</script><h1>GPU 5</h1>
