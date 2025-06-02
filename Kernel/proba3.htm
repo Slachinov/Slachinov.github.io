@@ -1,0 +1,73 @@
+<canvas id="canvas" width="300" height="300"></canvas>
+<pre id="out"></pre>
+<script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu-browser.min.js"></script>
+<script>
+const canvas = document.getElementById('canvas');
+const out = document.getElementById('out');
+const ctx = canvas.getContext('2d');
+const width = canvas.width;
+const height = canvas.height;
+
+
+// === CPU вычисление ===
+function renderCPU() {
+  const imageData = ctx.createImageData(width, height);
+  const data = imageData.data;
+  const t0 = performance.now();
+  for (let py = 0; py < height; py++) {
+    for (let px = 0; px < width; px++) {
+      let x0 = px / width * 3.5 - 2.5;
+      let y0 = py / height * 2.0 - 1.0;
+      let x = 0, y = 0, iteration = 0;
+      while (x * x + y * y <= 4 && iteration < 100) {
+        const xtemp = x * x - y * y + x0;
+        y = 2 * x * y + y0;
+        x = xtemp;
+        iteration++;
+      }
+      const i = (py * width + px) * 4;
+      const color = iteration === 100 ? 0 : Math.floor(255 * iteration / 100);
+      data[i] = data[i + 1] = data[i + 2] = color;
+      data[i + 3] = 255;
+    }
+  }
+  const t1 = performance.now();
+  ctx.putImageData(imageData, 0, 0);
+  return t1 - t0;
+}
+
+
+// === GPU вычисление ===
+const gpu = new GPU({ canvas, mode: 'gpu' });
+const mandelbrotGPU = gpu.createKernel(function () {
+  const x0 = this.thread.x / this.output.x * 3.5 - 2.5;
+  const y0 = this.thread.y / this.output.y * 2.0 - 1.0;
+  let x = 0, y = 0;
+  let iteration = 0;
+  while (x * x + y * y <= 4 && iteration < 100) {
+    const xtemp = x * x - y * y + x0;
+    y = 2 * x * y + y0;
+    x = xtemp;
+    iteration++;
+  }
+  const c = iteration === 100 ? 0 : iteration / 100;
+  this.color(c, c, c, 1);
+})
+.setOutput([width, height])
+.setGraphical(true);
+
+
+function testBoth() {
+  const t_cpu = renderCPU();
+  setTimeout(() => {
+    const t0 = performance.now();
+    mandelbrotGPU();
+    const t1 = performance.now();
+    const t_gpu = t1 - t0;
+    out.innerText = `CPU: ${t_cpu.toFixed(1)} мс\nGPU: ${t_gpu.toFixed(1)} мс`;
+  }, 500);
+}
+
+
+testBoth();
+</script>
