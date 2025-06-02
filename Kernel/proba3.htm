@@ -1,5 +1,5 @@
 <canvas id="canvas" width="300" height="300"></canvas>
-<pre id="out"></pre>
+<pre id="out">tratata</pre>
 <script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu-browser.min.js"></script>
 <script>alert(1);
 const canvas = document.getElementById('canvas');
@@ -57,6 +57,7 @@ const mandelbrotGPU = gpu.createKernel(function () {
 
 function testBoth() {
   const t_cpu = renderCPU();
+alert(t_cpu);
   setTimeout(() => {
     const t0 = performance.now();
     mandelbrotGPU();
