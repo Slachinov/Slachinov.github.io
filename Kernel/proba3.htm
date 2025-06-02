@@ -38,7 +38,7 @@ function renderCPU() {
 
 
 // === GPU вычисление ===
-const gpu = new GPU({ canvas, mode: 'gpu' });
+const gpu = new GPU.GPU({ canvas, mode: 'gpu' });alert(gpu);
 const mandelbrotGPU = gpu.createKernel(function () {
   const x0 = this.thread.x / this.output.x * 3.5 - 2.5;
   const y0 = this.thread.y / this.output.y * 2.0 - 1.0;
