@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gpu.js@latest/dist/gpu-browser.min.js"></script>
 <h1>Сравнение CPU и GPU 50</h1>
 <pre id="out">Загрузка...</pre>
-<script>alert(6);
+<script>alert(7);
   const out = document.getElementById('out');
 
 
@@ -38,5 +38,5 @@
   out.innerText =
     'CPU: ' + (cpuEnd - cpuStart ).toFixed(2) + ' ms\n' +
     'GPU: ' + (gpuEnd - gpuStart ).toFixed(2) + ' ms\n' +
-    'Пример результата: ' + gpuResult[0].toFixed(2) + ', ' + gpuResult[1].toFixed(2)+'\n'+ cpuStart+'-'+cpuEnd+'\n'+gpuStart+'-'+gpuEnd;
+    'Пример результата: ' + cpuResult[10000].toFixed(2) + ', ' + gpuResult[10000].toFixed(2)+'\n'+ cpuStart+'-'+cpuEnd+'\n'+gpuStart+'-'+gpuEnd;
 </script>
