@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jspreadsheet Пример</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce@5/dist/jspreadsheet.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsuites@5/dist/jsuites.min.css" />
+</head>
+<body>
+  <div id="spreadsheet"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jsuites@5/dist/jsuites.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspreadsheet-ce@5/dist/jspreadsheet.min.js"></script>
+  <script>
+    jspreadsheet(document.getElementById('spreadsheet'), {
+      data: [
+        ['Январь', 100],
+        ['Февраль', 150],
+        ['Март', 120]
+      ],
+      columns: [
+        { type: 'text', title: 'Месяц', width: 120 },
+        { type: 'numeric', title: 'Сумма', width: 100 }
+      ]
+    });
+  </script>
+</body>
+</html>
