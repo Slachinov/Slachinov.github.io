@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1 id="status">Проверка...</h1>
-  <script>alert(2);
+  <script>alert(3);
 
 
 const sentences = [
@@ -35,6 +35,24 @@ const sentences = [
         const model = await use.load();
         if (typeof model.embed === 'function') {
           status.innerText += 'Модель USE загружена.';
+//==
+alert(9);alert(model);
+alert(model.embed);
+
+
+
+
+const embeddings = await model.embed(sentences);
+
+
+status.innerText += 'эмбединг sentences загружен';
+        const vectors = await embeddings.array();
+
+
+
+
+status.innerText += 'вектор загружен';
+//==
         } else {
           status.innerText += 'USE не работает.';
         }
@@ -42,18 +60,8 @@ const sentences = [
         status.innerText += 'Ошибка при загрузке модели: ' + e.message;
       }
 //==
-alert(9);alert(model);
-alert(model.embed);
 
 
-const embeddings = await model.embed(sentences);
-
-
-status.innerText += 'эмбединг sentences загружен';
-        const vectors = await embeddings.array();
-
-
-status.innerText += 'вектор загружен';
     }
 
 
