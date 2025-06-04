@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>USE + Косинусное сходство</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+</head>
+<body>
+  <h1>Universal Sentence Encoder + Косинусное сходство</h1>
+  <pre id="output">Загрузка...</pre>
+
+
+  <script>
+    window.addEventListener("load", async () => {
+      const output = document.getElementById("output");
+      try {
+        output.innerText = "Загружается модель...";
+        const model = await window.universalSentenceEncoder.load();
+
+
+        const sentences = [
+          "Где находится Караганда?",
+          "Караганда находится в Казахстане.",
+          "Где находится Москва?",
+          "Яблоко от яблони недалеко падает."
+        ];
+
+
+        output.innerText = "Создаются эмбеддинги...";
+        const embeddings = await model.embed(sentences);
+        const vectors = await embeddings.array();
+
+
+        function cosineSimilarity(vecA, vecB) {
+          let dot = 0, magA = 0, magB = 0;
+          for (let i = 0; i < vecA.length; i++) {
+            dot += vecA[i] * vecB[i];
+            magA += vecA[i] * vecA[i];
+            magB += vecB[i] * vecB[i];
+          }
+          return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+        }
+
+
+        let result = "";
+        for (let i = 0; i < vectors.length; i++) {
+          for (let j = i + 1; j < vectors.length; j++) {
+            const sim = cosineSimilarity(vectors[i], vectors[j]);
+            result += `Сходство между:\n '${sentences[i]}'\n '${sentences[j]}' = ${sim.toFixed(3)}\n\n`;
+          }
+        }
+
+
+        output.innerText = result;
+      } catch (err) {
+        output.innerText = "Ошибка: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
