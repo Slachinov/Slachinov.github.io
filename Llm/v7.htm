@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1 id="status">Проверка...</h1>
-  <script>alert(4);
+  <script>alert(5);
 
 
 const sentences = [
@@ -52,6 +52,34 @@ status.innerText += '\nэмбединг sentences загружен';
 
 
 status.innerText += '\nвектор загружен';
+//==
+function cosineSimilarity(vecA, vecB) {
+          let dot = 0, magA = 0, magB = 0;
+          for (let i = 0; i < vecA.length; i++) {
+            dot += vecA[i] * vecB[i];
+            magA += vecA[i] * vecA[i];
+            magB += vecB[i] * vecB[i];
+          }
+          return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+        }
+
+
+
+
+        let result = "Косинусное сходство:\n\n";
+        for (let i = 0; i < vectors.length; i++) {
+          for (let j = i + 1; j < vectors.length; j++) {
+            const sim = cosineSimilarity(vectors[i], vectors[j]);
+            result += `• '${sentences[i]}'\n   и\n  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n\n`;
+          }
+        }
+
+
+
+
+        output.innerText = result;
+
+
 //==
         } else {
           status.innerText += 'USE не работает.';
