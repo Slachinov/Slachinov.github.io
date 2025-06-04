@@ -1,82 +1,94 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>USE + Косинусное сходство</title>
+  <title>TensorFlow.js Проверка</title>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 1em;
-      line-height: 1.4;
-    }
-    h1, pre {
-      font-size: 1.2em;
-      white-space: pre-wrap;
-    }
-  </style>
 </head>
 <body>
-  <h1 id="status">Загрузка...</h1>
+  <h1 id="status">Проверка...4</h1>
+  <script>//alert(9);
 
 
-  <script>
-    const sentences = [
-      "Где находится Караганда?",
-      "Караганда находится в Казахстане.",
-      "Где находится Москва?",
-      "Яблоко от яблони недалеко падает."
-    ];
+const sentences = [
+  "var",
+  "let",
+  "const",
+  "if",
+  "else",
+  "switch",
+  "case",
+  "default"
+];
+alert(sentences);
 
 
-    async function waitForUniversalSentenceEncoder() {
-      while (typeof window.universalSentenceEncoder === 'undefined') {
-        await new Promise(resolve => setTimeout(resolve, 100));
+    async function check() {
+      let status = document.getElementById('status');
+
+
+      if (typeof tf === 'undefined') {
+        status.innerText = 'TensorFlow.js НЕ загружен.';
+        return;
+      } else {
+        status.innerText = 'TensorFlow.js загружен.\n';
       }
-      return window.universalSentenceEncoder;
-    }
 
 
-    async function cosineSimilarity(vecA, vecB) {
-      let dot = 0, magA = 0, magB = 0;
-      for (let i = 0; i < vecA.length; i++) {
-        dot += vecA[i] * vecB[i];
-        magA += vecA[i] * vecA[i];
-        magB += vecB[i] * vecB[i];
-      }
-      return dot / (Math.sqrt(magA) * Math.sqrt(magB));
-    }
-
-
-    (async () => {
-      const status = document.getElementById("status");
       try {
-        status.innerText = "Ожидание модели...";
-        const use = await waitForUniversalSentenceEncoder();
         const model = await use.load();
-        status.innerText = "Модель загружена, рассчитываем...";
-
-
-        const embeddings = await model.embed(sentences);
+        if (typeof model.embed === 'function') {
+          status.innerText += 'Модель USE загружена.';
+//==
+const embeddings = await model.embed(sentences);
+status.innerText += '\nэмбединг sentences загружен';
         const vectors = await embeddings.array();
 
+status.innerText += '\nвектор загружен';
+//==
+function cosineSimilarity(vecA, vecB) {
+          let dot = 0, magA = 0, magB = 0;
+          for (let i = 0; i < vecA.length; i++) {
+            dot += vecA[i] * vecB[i];
+            magA += vecA[i] * vecA[i];
+            magB += vecB[i] * vecB[i];
+          }
+          return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+        }
 
-        let output = "Косинусное сходство:\n\n";
+//alert(cosineSimilarity);
+//alert(vectors.length);
+
+
+        let result = "Косинусное сходство:\n\n";
         for (let i = 0; i < vectors.length; i++) {
           for (let j = i + 1; j < vectors.length; j++) {
-            const sim = await cosineSimilarity(vectors[i], vectors[j]);
-            output += `• '${sentences[i]}'\n   и\n  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n\n`;
+            const sim = cosineSimilarity(vectors[i], vectors[j]);
+            result += `• '${sentences[i]}'\n   и\n  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n\n`;
           }
         }
 
 
-        status.innerText = output;
+
+
+        status.innerText = result;
+
+
+//==
+        } else {
+          status.innerText += 'USE не работает.';
+        }
       } catch (e) {
-        status.innerText = "Ошибка: " + e.message;
+        status.innerText += 'Ошибка при загрузке модели: ' + e.message;
       }
-    })();
+//==
+
+
+    }
+
+
+    check();
   </script>
 </body>
 </html>
