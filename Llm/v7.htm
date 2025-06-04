@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1 id="status">Проверка...</h1>
-  <script>
+  <script>alert(1);
 
 
 const sentences = [
@@ -46,6 +46,9 @@ alert(9);
 
 
 const embeddings = await model.embed(sentences);
+
+
+status.innerText += 'эмбединг sentences загружен';
         const vectors = await embeddings.array();
 
 
