@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1 id="status">Проверка...</h1>
-  <script>alert(5);
+  <script>alert(6);
 
 
 const sentences = [
@@ -36,20 +36,9 @@ const sentences = [
         if (typeof model.embed === 'function') {
           status.innerText += 'Модель USE загружена.';
 //==
-//alert(9);alert(model);
-//alert(model.embed);
-
-
-
-
 const embeddings = await model.embed(sentences);
-
-
 status.innerText += '\nэмбединг sentences загружен';
         const vectors = await embeddings.array();
-
-
-
 
 status.innerText += '\nвектор загружен';
 //==
@@ -63,7 +52,8 @@ function cosineSimilarity(vecA, vecB) {
           return dot / (Math.sqrt(magA) * Math.sqrt(magB));
         }
 
-
+alert(cosineSimilarity);
+alert(vectors.length);
 
 
         let result = "Косинусное сходство:\n\n";
