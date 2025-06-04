@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TensorFlow.js Проверка</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+</head>
+<body>
+  <h3 id="status">Проверка...</h3>
+  <script>
+    async function check() {
+      let status = document.getElementById('status');
+
+
+      if (typeof tf === 'undefined') {
+        status.innerText = 'TensorFlow.js НЕ загружен.';
+        return;
+      } else {
+        status.innerText = 'TensorFlow.js загружен.\n';
+      }
+
+
+      try {
+        const model = await use.load();
+        if (typeof model.embed === 'function') {
+          status.innerText += 'Модель USE загружена.';
+        } else {
+          status.innerText += 'USE не работает.';
+        }
+      } catch (e) {
+        status.innerText += 'Ошибка при загрузке модели: ' + e.message;
+      }
+    }
+
+
+    check();
+  </script>
+</body>
+</html>
