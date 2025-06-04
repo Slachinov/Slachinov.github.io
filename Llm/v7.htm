@@ -8,15 +8,16 @@
 </head>
 <body>
   <h1 id="status">Проверка...</h1>
-  <script>alert(8);
-
-
+  <script>alert(9);
 const sentences = [
   "Where is Paris located?",
   "Paris is located in France.",
+  "Paris is located in France, not in Russia.",
+  "Paris is in France.",
   "Where is London?",
   "An apple does not fall far from the tree."
-];/*
+];
+;/*
 
 const sentences = [
           "Где находится Караганда?",
@@ -60,8 +61,8 @@ function cosineSimilarity(vecA, vecB) {
           return dot / (Math.sqrt(magA) * Math.sqrt(magB));
         }
 
-alert(cosineSimilarity);
-alert(vectors.length);
+//alert(cosineSimilarity);
+/alert(vectors.length);
 
 
         let result = "Косинусное сходство:\n\n";
