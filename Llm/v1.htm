@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>USE Vectorizer</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+</head>
+<body>
+  <h2>Преобразование текста в вектор (USE)</h2>
+  <textarea id="input" rows="3" cols="60" placeholder="Введите фразу или вопрос"></textarea><br>
+  <button onclick="vectorize()">Векторизовать</button>
+
+
+  <pre id="output"></pre>
+
+
+  <script>
+    let model;
+    use.load().then(m => {
+      model = m;
+      document.getElementById("output").innerText = "Модель загружена. Можешь вводить текст.";
+    });
+
+
+    function vectorize() {
+      const text = document.getElementById("input").value;
+      if (!model || !text.trim()) return;
+
+
+      model.embed([text]).then(embedding => {
+        const vector = embedding.arraySync()[0];
+        document.getElementById("output").innerText = JSON.stringify(vector, null, 2);
+      });
+    }
+  </script>
+</body>
+</html>
