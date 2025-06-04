@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1 id="status">Проверка...</h1>
-  <script>alert(1);
+  <script>alert(2);
 
 
 const sentences = [
@@ -42,7 +42,8 @@ const sentences = [
         status.innerText += 'Ошибка при загрузке модели: ' + e.message;
       }
 //==
-alert(9);
+alert(9);alert(model);
+alert(model.embed);
 
 
 const embeddings = await model.embed(sentences);
