@@ -8,10 +8,10 @@
 </head>
 <body>
   <h1>Universal Sentence Encoder + Косинусное сходство</h1>
-  <pre id="output"></pre>
+  <pre id="output">вывод тут</pre>
 
 
-  <script>
+  <script>alert(0);
     async function run() {
       const sentences = [
         "Где находится Караганда?",
@@ -22,7 +22,9 @@
 
 
       const model = await use.load();
+alert(model);
       const embeddings = await model.embed(sentences);
+alert(embeddings);
       const vectors = await embeddings.array();
 
 
