@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jspreadsheet Пример</title>
+  
+
+//===
+
+
+<script src="https://bossanova.uk/jspreadsheet/v5/jspreadsheet.js"></script>
+<script src="https://jsuites.net/v5/jsuites.js"></script>
+<link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v5/jspreadsheet.css" type="text/css" />
+<link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+
+
+
+
+
+
+//==
+
+
+<body>
+  <div id="spreadsheet"></div>
+//++!++
+
+
+
+  <script>alert(2);
+alert(document.getElementById('spreadsheet'));
+alert(jspreadsheet);
+    jspreadsheet (document.getElementById('spreadsheet'), {
+      data: [
+        ['Январь', 100],
+        ['Февраль', 150],
+        ['Март', 120]
+      ],
+      columns: [
+        { type: 'text', title: 'Месяц', width: 120 },
+        { type: 'numeric', title: 'Сумма', width: 100 }
+      ]
+    });
+  </script>
+</body>
+</html>
