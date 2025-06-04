@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TensorFlow.js Проверка</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+</head>
+<body>
+  <h1 id="status">Проверка...</h1>
+  <script>
+
+
+const sentences = [
+          "Где находится Караганда?",
+          "Караганда находится в Казахстане.",
+          "Где находится Москва?",
+          "Яблоко от яблони недалеко падает."
+        ];alert(sentences);
+
+
+    async function check() {
+      let status = document.getElementById('status');
+
+
+      if (typeof tf === 'undefined') {
+        status.innerText = 'TensorFlow.js НЕ загружен.';
+        return;
+      } else {
+        status.innerText = 'TensorFlow.js загружен.\n';
+      }
+
+
+      try {
+        const model = await use.load();
+        if (typeof model.embed === 'function') {
+          status.innerText += 'Модель USE загружена.';
+        } else {
+          status.innerText += 'USE не работает.';
+        }
+      } catch (e) {
+        status.innerText += 'Ошибка при загрузке модели: ' + e.message;
+      }
+//==
+alert(9);
+
+
+const embeddings = await model.embed(sentences);
+        const vectors = await embeddings.array();
+
+
+status.innerText += 'вектор загружен';
+    }
+
+
+    check();
+  </script>
+</body>
+</html>
