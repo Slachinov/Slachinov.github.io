@@ -7,9 +7,11 @@
 <script src="../js/qqv33.js"></script>
   </head>
 <body>125
-<script type='module'>alert(6);/*
+<script type='module'>alert(7);/*
 alert(qq.ca);
 qq.ca([{tag:'div',style:{top:'0px',left:'0px',right:'0px',bottom:'0px',background:'gray',position: 'absolute','z-index':5},name:'main'}]);*/
+
+
 
 
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -45,14 +47,14 @@ import { m, ls, gh, db } from '/Lib/pan/main.js';
 //=========/==/====/
 
 
- qq.ce({ tag: 'input', ns: 'filename', attr: { placeholder: 'Имя файла (например: files/test.txt)' }, style: { width: '100%', marginBottom: '0.5em' } ,parent:m.top});
+ let inp=qq.ce({ tag: 'input', ns: 'filename', attr: { placeholder: 'Имя файла (например: files/test.txt)' }, style: { width: '100%', marginBottom: '0.5em' } ,parent:m.top});
 //============≈===
 let repo='Slachinov/Bot-server';
 
 
  qq.ce({ tag: 'button', it: '📖 Прочитать файл', style: { marginBottom: '0.5em' }, parent:m.top,event: {
       click: async function () {
-        let path = app.filename.value.trim();
+        let path = inp.value.trim();
         if (!path) return alert('Укажи имя файла');
         let url = `https://api.github.com/repos/${repo}/contents/${path}`;
 
