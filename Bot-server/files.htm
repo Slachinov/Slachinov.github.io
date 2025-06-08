@@ -7,9 +7,42 @@
 <script src="../js/qqv33.js"></script>
   </head>
 <body>125
-<script type='module'>alert(2);
+<script type='module'>alert(3);/*
 alert(qq.ca);
-qq.ca([{tag:'div',style:{top:'0px',left:'0px',right:'0px',bottom:'0px',background:'gray',position: 'absolute','z-index':5},name:'main'}]);
+qq.ca([{tag:'div',style:{top:'0px',left:'0px',right:'0px',bottom:'0px',background:'gray',position: 'absolute','z-index':5},name:'main'}]);*/
+
+
+import { m, ls, gh, db } from '/Lib/pan/main.js';
+
+
+
+
+      import { createFullscreenPanel } from '/Lib/pan/1all1.js';
+      
+      import { createEditButton } from '/aa/edit2.js';
+      import { createTopBottomMiddleLayout } from '/Lib/pan/3pv2.js';
+
+
+
+
+      const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } });
+      let mm = createTopBottomMiddleLayout(
+        grayPanel,
+        { style: { background: 'blue' } },
+        { style: { background: 'green' } },
+        { style: { background: 'red' } }
+      );
+      m.top = mm[0];
+      m.blue = mm[0];
+      m.red = mm[1];
+      m.green = mm[2];
+
+
+
+
+      qq.ce({ tag: 'button', it: 'tratata345', parent: mm[0] });
+      qq.ce({ tag: 'button', it: 'tratata', parent: mm[1] });
+
 
 
 </script>
