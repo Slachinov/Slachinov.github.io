@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Server Test</title>
+    <style>
+      body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+      button { font-size: 18px; padding: 10px 20px; }
+    </style>
+  </head>
+  <body>
+    <h1>Привет из GitHub Pages</h1>
+    <button onclick="sayHello()">Поприветствовать сервер</button>
+    <p id="result">Нажми на кнопку выше</p>
+
+
+    <script>
+      function sayHello() {
+        fetch('https://bot-server.onrender.com/')
+          .then(response => response.text())
+          .then(text => {
+            document.getElementById('result').innerText = text;
+          })
+          .catch(error => {
+            document.getElementById('result').innerText = 'Ошибка: ' + error;
+          });
+      }
+    </script>
+  </body>
+</html>
