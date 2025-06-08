@@ -7,7 +7,7 @@
 <script src="../js/qqv33.js"></script>
   </head>
 <body>125
-<script type='module'>alert(7);/*
+<script type='module'>alert(8);/*
 alert(qq.ca);
 qq.ca([{tag:'div',style:{top:'0px',left:'0px',right:'0px',bottom:'0px',background:'gray',position: 'absolute','z-index':5},name:'main'}]);*/
 
@@ -61,13 +61,13 @@ let repo='Slachinov/Bot-server';
 
 
 
-        let res = await fetch(url, {
+        let res = await fetch(url, {/*
           headers: { Authorization: `token ${token}` }
-        });
+      */  });
         let data = await res.json();
-        if (data.content) {
-          let decoded = decodeURIComponent(escape(atob(data.content)));
-          app.content.value = decoded;
+        if (data.content) {alert(9);
+          let decoded = decodeURIComponent(escape(atob(data.content)));alert(decoded);
+          m.green innerText = decoded;
         } else {
           alert('Ошибка: ' + data.message);
         }
