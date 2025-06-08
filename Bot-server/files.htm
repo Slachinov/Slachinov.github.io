@@ -1,0 +1,131 @@
+let token = localStorage.getItem('bot-token');
+let repo = 'user/repo'; /* замените на свой repo, например: myname/myrepo */
+
+
+let app = qq.ca('githubApp', {
+  skin: [
+    { ns: 'githubApp', tag: 'div', style: { padding: '1em', fontFamily: 'sans-serif' } },
+
+
+    /* Ввод пути */
+    { tag: 'input', ns: 'path', attr: { placeholder: 'Путь (например: files/)' }, prop: { value: 'files/' }, style: { width: '100%', marginBottom: '0.5em' } },
+
+
+    /* Загрузка списка файлов */
+    { tag: 'button', ns: 'load', innerText: '📂 Загрузить список файлов', style: { marginBottom: '1em' }, event: {
+      tap: async function () {
+        let path = app.path.value.trim();
+        if (!path) return alert('Укажи путь');
+        let url = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+
+        let res = await fetch(url, {
+          headers: { Authorization: `token ${token}` }
+        });
+        let files = await res.json();
+
+
+        if (!Array.isArray(files)) return alert('Это не папка или ошибка');
+
+
+        app.list.innerHTML = '';
+        for (let file of files) {
+          if (file.type === 'file') {
+            app.list.appendChild(qq.ce({
+              tag: 'button', innerText: file.name, style: { display: 'block', margin: '2px 0' },
+              event: {
+                tap: async () => {
+                  let res2 = await fetch(file.download_url);
+                  let txt = await res2.text();
+                  app.filename.value = file.path;
+                  app.content.value = txt;
+                }
+              }
+            }));
+          }
+        }
+      }
+    }},
+
+
+    { tag: 'div', ns: 'list', style: { marginBottom: '1em' } },
+
+
+    /* Имя файла */
+    { tag: 'input', ns: 'filename', attr: { placeholder: 'Имя файла (например: files/test.txt)' }, style: { width: '100%', marginBottom: '0.5em' } },
+
+
+    /* Чтение файла */
+    { tag: 'button', innerText: '📖 Прочитать файл', style: { marginBottom: '0.5em' }, event: {
+      tap: async function () {
+        let path = app.filename.value.trim();
+        if (!path) return alert('Укажи имя файла');
+        let url = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+
+        let res = await fetch(url, {
+          headers: { Authorization: `token ${token}` }
+        });
+        let data = await res.json();
+        if (data.content) {
+          let decoded = decodeURIComponent(escape(atob(data.content)));
+          app.content.value = decoded;
+        } else {
+          alert('Ошибка: ' + data.message);
+        }
+      }
+    }},
+
+
+    /* Контент файла */
+    { tag: 'textarea', ns: 'content', attr: { placeholder: 'Содержимое файла...' }, style: { width: '100%', height: '150px', marginBottom: '0.5em' } },
+
+
+    /* Сохранение файла */
+    { tag: 'button', innerText: '💾 Сохранить файл', event: {
+      tap: async function () {
+        let path = app.filename.value.trim();
+        let content = app.content.value;
+        if (!path) return alert('Укажи имя файла');
+
+
+        let getSha = async () => {
+          let res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+            headers: { Authorization: `token ${token}` }
+          });
+          let data = await res.json();
+          return data.sha || undefined;
+        };
+
+
+        let sha = await getSha();
+        let encoded = btoa(unescape(encodeURIComponent(content)));
+
+
+        let res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `token ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Обновление файла',
+            content: encoded,
+            ...(sha ? { sha } : {})
+          })
+        });
+
+
+        let result = await res.json();
+        if (result.commit) {
+          alert('Сохранено: ' + result.commit.message);
+        } else {
+          alert('Ошибка: ' + result.message);
+        }
+      }
+    }}
+  ]
+});
+
+
+document.body.appendChild(app);
