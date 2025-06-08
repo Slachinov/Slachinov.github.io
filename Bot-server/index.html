@@ -1,31 +1,67 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Server Test</title>
-    <style>
-      body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-      button { font-size: 18px; padding: 10px 20px; }
-    </style>
-  </head>
-  <body>
-    <h1>Привет из GitHub Pages 1</h1>
-    <button onclick="sayHello()">Поприветствовать сервер</button>
-    <p id="result">Нажми на кнопку выше</p>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Файлы на Render</title>
+  <style>
+    body { font-family: sans-serif; padding: 1em; }
+    textarea { width: 100%; height: 200px; margin-top: 0.5em; }
+    input, button { margin-top: 0.5em; display: block; width: 100%; }
+  </style>
+</head>
+<body>
+  <h2>Чтение и запись файлов на Render</h2>
 
 
-    <script>
-      function sayHello() {
-        fetch('https://bot-server-kg8z.onrender.com/')
-          .then(response => response.text())
-          .then(text => {
-            document.getElementById('result').innerText = text;
-          })
-          .catch(error => {
-            document.getElementById('result').innerText = 'Ошибка: ' + error;
-          });
-      }
-    </script>
-  </body>
+  <input type="text" id="filename" placeholder="Имя файла (например: test.txt)" />
+  
+  <button onclick="readFile()">📖 Прочитать</button>
+  <textarea id="content" placeholder="Содержимое файла..."></textarea>
+  <button onclick="writeFile()">💾 Сохранить</button>
+
+
+  <script>
+    const server = 'https://bot-server-kg8z.onrender.com';
+
+
+    function readFile() {
+      const filename = document.getElementById('filename').value.trim();
+      if (!filename) return alert('Введите имя файла');
+
+
+      fetch(`${server}/read/${filename}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert('Ошибка: ' + data.error);
+          } else {
+            document.getElementById('content').value = data.content;
+          }
+        });
+    }
+
+
+    function writeFile() {
+      const filename = document.getElementById('filename').value.trim();
+      const content = document.getElementById('content').value;
+      if (!filename) return alert('Введите имя файла');
+
+
+      fetch(`${server}/write/${filename}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert('Ошибка: ' + data.error);
+        } else {
+          alert(data.message);
+        }
+      });
+    }
+  </script>
+</body>
 </html>
