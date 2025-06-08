@@ -10,14 +10,14 @@
     </style>
   </head>
   <body>
-    <h1>Привет из GitHub Pages</h1>
+    <h1>Привет из GitHub Pages 1</h1>
     <button onclick="sayHello()">Поприветствовать сервер</button>
     <p id="result">Нажми на кнопку выше</p>
 
 
     <script>
       function sayHello() {
-        fetch('https://bot-server.onrender.com/')
+        fetch('https://bot-server-kg8z.onrender.com/')
           .then(response => response.text())
           .then(text => {
             document.getElementById('result').innerText = text;
