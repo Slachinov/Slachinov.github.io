@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WebRTC ICE кандидаты</title>
+</head>
+<body>
+<h2>WebRTC ICE кандидаты с STUN</h2>
+<button id="start">Создать Offer</button>
+<pre id="output"></pre>
+
+
+<script>
+(async () => {
+  const pc = new RTCPeerConnection({
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+  });
+
+
+  const output = document.getElementById('output');
+  const candidates = [];
+
+
+  pc.onicecandidate = event => {
+    if (event.candidate) {
+      const c = event.candidate.candidate;
+      // Разбор типа кандидата: host, srflx (публичный), relay (TURN)
+      let type = 'unknown';
+      const typeMatch = c.match(/typ (\w+)/);
+      if (typeMatch) type = typeMatch[1];
+
+
+      candidates.push({candidate: c, type});
+      output.textContent = 'Найденные ICE кандидаты:\n\n';
+      candidates.forEach((cand, i) => {
+        output.textContent += `${i+1}. [${cand.type}] ${cand.candidate}\n`;
+      });
+    }
+  };
+
+
+  document.getElementById('start').onclick = async () => {
+    output.textContent = 'Создаём Offer...\n';
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    output.textContent += 'SDP Offer готов.\nОжидаем ICE кандидатов...\n';
+  };
+})();
+</script>
+</body>
+</html>
