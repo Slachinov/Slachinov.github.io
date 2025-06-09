@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WS Тест</title>
 </head>
-<body>1
+<body>111
   <input id="to" placeholder="Кому" />
   <input id="msg" placeholder="Сообщение" />
   <button onclick="sendMsg()">Отправить</button>
-
-
   <pre id="log"></pre>
 
 
@@ -20,6 +19,7 @@
 
     ws.onopen = () => {
       ws.send(JSON.stringify({ type: "register", clientId }));
+      log(`Подключено как: ${clientId}`);
     };
 
 
@@ -32,6 +32,10 @@
     function sendMsg() {
       const to = document.getElementById("to").value;
       const content = document.getElementById("msg").value;
+      if (!to || !content) {
+        alert("Введите получателя и сообщение");
+        return;
+      }
       const msg = {
         type: "message",
         to,
@@ -43,7 +47,9 @@
 
 
     function log(text) {
-      document.getElementById("log").textContent += text + "\n";
+      const logElem = document.getElementById("log");
+      logElem.textContent += text + "\n";
+      logElem.scrollTop = logElem.scrollHeight;
     }
   </script>
 </body>
