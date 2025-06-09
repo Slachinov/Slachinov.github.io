@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WS Тест</title>
 </head>
-<body>1115
+<body>1116
   <input id="to" placeholder="Кому" />
   <input id="msg" placeholder="Сообщение" />
   <button onclick="sendMsg()">Отправить</button>
@@ -19,11 +19,13 @@ alert(clientId);
 
 
 
-/*ws.onerror = (e) => alert("Ошибка подключения WS");*/
 
-
-ws.onerror = (e) => {
-  alert("WS ошибка: " + JSON.stringify(e, Object.getOwnPropertyNames(e)));
+ws.onerror = function(e) {
+  let out = "";
+  for (let key in e) {
+    out += `${key}: ${e[key]}\n`;
+  }
+  alert(out);
 };
 
 ws.onclose = (e) => alert("Соединение закрыто");
