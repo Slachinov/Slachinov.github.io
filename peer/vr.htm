@@ -2,13 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-<title>WebRTC Offer & ICE Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WebRTC Offer с STUN</title>
 </head>
 <body>
-<h2>WebRTC Offer и ICE кандидаты</h2>
+<h2>WebRTC Offer с STUN-сервером 1</h2>
 <button id="start">Создать Offer</button>
 <pre id="output"></pre>
 
@@ -16,7 +14,7 @@
 <script>
 (async () => {
   const pc = new RTCPeerConnection({
-    iceServers: [] // без STUN/TURN
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
   });
 
 
