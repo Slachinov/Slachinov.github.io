@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WS Тест</title>
 </head>
-<body>1113
+<body>1114
   <input id="to" placeholder="Кому" />
   <input id="msg" placeholder="Сообщение" />
   <button onclick="sendMsg()">Отправить</button>
@@ -15,6 +15,12 @@
   <script>
     const clientId = prompt("Введите свой clientId:");
     const ws = new WebSocket("wss://bot-server-kg8z.onrender.com");alert(ws);
+alert(clientId);
+
+
+
+ws.onerror = (e) => alert("Ошибка подключения WS");
+ws.onclose = (e) => alert("Соединение закрыто");
 
 
     ws.onopen = () => {alert(8);
