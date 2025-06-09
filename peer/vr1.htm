@@ -6,7 +6,7 @@
 <title>WebRTC ICE кандидаты</title>
 </head>
 <body>
-<h2>WebRTC ICE кандидаты с STUN 3</h2>
+<h2>WebRTC ICE кандидаты с STUN 4</h2>
 <button id="start">Создать Offer</button>
 <pre id="output"></pre>
 
@@ -15,9 +15,8 @@
 (async () => {
   const pc = new RTCPeerConnection({
     iceServers: [{ urls: 'stun:stun.services.mozilla.com' }]
-  });
-
-
+  });alert(pc);
+alert(pc.onicecandidate);
   const output = document.getElementById('output');
   const candidates = [];
 
