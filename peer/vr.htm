@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<title>WebRTC Offer & ICE Test</title>
+</head>
+<body>
+<h2>WebRTC Offer и ICE кандидаты</h2>
+<button id="start">Создать Offer</button>
+<pre id="output"></pre>
+
+
+<script>
+(async () => {
+  const pc = new RTCPeerConnection({
+    iceServers: [] // без STUN/TURN
+  });
+
+
+  let output = document.getElementById('output');
+
+
+  pc.onicecandidate = event => {
+    if (event.candidate) {
+      output.textContent += '\nICE candidate:\n' + JSON.stringify(event.candidate);
+    }
+  };
+
+
+  document.getElementById('start').onclick = async () => {
+    output.textContent = 'Создаём Offer...\n';
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    output.textContent += 'SDP Offer:\n' + offer.sdp + '\n\n';
+  };
+})();
+</script>
+</body>
+</html>
