@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>WS Тест</title>
 </head>
-<body>
+<body>1
   <input id="to" placeholder="Кому" />
   <input id="msg" placeholder="Сообщение" />
   <button onclick="sendMsg()">Отправить</button>
@@ -15,7 +15,7 @@
 
   <script>
     const clientId = prompt("Введите свой clientId:");
-    const ws = new WebSocket("wss:bot-server-kg8z.onrender.com");
+    const ws = new WebSocket("wss://bot-server-kg8z.onrender.com");
 
 
     ws.onopen = () => {
