@@ -6,7 +6,7 @@
 <title>WebRTC ICE кандидаты</title>
 </head>
 <body>
-<h2>WebRTC ICE кандидаты с STUN 2</h2>
+<h2>WebRTC ICE кандидаты с STUN 3</h2>
 <button id="start">Создать Offer</button>
 <pre id="output"></pre>
 
@@ -22,8 +22,8 @@
   const candidates = [];
 
 
-  pc.onicecandidate = event => {
-    if (event.candidate) {
+  pc.onicecandidate = event => {alert(0);
+    if (event.candidate) {alert(1);
       const c = event.candidate.candidate;
       // Разбор типа кандидата: host, srflx (публичный), relay (TURN)
       let type = 'unknown';
