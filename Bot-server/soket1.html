@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WS Тест</title>
+</head>
+<body>
+  <input id="to" placeholder="Кому" />
+  <input id="msg" placeholder="Сообщение" />
+  <button onclick="sendMsg()">Отправить</button>
+
+
+  <pre id="log"></pre>
+
+
+  <script>
+    const clientId = prompt("Введите свой clientId:");
+    const ws = new WebSocket("wss:bot-server-kg8z.onrender.com");
+
+
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ type: "register", clientId }));
+    };
+
+
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      log("⬅ " + JSON.stringify(data));
+    };
+
+
+    function sendMsg() {
+      const to = document.getElementById("to").value;
+      const content = document.getElementById("msg").value;
+      const msg = {
+        type: "message",
+        to,
+        content
+      };
+      ws.send(JSON.stringify(msg));
+      log("➡ " + JSON.stringify(msg));
+    }
+
+
+    function log(text) {
+      document.getElementById("log").textContent += text + "\n";
+    }
+  </script>
+</body>
+</html>
