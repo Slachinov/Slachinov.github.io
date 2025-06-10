@@ -9,15 +9,16 @@
   <pre id="output"></pre>
 
 
-  <script type="module">
+  <script type="module">alert(1);
     import * as esprima from 'https://unpkg.com/esprima@4.0.1/dist/esprima.module.js';
 
 
     const code = 'function test() { return 42; }';
-    const tree = esprima.parseScript(code, { comment: true, loc: true });
+    const tree = esprima.parseScript(code, { comment: true, loc: true });alert(tree);
 
-
-    document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
+let t1=JSON.stringify(tree, null, 2);
+alert(t1);
+    document.getElementById('output').textContent = t1;
   </script>
 </body>
 </html>
