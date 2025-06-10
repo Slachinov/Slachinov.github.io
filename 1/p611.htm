@@ -20,7 +20,7 @@
   </style>
 </head>
 <body>
-  <h1>WebGPU Проверка</h1>
+  <h1>WebGPU Проверка 1</h1>
   <pre id="output">Проверка...</pre>
 
 
@@ -37,7 +37,7 @@
 
       try {
         const adapter = await navigator.gpu.requestAdapter();
-        if (!adapter) {
+        if (!adapter) {alert(adapter);
           output.textContent = '❌ WebGPU: адаптер не найден (requestAdapter вернул null)';
           return;
         }
