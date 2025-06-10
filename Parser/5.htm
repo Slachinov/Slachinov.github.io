@@ -13,12 +13,13 @@
   <pre id="output">Парсинг...</pre>
 <script src='https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/astring@latest/dist/astring.min.js"></script>
-<script type='module'>alert(6);alert(88+esprima);
+<script type='module'>alert(0);
+//alert(88+esprima);
 let scp=localStorage.getItem ('Idb3');
 alert(scp);
  const ast = esprima.parseScript(scp);alert(ast);
-//alert(astring);
-document.getElementById('intput').textContent= JSON.stringify(ast, null, 2); 
+alert(99+astring);
+document.getElementById('input').textContent= JSON.stringify(ast, null, 2); 
 let txt=astring.generate(ast);
 document.getElementById('output').textContent =txt;
 
