@@ -3,43 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Esprima + Astring</title>
+  <title>Esprima в браузере с обработкой ошибок</title>
 </head>
 <body>
-  <h1>Пример: AST и обратно</h1>
-  <pre id="output">Парсинг...</pre>
+  <h1>AST с Esprima + Astring</h1>
+  <pre id="input">Парсинг...</pre>
+  <pre id="output">Генерация...</pre>
 
 
-  <!-- Обычное подключение esprima -->
   <script src="https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/astring@latest/dist/astring.min.js"></script>
 
 
-  <!-- Модульный скрипт с импортом astring -->
   <script type="module">
-    import * as astring from 'https://cdn.jsdelivr.net/npm/astring@1.8.1/dist/astring.module.js';
+    let scp = localStorage.getItem('Vrem');
+    if (!scp) scp = 'function hello(name) { return "Привет, " + name; }';
 
 
-    const code = `
-      // Пример кода
-      function hello(name) {
-        return 'Привет, ' + name;
-      }
-    `;
+    document.getElementById('input').textContent = scp;
 
 
-    // Получаем AST с комментариями и позициями
-    const tree = esprima.parseScript(code, { comment: true, loc: true });
-
-
-    // Выводим дерево
-    const treeText = JSON.stringify(tree, null, 2);
-    document.getElementById('output').textContent = treeText;
-
-
-    // Генерируем код обратно
-    const generatedCode = astring.generate(tree);
-    console.log('Generated code:', generatedCode);
-    alert('Генерация:\n\n' + generatedCode);
+    try {
+      const ast = esprima.parseScript(scp);
+      document.getElementById('output').textContent = astring.generate(ast);
+    } catch (e) {
+      alert('Ошибка парсинга или генерации:\n' + e.message);
+      document.getElementById('output').textContent = 'Ошибка: ' + e.message;
+    }
   </script>
 </body>
 </html>
