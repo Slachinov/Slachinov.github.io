@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GPT‑2 в браузере </title>
+  <script type="module">
+    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0';
+alert(1);alert(pipeline);
+    let generator;
+    async function init() {
+      document.getElementById("output").innerText = "Загружаем GPT‑2…";
+      generator = await pipeline('text-generation', 'Xenova/gpt2');
+      document.getElementById("output").innerText = "Модель загружена. Введи что‑нибудь!";
+    }
+
+
+    async function generate() {
+      const input = document.getElementById("input").value;
+      if (!input.trim()) return;
+      document.getElementById("output").innerText = "Генерируем…";
+      const res = await generator(input, {
+        max_new_tokens: 40,
+        do_sample: true,
+        temperature: 0.7
+      });
+      document.getElementById("output").innerText = res[0].generated_text;
+    }
+
+
+    window.addEventListener('DOMContentLoaded', init);
+    window.generate = generate;
+  </script>
+</head>
+<body>
+  <h2>Браузерный GPT‑2v1</h2>
+  <textarea id="input" rows="2" cols="60" placeholder="Скажи что‑нибудь…"></textarea><br>
+  <button onclick="generate()">Сгенерировать</button>
+  <pre id="output"></pre>
+</body>
+</html>
