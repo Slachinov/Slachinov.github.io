@@ -9,15 +9,15 @@
 alert(22);alert(pipeline);
     let generator;
     async function init() {
-      document.getElementById("output").innerText = "Загружаем GPT‑2…62";
-alert(33);
+      document.getElementById("output").innerText = "Загружаем GPT‑2…623";
+alert(333);
      /* generator = await pipeline('text-generation', 'Xenova/gpt2');*/
 
 
 const generator = await pipeline(
   'text-generation',
   'Xenova/distilgpt2');
-alert(4);
+
       document.getElementById("output").innerText = "Модель загружена. Введи что‑нибудь!";
     }
 
@@ -26,11 +26,7 @@ alert(4);
       const input = document.getElementById("input").value;
       if (!input.trim()) return;
       document.getElementById("output").innerText = "Генерируем…";
-      const res = await generator(input, {
-        max_new_tokens: 40,
-        do_sample: true,
-        temperature: 0.7
-const result = await generator("Capital of Kazakhstan is", {
+      const res = await generator("Capital of Kazakhstan is", {
   max_new_tokens: 2,
   temperature: 0.5 });alert(99);alert(res);
       document.getElementById("output").innerText = res[0].generated_text;
