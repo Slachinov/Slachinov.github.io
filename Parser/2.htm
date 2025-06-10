@@ -6,7 +6,7 @@
   <title>Esprima в браузере 3</title>
 </head>
 <body>
-  <h1>AST с Esprima 4</h1>
+  <h1>AST с Esprima 5</h1>
   <pre id="output">Парсинг...</pre>
 <script src='https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js'>
 
@@ -25,9 +25,11 @@ const code = `
 
     const tree = esprima.parseScript(code, { comment: true, loc: true });
 
+document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
 
 
-    document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
+alert(astring);
+  alert(astring.generate(ast));
   </script>
 </body>
 </html>
