@@ -1,16 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src='../js/github.js'></script>
-<script src='../js/qqv24.js'></script>
-<script src='../js/qq.github.v3.js'></script>
-
-<title>Github</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebGPU Проверка</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      background: #f4f4f4;
+    }
+    pre {
+      background: #fff;
+      padding: 1em;
+      border-radius: 0.5em;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
 </head>
+<body>
+  <h1>WebGPU Проверка</h1>
+  <pre id="output">Проверка...</pre>
 
-</body><a href="data:text/plain;charset=utf-8,Привет,%20daэто караганда!" download="test.txt">
-  Скачать test.txt
-</a>
+
+  <script>
+    const output = document.getElementById('output');
+
+
+    async function checkWebGPU() {
+      if (!('gpu' in navigator)) {
+        output.textContent = '❌ WebGPU не поддерживается браузером (navigator.gpu отсутствует)';
+        return;
+      }
+
+
+      try {
+        const adapter = await navigator.gpu.requestAdapter();
+        if (!adapter) {
+          output.textContent = '❌ WebGPU: адаптер не найден (requestAdapter вернул null)';
+          return;
+        }
+
+
+        try {
+          const device = await adapter.requestDevice();
+
+
+          let info = '✅ WebGPU доступен и работает\n\n';
+          info += '📦 Имя адаптера: ' + (adapter.name || 'неизвестно') + '\n';
+          info += '🧩 Features:\n';
+          for (let feature of adapter.features) {
+            info += '  • ' + feature + '\n';
+          }
+
+
+          info += '\n🔧 Limits:\n';
+          const limits = adapter.limits;
+          for (let key in limits) {
+            info += `  • ${key}: ${limits[key]}\n`;
+          }
+
+
+          output.textContent = info;
+        } catch (deviceError) {
+          output.textContent = '❌ WebGPU: не удалось получить устройство (requestDevice завершился ошибкой)\n\n' + deviceError;
+        }
+      } catch (adapterError) {
+        output.textContent = '❌ WebGPU: ошибка при запросе адаптера\n\n' + adapterError;
+      }
+    }
+
+
+    checkWebGPU();
+  </script>
+</body>
 </html>
