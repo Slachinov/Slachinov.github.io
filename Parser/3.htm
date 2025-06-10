@@ -1,10 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/escodegen@2.0.0/escodegen.browser.min.js"></script>
-<h1>Var 0</h1>
-<script>alert(0);
-  const code = 'function test() { return 42; }';alert(code);
+<h1>Var 1</h1>
+<script>//alert(0);
+  const code = 'function test() { return 42; }';//alert(code);
   const ast = esprima.parseScript(code);alert(ast);
-  
+  alert(escodegen);
   const generated = escodegen.generate(ast);
   alert(generated); // Вернёт исходный код
 </script>
