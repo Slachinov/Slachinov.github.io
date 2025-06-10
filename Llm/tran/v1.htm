@@ -9,9 +9,16 @@
 alert(2);alert(pipeline);
     let generator;
     async function init() {
-      document.getElementById("output").innerText = "Загружаем GPT‑2…1";
-alert(3);
-      generator = await pipeline('text-generation', 'Xenova/gpt2');alert(4);
+      document.getElementById("output").innerText = "Загружаем GPT‑2…2";
+alert(33);
+     /* generator = await pipeline('text-generation', 'Xenova/gpt2');*/
+
+
+const generator = await pipeline(
+  'text-generation',
+  'Xenova/distilgpt2'
+);
+alert(4);
       document.getElementById("output").innerText = "Модель загружена. Введи что‑нибудь!";
     }
 
