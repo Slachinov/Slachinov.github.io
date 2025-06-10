@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Esprima в браузере</title>
+</head>
+<body>
+  <h1>Разбор кода JS</h1>
+  <pre id="output"></pre>
+
+
+  <script type="module">
+    import * as esprima from 'https://unpkg.com/esprima@4.0.1/dist/esprima.module.js';
+
+
+    const code = 'function test() { return 42; }';
+    const tree = esprima.parseScript(code, { comment: true, loc: true });
+
+
+    document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
+  </script>
+</body>
+</html>
