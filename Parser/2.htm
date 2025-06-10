@@ -3,27 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Esprima в браузере 2</title>
+  <title>Esprima в браузере 3</title>
 </head>
 <body>
   <h1>AST с Esprima 3</h1>
   <pre id="output">Парсинг...</pre>
 <script src='https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js'></script>
 
-  <script type="module">alert(1);
-   /* import * as esprima from 'https://esm.sh/esprima';*/
-
-
-    const code = `
+<script type="module">
+const code = `
       // Комментарий должен быть проигнорирован
       function hello(name) {
         return 'Привет, ' + name;
       }
-    `;alert(code);
-alert(esprima);
+    `;
+//alert(esprima);
 
     const tree = esprima.parseScript(code, { comment: true, loc: true });
-alert(tree);
+
 
 
     document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
