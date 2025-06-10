@@ -6,7 +6,7 @@
   <title>Esprima в браузере 1</title>
 </head>
 <body>
-  <h1>AST с Esprima 1</h1>
+  <h1>AST с Esprima 2</h1>
   <pre id="output">Парсинг...</pre>
 
 
@@ -19,10 +19,11 @@
       function hello(name) {
         return 'Привет, ' + name;
       }
-    `;
-
+    `;alert(code);
+alert(esprisma);
 
     const tree = esprima.parseScript(code, { comment: true, loc: true });
+alert(tree);
 
 
     document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
