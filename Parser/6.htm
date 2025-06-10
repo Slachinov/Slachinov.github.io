@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esprima + Astring</title>
+</head>
+<body>
+  <h1>Пример: AST и обратно</h1>
+  <pre id="output">Парсинг...</pre>
+
+
+  <!-- Обычное подключение esprima -->
+  <script src="https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js"></script>
+
+
+  <!-- Модульный скрипт с импортом astring -->
+  <script type="module">
+    import * as astring from 'https://cdn.jsdelivr.net/npm/astring@1.8.1/dist/astring.module.js';
+
+
+    const code = `
+      // Пример кода
+      function hello(name) {
+        return 'Привет, ' + name;
+      }
+    `;
+
+
+    // Получаем AST с комментариями и позициями
+    const tree = esprima.parseScript(code, { comment: true, loc: true });
+
+
+    // Выводим дерево
+    const treeText = JSON.stringify(tree, null, 2);
+    document.getElementById('output').textContent = treeText;
+
+
+    // Генерируем код обратно
+    const generatedCode = astring.generate(tree);
+    console.log('Generated code:', generatedCode);
+    alert('Генерация:\n\n' + generatedCode);
+  </script>
+</body>
+</html>
