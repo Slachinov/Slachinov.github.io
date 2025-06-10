@@ -10,11 +10,12 @@
 <body>
   <h1>AST с Esprima 8</h1>
   <pre id="output">Парсинг...</pre>
-<script src='https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js'>
+<script src='https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/astring@latest/dist/astring.min.js"></script>
-<script type='module'>alert(222);alert(esprima);
+<script type='module'>alert(333);alert(esprima);
  const ast = esprima.parseScript('let x = 42;');alert(ast);
 alert(astring);
+alert(astring.generate(ast));
 //alert(Object.values(astring));
 //alert(typeof astring.generate);
 alert(555555+astring.generate);
