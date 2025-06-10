@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Esprima в браузере</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esprima в браузере 1</title>
 </head>
 <body>
-  <h1>Разбор кода JS 5</h1>
-  <pre id="output"></pre>
+  <h1>AST с Esprima 3</h1>
+  <pre id="output">Парсинг...</pre>
+<script src='/js/esprisma.v1.js'></script>
+
+  <script type="module">alert(1);
+   /* import * as esprima from 'https://esm.sh/esprima';*/
 
 
-  <script type="module">alert(1);/*
-    import * as esprima from 'https://unpkg.com/esprima@4.0.1/dist/esprima.module.js';
+    const code = `
+      // Комментарий должен быть проигнорирован
+      function hello(name) {
+        return 'Привет, ' + name;
+      }
+    `;alert(code);
+alert(esprisma);
+
+    const tree = esprima.parseScript(code, { comment: true, loc: true });
+alert(tree);
 
 
-    const code = 'function test() { return 42; }';
-    const tree = esprima.parseScript(code, { comment: true, loc: true });alert(tree);
-
-let t1=JSON.stringify(tree, null, 2);
-alert(t1);
-    document.getElementById('output').textContent = t1;
-
-
-*/
+    document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
   </script>
 </body>
 </html>
