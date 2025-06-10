@@ -1,0 +1,8 @@
+<script type="module">
+  import * as esprima from 'https://dev.jspm.io/esprima';
+
+
+  const code = 'function test() { return 42; }';
+  const tree = esprima.parseScript(code, { comment: true, loc: true });
+  console.log(tree);
+</script>
