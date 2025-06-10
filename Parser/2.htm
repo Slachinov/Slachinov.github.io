@@ -1,8 +1,31 @@
-<script type="module">
-  import * as esprima from 'https://dev.jspm.io/esprima';
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esprima в браузере</title>
+</head>
+<body>
+  <h1>AST с Esprima</h1>
+  <pre id="output">Парсинг...</pre>
 
 
-  const code = 'function test() { return 42; }';
-  const tree = esprima.parseScript(code, { comment: true, loc: true });
-  console.log(tree);
-</script>
+  <script type="module">
+    import * as esprima from 'https://esm.sh/esprima';
+
+
+    const code = `
+      // Комментарий должен быть проигнорирован
+      function hello(name) {
+        return 'Привет, ' + name;
+      }
+    `;
+
+
+    const tree = esprima.parseScript(code, { comment: true, loc: true });
+
+
+    document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
+  </script>
+</body>
+</html>
