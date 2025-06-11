@@ -17,7 +17,7 @@
 </head>
 <body>
 <script>
-      alert('version=' + 9);
+      alert('version=' + 0);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -27,7 +27,7 @@ import { m, ls, gh, db } from '/Lib/pan/main.js';
 
       import { createFullscreenPanel } from '/Lib/pan/1all1.js';
       
- const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } ,event:{click:function(){this.hide}}});
+ const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } ,event:{click:function(){this.hide()}}});
 </script>
   <h1 id="status">Проверка...4</h1>
 
