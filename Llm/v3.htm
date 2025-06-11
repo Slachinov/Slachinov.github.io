@@ -17,7 +17,7 @@
 </head>
 <body>
 <script>
-      alert('version=' + 4);
+      alert('version=' + 5);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -43,7 +43,8 @@ qq.ce({tag:'button',it:'clear edit',parent:grayPanel},fs);
 qq.ce({tag:'button',it:'run llm',parent:grayPanel},fs);
 
 
-let out=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgray', border:'1px solid black' },parent:grayPanel, it:'tyt'});
+let out=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgray', border:'1px solid black' ,overflowY:'auto'}, parent:grayPanel , it:'tyt'});
+docyment.body.out=out;
 </script>
   <h3 id="status">Проверка...4</h3>
 
@@ -66,7 +67,7 @@ const sentences = [
 
 
     async function check() {
-      let status = document.getElementById('status');
+      let status =document.body.out; //document.getElementById('status');
 
 
       if (typeof tf === 'undefined') {
