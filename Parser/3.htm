@@ -25,7 +25,7 @@
 
     try {
       const ast = esprima.parseScript(scp);
-alert(Object.keys(ast));
+alert(Object.keys(ast.body[0]));
 
 
 document.getElementById('input').textContent = JSON.stringify(ast, null, 2);
