@@ -7,8 +7,23 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
 </head>
 <body>
-  <h3 id="status">Проверка...</h3>
-  <script>
+  <h1 id="status">Проверка...4</h1>
+  <script>//alert(9);
+
+
+const sentences = [
+  "var",
+  "let",
+  "const",
+  "if",
+  "else",
+  "switch",
+  "case",
+  "default"
+];
+alert(sentences);
+
+
     async function check() {
       let status = document.getElementById('status');
 
@@ -25,12 +40,51 @@
         const model = await use.load();
         if (typeof model.embed === 'function') {
           status.innerText += 'Модель USE загружена.';
+//==
+const embeddings = await model.embed(sentences);
+status.innerText += '\nэмбединг sentences загружен';
+        const vectors = await embeddings.array();
+
+status.innerText += '\nвектор загружен';
+//==
+function cosineSimilarity(vecA, vecB) {
+          let dot = 0, magA = 0, magB = 0;
+          for (let i = 0; i < vecA.length; i++) {
+            dot += vecA[i] * vecB[i];
+            magA += vecA[i] * vecA[i];
+            magB += vecB[i] * vecB[i];
+          }
+          return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+        }
+
+//alert(cosineSimilarity);
+//alert(vectors.length);
+
+
+        let result = "Косинусное сходство:\n\n";
+        for (let i = 0; i < vectors.length; i++) {
+          for (let j = i + 1; j < vectors.length; j++) {
+            const sim = cosineSimilarity(vectors[i], vectors[j]);
+            result += `• '${sentences[i]}'\n   и\n  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n\n`;
+          }
+        }
+
+
+
+
+        status.innerText = result;
+
+
+//==
         } else {
           status.innerText += 'USE не работает.';
         }
       } catch (e) {
         status.innerText += 'Ошибка при загрузке модели: ' + e.message;
       }
+//==
+
+
     }
 
 
