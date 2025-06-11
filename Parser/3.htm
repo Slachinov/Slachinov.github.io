@@ -24,10 +24,10 @@
 
 
     try {
-      const ast = esprima.parseScript(scp);
+      const ast = esprima.parseScript(scp);alert(ast);
 
 
-document.getElementById('intput').textContent = JSON.stringify(ast, null, 2);
+document.getElementById('input').textContent = JSON.stringify(ast, null, 2);
       document.getElementById('output').textContent = astring.generate(ast);
     } catch (e) {
       alert('Ошибка парсинга или генерации:\n' + e.message);
