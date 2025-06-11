@@ -1,38 +1,93 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <title>USE + Косинусное сходство</title>
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="../js/github.js"></script>
+    <script src="../js/qqv32.js"></script>
+    <script src="../js/qq.github.v3.js"></script>
+    
+   
+    
+  <title>TensorFlow.js Проверка</title>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
 </head>
 <body>
-  <h1>Universal Sentence Encoder + Косинусное сходство</h1>
-  <pre id="output">Загрузка...</pre>
+<script>
+      alert('version=' + 3);
+    </script>
+    <script type='module'>
+import { m, ls, gh, db } from '/Lib/pan/main.js';
+
+import { createFullscreenPanel } from '/Lib/pan/1all1.js';
+      
+ const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } ,event:{click:function(){this.hide()}}});
+document.body.el=grayPanel;
 
 
-  <script>
-    window.addEventListener("load", async () => {
-      const output = document.getElementById("output");
+let edit=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgreen'},parent:grayPanel, it:'tyt'});
+
+
+let fs={style:{'font-size':'25px'}};
+
+let check=document.body.check;
+
+qq.ce({tag:'button',it:'clear edit',parent:grayPanel},fs);
+
+
+qq.ce({tag:'button',it:'run llm',parent:grayPanel,event:{click:function(){document.body.edit= edit.innerText }}},fs);
+
+let out=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgray', border:'1px solid black' ,overflowY:'auto'}, parent:grayPanel , it:'tyt'});
+document.body.out=out;
+
+check(edit.innerText);
+</script>
+  <h3 id="status">Проверка...5</h3>
+
+
+
+  <script>alert(9);
+
+
+const sentences = [
+  "var",
+  "let",
+  "const",
+  "if",
+  "else",
+  "switch",
+  "case",
+  "default"
+];
+//alert(sentences);
+
+ 
+
+    async function check() {
+     let status =document.body.out;
+      if (typeof tf === 'undefined') {
+        status.innerText = 'TensorFlow.js НЕ загружен.';
+        return;
+      } else {
+        status.innerText = 'TensorFlow.js загружен.\n';
+      }
+
+
       try {
-        output.innerText = "Загружается модель...";
-        const model = await window.universalSentenceEncoder.load();
-
-
-        const sentences = [
-          "Где находится Караганда?",
-          "Караганда находится в Казахстане.",
-          "Где находится Москва?",
-          "Яблоко от яблони недалеко падает."
-        ];
-
-
-        output.innerText = "Создаются эмбеддинги...";
-        const embeddings = await model.embed(sentences);
+        const model = await use.load();
+        if (typeof model.embed === 'function') {
+          status.innerText += 'Модель USE загружена.';
+//==
+const embeddings = await model.embed(sentences);
+status.innerText += '\nэмбединг sentences загружен';
         const vectors = await embeddings.array();
 
-
-        function cosineSimilarity(vecA, vecB) {
+status.innerText += '\nвектор загружен';
+//==
+function cosineSimilarity (vecA, vecB) {
           let dot = 0, magA = 0, magB = 0;
           for (let i = 0; i < vecA.length; i++) {
             dot += vecA[i] * vecB[i];
@@ -42,21 +97,38 @@
           return dot / (Math.sqrt(magA) * Math.sqrt(magB));
         }
 
+//alert(cosineSimilarity);
+//alert(vectors.length);
 
-        let result = "";
+
+        let result = "Косинусное сходство:\n\n";
         for (let i = 0; i < vectors.length; i++) {
           for (let j = i + 1; j < vectors.length; j++) {
             const sim = cosineSimilarity(vectors[i], vectors[j]);
-            result += `Сходство между:\n '${sentences[i]}'\n '${sentences[j]}' = ${sim.toFixed(3)}\n\n`;
+ result += `• '${sentences[i]}'   и  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n`;
           }
         }
 
 
-        output.innerText = result;
-      } catch (err) {
-        output.innerText = "Ошибка: " + err.message;
+
+
+        status.innerText = result;
+
+
+//==
+        } else {
+          status.innerText += 'USE не работает.';
+        }
+      } catch (e) {
+        status.innerText += 'Ошибка при загрузке модели: ' + e.message;
       }
-    });
+//==
+
+
+    }
+
+document.body.check=check;
+    //check();
   </script>
 </body>
 </html>
