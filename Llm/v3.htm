@@ -17,7 +17,7 @@
 </head>
 <body>
 <script>
-      alert('version=' + 5);
+      alert('version=' + 6);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -65,9 +65,10 @@ const sentences = [
 ];
 //alert(sentences);
 
-
+ let status =document.body.out;
+alert(0);alert(status);
     async function check() {
-      let status =document.body.out; //document.getElementById('status');
+      //document.getElementById('status');
 
 
       if (typeof tf === 'undefined') {
