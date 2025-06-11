@@ -17,7 +17,7 @@
 </head>
 <body>
 <script>
-      alert('version=' + 1);
+      alert('version=' + 2);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -30,6 +30,7 @@ import { m, ls, gh, db } from '/Lib/pan/main.js';
  const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } ,event:{click:function(){this.hide()}}});
 document.body.el=grayPanel;
 let edit=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgreen'},parent:grayPanel, it:'tyt'});
+qq.ce({tag:'button',it:'run llm',parent:grayPanel});
 </script>
   <h1 id="status">Проверка...4</h1>
 
@@ -92,7 +93,7 @@ function cosineSimilarity(vecA, vecB) {
         for (let i = 0; i < vectors.length; i++) {
           for (let j = i + 1; j < vectors.length; j++) {
             const sim = cosineSimilarity(vectors[i], vectors[j]);
-            result += `• '${sentences[i]}'\n   и  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n`;
+ result += `• '${sentences[i]}'\n   и  '${sentences[j]}'\n   → ${sim.toFixed(3)}\n`;
           }
         }
 
