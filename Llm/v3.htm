@@ -17,7 +17,7 @@
 </head>
 <body>
 <script>
-      alert('version=' + 3);
+      alert('version=' + 4);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -32,11 +32,15 @@ document.body.el=grayPanel;
 
 
 let edit=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgreen'},parent:grayPanel, it:'tyt'});
-fs={style:{'font-size':'25px'}};
-qq.ce(fs,{tag:'button',it:'clear edit',parent:grayPanel});
 
 
-qq.ce(fs,{tag:'button',it:'run llm',parent:grayPanel});
+let fs={style:{'font-size':'25px'}};
+
+
+qq.ce({tag:'button',it:'clear edit',parent:grayPanel},fs);
+
+
+qq.ce({tag:'button',it:'run llm',parent:grayPanel},fs);
 
 
 let out=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgray', border:'1px solid black' },parent:grayPanel, it:'tyt'});
