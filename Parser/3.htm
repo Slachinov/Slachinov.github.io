@@ -1,11 +1,38 @@
-<script src="https://cdn.jsdelivr.net/npm/astring@latest/dist/astring.min.js"></script>
-<script>alert(111);
- /* const ast = esprima.parseScript('let x = 42;');*/;
-alert(astring);
-alert(Object.values(astring));
-alert(typeof astring.generate);
-alert(555555+astring.generate);
-/*
-for(let u in astring)alert(u);//alert(u+'='+astring[u]);*/
-</script>
-<h1>ver 8</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esprima в браузере с обработкой ошибок</title>
+</head>
+<body>
+  <h1>AST с Esprima + Astring</h1>
+  <pre id="input">Парсинг...</pre>
+  <pre id="output">Генерация...</pre>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/astring@latest/dist/astring.min.js"></script>
+
+
+  <script type="module">
+    let scp = localStorage.getItem('Vrem');
+    if (!scp) scp = 'function hello(name) { return "Привет, " + name; }';
+
+
+    document.getElementById('input').textContent = scp;
+
+
+    try {
+      const ast = esprima.parseScript(scp);
+
+
+document.getElementById('intput').textContent = JSON.stringify(ast, null, 2);
+      document.getElementById('output').textContent = astring.generate(ast);
+    } catch (e) {
+      alert('Ошибка парсинга или генерации:\n' + e.message);
+      document.getElementById('output').textContent = 'Ошибка: ' + e.message;
+    }
+  </script>
+</body>
+</html>
