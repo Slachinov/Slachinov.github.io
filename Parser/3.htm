@@ -25,9 +25,10 @@
 
     try {
       const ast = esprima.parseScript(scp);
+/*
 ast.body[0]['expression']=true;
 ast.body[0]['generator']=true;
-ast.body[0]['async']=true;
+ast.body[0]['async']=true;*/
 
 
 document.getElementById('input').textContent = JSON.stringify(ast, null, 2);
