@@ -12,7 +12,7 @@
 </head>
 <body>
 <script>
-      alert('version=' + 4);
+      alert('version=' + 5);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
@@ -63,7 +63,8 @@ const se = [
 
     async function check(a) {
      let status =document.body.out;
-     let sentences=a||se;
+     let sentences =a||se;
+alert(sentences);
       if (typeof tf === 'undefined') {
         status.innerText = 'TensorFlow.js НЕ загружен.';
         return;
