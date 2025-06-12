@@ -12,18 +12,18 @@
 </head>
 <body>
 <script>
-      alert('version=' + 6);
+      alert('version=' + 8);
     </script>
     <script type='module'>
 import { m, ls, gh, db } from '/Lib/pan/main.js';
 
 import { createFullscreenPanel } from '/Lib/pan/1all1.js';
       
- const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } ,event:{click:function(){this.hide()}}});
+ const grayPanel = createFullscreenPanel({ tag: 'div', style: { background: 'gray' } ,event:{click:function(){}}});
 document.body.el=grayPanel;
 
 
-let edit=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgreen'},parent:grayPanel, it:'tyt'});
+let edit=qq.ce({tag:'div',style:{width:'100%',height:'300px', background:'lightgreen'},attr:{this.contentEditable=true},parent:grayPanel, it:'tyt'});
 
 
 let fs={style:{'font-size':'25px'}};
