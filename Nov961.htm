@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="js/qqv28.js"></script>
+
+<script src="js/console.js"></script>
+<script>alert(55)</script></head>
+<body>qq
+<script>
+
+
+
+
+
+
+
+
+ let m=qq.ce ({
+    tag: 'div',
+    style: {
+      top: '0px',
+      left: '0px',
+      right: '0px',
+      bottom: '0px',
+      background: 'gray',
+      position: 'absolute',
+'z-index':12
+    },
+    name: 'main'
+  });
+  let gr=qq.ce({
+    tag: 'div',
+    style: {
+      left: '0px',
+      right: '0px',
+border:'4px solid black',
+      background: 'green',
+      position: 'absolute',
+overflow:'auto '
+    },
+    name: 'h0',
+    parent: m
+  });
+  qq.ce({
+    tag: 'div',
+    ih: '<b>Сделано с помощью чаты</b>',
+    parent: gr
+  });
+  qq.ce({
+    tag: 'div',
+    style: {
+      width: '50px',
+      height: '50px',
+      background: 'red',
+      position: 'absolute',
+      top: '0px',
+      right: '0px'
+    },event:{click:function(){m.hide()}},
+    parent: gr
+  });
+  let prp=qq.ce({
+    tag: 'div',
+    style: {
+      top: '100px',
+      bottom: '0px',
+      background: 'purple',
+      position: 'absolute',
+      width: '20%'
+    },
+    name: 'purple',
+    parent: m
+  });
+  qq.ce({
+    tag: 'div',
+    style: {
+      top: '100px',
+      bottom: '0px',
+      background: 'brown',
+      position: 'absolute',
+      width: '50%',
+      right: '0px'
+    },
+    name: 'brown',
+    parent: m,
+    event: {
+      swipeup: function(e) {
+        prp.show();
+      },
+      swipedown: function(e) {
+        prp.hide();
+      },
+      swiperight: function(e) {
+        prp.style.transition = 'width 3s';
+        prp.style.width = '45%';
+      },
+      swipeleft: function(e) {
+        prp.style.transition = 'width 3s';
+        prp.style.width = '20%';
+      }
+    }
+  });
+
+
+
+
+</script>
