@@ -16,6 +16,6 @@ export function createFullscreenPanel(params) {
      
     }
   };
-  return window.qq.ce(params,skin);
+  return qq.ce(params,skin);
 }
 
