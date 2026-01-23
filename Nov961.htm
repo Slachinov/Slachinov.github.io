@@ -6,7 +6,7 @@
 <script src="js/qqv28.js"></script>
 <script type="module" src="js/console.js"></script>
 </head>
-<body>qq4<script type="module"> import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.js';
+<body>qq5<script type="module"> import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.js';
 import {createTopBottomMiddleLayout} from 'https://slachinov.github.io/Lib/pan/3pv2.js';
 //--
 import {createBottomTopLayout} from 'https://slachinov.github.io/Lib/pan/2pv0.js';
@@ -20,6 +20,34 @@ let o= createTopBottomMiddleLayout(main,{style:{background:'orange'}},{style:{ba
 let o1=createBottomTopLayout(o[2],{},{style:{background:'lightgreen'}});
 let edit =o1[1];
 qq.ce({tag:'button',it:'EVAL',style:{margin:'5px'}, parent:o1[0], event:{click:function(){eval(edit.innerText)}}});
+//==
+qq.ce({tag:'button',it:'CLEAR',style:{margin:'5px'}, parent:o1[0], event:{click:function(){edit.innerText="";}}});
+
+//===
+qq.ce({tag:'button',it:'PROBEL',style:{margin:'5px'}, parent:o1[0], event:{click:function(){checkWeirdSpaces();}}});
+//==
+// Проверка текста на "подозрительные" пробелы
+function checkWeirdSpaces () {
+  const text = edit.innerText;
+  const weird = [];
+  for (let i = 0; i < text.length; i++) {
+    const code = text.charCodeAt(i);
+    if (code !== 32 && /\s/.test(text[i])) {
+      // Все пробельные символы кроме обычного пробела
+      weird.push({index: i, char: text[i], code});
+    }
+  }
+  if (weird.length) {
+    qq.cl('Найдены странные пробелы:', weird);
+  } else {
+    qq.cl('Странных пробелов нет');
+  }
+}
+
+
+// Использование
+checkWeirdSpaces(edit);
+//===
 </script>
 
 
