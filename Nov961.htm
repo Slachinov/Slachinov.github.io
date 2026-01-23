@@ -15,7 +15,7 @@ qq.cl('tratata');qq.er('error4');
 //alert( createFullscreenPanel);
 let main=createFullscreenPanel({style:{background:'lightgray'}});alert(main);
 //alert(createTopBottomMiddleLayout);
-let o= createTopBottomMiddleLayout(main,{style:{background:'orange'}},{style:{background:'gray'}},{style:{background:'blue'}}); qq.ce({tag:'button',it:'promt',parent:o[0]});qq.ce({tag:'button',style:{'font-size':'54px'},it:'promt',parent:o[1]});
+let o= createTopBottomMiddleLayout(main,{style:{background:'orange'}},{style:{background:'gray'}},{style:{background:'blue'}}); qq.ce({tag:'button',it:'promt1',parent:o[0]});qq.ce({tag:'button',style:{'font-size':'54px'},it:'promt',parent:o[1]});
 //alert(createBottomTopLayout);
 let o1=createBottomTopLayout(o[2],{},{style:{background:'lightgreen'}});
 let edit =o1[1];
@@ -26,19 +26,23 @@ qq.ce({tag:'button',it:'CLEAR',style:{margin:'5px'}, parent:o1[0], event:{click:
 //===
 qq.ce({tag:'button',it:'PROBEL',style:{margin:'5px'}, parent:o1[0], event:{click:function(){checkWeirdSpaces();}}});
 //==
-// Проверка текста на "подозрительные" пробелы
-function checkWeirdSpaces () {
-  const text = edit.innerText;
+// Проверка текста на
+function checkWeirdSpaces(el) {
+  const text = el.innerText;
   const weird = [];
   for (let i = 0; i < text.length; i++) {
     const code = text.charCodeAt(i);
     if (code !== 32 && /\s/.test(text[i])) {
-      // Все пробельные символы кроме обычного пробела
       weird.push({index: i, char: text[i], code});
     }
   }
+
+
   if (weird.length) {
-    qq.cl('Найдены странные пробелы:', weird);
+    qq.cl('Найдены странные пробелы:');
+    weird.forEach(item => {
+      qq.cl(`позиция ${item.index}, код ${item.code}, символ: "${item.char}"`);
+    });
   } else {
     qq.cl('Странных пробелов нет');
   }
@@ -47,6 +51,10 @@ function checkWeirdSpaces () {
 
 // Использование
 checkWeirdSpaces(edit);
+
+
+// Использование
+//checkWeirdSpaces(edit);
 //===
 </script>
 
