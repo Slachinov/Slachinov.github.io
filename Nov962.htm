@@ -1,123 +1,92 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="js/qqv28.js"></script>
-<script type="module" src="js/console.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/qqv28.js"></script>
+  <script type="module" src="js/console.js"></script>
 </head>
 <body>
-qqTextEditor
-
-
-
-
+qq5
 <script type="module">
-import { createFullscreenPanel } from 'https://slachinov.github.io/Lib/pan/1all1.js';
-import { createTopBottomMiddleLayout } from 'https://slachinov.github.io/Lib/pan/3pv2.js';
-import { createBottomTopLayout } from 'https://slachinov.github.io/Lib/pan/2pv0.js';
+import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.js';
+import {createTopBottomMiddleLayout} from 'https://slachinov.github.io/Lib/pan/3pv2.js';
+//--import {createBottomTopLayout} from 'https://slachinov.github.io/Lib/pan/2pv0.js';
+//--qq.cl('tratata');qq.er('error4');//alert( createFullscreenPanel);
+let main=createFullscreenPanel({style:{background:'lightgray'}});
+//alert(main);//alert(createTopBottomMiddleLayout);
+let o= createTopBottomMiddleLayout(
+  main,
+  {style:{background:'orange'}},
+  {style:{background:'gray'}},
+  {style:{background:'blue'}}
+); 
 
 
+qq.ce({tag:'button',it:'Ppp4',parent:o[0]});
+qq.ce({tag:'button',style:{'font-size':'54px'},it:'promt',parent:o[1]});
 
 
-// === Главный контейнер ===
-let main = createFullscreenPanel({ style: { background: 'lightgray' } });
+//alert(createBottomTopLayout);
+let o1=createBottomTopLayout(o[2],{}, {style:{background:'lightgreen'}});
+let edit = o1[1];
 
 
-
-
-// === Верх / середина / низ ===
-let layout = createTopBottomMiddleLayout(
-main,
-{ style: { background:'orange' } }, // верх
-{ style: { background:'gray' } }, // середина
-{ style: { background:'blue' } } // низ
-);
-
-
-
-
-// === Панель кнопок и редактор ===
-let bottomLayout = createBottomTopLayout(
-layout[2],
-{}, // панель кнопок
-{ style: { background:'lightgreen' } } // редактор
-);
-let edit = bottomLayout[1]; // это сам текстовый редактор
-
-
-
-
-// === Базовый скин для всех кнопок ===
-const btnSkin = qq.cs({
-tag: 'button',
-parent: bottomLayout[0],
-style: { margin: '5px' }
+qq.ce({
+  tag:'button',
+  it:'EVAL',
+  style:{margin:'5px'},
+  parent:o1[0],
+  event:{click:function(){eval(edit.innerText)}}
 });
 
 
+//==
+qq.ce({
+  tag:'button',
+  it:'CLEAR',
+  style:{margin:'5px'},
+  parent:o1[0],
+  event:{click:function(){edit.innerText="";}}
+});
 
 
-// === Функция автоочистки текста ===
-function cleanText(el) {
-// заменяем все неразрывные пробелы на обычные
-el.innerText = el.innerText.replace(/\u00A0/g, ' ');
+//===
+qq.ce({
+  tag:'button',
+  it:'PROBEL',
+  style:{margin:'5px'},
+  parent:o1[0],
+  event:{click:function(){checkWeirdSpaces(edit);}}
+});
+
+
+//==
+// Проверка текста на странные пробелы
+function checkWeirdSpaces(el) {
+  el.innerText = el.innerText.replace(/\u00A0/g, ' ');
+  const text = el.innerText;
+  const weird = [];
+  for (let i = 0; i < text.length; i++) {
+    const code = text.charCodeAt(i);
+    if (code !== 32 && /\s/.test(text[i])) {
+      weird.push({index: i, char: text[i], code});
+    }
+  }
+  if (weird.length) {
+    qq.cl('Найдены странные пробелы:');
+    weird.forEach(item => {
+      qq.cl(`позиция ${item.index}, код ${item.code}, символ: "${item.char}"`);
+    });
+  } else {
+    qq.cl('Странных пробелов нет');
+  }
 }
 
 
-
-
-// очистка при вводе и вставке
-edit.addEventListener('input', () => cleanText(edit));
-edit.addEventListener('paste', () => setTimeout(() => cleanText(edit), 0));
-
-
-
-
-// === Кнопка EVAL ===
-qq.ce(
-btnSkin,
-{
-it: 'EVAL',
-event: {
-click() {
-cleanText(edit); // очищаем текст перед eval
-try {
-eval(edit.innerText);
-} catch (e) {
-qq.er(e);
-}
-}
-}
-}
-);
-
-
-
-
-// === Кнопка CLEAR ===
-qq.ce(
-btnSkin,
-{
-it: 'CLEAR',
-event: {
-click() {
-edit.innerText = '';
-}
-}
-}
-);
-
-
-
-
-// === Пример добавления новых кнопок ===
-// qq.ce(btnSkin, { it:'SAVE', event:{click:()=>{...}} });
-// qq.ce(btnSkin, { it:'LOAD', event:{click:()=>{...}} });
-
-
-
-
+// Использование
+//checkWeirdSpaces(edit);
+//===
 </script>
 </body>
 </html>
