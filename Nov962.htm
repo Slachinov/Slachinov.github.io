@@ -1,15 +1,15 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <script src="js/qqv28.js"></script>
-  <script type="module" src="js/console.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="js/qqv28.js"></script>
+<script type="module" src="js/console.js"></script>
 </head>
-
-
 <body>
-qq4
+qqTextEditor
+
+
 
 
 <script type="module">
@@ -18,81 +18,104 @@ import { createTopBottomMiddleLayout } from 'https://slachinov.github.io/Lib/pan
 import { createBottomTopLayout } from 'https://slachinov.github.io/Lib/pan/2pv0.js';
 
 
+
+
 // === Главный контейнер ===
-let main = createFullscreenPanel({
-  style: { background: 'lightgray' }
-});
+let main = createFullscreenPanel({ style: { background: 'lightgray' } });
 
 
-// === Top / Middle / Bottom Layout ===
-let o = createTopBottomMiddleLayout(
-  main,
-  { style:{ background:'orange' } },  // верх
-  { style:{ background:'gray' } },    // середина
-  { style:{ background:'blue' } }     // низ
+
+
+// === Верх / середина / низ ===
+let layout = createTopBottomMiddleLayout(
+main,
+{ style: { background:'orange' } }, // верх
+{ style: { background:'gray' } }, // середина
+{ style: { background:'blue' } } // низ
 );
 
 
-// Тестовые кнопки (можно удалить / заменить)
-qq.ce({ tag:'button', it:'prompt', parent:o[0] });
-qq.ce({ tag:'button', it:'prompt', style:{ 'font-size':'54px' }, parent:o[1] });
 
 
-// === Bottom Top Layout (панель кнопок + редактор) ===
-let o1 = createBottomTopLayout(
-  o[2],
-  {}, // панель кнопок
-  { style:{ background:'lightgreen' } } // редактор
+// === Панель кнопок и редактор ===
+let bottomLayout = createBottomTopLayout(
+layout[2],
+{}, // панель кнопок
+{ style: { background:'lightgreen' } } // редактор
 );
-let edit = o1[1];
+let edit = bottomLayout[1]; // это сам текстовый редактор
 
 
-// === Базовый скин кнопки ===
+
+
+// === Базовый скин для всех кнопок ===
 const btnSkin = qq.cs({
-  tag: 'button',
-  parent: o1[0],
-  style: { margin:'5px' }
+tag: 'button',
+parent: bottomLayout[0],
+style: { margin: '5px' }
 });
 
 
-// === Кнопки ===
 
 
-// EVAL
+// === Функция автоочистки текста ===
+function cleanText(el) {
+// заменяем все неразрывные пробелы на обычные
+el.innerText = el.innerText.replace(/\u00A0/g, ' ');
+}
+
+
+
+
+// очистка при вводе и вставке
+edit.addEventListener('input', () => cleanText(edit));
+edit.addEventListener('paste', () => setTimeout(() => cleanText(edit), 0));
+
+
+
+
+// === Кнопка EVAL ===
 qq.ce(
-  btnSkin,
-  {
-    it: 'EVAL',
-    event: {
-      click() {
-        try {
-          eval(edit.innerText);
-        } catch (e) {
-          qq.er(e);
-        }
-      }
-    }
-  }
+btnSkin,
+{
+it: 'EVAL',
+event: {
+click() {
+cleanText(edit); // очищаем текст перед eval
+try {
+eval(edit.innerText);
+} catch (e) {
+qq.er(e);
+}
+}
+}
+}
 );
 
 
-// CLEAR
+
+
+// === Кнопка CLEAR ===
 qq.ce(
-  btnSkin,
-  {
-    it: 'CLEAR',
-    event: {
-      click() {
-        edit.innerText = '';
-      }
-    }
-  }
+btnSkin,
+{
+it: 'CLEAR',
+event: {
+click() {
+edit.innerText = '';
+}
+}
+}
 );
 
 
-// Пример: можно добавлять новые кнопки просто через btnSkin
+
+
+// === Пример добавления новых кнопок ===
 // qq.ce(btnSkin, { it:'SAVE', event:{click:()=>{...}} });
 // qq.ce(btnSkin, { it:'LOAD', event:{click:()=>{...}} });
+
+
 
 
 </script>
