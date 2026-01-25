@@ -7,14 +7,19 @@
   <script type="module" src="js/console.js"></script>
 </head>
 <body>
+<script type="module">
 
+import { saveFile, loadFile, getAllKeys } from './myFilesDB.js';
+
+
+getAllKeys().then(keys => qq.cl(keys));</script>
 <script type="module">
 
 
 import {m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan/main.js';
 
 
-let edit = m.edit;alert(m.all);
+let edit = m.edit;//alert(m.all);
 
 
 // === глобальные настройки для кнопок ===
@@ -40,16 +45,36 @@ qq.ce({
   parent: butonsEditPanel,
   event: { click: function() { edit.innerText = ''; } }
 });
+//====/
 
 
+function toggleEditHtml(edit) {
+  if (!edit._mode) edit._mode = 'text';
+
+
+  if (edit._mode === 'text') {
+    // TEXT → HTML
+    edit._textCache = edit.innerText;
+    edit.innerHTML = edit.innerText;
+    edit.contentEditable = false;
+    edit.style.background = '#e6d3b1'; // светло-коричневый
+    edit._mode = 'html';
+  } else {
+    // HTML → TEXT
+    edit.innerText = edit.innerHTML;
+    edit.contentEditable = true;
+    edit.style.background = 'lightgreen';
+    edit._mode = 'text';
+  }
+}
 // === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
-  it: 'PRO9',
+  it: 'PRO97',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
   event: { click: function() { 
-    // обработчик пока пустой
+    toggleEditHtml(edit)
   } }
 });
 
