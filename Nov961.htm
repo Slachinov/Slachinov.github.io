@@ -1,68 +1,112 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="js/qqv28.js"></script>
-<script type="module" src="js/console.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/qqv28.js"></script>
+  <script type="module" src="js/console.js"></script>
 </head>
-<body>qq5<script type="module"> import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.js';
-import {createTopBottomMiddleLayout} from 'https://slachinov.github.io/Lib/pan/3pv2.js';
-//--
-import {createBottomTopLayout} from 'https://slachinov.github.io/Lib/pan/2pv0.js';
-//--
-qq.cl('tratata');qq.er('error4');
-//alert( createFullscreenPanel);
-let main=createFullscreenPanel({style:{background:'lightgray'}});
-//alert(main);
-//alert(createTopBottomMiddleLayout);
-let o= createTopBottomMiddleLayout(main,{style:{background:'orange'}},{style:{background:'gray'}},{style:{background:'blue'}}); qq.ce({tag:'button',it:'Ppp4',parent:o[0]});qq.ce({tag:'button',style:{'font-size':'54px'},it:'promt',parent:o[1]});
-//alert(createBottomTopLayout);
-let o1=createBottomTopLayout(o[2],{},{style:{background:'lightgreen'}});
-let edit =o1[1];
-qq.ce({tag:'button',it:'EVAL',style:{margin:'5px'}, parent:o1[0], event:{click:function(){eval(edit.innerText)}}});
+<body>
+
+<script type="module">
+
+
+import {m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan/main.js';
+
+
+let edit = m.edit;
+
+
+// === глобальные настройки для кнопок ===
+let mr = '5px';
+let fs = 20;
+
+
+// === кнопка EVAL ===
+qq.ce({
+  tag: 'button',
+  it: 'EVAL',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: butonsEditPanel,
+  event: { click: function() { eval(edit.innerText); } }
+});
+
+
+// === кнопка CLEAR ===
+qq.ce({
+  tag: 'button',
+  it: 'CLEAR',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: butonsEditPanel,
+  event: { click: function() { edit.innerText = ''; } }
+});
+
+
+// === кнопка PROBEL ===
+qq.ce({
+  tag: 'button',
+  it: 'PRO3',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: butonsEditPanel,
+  event: { click: function() { 
+    // обработчик пока пустой
+  } }
+});
+
+
+// === новая кнопка locSt в bottomPanel ===
+qq.ce({
+  tag: 'button',
+  it: 'locSt',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: bottomPanel,
+  event: { click: function() { 
+    // обработчик пока оставляем пустым
+  } }
+});
 //==
-qq.ce({tag:'button',it:'CLEAR',style:{margin:'5px'}, parent:o1[0], event:{click:function(){edit.innerText="";}}});
+function createLocalStoragePanel() {
+  // создаём контейнер в topPanel
+  let container = qq.ce({
+    tag: 'div',
+    parent: m.topPanel,
+    style: { margin: '10px 0' }
+  });
 
-//===
-qq.ce({tag:'button',it:'PROBEL',style:{margin:'5px'}, parent:o1[0], event:{click:function(){checkWeirdSpaces(edit);}}});
-//==
-// Проверка текста на
-function checkWeirdSpaces(el) {
-el.innerText = el.innerText.replace(/\u00A0/g, ' ');
+
+  // создаём инпут для ключа
+  let keyInput = qq.ce({
+    tag: 'input',
+    parent: container,
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage' },
+    style: { marginRight: '5px' }
+  });
 
 
-  const text = el.innerText;
-  const weird = [];
-  for (let i = 0; i < text.length; i++) {
-    const code = text.charCodeAt(i);
-    if (code !== 32 && /\s/.test(text[i])) {
-      weird.push({index: i, char: text[i], code});
+  // создаём кнопку Load
+  qq.ce({
+    tag: 'button',
+    it: 'Load',
+    style: { margin: '5px' },
+    parent: container,
+    event: {
+      click: function() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        let value = localStorage.getItem(key);
+        edit.innerText = value !== null ? value : '';
+        if (value === null) qq.cl(`Нет значения в localStorage по ключу: "${key}"`);
+      }
     }
-  }
+  });
 
 
-  if (weird.length) {
-    qq.cl('Найдены странные пробелы:');
-    weird.forEach(item => {
-      qq.cl(`позиция ${item.index}, код ${item.code}, символ: "${item.char}"`);
-    });
-  } else {
-    qq.cl('Странных пробелов нет');
-  }
+  return container;
 }
 
 
-
-
-
-
-// Использование
-//checkWeirdSpaces(edit);
-//===
+// === 
+//==
 </script>
-
-
-
-
-
+</body>
+</html>
