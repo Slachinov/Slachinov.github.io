@@ -45,7 +45,7 @@ qq.ce({
 // === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
-  it: 'PRO3',
+  it: 'PRO4',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
   event: { click: function() { 
@@ -61,11 +61,11 @@ qq.ce({
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: bottomPanel,
   event: { click: function() { 
-    // обработчик пока оставляем пустым
+    createLocalStoragePanel();
   } }
 });
 //==
-function createLocalStoragePanel() {
+function createLocalStoragePanel () {
   // создаём контейнер в topPanel
   let container = qq.ce({
     tag: 'div',
