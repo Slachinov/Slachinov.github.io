@@ -50,13 +50,13 @@ function toggleEditHtml(edit) {
   if (edit._mode === 'text') {
     // TEXT → HTML
     edit._textCache = edit.innerText;
-    edit.innerHTML = edit._textCache;
+    edit.innerHTML = edit.innerText;
     edit.contentEditable = false;
     edit.style.background = '#e6d3b1'; // светло-коричневый
     edit._mode = 'html';
   } else {
     // HTML → TEXT
-    edit.innerText = edit._textCache ?? edit.innerHTML;
+    edit.innerText = edit.innerHTML;
     edit.contentEditable = true;
     edit.style.background = 'lightgreen';
     edit._mode = 'text';
@@ -65,7 +65,7 @@ function toggleEditHtml(edit) {
 // === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
-  it: 'PRO95',
+  it: 'PRO96',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
   event: { click: function() { 
