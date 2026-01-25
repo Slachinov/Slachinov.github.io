@@ -13,9 +13,7 @@ import { saveFile, loadFile, getAllKeys } from 'https://slachinov.github.io/Lib/
 qq.cl(990);
 getAllKeys().then(keys => qq.cl(keys));
 //==
-import { loadFile, getAllKeys } from './myFilesDB.js';
-
-
+import { loadFile, getAllKeys } from 'https://slachinov.github.io/Lib/pan/idb.js';
 (async () => {
   const keys = await getAllKeys();
 
@@ -106,7 +104,7 @@ function toggleEditHtml(edit) {
 // === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
-  it: 'PRO0',
+  it: 'PRO1',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
   event: { click: function() { 
