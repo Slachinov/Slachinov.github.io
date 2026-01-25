@@ -7,27 +7,28 @@
   <script type="module" src="js/console.js"></script>
 </head>
 <body>
-qq0
+qq1
 <script type="module">
 
-import { m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan/main.js';
 
-alert(89);alert(m);
-alert(bottomPanel);
+import { m, butonsEditPanel, bottomPanel } from 'https://slachinov.github.io/Lib/pan/main.js';
+
+
 let edit = m.edit;
+
+
+// === глобальные настройки для кнопок ===
+let mr = 5;
+let fs = 24;
 
 
 // === кнопка EVAL ===
 qq.ce({
   tag: 'button',
   it: 'EVAL',
-  style: { margin: '5px' },
+  style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
-  event: {
-    click: function () {
-      eval(edit.innerText);
-    }
-  }
+  event: { click: function() { eval(edit.innerText); } }
 });
 
 
@@ -35,28 +36,33 @@ qq.ce({
 qq.ce({
   tag: 'button',
   it: 'CLEAR',
-  style: { margin: '5px' },
+  style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
-  event: {
-    click: function () {
-      edit.innerText = '';
-    }
-  }
+  event: { click: function() { edit.innerText = ''; } }
 });
 
 
-// === кнопка ПРОБЕЛ / проверка странных пробелов ===
+// === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
   it: 'PROBEL',
-  style: { margin: '5px' },
+  style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
-  event: {
-    click: function () {
-      // функция проверки должна быть здесь, если нужна
-      // иначе можно просто удалить обработчик или оставить пустым
-    }
-  }
+  event: { click: function() { 
+    // обработчик пока пустой
+  } }
+});
+
+
+// === новая кнопка locSt в bottomPanel ===
+qq.ce({
+  tag: 'button',
+  it: 'locSt',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: bottomPanel,
+  event: { click: function() { 
+    // обработчик пока оставляем пустым
+  } }
 });
 </script>
 </body>
