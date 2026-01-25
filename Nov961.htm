@@ -10,8 +10,45 @@
 <script type="module">
 
 import { saveFile, loadFile, getAllKeys } from 'https://slachinov.github.io/Lib/pan/idb.js';
-qq.cl(89);
-getAllKeys().then(keys => qq.cl(keys));</script>
+qq.cl(990);
+getAllKeys().then(keys => qq.cl(keys));
+//==
+import { loadFile, getAllKeys } from './myFilesDB.js';
+
+
+(async () => {
+  const keys = await getAllKeys();
+
+
+  if (!keys.length) {
+    qq.cl('IndexedDB пуст');
+    return;
+  }
+
+
+  const items = [];
+
+
+  for (let key of keys) {
+    const value = await loadFile(key); // берём содержимое
+    const size = new Blob([value]).size; // размер в байтах
+    items.push({ key, size });
+  }
+
+
+  // Сортируем по размеру (от большего к меньшему)
+  items.sort((a, b) => b.size - a.size);
+
+
+  // Выводим через qq.cl
+  items.forEach((item, index) => {
+    qq.cl(`${index + 1}. "${item.key}" — ${item.size} байт`);
+  });
+
+
+  qq.cl(`✅ Всего элементов: ${items.length}`);
+})();
+</script>
 <script type="module">
 
 
@@ -69,7 +106,7 @@ function toggleEditHtml(edit) {
 // === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
-  it: 'PRO98',
+  it: 'PRO0',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
   event: { click: function() { 
