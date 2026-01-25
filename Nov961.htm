@@ -45,7 +45,7 @@ qq.ce({
 // === кнопка PROBEL ===
 qq.ce({
   tag: 'button',
-  it: 'PRO8',
+  it: 'PRO9',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: butonsEditPanel,
   event: { click: function() { 
@@ -111,7 +111,7 @@ qq.ce({
     background: 'red', 
     color: 'white' 
   },
-  parent: m.topPanel,
+  parent: container,
   event: {
     click: function() {
       let key = keyInput.value.trim();
@@ -128,7 +128,7 @@ qq.ce({
   tag: 'button',
   it: 'All',
   style: { margin: mr, 'font-size': `${fs}px` },
-  parent: m.topPanel,
+  parent: container,
   event: {
     click: function() {
       m.all.innerHTML = ''; // очищаем панель
