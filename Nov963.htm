@@ -43,7 +43,7 @@ function createIndexedDBPanel () {
   // ===== Load =====
   qq.ce({
     tag: 'button',
-    it: 'Load2',
+    it: 'Load3',
     parent: container,
     style: { margin: '5px' },
     event: {
@@ -65,6 +65,18 @@ function createIndexedDBPanel () {
 
 
   // ===== Save =====
+qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    style: {
+      margin: mr,
+      'font-size': `${fs}px`,
+      background: 'red',
+      color: 'white'
+    }});
+
+
   /*qq.ce({
     tag: 'button',
     it: 'Save',
