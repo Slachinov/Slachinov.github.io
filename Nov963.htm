@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/qqv28.js"></script>
+  <script type="module" src="js/console.js"></script>
+</head>
+<body>
+qq5
+<script type="module">
+
+import { m, butonsEditPanel } from './uiLayout.js'; // путь к твоему модулю
+
+
+let edit = m.edit; // локальная переменная для удобства
+
+
+// === кнопка EVAL ===
+qq.ce({
+  tag: 'button',
+  it: 'EVAL',
+  style: { margin: '5px' },
+  parent: butonsEditPanel,
+  event: {
+    click: function () {
+      eval(edit.innerText);
+    }
+  }
+});
+
+
+// === кнопка CLEAR ===
+qq.ce({
+  tag: 'button',
+  it: 'CLEAR',
+  style: { margin: '5px' },
+  parent: butonsEditPanel,
+  event: {
+    click: function () {
+      edit.innerText = '';
+    }
+  }
+});
+
+
+// === кнопка ПРОБЕЛ / проверка странных пробелов ===
+qq.ce({
+  tag: 'button',
+  it: 'PROBEL',
+  style: { margin: '5px' },
+  parent: butonsEditPanel,
+  event: {
+    click: function () {
+      // функция проверки должна быть здесь, если нужна
+      // иначе можно просто удалить обработчик или оставить пустым
+    }
+  }
+});
+</script>
+</body>
+</html>
