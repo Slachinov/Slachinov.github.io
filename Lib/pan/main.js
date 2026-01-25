@@ -33,4 +33,4 @@ let m={};
 m.edit=edit;
 m.topPanel=topPanel;
 m.all=all;
-export {m,butonsEditPanel}
+export {m,butonsEditPanel,bottomPanel}
