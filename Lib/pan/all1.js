@@ -12,7 +12,7 @@ const basePanel = {
 };
 
 
-export default function createFullscreenPanel(params = {}) {
-  const skin = qq.cs(basePanel, params);
-  return qq.ce(skin);
+export default function createFullscreenPanel(par) {
+  
+  return qq.ce(par);
 }
