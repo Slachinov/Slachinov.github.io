@@ -70,21 +70,7 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
   sel.addRange(range);
 }
 // вставка текста в позицию курсора
-function insertAtCursor2(text) {alert(0);alert(text);
-  const sel = window.getSelection();
-  if (!sel.rangeCount) return;alert(sel.rangeCount);
-alert(2);
 
-  const range = sel.getRangeAt(0);alert(range);
-  range.deleteContents(); // удаляем выделенный текст, если есть
- alert(3); range.insertNode(document.createTextNode(text));
-
-
-  // сдвигаем курсор после вставленного текста
-  range.collapse(false);
-  sel.removeAllRanges();
-  sel.addRange(range);
-}
 
 
 // пример использования
@@ -144,13 +130,13 @@ insertAtCursor(editor,"<b>Hello World!</b>");return;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save1',
+    it: 'Save2',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {insertHtmlAtCursor ('<b>tratata</b>')
+      click() {insertHtmlAtCursor ('<b>tratata</b>');
 return;
         if (!editor) return;
-        //localStorage.setItem(lsKey, editor.innerHTML);
+        
       }
     }
   });
