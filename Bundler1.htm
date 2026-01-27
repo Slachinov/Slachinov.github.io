@@ -12,7 +12,30 @@
 import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
 let all=fall();all.hide();
 //====
-function insertAtCursor(edit, text) {
+function insertHtmlAtCursor (html) {
+  const sel = frame.contentWindow.getSelection();
+  if (!sel || sel.rangeCount === 0) return;
+
+
+  const range = sel.getRangeAt(0);
+  range.deleteContents(); // удаляем выделенный текст, если есть
+
+
+  // создаём DocumentFragment из HTML
+  const fragment = range.createContextualFragment(html);
+
+
+  // вставляем в позицию курсора
+  range.insertNode(fragment);
+
+
+  // перемещаем курсор после вставленного фрагмента
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+//===/
+function insertAtCursor2(edit, text) {
   edit.focus(); // обязательно фокусируем див
 
 //alert(edit);alert(text);
@@ -121,12 +144,13 @@ insertAtCursor(editor,"<b>Hello World!</b>");return;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save',
+    it: 'Save1',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {return;
+      click() {insertHtmlAtCursor ('<b>tratata</b>')
+return;
         if (!editor) return;
-        localStorage.setItem(lsKey, editor.innerHTML);
+        //localStorage.setItem(lsKey, editor.innerHTML);
       }
     }
   });
