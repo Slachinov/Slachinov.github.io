@@ -139,7 +139,7 @@
 
     // запрет контекстного меню, выделение сохраняется
     editor.addEventListener('contextmenu', e => e.preventDefault());
-  });
+  });alert(67);alert(editor);
 
 
   // ---------- пересчёт высоты iframe ----------
@@ -205,7 +205,7 @@ function createLocalStoragePanel(
   // === Load ===
   qq.ce({
     tag: 'button',
-    it: 'Load1',
+    it: 'Load22',
     parent: container,
     style: btnStyle(),
     event: {
@@ -283,8 +283,8 @@ alert(edit);
 
   return container;
 };
-
-
+alert(77);
+if(editor)alert(editor);
  createLocalStoragePanel (topContainer,editor,editor);
 
 </script>
