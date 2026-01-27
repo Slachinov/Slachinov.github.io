@@ -13,14 +13,14 @@ import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
 let all=fall();all.hide();
 //====
 // вставка текста в позицию курсора
-function insertAtCursor(text) {alert(0);
+function insertAtCursor(text) {alert(0);alert(text);
   const sel = window.getSelection();
-  if (!sel.rangeCount) return;alert(2);
+  if (!sel.rangeCount) return;alert(sel);
+alert(2);
 
-
-  const range = sel.getRangeAt(0);
+  const range = sel.getRangeAt(0);alert(range);
   range.deleteContents(); // удаляем выделенный текст, если есть
-  range.insertNode(document.createTextNode(text));
+ alert(3); range.insertNode(document.createTextNode(text));
 
 
   // сдвигаем курсор после вставленного текста
@@ -71,7 +71,7 @@ function insertAtCursor(text) {alert(0);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load1',
+    it: 'Load2',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
