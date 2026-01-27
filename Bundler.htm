@@ -1,118 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Builder editor</title>
-<style>
-  body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: sans-serif;
-  }
-
-
-  #panel {
-    height: 140px;
-    background: gray;
-    width:100%;
-    display: flex;
-    gap: 2px;
-    align-items: center;
-    padding: 0 1px;
-    border: 10px solid black;
-  }
-
-
-  #editorFrame {
-    flex: 1;
-    border: none;
-    width: 100%;
-  }
-</style>
-</head>
-
-
-<body>
-
-
-<div id="panel">
-  <button data-color="blue">Path4</button>
-  <button data-color="green">Var</button>
-  <input type="file" id="loadFile">
-</div>
-
-
-<iframe id="editorFrame"></iframe>
-
-
-<script>
-const iframe = document.getElementById('editorFrame');
-
-
-iframe.srcdoc = `
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-  body { margin:0; font-family: monospace; }
-  #editor {
-    min-height: 100vh;
-    padding: 10px;
-    outline: none;
-    white-space: pre;
-  }
-  .ref-blue { background: #d0e8ff; }
-  .ref-green { background: #d8ffd8; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/qqv28.js"></script>
 </head>
 <body>
-<div id="editor" contentEditable="true"></div>
-</body>
-</html>
-`;
 
 
-iframe.onload = () => {
-  const doc = iframe.contentDocument;
-  const editor = doc.getElementById('editor');
-
-
-  document.getElementById('panel').addEventListener('click', e => {
-    if (e.target.tagName !== 'BUTTON') return;
-
-
-    const color = e.target.dataset.color;
-    wrapSelection(editor, color);
+<script type="module">
+  // ---------- Верхний контейнер с двумя панелями ----------
+  const topContainer = qq.ce({
+    tag: 'div',
+    parent: document.body,
+    style: {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      right: '0',
+      zIndex: 10,
+      background: '#eee'
+    }
   });
 
 
-  document.getElementById('loadFile').addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    file.text().then(text => editor.textContent = text);
+  // Панель работы с localStorage
+  const lsPanel = qq.ce({
+    tag: 'div',
+    parent: topContainer,
+    style: { padding: '4px', borderBottom: '1px solid #ccc' }
   });
-};
 
 
-function wrapSelection(editor, color) {
-  const sel = iframe.contentWindow.getSelection();
-  if (!sel.rangeCount) return;
+  // Панель выбора цветов
+  const colorPanel = qq.ce({
+    tag: 'div',
+    parent: topContainer,
+    style: { padding: '4px', borderBottom: '1px solid #ccc' }
+  });
 
 
-  const range = sel.getRangeAt(0);
-  if (range.collapsed) return;
+  // ---------- кнопки localStorage ----------
+  const lsKey = 'myEditorText';
 
 
-  const span = iframe.contentDocument.createElement('span');
-  span.className = 'ref-' + color;
-  span.dataset.ref = color; // логика здесь
-  range.surroundContents(span);
+  qq.ce({
+    tag: 'button',
+    parent: lsPanel,
+    it: 'Load',
+    style: { margin: '2px', fontSize: '14px' },
+    event: {
+      click() {
+        if (!editor) return;
+        const txt = localStorage.getItem(lsKey) || '';
+        editor.innerHTML = txt;
+      }
+    }
+  });
 
 
-  sel.removeAllRanges();
-}
+  qq.ce({
+    tag: 'button',
+    parent: lsPanel,
+    it: 'Save',
+    style: { margin: '2px', fontSize: '14px' },
+    event: {
+      click() {
+        if (!editor) return;
+        localStorage.setItem(lsKey, editor.innerHTML);
+      }
+    }
+  });
+
+
+  // ---------- кнопки подсветки ----------
+  const colors = [
+    {name: 'Blue', color: '#cce5ff', ref: 'path1'},
+    {name: 'Yellow', color: '#fff3b0', ref: 'path2'},
+    {name: 'Pink', color: '#ffcce5', ref: 'path3'}
+  ];
+
+
+  colors.forEach(c => {
+    qq.ce({
+      tag: 'button',
+      parent: colorPanel,
+      it: c.name,
+      style: { margin: '2px', fontSize: '14px' },
+      event: {
+        click() {
+          if (!editor) return;
+          const sel = frame.contentWindow.getSelection();
+          if (!sel || !sel.rangeCount) return;
+          const range = sel.getRangeAt(0);
+          if (range.collapsed) return;
+
+
+          const span = frame.contentDocument.createElement('span');
+          span.style.background = c.color;
+          span.setAttribute('data-ref', c.ref);
+
+
+          range.surroundContents(span);
+          sel.removeAllRanges();
+        }
+      }
+    });
+  });
+
+
+  // ---------- iframe ----------
+  const frame = qq.ce({
+    tag: 'iframe',
+    parent: document.body,
+    style: { position: 'absolute', top: '0', left: '0', border: 'none', zIndex: 1 }
+  });
+
+
+  frame.srcdoc = `<!DOCTYPE html>
+  <html>
+    <body style="margin:0;height:100%">
+      <div contenteditable="true"></div>
+    </body>
+  </html>`;
+
+
+  let editor = null;
+  frame.addEventListener('load', () => {
+    editor = frame.contentDocument.body.children[0];
+    editor.style.background = 'gray';
+    editor.style.position = 'absolute';
+    editor.style.top = '0px';
+    editor.style.left = '0';
+    editor.style.width = '100%';
+    editor.style.height = '100%';
+    editor.style.overflow = 'auto';
+
+
+    // запрет контекстного меню, выделение сохраняется
+    editor.addEventListener('contextmenu', e => e.preventDefault());
+  });
+
+
+  // ---------- пересчёт высоты iframe ----------
+  const updateFrame = () => {
+    const top = topContainer.offsetHeight;
+    frame.style.top = top + 'px';
+    frame.style.left = '0';
+    frame.style.width = '100%';
+    frame.style.height = `calc(100% - ${top + 10}px)`; // уменьшено на 10px
+  };
+
+
+  updateFrame();
+  new MutationObserver(updateFrame).observe(topContainer, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+
+
 </script>
 
 
