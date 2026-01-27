@@ -7,7 +7,6 @@
 <style>
   body {
     margin: 0;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
@@ -17,11 +16,12 @@
   #panel {
     height: 40px;
     background: #eee;
+    width:100%;
     display: flex;
     gap: 8px;
     align-items: center;
     padding: 0 8px;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ccc;
   }
 
 
@@ -38,7 +38,7 @@
 
 
 <div id="panel">
-  <button data-color="blue">Path1</button>
+  <button data-color="blue">Path2</button>
   <button data-color="green">Var</button>
   <input type="file" id="loadFile">
 </div>
@@ -68,7 +68,7 @@ iframe.srcdoc = `
 </style>
 </head>
 <body>
-<div id="editor" contenteditable="true"></div>
+<div id="editor" contentEditable="true"></div>
 </body>
 </html>
 `;
