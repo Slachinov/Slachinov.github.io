@@ -15,7 +15,7 @@ let all=fall();all.hide();
 // вставка текста в позицию курсора
 function insertAtCursor(text) {alert(0);alert(text);
   const sel = window.getSelection();
-  if (!sel.rangeCount) return;alert(sel);
+  if (!sel.rangeCount) return;alert(sel.rangeCount);
 alert(2);
 
   const range = sel.getRangeAt(0);alert(range);
@@ -71,7 +71,7 @@ alert(2);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load2',
+    it: 'Load3',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
