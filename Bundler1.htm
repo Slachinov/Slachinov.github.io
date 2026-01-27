@@ -16,8 +16,9 @@ function insertAtCursor(edit, text) {
   edit.focus(); // обязательно фокусируем див
 
 alert(edit);alert(text);
-  const sel = edit.ownerDocument.getSelection(); // берём Selection из документа div
-  if (!sel) return;alert(1);alert(sel);
+  /*const sel = edit.ownerDocument.getSelection();*/ // берём Selection из 
+const sel = frame.contentWindow.getSelection();alert(3);alert(sel);
+  if (!sel) return;alert(4);
 
 
   let range;
@@ -104,7 +105,7 @@ alert(2);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load5',
+    it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
