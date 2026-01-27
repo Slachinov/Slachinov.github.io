@@ -11,6 +11,28 @@
 <script type="module">
 import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
 let all=fall();all.hide();
+//====
+// вставка текста в позицию курсора
+function insertAtCursor(text) {
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return;
+
+
+  const range = sel.getRangeAt(0);
+  range.deleteContents(); // удаляем выделенный текст, если есть
+  range.insertNode(document.createTextNode(text));
+
+
+  // сдвигаем курсор после вставленного текста
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+
+// пример использования
+
+
   // ---------- Верхний контейнер с двумя панелями ----------
   const topContainer = qq.ce({
     tag: 'div',
@@ -49,11 +71,12 @@ let all=fall();all.hide();
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load9',
+    it: 'Load',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
         if (!editor) return;
+insertAtCursor("Hello World!");return;
         const txt = localStorage.getItem(lsKey) || 'tratata';
         editor.innerHTML = txt;
       }
