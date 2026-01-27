@@ -15,10 +15,10 @@ let all=fall();all.hide();
 function insertAtCursor(edit, text) {
   edit.focus(); // обязательно фокусируем див
 
-alert(edit);alert(text);
+//alert(edit);alert(text);
   /*const sel = edit.ownerDocument.getSelection();*/ // берём Selection из 
-const sel = frame.contentWindow.getSelection();alert(3);alert(sel);
-  if (!sel) return;alert(4);
+const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
+  if (!sel) return;//alert(4);
 
 
   let range;
@@ -105,12 +105,12 @@ alert(2);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load6',
+    it: 'Load7',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
         if (!editor) return;
-insertAtCursor(editor,"Hello World!");return;
+insertAtCursor(editor,"<b>Hello World!</b>");return;
         const txt = localStorage.getItem(lsKey) || 'tratata';
         editor.innerHTML = txt;
       }
