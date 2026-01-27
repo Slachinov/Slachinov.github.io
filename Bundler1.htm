@@ -10,7 +10,12 @@
 
 <script type="module">
 import fall from 'https://slachinov.github.io/Lib/pan/all1.js';let all=fall({});alert(2);alert(all);
-all.innerText='tratata';alert(all.getStyle('width'));
+all.innerText='tratata';
+alert(all.getStyle('width'));
+alert(all.getStyle('height'));
+alert(all.getStyle('background'));
+alert(all.getStyle('z-index'));
+alert(all.getStyle('top'));
   // ---------- Верхний контейнер с двумя панелями ----------
   const topContainer = qq.ce({
     tag: 'div',
@@ -49,7 +54,7 @@ all.innerText='tratata';alert(all.getStyle('width'));
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load4',
+    it: 'Load5',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
