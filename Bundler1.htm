@@ -13,9 +13,9 @@ import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
 let all=fall();all.hide();
 //====
 // вставка текста в позицию курсора
-function insertAtCursor(text) {
+function insertAtCursor(text) {alert(0);
   const sel = window.getSelection();
-  if (!sel.rangeCount) return;
+  if (!sel.rangeCount) return;alert(2);
 
 
   const range = sel.getRangeAt(0);
@@ -71,7 +71,7 @@ function insertAtCursor(text) {
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load',
+    it: 'Load1',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
@@ -90,7 +90,7 @@ insertAtCursor("Hello World!");return;
     it: 'Save',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {
+      click() {return;
         if (!editor) return;
         localStorage.setItem(lsKey, editor.innerHTML);
       }
