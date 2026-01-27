@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Builder editor</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+  }
+
+
+  #panel {
+    height: 40px;
+    background: #eee;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 0 8px;
+    border-bottom: 1px solid #ccc;
+  }
+
+
+  #editorFrame {
+    flex: 1;
+    border: none;
+    width: 100%;
+  }
+</style>
+</head>
+
+
+<body>
+
+
+<div id="panel">
+  <button data-color="blue">Path</button>
+  <button data-color="green">Var</button>
+  <input type="file" id="loadFile">
+</div>
+
+
+<iframe id="editorFrame"></iframe>
+
+
+<script>
+const iframe = document.getElementById('editorFrame');
+
+
+iframe.srcdoc = `
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin:0; font-family: monospace; }
+  #editor {
+    min-height: 100vh;
+    padding: 10px;
+    outline: none;
+    white-space: pre;
+  }
+  .ref-blue { background: #d0e8ff; }
+  .ref-green { background: #d8ffd8; }
+</style>
+</head>
+<body>
+<div id="editor" contenteditable="true"></div>
+</body>
+</html>
+`;
+
+
+iframe.onload = () => {
+  const doc = iframe.contentDocument;
+  const editor = doc.getElementById('editor');
+
+
+  document.getElementById('panel').addEventListener('click', e => {
+    if (e.target.tagName !== 'BUTTON') return;
+
+
+    const color = e.target.dataset.color;
+    wrapSelection(editor, color);
+  });
+
+
+  document.getElementById('loadFile').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    file.text().then(text => editor.textContent = text);
+  });
+};
+
+
+function wrapSelection(editor, color) {
+  const sel = iframe.contentWindow.getSelection();
+  if (!sel.rangeCount) return;
+
+
+  const range = sel.getRangeAt(0);
+  if (range.collapsed) return;
+
+
+  const span = iframe.contentDocument.createElement('span');
+  span.className = 'ref-' + color;
+  span.dataset.ref = color; // логика здесь
+  range.surroundContents(span);
+
+
+  sel.removeAllRanges();
+}
+</script>
+
+
+</body>
+</html>
