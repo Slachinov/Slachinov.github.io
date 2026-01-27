@@ -114,17 +114,21 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load4',
+    it: 'Load5',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
         
 const mm = frame.contentDocument.querySelectorAll('span');alert(mm.length);
-const m1=mm[0];
+/*
+ // начало документа
+range.setEndBefore(firstMarker);               // перед меткой*/
+const m11=mm[0];
 const m2=mm[1];
 const range = frame.contentDocument.createRange();
+range.setStart(frame.contentDocument.body, 0); 
 range.setStartAfter(m1);
-range.setEndBefore(m2);
+//range.setEndBefore(m2);
 const text = range.toString(); // чистый текст
 const html = range.cloneContents();
 alert(text);alert(html);
