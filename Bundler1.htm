@@ -12,8 +12,41 @@
 import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
 let all=fall();all.hide();
 //====
+function insertAtCursor(edit, text) {
+  edit.focus(); // обязательно фокусируем див
+
+
+  const sel = edit.ownerDocument.getSelection(); // берём Selection из документа div
+  if (!sel) return;
+
+
+  let range;
+  if (sel.rangeCount > 0) {
+    range = sel.getRangeAt(0);
+    range.deleteContents(); // удаляем выделенный текст, если есть
+  } else {
+    // создаём range в начале div
+    range = edit.ownerDocument.createRange();
+    range.setStart(edit, 0);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+
+  // создаём текстовый узел
+  const textNode = edit.ownerDocument.createTextNode(text);
+  range.insertNode(textNode);
+
+
+  // сдвигаем курсор после вставленного текста
+  range.setStartAfter(textNode);
+  range.collapse(true);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
 // вставка текста в позицию курсора
-function insertAtCursor(text) {alert(0);alert(text);
+function insertAtCursor2(text) {alert(0);alert(text);
   const sel = window.getSelection();
   if (!sel.rangeCount) return;alert(sel.rangeCount);
 alert(2);
@@ -71,7 +104,7 @@ alert(2);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load3',
+    it: 'Load4',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
