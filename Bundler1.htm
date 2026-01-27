@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/qqv28.js"></script>
+</head>
+<body>
+
+
+<script type="module">
+  // ---------- Верхний контейнер с двумя панелями ----------
+  const topContainer = qq.ce({
+    tag: 'div',
+    parent: document.body,
+    style: {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      right: '0',
+      zIndex: 10,
+      background: '#eee'
+    }
+  });
+
+
+  // Панель работы с localStorage
+  const lsPanel = qq.ce({
+    tag: 'div',
+    parent: topContainer,
+    style: { padding: '4px', borderBottom: '1px solid #ccc' }
+  });
+
+
+  // Панель выбора цветов
+  const colorPanel = qq.ce({
+    tag: 'div',
+    parent: topContainer,
+    style: { padding: '4px', borderBottom: '1px solid #ccc' }
+  });
+
+
+  // ---------- кнопки localStorage ----------
+  const lsKey = 'myEditorText';
+
+
+  qq.ce({
+    tag: 'button',
+    parent: lsPanel,
+    it: 'Load',
+    style: { margin: '2px', fontSize: '14px' },
+    event: {
+      click() {
+        if (!editor) return;
+        const txt = localStorage.getItem(lsKey) || '';
+        editor.innerHTML = txt;
+      }
+    }
+  });
+
+
+  qq.ce({
+    tag: 'button',
+    parent: lsPanel,
+    it: 'Save',
+    style: { margin: '2px', fontSize: '14px' },
+    event: {
+      click() {
+        if (!editor) return;
+        localStorage.setItem(lsKey, editor.innerHTML);
+      }
+    }
+  });
+
+
+  // ---------- кнопки подсветки ----------
+  const colors = [
+    {name: 'Blue', color: '#cce5ff', ref: 'path1'},
+    {name: 'Yellow', color: '#fff3b0', ref: 'path2'},
+    {name: 'Pink', color: '#ffcce5', ref: 'path3'}
+  ];
+
+
+  colors.forEach(c => {
+    qq.ce({
+      tag: 'button',
+      parent: colorPanel,
+      it: c.name,
+      style: { margin: '2px', fontSize: '14px' },
+      event: {
+        click() {
+          if (!editor) return;
+          const sel = frame.contentWindow.getSelection();
+          if (!sel || !sel.rangeCount) return;
+          const range = sel.getRangeAt(0);
+          if (range.collapsed) return;
+
+
+          const span = frame.contentDocument.createElement('span');
+          span.style.background = c.color;
+          span.setAttribute('data-ref', c.ref);
+
+
+          range.surroundContents(span);
+          sel.removeAllRanges();
+        }
+      }
+    });
+  });
+
+
+  // ---------- iframe ----------
+  const frame = qq.ce({
+    tag: 'iframe',
+    parent: document.body,
+    style: { position: 'absolute', top: '0', left: '0', border: 'none', zIndex: 1 }
+  });
+
+
+  frame.srcdoc = `<!DOCTYPE html>
+  <html>
+    <body style="margin:0;height:100%">
+      <div contenteditable="true"></div>
+    </body>
+  </html>`;
+
+
+  let editor = null;
+  frame.addEventListener('load', () => {
+    editor = frame.contentDocument.body.children[0];
+    editor.style.background = 'gray';
+    editor.style.position = 'absolute';
+    editor.style.top = '0px';
+    editor.style.left = '0';
+    editor.style.width = '100%';
+    editor.style.height = '100%';
+    editor.style.overflow = 'auto';
+
+
+    // запрет контекстного меню, выделение сохраняется
+    editor.addEventListener('contextmenu', e => e.preventDefault());
+  });
+
+
+  // ---------- пересчёт высоты iframe ----------
+  const updateFrame = () => {
+    const top = topContainer.offsetHeight;
+    frame.style.top = top + 'px';
+    frame.style.left = '0';
+    frame.style.width = '100%';
+    frame.style.height = `calc(100% - ${top + 10}px)`; // уменьшено на 10px
+  };
+
+
+  updateFrame();
+  new MutationObserver(updateFrame).observe(topContainer, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+//===========
+function createLocalStoragePanel(
+  parent,      // куда вставлять панель
+  edit,        // editor div
+  allPanel,    // панель со списком ключей
+  mr = '3px',
+  fs = 18
+, skin) {
+
+
+  // === контейнер панели ===
+  const container = qq.ce({
+    tag: 'div',
+    parent: parent,
+    style: {
+      margin: '1px 0',
+      background: '#ffe4e1',
+      padding: '4px'
+    }
+  });
+
+
+  // === input key ===
+  const keyInput = qq.ce({
+    tag: 'input',
+    parent: container,
+    attr: {
+      type: 'text',
+      placeholder: 'localStorage key'
+    },
+    style: {
+      marginRight: '5px'
+    }
+  });
+
+
+  // helper для кнопок
+  const btnStyle = () => {
+    let s = { margin: mr, 'font-size': fs + 'px' };
+    if (skin) Object.assign(s, skin);
+    return s;
+  };
+
+
+  // === Load ===
+  qq.ce({
+    tag: 'button',
+    it: 'Load',
+    parent: container,
+    style: btnStyle(),
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        let v = localStorage.getItem(key);
+        edit.innerText = v ?? '';
+      }
+    }
+  });
+
+
+  // === Save ===
+  qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    style: btnStyle(),
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        localStorage.setItem(key, edit.innerText);
+      }
+    }
+  });
+
+
+  // === All ===
+  qq.ce({
+    tag: 'button',
+    it: 'All',
+    parent: container,
+    style: btnStyle(),
+    event: {
+      click() {
+        if (!allPanel) return;
+
+
+        allPanel.innerHTML = '';
+        allPanel.show?.();
+
+
+        for (let i = 0; i < localStorage.length; i++) {
+          let key = localStorage.key(i);
+          let value = localStorage.getItem(key);
+
+
+          qq.ce({
+            tag: 'div',
+            parent: allPanel,
+            it: key,
+            style: {
+              cursor: 'pointer',
+              padding: '2px 4px',
+              border: '1px solid gray',
+              margin: '2px 0',
+              borderRadius: '3px'
+            },
+            event: {
+              click() {
+                keyInput.value = key;
+                edit.innerText = value;
+                allPanel.hide?.();
+              }
+            }
+          });
+        }
+      }
+    }
+  });
+
+
+  return container;
+}
+
+
+ createLocalStoragePanel(topContainer,editor,editor);
+
+</script>
+
+
+</body>
+</html>
