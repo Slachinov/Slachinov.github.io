@@ -17,7 +17,7 @@ function insertAtCursor(edit, text) {
 
 alert(edit);alert(text);
   const sel = edit.ownerDocument.getSelection(); // берём Selection из документа div
-  if (!sel) return;
+  if (!sel) return;alert(1);alert(sel);
 
 
   let range;
