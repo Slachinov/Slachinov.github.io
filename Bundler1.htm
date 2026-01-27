@@ -205,14 +205,15 @@ function createLocalStoragePanel(
   // === Load ===
   qq.ce({
     tag: 'button',
-    it: 'Load',
+    it: 'Load1',
     parent: container,
     style: btnStyle(),
     event: {
-      click() {
+      click() {alert(0);
         let key = keyInput.value.trim();
-        if (!key) return;
-        let v = localStorage.getItem(key);
+        if (!key) return;alert(1);alert(key);
+        let v = localStorage.getItem(key);alert(v);
+alert(edit);
         edit.innerText = v ?? '';
       }
     }
@@ -281,10 +282,10 @@ function createLocalStoragePanel(
 
 
   return container;
-}
+};
 
 
- createLocalStoragePanel(topContainer,editor,editor);
+ createLocalStoragePanel (topContainer,editor,editor);
 
 </script>
 
