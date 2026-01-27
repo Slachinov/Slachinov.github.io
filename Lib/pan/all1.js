@@ -14,5 +14,5 @@ const basePanel = {
 
 export default function createFullscreenPanel(par) {
   
-  return qq.ce(par);
+  return qq.ce(basePanel);
 }
