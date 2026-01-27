@@ -52,7 +52,7 @@
     event: {
       click() {
         if (!editor) return;
-        const txt = localStorage.getItem(lsKey) || '';
+        const txt = localStorage.getItem(lsKey) || 'tratata';
         editor.innerHTML = txt;
       }
     }
@@ -62,7 +62,7 @@
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save',
+    it: 'Save5',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
