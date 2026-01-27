@@ -15,7 +15,7 @@ let all=fall();all.hide();
 function insertAtCursor(edit, text) {
   edit.focus(); // обязательно фокусируем див
 
-
+alert(edit);alert(text);
   const sel = edit.ownerDocument.getSelection(); // берём Selection из документа div
   if (!sel) return;
 
@@ -104,12 +104,12 @@ alert(2);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load4',
+    it: 'Load5',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
         if (!editor) return;
-insertAtCursor("Hello World!");return;
+insertAtCursor(editor,"Hello World!");return;
         const txt = localStorage.getItem(lsKey) || 'tratata';
         editor.innerHTML = txt;
       }
