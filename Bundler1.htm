@@ -126,14 +126,14 @@ insertAtCursor(editor,"<b>Hello World!</b>");return;
     }
   });
 
-
+let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save2',
+    it: 'Save3',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {insertHtmlAtCursor ('<b>tratata</b>');
+      click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>';n++
 return;
         if (!editor) return;
         
