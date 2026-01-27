@@ -62,7 +62,7 @@
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save5',
+    it: 'Save',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
@@ -138,7 +138,10 @@
 
 
     // запрет контекстного меню, выделение сохраняется
-    editor.addEventListener('contextmenu', e => e.preventDefault());alert(editor);
+    editor.addEventListener('contextmenu', e => e.preventDefault());
+alert(77);
+if(editor)alert(editor);
+ createLocalStoragePanel (topContainer,editor,editor);
   });
 
 
@@ -283,9 +286,7 @@ alert('2'+edit);
 
   return container;
 };
-alert(77);
-if(editor)alert(editor);
- createLocalStoragePanel (topContainer,editor,editor);
+
 
 </script>
 
