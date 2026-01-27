@@ -114,14 +114,24 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load8',
+    it: 'Load9',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
-        if (!editor) return;
-insertAtCursor(editor,"<b>Hello World!</b>");return;
-        const txt = localStorage.getItem(lsKey) || 'tratata';
-        editor.innerHTML = txt;
+        const m1 = frame.contentDocument.querySelector('[data-mark="1"]');
+const m2 = frame.contentDocument.querySelector('[data-mark="2"]');
+const range = frame.contentDocument.createRange();
+range.setStartAfter(m1);
+range.setEndBefore(m2);
+const text = range.toString(); // чистый текст
+const html = range.cloneContents();
+alert(text);
+ // фрагмент DOM
+return;
+    
+
+
+    
       }
     }
   });
