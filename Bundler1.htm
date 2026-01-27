@@ -12,8 +12,8 @@
 import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
 let all=fall();all.hide();
 //====
-function insertHtmlAtCursor (html) {alert(html);
-  const sel = frame.contentWindow.getSelection();alert(sel);
+function insertHtmlAtCursor (html) {//alert(html);
+  const sel = frame.contentWindow.getSelection();//alert(sel);
   if (!sel || sel.rangeCount === 0) return;
 
 
@@ -22,7 +22,7 @@ function insertHtmlAtCursor (html) {alert(html);
 
 
   // создаём DocumentFragment из HTML
-  const fragment = range.createContextualFragment(html);alert(fragment);
+  const fragment = range.createContextualFragment(html);//alert(fragment);
 
 
   // вставляем в позицию курсора
@@ -130,7 +130,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save4',
+    it: 'Save5',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
