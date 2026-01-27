@@ -138,8 +138,8 @@
 
 
     // запрет контекстного меню, выделение сохраняется
-    editor.addEventListener('contextmenu', e => e.preventDefault());
-  });alert(67);alert(editor);
+    editor.addEventListener('contextmenu', e => e.preventDefault());alert(editor);
+  });
 
 
   // ---------- пересчёт высоты iframe ----------
@@ -205,15 +205,15 @@ function createLocalStoragePanel(
   // === Load ===
   qq.ce({
     tag: 'button',
-    it: 'Load22',
+    it: 'Load',
     parent: container,
     style: btnStyle(),
     event: {
-      click() {alert(0);
+      click() {
         let key = keyInput.value.trim();
-        if (!key) return;alert(1);alert(key);
-        let v = localStorage.getItem(key);alert(v);
-alert(edit);
+        if (!key) return;
+        let v = localStorage.getItem(key);
+alert('2'+edit);
         edit.innerText = v ?? '';
       }
     }
