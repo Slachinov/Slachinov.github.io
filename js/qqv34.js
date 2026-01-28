@@ -28,11 +28,9 @@ qq.f.getStyle = function(style, elem) {
 
 
 qq.f.createSkin = function() {
-let mm;
-
-if(arguments[0]=='[object Arguments]')mm=arguments[0]; else mm=arguments;
+let m;
+if(arguments[0]=='[object Arguments]')m=arguments[0]; else m=arguments;
   let skin = {};
-  let m = mm[0];
   let i0 = qq.f.isObject(m[0]) ? 0 : 1;
   for (let i = i0; i < m.length; i++) {
     qq.f.extend(skin, m[i]);
