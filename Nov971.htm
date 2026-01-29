@@ -74,7 +74,7 @@ qq.ce({
 //==
 qq.ce({
   tag: 'button',
-  it: 'load1',
+  it: 'load2',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
@@ -83,7 +83,13 @@ let keys = await getAllKeys();
 
 for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){let t=this.innerText;alert(t);
 let file = await loadFile(k);
-alert(file);for(let u in file)alert(u);
+let inputs = edit.querySelectorAll('input');
+let n=0;
+alert(file);for(let u in file){
+inputs[n]=u;n++;inputs[n]=file[n]; n++
+}
+
+
 }}})};
   /*let file = await loadFile(k);
   qq.cl(file);
