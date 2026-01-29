@@ -79,14 +79,14 @@ for(let i=0;i<ins.length;i++)ins[i].value='';
 //==
 qq.ce({
   tag: 'button',
-  it: 'load6',
+  it: 'load7',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
 let keys = await getAllKeys();
 
 
-for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){clin();let t=this.innerText;//alert(t);
+for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k+typeof(k),style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){clin();let t=this.innerText;//alert(t);
 let file = await loadFile(k);
 let inputs = edit.querySelectorAll('input');
 let n=0;
