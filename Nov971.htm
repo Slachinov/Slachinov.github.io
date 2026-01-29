@@ -31,6 +31,7 @@ let o={};
 let m=5;
 for(let i=0;i<m;i++){
 if(ar1[i].value){ o[ar1[i].value] =ar2[i].value;qq.cl(ar1[i].value+'='+ar2[i].value);
+if(o['id'])o['id']=number(o['id']);
 }
 }
 return o;
@@ -64,7 +65,7 @@ qq.ce({
 //================
 qq.ce({
   tag: 'button',
-  it: 'save2',
+  it: 'save',
   style: { margin: mr, 'font-size': `${fs}px`,background:'red'},
   parent: bottomPanel,
   event: { click: async function() {let o=far();window.o=o;
@@ -86,7 +87,7 @@ qq.ce({
 let keys = await getAllKeys();
 
 
-for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k+typeof(k),style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){clin();let t=this.innerText;//alert(t);
+for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){clin();let t=this.innerText;//alert(t);
 let file = await loadFile(k);
 let inputs = edit.querySelectorAll('input');
 let n=0;
