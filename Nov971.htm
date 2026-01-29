@@ -31,9 +31,9 @@ let o={};
 let m=5;
 for(let i=0;i<m;i++){
 if(ar1[i].value){ o[ar1[i].value] =ar2[i].value;qq.cl(ar1[i].value+'='+ar2[i].value);
-if(o['id'])o['id']=number(o['id']);
+
 }
-}
+};if(o['id'])o['id']=Number(o['id']);
 return o;
 };
 //===========
@@ -65,10 +65,10 @@ qq.ce({
 //================
 qq.ce({
   tag: 'button',
-  it: 'save',
+  it: 'save1',
   style: { margin: mr, 'font-size': `${fs}px`,background:'red'},
   parent: bottomPanel,
-  event: { click: async function() {let o=far();window.o=o;
+  event: { click: async function() {alert(4);let o=far();alert(o);window.o=o;
  await   saveFile(o);
   } }
 });
