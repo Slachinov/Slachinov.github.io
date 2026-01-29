@@ -74,14 +74,14 @@ qq.ce({
 //==
 qq.ce({
   tag: 'button',
-  it: 'load8',
+  it: 'load9',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
 let keys = await getAllKeys();
 
 
-for (let k of keys) {qq.ce({tag:'span', parent:m.all,it:k,style:{'font-size': '32px' },event:{click:function(){alert(this.innerText)}});
+for (let k of keys) {qq.ce({tag:'span', parent:m.all,it:k,style:{'font-size': '32px' },event:{click:function(){alert(this.innerText)}})};
   /*let file = await loadFile(k);
   qq.cl(file);
 };return;
