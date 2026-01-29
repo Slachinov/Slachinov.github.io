@@ -74,14 +74,21 @@ qq.ce({
 //==
 qq.ce({
   tag: 'button',
-  it: 'load7',
+  it: 'load8',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
+let keys = await getAllKeys();
+
+
+for (let k of keys) {qq.ce({tag:'span', parent:m.all,it:k,style:{'font-size': '32px' },event:{click:function(){alert(this.innerText)}});
+  /*let file = await loadFile(k);
+  qq.cl(file);
+};return;
 let o=await loadFile(2); //getAllKeys();window.a=a;
 qq.cl(555);
 //qq.cl('$%'+a);qq.cl(a.toString());
-for(let u in o) qq.cl('@'+u+'='+o[u]);
+for(let u in o) qq.cl('@'+u+'='+o[u]);*/
   } }
 });
 // === новая кнопка locSt в bottomPanel ===
