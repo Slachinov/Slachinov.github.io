@@ -74,11 +74,11 @@ qq.ce({
 //==
 qq.ce({
   tag: 'button',
-  it: 'load4',
+  it: 'load5',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
-let o=await getAllKeys();
+let a=await getAllKeys();let o=a[0];
 for(let u in o) qq.cl('@'+u+'='+o[u]);
   } }
 });
