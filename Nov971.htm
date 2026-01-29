@@ -81,7 +81,7 @@ qq.ce({
 let keys = await getAllKeys();
 
 
-for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:function(){alert(this.innerText)}}})};
+for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:function(){let t=this.innerText;alert(t);}}})};
   /*let file = await loadFile(k);
   qq.cl(file);
 };return;
