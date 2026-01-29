@@ -24,7 +24,7 @@ let edit = m.edit;
 let mr = '2px';
 let fs = 16;
 //===========
-function cr(){alert(9);
+function cr(){//alert(9);
 let m=5;
 for(let i=0;i<m;i++){
 let o=qq.ce({
@@ -35,11 +35,14 @@ let i1=qq.ce({
   parent:o});
 
 
+let i2=qq.ce({
+  tag:'input',
+  parent:o});
 }
 };
 qq.ce({
   tag: 'button',
-  it: 'run5',
+  it: 'run6',
   style: { margin: mr, 'font-size': `${fs}px` },
   parent: bottomPanel,
   event: { click: function() { 
