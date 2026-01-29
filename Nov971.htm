@@ -25,7 +25,7 @@ let mr = '2px';
 let fs = 16;
 //===========
 function cr(){//alert(9);
-let m=5;
+let m=5;let ar1=[];let ar2=[];
 for(let i=0;i<m;i++){
 let o=qq.ce({
   tag:'div',
@@ -37,7 +37,7 @@ let i1=qq.ce({
 
 let i2=qq.ce({
   tag:'input',
-  parent:o});
+  parent:o});ar1.push(i1);ar2.push(i2);
 }
 };
 qq.ce({
@@ -53,19 +53,19 @@ qq.ce({
 qq.ce({
   tag: 'button',
   it: 'save',
-  style: { margin: mr, 'font-size': `${fs}px` },
+  style: { margin: mr, 'font-size': `${fs}px`,background:'red'},
   parent: bottomPanel,
-  event: { click: function() { 
+  event: { click: function() { alert(ar1);return;
     saveFile()
   } }
 });
 //==
 qq.ce({
   tag: 'button',
-  it: 'load',
-  style: { margin: mr, 'font-size': `${fs}px`,background:'red'},
+  it: 'load3',
+  style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
-  event: { click: function() { 
+  event: { click: function() { alert(ar2);return;
     loadFile()
   } }
 });
