@@ -30,9 +30,10 @@ function far(){
 let o={};
 let m=5;
 for(let i=0;i<m;i++){
-if(ar1[i].value){ o[ar1[i].value] =ar2[i].value;qq.cl(ar1[i].value);
+if(ar1[i].value){ o[ar1[i].value] =ar2[i].value;qq.cl(ar1[i].value+'='+ar2[i].value);
 }
 }
+return o;
 };
 //===========
 function cr(){//alert(9);
@@ -76,7 +77,9 @@ qq.ce({
   it: 'load3',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
-  event: { click: function() { alert(ar2);return;
+  event: { click: function() { 
+let o=far();for(let u in o) qq.cl('@#'+u);
+return;
     loadFile()
   } }
 });
@@ -95,6 +98,6 @@ qq.ce({
 
 // === 
 //==
-</script><script>alert(1)</script>
+</script><script></script>
 </body>
 </html>
