@@ -74,11 +74,12 @@ qq.ce({
 //==
 qq.ce({
   tag: 'button',
-  it: 'load9',
+  it: 'load',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
-let a=await getAllKeys();qq.cl(555);
+let a=await getAllKeys();window.a=a;
+qq.cl(555);
 qq.cl('$%'+a);qq.cl(a.toString());
 let o=a[1];
 for(let u in o) qq.cl('@'+u+'='+o[u]);
