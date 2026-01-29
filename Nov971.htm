@@ -49,7 +49,26 @@ qq.ce({
     cr();
   } }
 });
-
+//================
+qq.ce({
+  tag: 'button',
+  it: 'save',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: bottomPanel,
+  event: { click: function() { 
+    saveFile()
+  } }
+});
+//==
+qq.ce({
+  tag: 'button',
+  it: 'load',
+  style: { margin: mr, 'font-size': `${fs}px`,background:'red'},
+  parent: bottomPanel,
+  event: { click: function() { 
+    loadFile()
+  } }
+});
 // === новая кнопка locSt в bottomPanel ===
 qq.ce({
   tag: 'button',
