@@ -72,20 +72,25 @@ qq.ce({
   } }
 });
 //==
+function clin(){
+let ins=edit.querySelectorAll('input');
+for(let i=0;i<ins.length;i++)ins[i].value='';
+}
+//==
 qq.ce({
   tag: 'button',
-  it: 'load4',
+  it: 'load6',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
   event: { click: async function() { 
 let keys = await getAllKeys();
 
 
-for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){let t=this.innerText;alert(t);
+for (let k of keys) {qq.ce({tag:'span', parent:edit,it:k,style:{'font-size': '42px' ,margin:'10px',border:'1px solid black'},event:{click:async function(){clin();let t=this.innerText;//alert(t);
 let file = await loadFile(k);
 let inputs = edit.querySelectorAll('input');
 let n=0;
-alert(file);for(let u in file){
+for(let u in file){
 inputs[n].value=u;n++;
 inputs[n].value=file[u]; n++
 }
