@@ -67,20 +67,19 @@ qq.ce({
   it: 'save1',
   style: { margin: mr, 'font-size': `${fs}px`,background:'red'},
   parent: bottomPanel,
-  event: { click: function() {far(); return;
-    saveFile()
+  event: { click: async function() {let o=far();
+ await   saveFile(o);
   } }
 });
 //==
 qq.ce({
   tag: 'button',
-  it: 'load3',
+  it: 'load4',
   style: { margin: mr, 'font-size': `${fs}px`},
   parent: bottomPanel,
-  event: { click: function() { 
-let o=far();for(let u in o) qq.cl('@#'+u);
-return;
-    loadFile()
+  event: { click: async function() { 
+let o=await getAllKeys();
+for(let u in o) qq.cl('@'+u+'='+o[u]);
   } }
 });
 // === новая кнопка locSt в bottomPanel ===
