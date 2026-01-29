@@ -24,59 +24,6 @@ let edit = m.edit;
 let mr = '2px';
 let fs = 16;
 
-/*
-// === кнопка EVAL ===
-qq.ce({
-  tag: 'button',
-  it: 'EVAL',
-  style: { margin: mr, 'font-size': `${fs}px` },
-  parent: butonsEditPanel,
-  event: { click: function() { eval(edit.innerText); } }
-});
-
-
-// === кнопка CLEAR ===
-qq.ce({
-  tag: 'button',
-  it: 'CLEAR',
-  style: { margin: mr, 'font-size': `${fs}px` },
-  parent: butonsEditPanel,
-  event: { click: function() { edit.innerText = ''; } }
-});
-//====/
-
-
-function toggleEditHtml(edit) {
-  if (!edit._mode) edit._mode = 'text';
-
-
-  if (edit._mode === 'text') {
-    // TEXT → HTML
-    edit._textCache = edit.innerText;
-    edit.innerHTML = edit.innerText;
-    edit.contentEditable = false;
-    edit.style.background = '#e6d3b1'; // светло-коричневый
-    edit._mode = 'html';
-  } else {
-    // HTML → TEXT
-    edit.innerText = edit.innerHTML;
-    edit.contentEditable = true;
-    edit.style.background = 'lightgreen';
-    edit._mode = 'text';
-  }
-}
-// === кнопка PROBEL ===
-qq.ce({
-  tag: 'button',
-  it: 'PRO4',
-  style: { margin: mr, 'font-size': `${fs}px` },
-  parent: butonsEditPanel,
-  event: { click: function() { 
-    toggleEditHtml(edit)
-  } }
-});
-*/
-
 // === новая кнопка locSt в bottomPanel ===
 qq.ce({
   tag: 'button',
@@ -92,6 +39,6 @@ qq.ce({
 
 // === 
 //==
-</script><script>alert(2)</script>
+</script><script>alert(3)</script>
 </body>
 </html>
