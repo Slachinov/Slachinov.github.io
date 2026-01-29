@@ -23,6 +23,17 @@ let edit = m.edit;
 // === глобальные настройки для кнопок ===
 let mr = '2px';
 let fs = 16;
+//===========
+function cr(){alert(9)};
+qq.ce({
+  tag: 'button',
+  it: 'run',
+  style: { margin: mr, 'font-size': `${fs}px` },
+  parent: bottomPanel,
+  event: { click: function() { 
+    cr();
+  } }
+});
 
 // === новая кнопка locSt в bottomPanel ===
 qq.ce({
@@ -39,6 +50,6 @@ qq.ce({
 
 // === 
 //==
-</script><script>alert(3)</script>
+</script><script></script>
 </body>
 </html>
