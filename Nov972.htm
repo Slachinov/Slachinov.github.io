@@ -13,13 +13,14 @@ import {m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan
 
 
 import {} from 'https://slachinov.github.io/Editor/buttonsEdit.js';
-let edit = m.edit;
+//==
+import {} from 'https://slachinov.github.io/Editor/panelLs.V1.js';
 
-//===
-LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel,skinbutt:{style:{background:'blue'}}});
+//=== Editor/panelLs.V1.js
+
 
 //======
-export default function LsCreateLocalStoragePanel(par = {}) {
+export default function LsCreateLocalStoragePanel55(par = {}) {
 
 
   let m = par.m;
@@ -44,7 +45,7 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
   qq.ce({
     tag: 'span',
     parent: container,
-    it: 'ls',
+    it: 'ls55',
     style: { color: 'magenta', background:'white', marginRight: '6px', fontSize: '16px' }
   });
 
