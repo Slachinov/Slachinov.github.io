@@ -14,7 +14,7 @@ export function createFullscreenPanel(params) {
       width: '100%',
       height: '100%',
      background:'lightgray',
-     overflou:'auto'
+     overflow:'auto'
     }
   };
   return qq.ce(params,skin);
