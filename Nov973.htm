@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/qqv34.js"></script>
+  <script type="module" src="js/console.js"></script>
+</head>
+<body>
+<script type="module">
+
+import {m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan/main.js';
+
+
+import {} from 'https://slachinov.github.io/Editor/buttonsEdit.js';
+let edit = m.edit;
+
+//===
+LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
+
+//======
+export default function LsCreateLocalStoragePanel(par = {}) {
+
+
+  let m = par.m;
+  let edit = par.edit || m.edit;
+
+
+  const Skin = {
+    styleButt: { fontSize: '20px', margin: '2px' },
+    styleInp: { fontSize: '20px', margin: '2px' }
+  };
+
+
+  let skinButt = { ...Skin.styleButt, ...(par.skinbutt || {}) };
+  let skinInp  = { ...Skin.styleInp,  ...(par.skininp  || {}) };
+
+
+  // контейнер
+  let container = qq.ce({ tag: 'div', parent: m.topPanel });
+
+
+  // Ls метка
+  qq.ce({
+    tag: 'span',
+    parent: container,
+    it: 'ls',
+    style: { color: 'magenta', marginRight: '6px', fontSize: '16px' }
+  });
+
+
+  // кнопка очистки
+  let clearBtn = qq.ce({
+    tag: 'button',
+    it: 'CL',
+    parent: container,
+    style: skinButt,
+    event: { click() { keyInput.value=''; } }
+  });
+
+
+  // input key
+  let keyInput = qq.ce({
+    tag: 'input',
+    parent: container,
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage' },
+    style: skinInp
+  });
+
+
+  // Load
+  qq.ce({
+    tag: 'button',
+    it: 'Load',
+    parent: container,
+    style: skinButt,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        let value = localStorage.getItem(key);
+        edit.innerText = value!==null?value:'';
+        if(value===null) qq.cl(`Нет значения: "${key}"`);
+      }
+    }
+  });
+
+
+  // Save красный
+  qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    style: { ...skinButt, background:'red', color:'white' },
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if(!key) return;
+        localStorage.setItem(key, edit.innerText);
+        qq.cl(`Сохранено: "${key}"`);
+      }
+    }
+  });
+
+
+  // Delete красный
+  qq.ce({
+    tag: 'button',
+    it: 'Delete',
+    parent: container,
+    style: { ...skinButt, background:'red', color:'white' },
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if(!key) return;
+        localStorage.removeItem(key);
+        edit.innerText='';
+        qq.cl(`Удалено: "${key}"`);
+      }
+    }
+  });
+
+
+  // checkbox для поиска
+  let searchCheckbox = qq.ce({
+    tag:'input',
+    parent: container,
+    attr:{ type:'checkbox' }
+  });
+  qq.ce({ tag:'span', parent: container, it:'По содержимому', style:{marginRight:'6px'} });
+
+
+  // input для поиска
+  let searchInput = qq.ce({
+    tag:'input',
+    parent: container,
+    attr:{ type:'text', placeholder:'Поиск' },
+    style: skinInp
+  });
+
+
+  // кнопка search
+  qq.ce({
+    tag:'button',
+    it:'Search',
+    parent: container,
+    style: skinButt,
+    event:{
+      click(){
+        let query = searchInput.value.trim().toLowerCase();
+        if(!query) return;
+
+
+        let keys = [];
+        for(let i=0;i<localStorage.length;i++){
+          let key = localStorage.key(i);
+          let value = localStorage.getItem(key);
+          if(!searchCheckbox.checked && key.toLowerCase().includes(query)) keys.push(key);
+          if(searchCheckbox.checked && value && value.toLowerCase().includes(query)) keys.push(key);
+        }
+
+
+        keys.sort((a,b)=>a.localeCompare(b));
+        renderLSItems(keys);
+      }
+    }
+  });
+
+
+  // кнопка All
+  qq.ce({
+    tag:'button',
+    it:'All',
+    parent: container,
+    style: skinButt,
+    event:{
+      click(){
+        let keys = [];
+        for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+        keys.sort((a,b)=>a.localeCompare(b));
+        renderLSItems(keys);
+      }
+    }
+  });
+
+
+  // функция рендера элементов на панели all
+  function renderLSItems(keys){
+    m.all.innerHTML='';
+    m.all.show();
+    for(let key of keys){
+      let value = localStorage.getItem(key);
+      qq.ce({
+        tag:'div',
+        parent: m.all,
+        it:key,
+        style:{ border:'1px solid black', padding:'2px', margin:'2px' },
+        event:{
+          click(){
+            keyInput.value = key;
+            edit.innerText = value;
+            m.all.hide();
+          }
+        }
+      });
+    }
+  }
+
+
+  return container;
+}
+</script>
+<script>alert(1);</script>
+</body>
+</html>
