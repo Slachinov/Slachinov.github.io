@@ -32,8 +32,8 @@ export default function LsCreateLocalStoragePanel(par = {}) {
   };
 
 
-  let skinButt = { ...Skin.styleButt, ...(par.skinbutt || {}) };
-  let skinInp  = { ...Skin.styleInp,  ...(par.skininp  || {}) };
+let skinButt = qq.cs(Skin.styleButt, par.skinbutt || {});
+let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
 
 
   // контейнер
@@ -133,7 +133,7 @@ export default function LsCreateLocalStoragePanel(par = {}) {
   // кнопка Search (используем тот же input)
   qq.ce({
     tag:'button',
-    it:'Search1',
+    it:'Search',
     parent: container,
     style: skinButt,
     event:{
@@ -202,6 +202,6 @@ if(!keys || keys.length===0) return;
   return container;
 }
 </script>
-<script>alert(5);</script>
+<script>alert(6);</script>
 </body>
 </html>
