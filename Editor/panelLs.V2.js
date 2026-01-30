@@ -51,7 +51,7 @@ export default function LsCreateLocalStoragePanel (par = {}) {
   let keyInput = qq.ce({
     tag: 'input',
     parent: container,
-    style: {width: '140px' },
+    style: {width: '200px' },
     attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' }
   }, mysk);
 
@@ -74,7 +74,7 @@ export default function LsCreateLocalStoragePanel (par = {}) {
     }
   }, mysk);
 
-
+qq.ce({tag:'br', parent: container});
   // checkbox поиска
   let searchCheckbox = qq.ce({
     tag:'input',
