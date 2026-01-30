@@ -27,12 +27,13 @@ export default function LsCreateLocalStoragePanel(par = {}) {
 
 
   const Skin = {
-    style: { fontSize: '20px', margin: '2px' }
+    styleButt: { fontSize: '20px', margin: '2px' },
+    styleInp: { fontSize: '20px', margin: '2px' }
   };
-
-
-let skinButt = qq.cs(Skin, par.skinbutt || {});
-let skinInp  = qq.cs(Skin,  par.skininp  || {});
+const skin= {style: { fontSize: '20px', margin: '2px' }};
+let mysk=qq.cs(skin, par.skinbutt);
+let skinButt = qq.cs(Skin.styleButt, par.skinbutt || {});
+let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
 
 
   // контейнер
@@ -53,16 +54,18 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
     tag: 'button',
     it: 'CL',
     parent: container,
+    style: skinButt,
     event: { click() { keyInput.value=''; } }
-  },skinButt;
+  });
 
 
   // input key (используется и для поиска)
   let keyInput = qq.ce({
     tag: 'input',
     parent: container,
-    attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' }
-  },skinInp);
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' },
+    style: skinInp
+  });
 
 
   // Load
@@ -70,6 +73,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
     tag: 'button',
     it: 'Load',
     parent: container,
+    style: skinButt,
     event: {
       click() {
         let key = keyInput.value.trim();
@@ -79,7 +83,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
         if(value===null) qq.cl(`Нет значения: "${key}"`);
       }
     }
-  },skinButt);
+  },mysk);
 
 
   // Save красный
@@ -87,7 +91,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
     tag: 'button',
     it: 'Save',
     parent: container,
-    style: { background:'red', color:'white' },
+    style: { ...skinButt, background:'red', color:'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
@@ -96,7 +100,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
         qq.cl(`Сохранено: "${key}"`);
       }
     }
-  },skinButt);
+  });
 
 
   // Delete красный
@@ -104,7 +108,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
     tag: 'button',
     it: 'Delete',
     parent: container,
-    style: { background:'red', color:'white' },
+    style: { ...skinButt, background:'red', color:'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
@@ -114,7 +118,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
         qq.cl(`Удалено: "${key}"`);
       }
     }
-  },skinButt);
+  });
 
 
   // checkbox для поиска
@@ -131,6 +135,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
     tag:'button',
     it:'Search',
     parent: container,
+    style: skinButt,
     event:{
       click(){
         let query = keyInput.value.trim().toLowerCase();
@@ -150,7 +155,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
         renderLSItems(keys);
       }
     }
-  },skinButt);
+  });
 
 
   // кнопка All
@@ -158,6 +163,7 @@ let skinInp  = qq.cs(Skin,  par.skininp  || {});
     tag:'button',
     it:'All',
     parent: container,
+    style: skinButt,
     event:{
       click(){
         let keys = [];
@@ -188,7 +194,7 @@ if(!keys || keys.length===0) return;
             m.all.hide();
           }
         }
-      },skinButt);
+      });
     }
   }
 
@@ -196,6 +202,6 @@ if(!keys || keys.length===0) return;
   return container;
 }
 </script>
-<script>alert(9);</script>
+<script>alert(7);</script>
 </body>
 </html>
