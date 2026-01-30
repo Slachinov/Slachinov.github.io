@@ -53,6 +53,8 @@ qq.f.crElem = function() {
 
   let eventBase = {
     prop: {
+      clear: function(){
+this.innerHTML=""; },
       hide: function() { this.style.display = 'none'; },
       show: function() { this.style.display = 'block'; },
       toggle: function() {
