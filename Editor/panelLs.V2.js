@@ -75,45 +75,6 @@ export default function LsCreateLocalStoragePanel (par = {}) {
   }, mysk);
 
 
-
-
-  // Save (красная)
-  qq.ce({
-    tag: 'button',
-    it: 'Save',
-    parent: container,
-    event: {
-      click() {
-        let key = keyInput.value.trim();
-        if(!key) return;
-        localStorage.setItem(key, edit.innerText);
-        qq.cl(`Сохранено: "${key}"`);
-      }
-    }
-  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
-
-
-
-
-  // Delete (красная)
-  qq.ce({
-    tag: 'button',
-    it: 'Delete',
-    parent: container,
-    event: {
-      click() {
-        let key = keyInput.value.trim();
-        if(!key) return;
-        localStorage.removeItem(key);
-        edit.innerText='';
-        qq.cl(`Удалено: "${key}"`);
-      }
-    }
-  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
-
-
-
-
   // checkbox поиска
   let searchCheckbox = qq.ce({
     tag:'input',
@@ -200,10 +161,47 @@ export default function LsCreateLocalStoragePanel (par = {}) {
         }
       });
     }
-  }
+  };
 
 
 
+// Save (красная)
+  qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if(!key) return;
+        localStorage.setItem(key, edit.innerText);
+        qq.cl(`Сохранено: "${key}"`);
+      }
+    }
+  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
+
+
+
+
+
+
+
+
+  // Delete (красная)
+  qq.ce({
+    tag: 'button',
+    it: 'Delete',
+    parent: container,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if(!key) return;
+        localStorage.removeItem(key);
+        edit.innerText='';
+        qq.cl(`Удалено: "${key}"`);
+      }
+    }
+  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
 
   return container;
 };
