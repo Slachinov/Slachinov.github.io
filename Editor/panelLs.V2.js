@@ -51,6 +51,7 @@ export default function LsCreateLocalStoragePanel (par = {}) {
   let keyInput = qq.ce({
     tag: 'input',
     parent: container,
+    style: {width: '140px' },
     attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' }
   }, mysk);
 
