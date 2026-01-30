@@ -15,9 +15,141 @@ import {m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan
 import {} from 'https://slachinov.github.io/Editor/buttonsEdit.js';
 let edit = m.edit;
 
+//===
+LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
 
+ function LsCreateLocalStoragePanel (par = {}) {
+
+
+  let m = par.m;
+  let edit = par.edit || m.edit;
+
+
+  let skinButt = par.skinbutt || {};
+  let skinInp = par.skininp || {};
+
+
+  // контейнер
+  let container = qq.ce({
+    tag: 'div',
+    parent: m.topPanel
+  });
+
+
+  // Ls метка
+  qq.ce({
+    tag: 'span',
+    parent: container,
+    it: 'ls',
+    style: { color: 'magenta', marginRight: '6px', fontSize: '12px' }
+  });
+
+
+  // input key
+  let keyInput = qq.ce({
+    tag: 'input',
+    parent: container,
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage' },
+    style: skinInp
+  });
+
+
+  // Load
+  qq.ce({
+    tag: 'button',
+    it: 'Load',
+    parent: container,
+    style: skinButt,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+
+
+        let value = localStorage.getItem(key);
+        edit.innerText = value !== null ? value : '';
+
+
+        if (value === null) qq.cl(`Нет значения: "${key}"`);
+      }
+    }
+  });
+
+
+  // Save
+  qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    style: skinButt,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+
+
+        localStorage.setItem(key, edit.innerText);
+        qq.cl(`Сохранено: "${key}"`);
+      }
+    }
+  });
+
+
+  // All (с сортировкой)
+  qq.ce({
+    tag: 'button',
+    it: 'All',
+    parent: container,
+    style: skinButt,
+    event: {
+      click() {
+
+
+        m.all.innerHTML = '';
+        m.all.show();
+
+
+        let keys = [];
+
+
+        for (let i = 0; i < localStorage.length; i++) {
+          keys.push(localStorage.key(i));
+        }
+
+
+        keys.sort((a,b)=> a.localeCompare(b));
+
+
+        for (let key of keys) {
+
+
+          let value = localStorage.getItem(key);
+
+
+          qq.ce({
+            tag: 'div',
+            parent: m.all,
+            it: key,
+            event: {
+              click() {
+                keyInput.value = key;
+                edit.innerText = value;
+                m.all.hide();
+              }
+            }
+          });
+
+
+        }
+      }
+    }
+  });
+
+
+  return container;
+}
 
 </script>
-<script></script>
+<script>alert(9);</script>
 </body>
 </html>
