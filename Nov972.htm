@@ -133,7 +133,7 @@ export default function LsCreateLocalStoragePanel(par = {}) {
   // кнопка Search (используем тот же input)
   qq.ce({
     tag:'button',
-    it:'Search',
+    it:'Search1',
     parent: container,
     style: skinButt,
     event:{
@@ -177,6 +177,7 @@ export default function LsCreateLocalStoragePanel(par = {}) {
 
   // функция рендера элементов на панели all
   function renderLSItems(keys){
+if(!keys || keys.length===0) return;
     m.all.innerHTML='';
     m.all.show();
     for(let key of keys){
