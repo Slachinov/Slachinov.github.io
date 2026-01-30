@@ -19,6 +19,29 @@ let edit = m.edit;
 LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel,skinbutt:{style:{background:'blue'}}});
 
 //======
+
+Ок, делаем весь скрипт по той же логике, что у Load:
+Скин (mysk) передаётся вторым аргументом
+Красный фон у Save/Delete остаётся
+Больше никаких своих skinButt/skinInp
+Вот готовый вариант:
+Копировать код
+Html
+<script type="module">
+
+
+import {m,butonsEditPanel,bottomPanel} from 'https://slachinov.github.io/Lib/pan/main.js';
+import {} from 'https://slachinov.github.io/Editor/buttonsEdit.js';
+
+
+let edit = m.edit;
+
+
+//===
+LsCreateLocalStoragePanel({m:m, edit:edit, topPanel:m.topPanel, skinbutt:{style:{background:'blue'}}});
+
+
+//======
 export default function LsCreateLocalStoragePanel(par = {}) {
 
 
@@ -26,14 +49,8 @@ export default function LsCreateLocalStoragePanel(par = {}) {
   let edit = par.edit || m.edit;
 
 
-  const Skin = {
-    styleButt: { fontSize: '20px', margin: '2px' },
-    styleInp: { fontSize: '20px', margin: '2px' }
-  };
-const skin= {style: { fontSize: '20px', margin: '2px' }};
-let mysk=qq.cs(skin, par.skinbutt);
-let skinButt = qq.cs(Skin.styleButt, par.skinbutt || {});
-let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
+  const skin = { style: { fontSize: '20px', margin: '2px' } };
+  let mysk = qq.cs(skin, par.skinbutt || {});
 
 
   // контейнер
@@ -54,18 +71,16 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
     tag: 'button',
     it: 'CL',
     parent: container,
-    style: skinButt,
     event: { click() { keyInput.value=''; } }
-  });
+  }, mysk);
 
 
-  // input key (используется и для поиска)
+  // input key
   let keyInput = qq.ce({
     tag: 'input',
     parent: container,
-    attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' },
-    style: skinInp
-  });
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' }
+  }, mysk);
 
 
   // Load
@@ -73,25 +88,23 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
     tag: 'button',
     it: 'Load',
     parent: container,
-    style: skinButt,
     event: {
       click() {
         let key = keyInput.value.trim();
         if (!key) return;
         let value = localStorage.getItem(key);
-        edit.innerText = value!==null?value:'';
-        if(value===null) qq.cl(`Нет значения: "${key}"`);
+        edit.innerText = value !== null ? value : '';
+        if (value === null) qq.cl(`Нет значения: "${key}"`);
       }
     }
-  },mysk);
+  }, mysk);
 
 
-  // Save красный
+  // Save (красная)
   qq.ce({
     tag: 'button',
     it: 'Save',
     parent: container,
-    style: { ...skinButt, background:'red', color:'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
@@ -100,15 +113,14 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
         qq.cl(`Сохранено: "${key}"`);
       }
     }
-  });
+  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
 
 
-  // Delete красный
+  // Delete (красная)
   qq.ce({
     tag: 'button',
     it: 'Delete',
     parent: container,
-    style: { ...skinButt, background:'red', color:'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
@@ -118,24 +130,22 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
         qq.cl(`Удалено: "${key}"`);
       }
     }
-  });
+  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
 
 
-  // checkbox для поиска
+  // checkbox поиска
   let searchCheckbox = qq.ce({
     tag:'input',
     parent: container,
     attr:{ type:'checkbox' }
-  });
-  // после checkbox пока ничего не пишем
+  }, mysk);
 
 
-  // кнопка Search (используем тот же input)
+  // Search
   qq.ce({
     tag:'button',
     it:'Search',
     parent: container,
-    style: skinButt,
     event:{
       click(){
         let query = keyInput.value.trim().toLowerCase();
@@ -155,15 +165,14 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
         renderLSItems(keys);
       }
     }
-  });
+  }, mysk);
 
 
-  // кнопка All
+  // All
   qq.ce({
     tag:'button',
     it:'All',
     parent: container,
-    style: skinButt,
     event:{
       click(){
         let keys = [];
@@ -172,14 +181,16 @@ let skinInp  = qq.cs(Skin.styleInp,  par.skininp  || {});
         renderLSItems(keys);
       }
     }
-  });
+  }, mysk);
 
 
-  // функция рендера элементов на панели all
+  // render
   function renderLSItems(keys){
-if(!keys || keys.length===0) return;
+    if(!keys || keys.length===0) return;
     m.all.innerHTML='';
     m.all.show();
+
+
     for(let key of keys){
       let value = localStorage.getItem(key);
       qq.ce({
@@ -202,6 +213,13 @@ if(!keys || keys.length===0) return;
   return container;
 }
 </script>
-<script>alert(7);</script>
+✅ В этом варианте:
+Все кнопки используют mysk
+Save/Delete имеют красный фон поверх mysk
+Никаких своих skinButt/skinInp больше нет
+Скин передаётся вторым аргументом в qq.ce, как у кнопки Load
+Хочешь, могу сразу сделать мини-функцию для кнопок, чтобы код сократился и все кнопки строились одинаково.
+</script>
+<script>alert(73);</script>
 </body>
 </html>
