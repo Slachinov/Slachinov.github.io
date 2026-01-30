@@ -1,0 +1,209 @@
+
+//======
+export default function LsCreateLocalStoragePanel(par = {}) {
+
+
+
+
+  
+  let edit = par.edit;
+  let all = par.all;
+  let parent = par.parent;
+
+
+
+
+  const skin = { style: { fontSize: '20px', margin: '2px' } };
+  let mysk = qq.cs(skin, par.skinbutt || {});
+
+
+
+
+  // контейнер
+  let container = qq.ce({ tag: 'div', parent: parent });
+
+
+
+
+  // Ls метка
+  qq.ce({
+    tag: 'span',
+    parent: container,
+    it: 'ls',
+    style: { color: 'magenta', background:'white', marginRight: '6px', fontSize: '16px' }
+  });
+
+
+
+
+  // кнопка очистки инпута
+  qq.ce({
+    tag: 'button',
+    it: 'CL',
+    parent: container,
+    event: { click() { keyInput.value=''; } }
+  }, mysk);
+
+
+
+
+  // input key
+  let keyInput = qq.ce({
+    tag: 'input',
+    parent: container,
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' }
+  }, mysk);
+
+
+
+
+  // Load
+  qq.ce({
+    tag: 'button',
+    it: 'Load',
+    parent: container,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        let value = localStorage.getItem(key);
+        edit.innerText = value !== null ? value : '';
+        if (value === null) qq.cl(`Нет значения: "${key}"`);
+      }
+    }
+  }, mysk);
+
+
+
+
+  // Save (красная)
+  qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if(!key) return;
+        localStorage.setItem(key, edit.innerText);
+        qq.cl(`Сохранено: "${key}"`);
+      }
+    }
+  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
+
+
+
+
+  // Delete (красная)
+  qq.ce({
+    tag: 'button',
+    it: 'Delete',
+    parent: container,
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if(!key) return;
+        localStorage.removeItem(key);
+        edit.innerText='';
+        qq.cl(`Удалено: "${key}"`);
+      }
+    }
+  }, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
+
+
+
+
+  // checkbox поиска
+  let searchCheckbox = qq.ce({
+    tag:'input',
+    parent: container,
+    attr:{ type:'checkbox' }
+  }, mysk);
+
+
+
+
+  // Search
+  qq.ce({
+    tag:'button',
+    it:'Search',
+    parent: container,
+    event:{
+      click(){
+        let query = keyInput.value.trim().toLowerCase();
+        if(!query) return;
+
+
+
+
+        let keys = [];
+        for(let i=0;i<localStorage.length;i++){
+          let key = localStorage.key(i);
+          let value = localStorage.getItem(key);
+          if(!searchCheckbox.checked && key.toLowerCase().includes(query)) keys.push(key);
+          if(searchCheckbox.checked && value && value.toLowerCase().includes(query)) keys.push(key);
+        }
+
+
+
+
+        keys.sort((a,b)=>a.localeCompare(b));
+        renderLSItems(keys);
+      }
+    }
+  }, mysk);
+
+
+
+
+  // All
+  qq.ce({
+    tag:'button',
+    it:'All',
+    parent: container,
+    event:{
+      click(){
+        let keys = [];
+        for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+        keys.sort((a,b)=>a.localeCompare(b));
+        renderLSItems(keys);
+      }
+    }
+  }, mysk);
+
+
+
+
+  // render
+  function renderLSItems(keys){
+    if(!keys || keys.length===0) return;
+    all.innerHTML='';
+    all.show();
+
+
+
+
+    for(let key of keys){
+      let value = localStorage.getItem(key);
+      qq.ce({
+        tag:'div',
+        parent: all,
+        it:key,
+        style:{ border:'1px solid black', padding:'2px', margin:'2px' },
+        event:{
+          click(){
+            keyInput.value = key;
+            edit.innerText = value;
+            all.hide();
+          }
+        }
+      });
+    }
+  }
+
+
+
+
+  return container;
+};
+
