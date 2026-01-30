@@ -18,15 +18,23 @@ let edit = m.edit;
 //===
 LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
 
- function LsCreateLocalStoragePanel (par = {}) {
+//======
+export default function LsCreateLocalStoragePanel(par = {}) {
 
 
   let m = par.m;
   let edit = par.edit || m.edit;
 
 
-  let skinButt = par.skinbutt || {};
-  let skinInp = par.skininp || {};
+  // общий объект стилей по умолчанию
+  const Skin = {
+    styleButt: { fontSize: '20px', margin: '2px' },
+    styleInp: { fontSize: '20px', margin: '2px' }
+  };
+
+
+  let skinButt = { ...Skin.styleButt, ...(par.skinbutt || {}) };
+  let skinInp  = { ...Skin.styleInp,  ...(par.skininp  || {}) };
 
 
   // контейнер
@@ -41,7 +49,7 @@ LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
     tag: 'span',
     parent: container,
     it: 'ls',
-    style: { color: 'magenta', marginRight: '6px', fontSize: '12px' }
+    style: { color: 'magenta', marginRight: '6px', fontSize: '16px' }
   });
 
 
@@ -76,12 +84,12 @@ LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
   });
 
 
-  // Save
+  // Save (красный)
   qq.ce({
     tag: 'button',
     it: 'Save',
     parent: container,
-    style: skinButt,
+    style: { ...skinButt, background: 'red', color: 'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
@@ -90,6 +98,26 @@ LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
 
         localStorage.setItem(key, edit.innerText);
         qq.cl(`Сохранено: "${key}"`);
+      }
+    }
+  });
+
+
+  // Delete (красный)
+  qq.ce({
+    tag: 'button',
+    it: 'Delete',
+    parent: container,
+    style: { ...skinButt, background: 'red', color: 'white' },
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+
+
+        localStorage.removeItem(key);
+        edit.innerText = '';
+        qq.cl(`Удалено: "${key}"`);
       }
     }
   });
@@ -130,6 +158,7 @@ LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
             tag: 'div',
             parent: m.all,
             it: key,
+            style: skinButt,
             event: {
               click() {
                 keyInput.value = key;
@@ -148,8 +177,7 @@ LsCreateLocalStoragePanel ({m:m,edit:edit,topPanel:m.topPanel});
 
   return container;
 }
-
 </script>
-<script>alert(9);</script>
+<script>alert(0);</script>
 </body>
 </html>
