@@ -42,7 +42,7 @@ export default function LsCreateLocalStoragePanel (par = {}) {
     it: 'CL',
     parent: container,
     event: { click() { keyInput.value=''; } }
-  }, mysk);
+  });
 
 
 
