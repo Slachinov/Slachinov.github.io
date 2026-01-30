@@ -13,7 +13,8 @@ export function createFullscreenPanel(params) {
       left: '0',
       width: '100%',
       height: '100%',
-     background:'lightgray'
+     background:'lightgray',
+     overflou:'auto'
     }
   };
   return qq.ce(params,skin);
