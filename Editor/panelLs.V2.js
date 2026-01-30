@@ -29,7 +29,7 @@ export default function LsCreateLocalStoragePanel (par = {}) {
   qq.ce({
     tag: 'span',
     parent: container,
-    it: 'ls',
+    it: 'Ls',
     style: { color: 'magenta', background:'white', marginRight: '6px', fontSize: '16px' }
   });
 
