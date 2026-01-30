@@ -26,7 +26,6 @@ export default function LsCreateLocalStoragePanel(par = {}) {
   let edit = par.edit || m.edit;
 
 
-  // общий объект стилей по умолчанию
   const Skin = {
     styleButt: { fontSize: '20px', margin: '2px' },
     styleInp: { fontSize: '20px', margin: '2px' }
@@ -38,10 +37,7 @@ export default function LsCreateLocalStoragePanel(par = {}) {
 
 
   // контейнер
-  let container = qq.ce({
-    tag: 'div',
-    parent: m.topPanel
-  });
+  let container = qq.ce({ tag: 'div', parent: m.topPanel });
 
 
   // Ls метка
@@ -49,15 +45,25 @@ export default function LsCreateLocalStoragePanel(par = {}) {
     tag: 'span',
     parent: container,
     it: 'ls',
-    style: { color: 'magenta', marginRight: '6px', fontSize: '16px' }
+    style: { color: 'magenta', background:'white', marginRight: '6px', fontSize: '16px' }
   });
 
 
-  // input key
+  // кнопка очистки инпута
+  qq.ce({
+    tag: 'button',
+    it: 'CL',
+    parent: container,
+    style: skinButt,
+    event: { click() { keyInput.value=''; } }
+  });
+
+
+  // input key (используется и для поиска)
   let keyInput = qq.ce({
     tag: 'input',
     parent: container,
-    attr: { type: 'text', placeholder: 'Введите ключ localStorage' },
+    attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' },
     style: skinInp
   });
 
@@ -72,30 +78,24 @@ export default function LsCreateLocalStoragePanel(par = {}) {
       click() {
         let key = keyInput.value.trim();
         if (!key) return;
-
-
         let value = localStorage.getItem(key);
-        edit.innerText = value !== null ? value : '';
-
-
-        if (value === null) qq.cl(`Нет значения: "${key}"`);
+        edit.innerText = value!==null?value:'';
+        if(value===null) qq.cl(`Нет значения: "${key}"`);
       }
     }
   });
 
 
-  // Save (красный)
+  // Save красный
   qq.ce({
     tag: 'button',
     it: 'Save',
     parent: container,
-    style: { ...skinButt, background: 'red', color: 'white' },
+    style: { ...skinButt, background:'red', color:'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
-        if (!key) return;
-
-
+        if(!key) return;
         localStorage.setItem(key, edit.innerText);
         qq.cl(`Сохранено: "${key}"`);
       }
@@ -103,81 +103,104 @@ export default function LsCreateLocalStoragePanel(par = {}) {
   });
 
 
-  // Delete (красный)
+  // Delete красный
   qq.ce({
     tag: 'button',
     it: 'Delete',
     parent: container,
-    style: { ...skinButt, background: 'red', color: 'white' },
+    style: { ...skinButt, background:'red', color:'white' },
     event: {
       click() {
         let key = keyInput.value.trim();
-        if (!key) return;
-
-
+        if(!key) return;
         localStorage.removeItem(key);
-        edit.innerText = '';
+        edit.innerText='';
         qq.cl(`Удалено: "${key}"`);
       }
     }
   });
 
 
-  // All (с сортировкой)
+  // checkbox для поиска
+  let searchCheckbox = qq.ce({
+    tag:'input',
+    parent: container,
+    attr:{ type:'checkbox' }
+  });
+  // после checkbox пока ничего не пишем
+
+
+  // кнопка Search (используем тот же input)
   qq.ce({
-    tag: 'button',
-    it: 'All',
+    tag:'button',
+    it:'Search',
     parent: container,
     style: skinButt,
-    event: {
-      click() {
-
-
-        m.all.innerHTML = '';
-        m.all.show();
+    event:{
+      click(){
+        let query = keyInput.value.trim().toLowerCase();
+        if(!query) return;
 
 
         let keys = [];
-
-
-        for (let i = 0; i < localStorage.length; i++) {
-          keys.push(localStorage.key(i));
-        }
-
-
-        keys.sort((a,b)=> a.localeCompare(b));
-
-
-        for (let key of keys) {
-
-
+        for(let i=0;i<localStorage.length;i++){
+          let key = localStorage.key(i);
           let value = localStorage.getItem(key);
-
-
-          qq.ce({
-            tag: 'div',
-            parent: m.all,
-            it: key,
-            style: skinButt,
-            event: {
-              click() {
-                keyInput.value = key;
-                edit.innerText = value;
-                m.all.hide();
-              }
-            }
-          });
-
-
+          if(!searchCheckbox.checked && key.toLowerCase().includes(query)) keys.push(key);
+          if(searchCheckbox.checked && value && value.toLowerCase().includes(query)) keys.push(key);
         }
+
+
+        keys.sort((a,b)=>a.localeCompare(b));
+        renderLSItems(keys);
       }
     }
   });
 
 
+  // кнопка All
+  qq.ce({
+    tag:'button',
+    it:'All',
+    parent: container,
+    style: skinButt,
+    event:{
+      click(){
+        let keys = [];
+        for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+        keys.sort((a,b)=>a.localeCompare(b));
+        renderLSItems(keys);
+      }
+    }
+  });
+
+
+  // функция рендера элементов на панели all
+  function renderLSItems(keys){
+    m.all.innerHTML='';
+    m.all.show();
+    for(let key of keys){
+      let value = localStorage.getItem(key);
+      qq.ce({
+        tag:'div',
+        parent: m.all,
+        it:key,
+        style:{ border:'1px solid black', padding:'2px', margin:'2px' },
+        event:{
+          click(){
+            keyInput.value = key;
+            edit.innerText = value;
+            m.all.hide();
+          }
+        }
+      });
+    }
+  }
+
+
   return container;
 }
 </script>
-<script>alert(0);</script>
+<script>alert(5);</script>
 </body>
 </html>
