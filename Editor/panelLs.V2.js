@@ -1,11 +1,11 @@
 
 //======
-export default function LsCreateLocalStoragePanel(par = {}) {
+export default function LsCreateLocalStoragePanel (par = {}) {alert(12345);
 
 
 
 
-  
+  qq.cl(123);
   let edit = par.edit;
   let all = par.all;
   let parent = par.parent;
@@ -20,7 +20,7 @@ export default function LsCreateLocalStoragePanel(par = {}) {
 
 
   // контейнер
-  let container = qq.ce({ tag: 'div', parent: parent });
+  let container = qq.ce({ tag: 'div', parent: parent });qq.cl(9999);
 
 
 
