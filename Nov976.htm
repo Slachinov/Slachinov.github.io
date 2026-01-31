@@ -19,6 +19,8 @@ let pns=f2p();
 let topp=pns[0];
 qq.ce(topp,{style:{background:'plum', border:'1px solid black'}});
 //=====
+async function listDBs (parentEdit) {
+
 
 // dbSelect
   const dbSelect = qq.ce({
@@ -44,8 +46,28 @@ qq.ce(topp,{style:{background:'plum', border:'1px solid black'}});
       it: e.name + ', ' + e.version
     });
   });
+//=====
+// создаём storeSelect один раз
+  const storeSelect = qq.ce({
+    tag: 'select',
+    parent: topp,
+    style: { fontSize: '26px' ,
+     marginTop:'40px'},
+    event: {
+      change: function(ev) { showRecords(currentDB, ev.target.value); },
+      click: function(ev) { showRecords(currentDB, ev.target.value); }
+    }
+  });
 
+
+
+
+  // переменная для текущей открытой базы
+  let currentDB = null;
+//_____^__
+};
+listDBs();
 </script>
-<script>//alert(0)</script>
+<script>alert(0)</script>
 </body>
 </html>
