@@ -11,7 +11,7 @@
 //alert(3);qq.cl(89);
 import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.js';
 let m=createFullscreenPanel({});
-qq.cl(12);
+qq.cl(11);
 //=====
 
 /**
@@ -71,7 +71,9 @@ export function createTopMiddleLayout (parent, topSkin, middleSkin) {
   return { topPanel, middlePanel };
 };
 let pans=createTopMiddleLayout(m);
-qq.cl(pans);qq.cl(pans.topPanel);
+qq.cl(pans);let t=pans.topPanel;
+qq.ce({tag:'button',it:'load',parent:t});
+qq.ce(pans.middlePanel,{style: {background:'orange'}});
 //=====
 </script>
 <script>//alert(0)</script>
