@@ -26,7 +26,9 @@ async function listDBs (parentEdit) {
   const dbSelect = qq.ce({
     tag: 'select',
     parent: topp,
-    style: { fontSize: '26px' },
+    style: { fontSize: '26px' ,
+                  display:'block',
+                  margin:'10px auto 0'},
     event: {
       change: async function (e) { showStore(e.target.value); },
       click: async function (e) {return; showStore(e.target.value); }
@@ -69,6 +71,6 @@ qq.ce({tag:'br',parent:topp});
 };
 listDBs();
 </script>
-<script>alert(1)</script>
+<script>alert(2)</script>
 </body>
 </html>
