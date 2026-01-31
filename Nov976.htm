@@ -14,10 +14,35 @@ import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.j
 
 import f2p from 'https://slachinov.github.io/Lib/pan/2pv2.js';
 let m=createFullscreenPanel({});
-qq.cl(1);alert(f2p);
-let pns=f2p();alert(pns[0]);
+qq.cl(11);
+let pns=f2p();
+let topp=pns[0];
 //=====
 
+// dbSelect
+  const dbSelect = qq.ce({
+    tag: 'select',
+    parent: topp,
+    style: { fontSize: '26px' },
+    event: {
+      change: async function (e) { showStore(e.target.value); },
+      click: async function (e) { showStore(e.target.value); }
+    }
+  });
+
+
+
+
+  // заполняем dbSelect
+  const dbs = await indexedDB.databases();
+  dbs.forEach(e => {
+    qq.ce({
+      tag: 'option',
+      parent: dbSelect,
+      val: e.name,
+      it: e.name + ', ' + e.version
+    });
+  });
 
 </script>
 <script>//alert(0)</script>
