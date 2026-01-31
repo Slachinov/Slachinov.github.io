@@ -22,7 +22,7 @@ qq.cl(1);
  * @param {Object} middleSkin - скин для средней панели
  * @returns {Object} - { topPanel, middlePanel }
  */
-export function createTopMiddleLayout (parent, topSkin, middleSkin) {
+export default function createTopMiddleLayout (parent, topSkin, middleSkin) {
   const parentElement = parent || document.body;
 
 
@@ -74,7 +74,7 @@ let pans=createTopMiddleLayout(m);
 qq.cl(pans);let t=pans[0];
 qq.ce({tag:'button',it:'load',parent:t});
 qq.ce( pans[1] ,{style: {background:'green'}});
-qq.ce({tag:'div',parent: pans[1],it:111+'\u2191'+'\u2193'
+qq.ce({tag:'div',parent: pans[1],it:22+'\u2191'+'\u2193'
 ,style:{'margin-left':'20px','margin-top':'50px',width:'200px',height:'200px',background:'gray'}});
 //=====
 </script>
