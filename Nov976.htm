@@ -17,6 +17,7 @@ let m=createFullscreenPanel({});
 qq.cl(11);
 let pns=f2p();
 let topp=pns[0];
+qq.ce(topp,{style:background:'plum', border:'1px solid black'});
 //=====
 
 // dbSelect
@@ -26,7 +27,7 @@ let topp=pns[0];
     style: { fontSize: '26px' },
     event: {
       change: async function (e) { showStore(e.target.value); },
-      click: async function (e) { showStore(e.target.value); }
+      click: async function (e) {return; showStore(e.target.value); }
     }
   });
 
