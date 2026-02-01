@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест MyCard</title>
+</head>
+<body style="font-family: sans-serif; padding: 16px; background: #f0f0f0;">
+
+
+<h1>Пример карточки с slot</h1>
+
+
 <!-- Шаблон компонента -->
 <template id="my-card-template">
   <style>
@@ -5,17 +18,24 @@
       border: 1px solid #ccc;
       padding: 16px;
       border-radius: 8px;
-      width: 250px;
+      width: 100%;
+      max-width: 300px;
       box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+      background: #fff;
+      margin-bottom: 16px;
+      box-sizing: border-box;
     }
     .card-header {
       font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 8px;
+    }
+    .card-body {
       margin-bottom: 8px;
     }
     .card-footer {
-      font-size: 12px;
+      font-size: 0.9em;
       color: gray;
-      margin-top: 12px;
     }
   </style>
   <div class="card">
@@ -32,6 +52,22 @@
 </template>
 
 
+<!-- Используем компонент -->
+<my-card>
+  <span slot="header">Мой крутой заголовок</span>
+  <p>Вот какой-то текст для карточки. Он попадет в default slot.</p>
+  <span slot="footer">Дата: 01.02.2026</span>
+</my-card>
+
+
+<my-card>
+  <span slot="header">Вторая карточка</span>
+  <p>Можно вставлять любой HTML-контент.</p>
+  <span slot="footer">Автор: Сергей</span>
+</my-card>
+
+
+<!-- Скрипт с компонентом -->
 <script>
 class MyCard extends HTMLElement {
   constructor() {
@@ -45,9 +81,5 @@ customElements.define('my-card', MyCard);
 </script>
 
 
-<!-- Используем компонент -->
-<my-card>
-  <span slot="header">Мой крутой заголовок</span>
-  <p>Вот какой-то текст для карточки. Он попадет в default slot.</p>
-  <span slot="footer">Дата: 01.02.2026</span>
-</my-card>
+</body>
+</html>
