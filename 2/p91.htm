@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цветные карточки</title>
+<style>
+  body {
+    font-family: sans-serif;
+    padding: 16px;
+    background-color: #e0f7fa; /* светлый фон страницы */
+  }
+
+
+  .card {
+    border: 1px solid #0288d1; /* синяя рамка */
+    padding: 16px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    background-color: #ffffff; /* белая карточка */
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+
+
+  .card-header {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 8px;
+    color: #01579b; /* синий заголовок */
+  }
+
+
+  .card-body {
+    margin-bottom: 8px;
+    color: #212121; /* темно-серый текст */
+  }
+
+
+  .card-footer {
+    font-size: 0.9em;
+    color: #757575; /* серый подвал */
+  }
+</style>
+</head>
+<body>
+
+
+<h1>Пример цветных карточек</h1>
+
+
+<div class="card">
+  <div class="card-header">Мой крутой заголовок</div>
+  <div class="card-body">
+    <p>Вот какой-то текст для карточки. Всё видно на смартфоне.</p>
+  </div>
+  <div class="card-footer">Дата: 01.02.2026</div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">Вторая карточка</div>
+  <div class="card-body">
+    <p>Можно вставлять любой HTML-контент.</p>
+  </div>
+  <div class="card-footer">Автор: Сергей 22</div>
+</div>
+
+
+</body>
+</html>
