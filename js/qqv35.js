@@ -47,8 +47,12 @@ qq.f.extend = function(destination, source) {
   }
   return destination;
 };
-
-
+//===
+qq.getStyle = function(style, elem) {
+  if (!elem) return null;
+  return window.getComputedStyle(elem, null).getPropertyValue(style);
+};
+//===
 qq.f.getStyle = function(style, elem) {
   return document.defaultView.getComputedStyle(elem, null).getPropertyValue(style);
 };
