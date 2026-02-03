@@ -19,11 +19,11 @@
       function hello(name) {
         return 'Привет, ' + name;
       }
-    `;alert(code);
-alert(esprima);
+    `;//alert(code);
+//alert(esprima);
 
     const tree = esprima.parseScript(code, { comment: true, loc: true });
-alert(tree);
+//alert(tree);
 
 
     document.getElementById('output').textContent = JSON.stringify(tree, null, 2);
