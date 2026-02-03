@@ -13,8 +13,28 @@ qq.isObject = function (o) {
 qq.f.isObject = function(o) {
   return o && typeof o === 'object' && o.toString() === '[object Object]';
 };
+//===
+// Основная функция
+qq.extend = function(destination, source) {
+  for (let key of Object.keys(source)) {          // только собственные свойства
+    const value = source[key];
 
 
+    if (qq.isObject(value)) {                     // рекурсивно сливаем только plain object
+      if (!destination[key] || !qq.isObject(destination[key])) {
+        destination[key] = {};
+      }
+      qq.extend(destination[key], value);
+    } else {
+      destination[key] = value;                  // массивы, примитивы, функции — просто перезапись
+    }
+  }
+  return destination;
+};
+
+
+// Алиас для старого кода
+//===
 qq.f.extend = function(destination, source) {
   for (let property in source) {
     if (qq.f.isObject(source[property])) {
