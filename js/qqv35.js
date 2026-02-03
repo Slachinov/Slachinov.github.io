@@ -102,7 +102,35 @@ qq.f.crElem = function() {
     el = arguments[0];
     p = 1;
   }
-
+/*
+let eventBase = {
+  prop: {
+    clear: function() {
+      this.innerHTML = "";
+    },
+    hide: function() {
+      if (!this._displayCache) {
+        this._displayCache = qq.f.getStyle('display', this);
+      }
+      this.style.display = 'none';
+    },
+    show: function() {
+      this.style.display = this._displayCache || 'block';
+      delete this._displayCache;
+    },
+    toggle: function() {
+      if (this.style.display !== 'none') {
+        this.hide();
+      } else {
+        this.show();
+      }
+    },
+    getStyle: function(style) {
+      return qq.f.getStyle(style, this);
+    }
+  }
+};
+*/
 
   let eventBase = {
     prop: {
