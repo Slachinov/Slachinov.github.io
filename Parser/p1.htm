@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-<h2 id="kod">AST для кода JS1</h2>
+<h2 id="kod">AST для кода JS2</h2>
 <pre id="ast"></pre>
 
 
@@ -22,7 +22,7 @@
 import { parse } from 'https://esm.sh/@babel/parser';
 
 
-const code = "a = b + 1";
+const code = "let a = b + 1";
 
 
 const ast = parse(code, {
