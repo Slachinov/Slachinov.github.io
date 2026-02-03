@@ -13,7 +13,7 @@
   }
 </style>
 </head>
-<body>
+<body><h1>1</h1>
 <h2 id="kod">AST для кода JS3</h2>
 <pre id="ast"></pre>
 
@@ -22,10 +22,7 @@
 import { parse } from 'https://esm.sh/@babel/parser';
 
 
-const code = "let b=7;
-let a = b + 1";
-
-
+const code = "let b=7;\nlet a = b + 1";
 const ast = parse(code, {
   sourceType: "module",
   plugins: [] // можно добавить плагины, если нужен современный JS
