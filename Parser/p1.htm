@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-<h2>AST для кода JS</h2>
+<h2 id="kod">AST для кода JS1</h2>
 <pre id="ast"></pre>
 
 
@@ -29,8 +29,10 @@ const ast = parse(code, {
   sourceType: "module",
   plugins: [] // можно добавить плагины, если нужен современный JS
 });
+//====
 
 
+document.getElementById("kod").textContent=code;
 // Выводим в <pre> в виде читаемого JSON
 document.getElementById("ast").textContent = JSON.stringify(ast, null, 2);
 </script>
