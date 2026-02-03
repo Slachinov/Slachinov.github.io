@@ -16,24 +16,23 @@ qq.f.isObject = function(o) {
 //===
 // Основная функция
 qq.extend = function(destination, source) {
-  for (let key of Object.keys(source)) {          // только собственные свойства
+  for (let key of Object.keys(source)) {          // только собственные
     const value = source[key];
 
 
-    if (qq.isObject(value)) {                     // рекурсивно сливаем только plain object
+    if (qq.isObject(value)) {                     // рекурсивно сливаем толь
       if (!destination[key] || !qq.isObject(destination[key])) {
         destination[key] = {};
       }
       qq.extend(destination[key], value);
     } else {
-      destination[key] = value;                  // массивы, примитивы, функции — просто перезапись
+      destination[key] = value;                  // массивы, примитивы,
     }
   }
   return destination;
 };
 
 
-// Алиас для старого кода
 //===
 qq.f.extend = function(destination, source) {
   for (let property in source) {
