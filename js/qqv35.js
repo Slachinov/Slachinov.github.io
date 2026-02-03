@@ -56,8 +56,15 @@ qq.getStyle = function(style, elem) {
 qq.f.getStyle = function(style, elem) {
   return document.defaultView.getComputedStyle(elem, null).getPropertyValue(style);
 };
-
-
+//===
+qq.createSkin = function() {
+  let skin = {};
+  for (let i = 0; i < arguments.length; i++) {
+    if (qq.isObject(arguments[i])) qq.extend(skin, arguments[i]);
+  }
+  return skin;
+};
+//===
 qq.f.createSkin = function() {
 let m;
 if(arguments[0]=='[object Arguments]')m=arguments[0]; else m=arguments;
