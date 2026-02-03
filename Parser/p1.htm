@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>JS AST в браузере</title>
+<style>
+  pre {
+    background: #f0f0f0;
+    padding: 10px;
+    overflow: auto;
+    max-height: 90vh;
+  }
+</style>
+</head>
+<body>
+<h2>AST для кода JS</h2>
+<pre id="ast"></pre>
+
+
+<script type="module">
+import { parse } from 'https://esm.sh/@babel/parser';
+
+
+const code = "a = b + 1";
+
+
+const ast = parse(code, {
+  sourceType: "module",
+  plugins: [] // можно добавить плагины, если нужен современный JS
+});
+
+
+// Выводим в <pre> в виде читаемого JSON
+document.getElementById("ast").textContent = JSON.stringify(ast, null, 2);
+</script>
+</body>
+</html>
