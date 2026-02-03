@@ -75,7 +75,22 @@ if(arguments[0]=='[object Arguments]')m=arguments[0]; else m=arguments;
   }
   return skin;
 };
+/*
+qq.f.crElem = function() {
+  const args = Array.from(arguments);
+  let el;
+  let skin;
 
+
+  if (args[0] instanceof Element) {
+    el = args[0];
+    skin = qq.createSkin(...args.slice(1));
+  } else {
+    skin = qq.createSkin(...args);
+    el = document.createElement(skin.tag || 'div');
+  }
+};
+*/
 
 qq.f.crElem = function() {
   let skin = qq.f.createSkin(arguments);
