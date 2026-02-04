@@ -20,7 +20,7 @@ export default function github(o) {
     const { owner, repo, token, branch } = cfg;
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
     const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+      headers: { 'Authorization':`token ${token}`,'Accept': 'application/vnd.github.v3+json' }
     });
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
@@ -52,7 +52,7 @@ export default function github(o) {
   async function getPath(targetPath) {
     const { owner, repo, token, branch } = cfg;
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${targetPath}?ref=${branch}`;
-    const res = await fetch(url, { headers: { 'Authorization':`token ${token}`,'Accept': 'application/vnd.github.v3+json' } });
+    const res = await fetch(url, { headers: { 'Authorization':`token ${token}`,'Accept':'application/vnd.github.v3+json' } });
     if (!res.ok) throw new Error(await res.text());
     const data = await res.json();
     if (Array.isArray(data)) return data.map(item => ({ name: item.name, path: item.path, type: item.type, size: item.size, sha: item.sha, url: item.url, download_url: item.download_url }));
@@ -64,7 +64,7 @@ export default function github(o) {
 
   return { loadFile, saveFile, getPath };
 };
-alert(3);
+alert(5);
 //alert(github);
 //====
 
