@@ -24,7 +24,7 @@ export default function github(o) {
     });
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
-    return { content: atob(data.content), sha: data.sha };
+    return { content: decodeURIComponent(escape(atob(data.content))), sha: data.sha };
   }
 
 
@@ -64,7 +64,7 @@ export default function github(o) {
 
   return { loadFile, saveFile, getPath };
 };
-alert(7);
+alert(8);
 //alert(github);
 //====
 
