@@ -9,14 +9,13 @@
 <body>
 
 
-<script type="module">
+<script type="module">alert(0);
 import github from 'https://slachinov.github.io/Lib/githubClaude.js';
-
-
+alert(github);
 const gh = github({
   owner: 'slachinov',
   repo: 'slachinov.github.io',
-  token: qq.cl('token'),
+  token: qq.ls('token'),
   branch: 'master'
 });
 
