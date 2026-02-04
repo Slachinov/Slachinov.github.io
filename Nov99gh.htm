@@ -25,7 +25,7 @@ async function showFile() {
     const { content } = await gh.loadFile('Nov98.htm');
     qq.cl(content);
   } catch (err) {
-    console.error(err);
+    qq.er(err);
   }
 }
 
