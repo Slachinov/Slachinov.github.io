@@ -9,7 +9,7 @@
 <body>
 
 
-<script type="module">alert(1);
+<script type="module">alert(2);
 import github from 'https://slachinov.github.io/Lib/githubClaude.js';
 //alert(github);
 const gh = github({
@@ -22,7 +22,7 @@ const gh = github({
 
 async function showFile() {
   try {
-    const content = await gh.loadFile('https://slachinov.github.io/Nov98.htm');
+    const {content }= await gh.loadFile('https://slachinov.github.io/Nov98.htm');
     qq.cl(content);
   } catch (err) {
     qq.er(err);
