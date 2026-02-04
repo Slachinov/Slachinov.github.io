@@ -64,7 +64,7 @@ export default function github(o) {
 
   return { loadFile, saveFile, getPath };
 };
-alert(8);
+alert(0);
 //alert(github);
 //====
 
@@ -81,7 +81,7 @@ const gh = github({
 
 async function showFile() {
   try {
-    const { content } = await gh.loadFile('Promt/main1.htm');
+    const { content } = await gh.getPath('');
     qq.cl(content);
   } catch (err) {
     qq.er('Ошибка при загрузке файла:', err);
