@@ -22,7 +22,7 @@ const gh = github({
 
 async function showFile() {
   try {
-    const { content } = await gh.loadFile('Nov98.htm');
+    const content = await gh.loadFile('https://slachinov.github.io/Nov98.htm');
     qq.cl(content);
   } catch (err) {
     qq.er(err);
