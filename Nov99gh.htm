@@ -9,41 +9,7 @@
 <body>
 
 
-<script type="module">alert(5);
-import github from 'https://slachinov.github.io/Lib/githubClaude.js';
-//alert(github);
-const gh = github({
-  owner: 'slachinov',
-  repo: 'slachinov.github.io',
-  token: qq.ls('token'),
-  branch: 'master'
-});
-
-
-async function loadFile (path) {
-    const { owner, repo, token, branch } = cfg;
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;alert(url);
-    const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-    });qq.cl(9);qq.cl(9+res);
-    if (!res.ok) throw new Error(res.statusText);
-    const data = await res.json();
-    return { content: atob(data.content), sha: data.sha };
-  };
-//===
-
-
-async function showFile() {
-  try {
-    const {content }= await loadFile('https://slachinov.github.io/Nov98.htm');
-    qq.cl(content);
-  } catch (err) {
-    qq.er(err);
-  }
-}
-
-
-showFile();
+<script type='module'>
 </script>
 <script></script>
 </body>
