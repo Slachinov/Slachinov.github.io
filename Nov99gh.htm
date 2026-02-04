@@ -18,7 +18,7 @@ export default function github(o) {
 
   async function loadFile(path) {
     const { owner, repo, token, branch } = cfg;
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;alert(token);
     const res = await fetch(url, {
       headers: { 'Authorization':`token ${token}`,'Accept': 'application/vnd.github.v3+json' }
     });
@@ -64,7 +64,7 @@ export default function github(o) {
 
   return { loadFile, saveFile, getPath };
 };
-alert(5);
+alert(6);
 //alert(github);
 //====
 
@@ -74,7 +74,7 @@ alert(5);
 const gh = github({
   owner: 'slachinov',
   repo: 'slachinov.github.io',
-  token: 'ghp_ВАШ_ТОКЕН',
+  token:qq.ls('token'),
   branch: 'master'
 });
 
