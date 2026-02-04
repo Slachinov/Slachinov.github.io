@@ -8,22 +8,22 @@
 </head>
 <body>
 
+
 <script type="module">
-import github from './main1.js';
+import github from 'https://slachinov.github.io/Lib/githubClaude.js';
 
 
 const gh = github({
   owner: 'slachinov',
-  repo: 'https://slachinov.github.io',
-  path: 'main1.htm',
-  token: qq.ls('token'),
+  repo: 'slachinov.github.io',
+  token: qq.cl('token'),
   branch: 'master'
 });
 
 
-async function showFile(p) {
+async function showFile() {
   try {
-    const { content } = await gh.load(p);
+    const { content } = await gh.loadFile('Nov98.htm');
     qq.cl(content);
   } catch (err) {
     console.error(err);
