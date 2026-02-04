@@ -64,7 +64,7 @@ export default function github(o) {
 
   return { loadFile, saveFile, getPath };
 };
-alert(1);
+alert(2);
 //alert(github);
 //====
 
@@ -82,7 +82,8 @@ const gh = github({
 async function showFile() {
   try {
     const content = await gh.getPath('');
-    qq.cl(content);
+for(let i=0;i<content.length;i++)
+    qq.cl(content.name+',');
   } catch (err) {
     qq.er('Ошибка при загрузке файла:', err);
   }
