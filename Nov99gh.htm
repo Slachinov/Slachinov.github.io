@@ -64,8 +64,35 @@ export default function github(o) {
 
   return { loadFile, saveFile, getPath };
 };
-alert(0);
-alert(github);
+alert(1);
+//alert(github);
+//====
+
+
+
+
+const gh = github({
+  owner: 'slachinov',
+  repo: 'slachinov.github.io',
+  token: 'ghp_ВАШ_ТОКЕН',
+  branch: 'master'
+});
+
+
+async function showFile() {
+  try {
+    const { content } = await gh.loadFile('Nov98.htm');
+    qq.cl(content);
+  } catch (err) {
+    qq.er('Ошибка при загрузке файла:', err);
+  }
+}
+
+
+showFile();
+
+
+//======
 </script>
 <script></script>
 </body>
