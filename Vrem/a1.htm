@@ -22,8 +22,9 @@ async function getRepos (username,token) {
   return await response.json();
 };
 //==/=
-alert(getRepos);
-let repos=await getRepos('slachinov',qq.ls('token'));
+//alert(getRepos);
+qq.cl(0);
+let repos=await getRepos('slachinov',qq.ls('token'));qq.cl(1);qq.cl(repos);
 </script>
 <script></script>
 </body>
