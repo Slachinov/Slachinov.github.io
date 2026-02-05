@@ -51,8 +51,13 @@ const gh = {
   branch: 'master'
 };
 let tree=await getAllTree(gh);
-qq.cl(tree);
+const tree = await getAllTree();
+
+
+qq.cl (tree.map(item => item.path));
+
+
 </script>
-<script>alert(8);</script>
+<script>alert(0);</script>
 </body>
 </html>
