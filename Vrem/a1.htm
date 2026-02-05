@@ -7,56 +7,23 @@
   <script type="module" src="/js/console.js"></script>
 </head>
 <body>
-<script type="module">alert(1);
-
-async function getAllTree (o) {
-  const { owner, repo, token, branch = 'main' } = o;
+<script type="module">
 
 
-  const refRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`, {
-    headers: { 'Authorization': `token ${token}` }
+async function getRepos (username,token) {
+  
+  const response = await fetch(`https://api.github.com/users/${username}/repos?type=owner&sort=updated`, {
+    headers: {
+      'Authorization': `token ${token}`,
+      'Accept': 'application/vnd.github.v3+json'
+    }
   });
-  if (!refRes.ok) throw new Error(`Failed to get branch SHA: ${refRes.statusText}`);
-  const refData = await refRes.json();
-  const commitSha = refData.object.sha;
-
-
-  const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/commits/${commitSha}`, {
-    headers: { 'Authorization': `token ${token}` }
-  });
-  if (!commitRes.ok) throw new Error(`Failed to get commit tree SHA: ${commitRes.statusText}`);
-  const commitData = await commitRes.json();
-  const treeSha = commitData.tree.sha;
-
-
-  const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSha}?recursive=1`, {
-    headers: { 'Authorization': `token ${token}` }
-  });
-  if (!treeRes.ok) throw new Error(`Failed to get tree: ${treeRes.statusText}`);
-  const treeData = await treeRes.json();
-
-
-  return treeData.tree;
+  if (!response.ok) throw new Error(`Failed to get repos: ${response.statusText}`);
+  return await response.json();
 };
-//===
-
-
-//qq.cl(getAllTree);
-
-
-const gh = {
-  owner: 'slachinov',
-  repo: 'slachinov.github.io',
-  token:qq.ls('token'),
-  branch: 'master'
-};
-//let tree=await getAllTree(gh);
-const tree = await getAllTree(gh);
-
-
-let t=tree.map(item => item.path).join('<br>');
-qq.cl(t);
+//==/=
+alert(getRepos);
 </script>
-<script>alert(3);</script>
+<script></script>
 </body>
 </html>
