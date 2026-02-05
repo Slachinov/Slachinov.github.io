@@ -50,14 +50,13 @@ const gh = {
   token:qq.ls('token'),
   branch: 'master'
 };
-let tree=await getAllTree(gh);
-const tree = await getAllTree();
+//let tree=await getAllTree(gh);
+const tree = await getAllTree(gh);
 
 
-qq.cl (tree.map(item => item.path));
-
-
+let t=tree.map(item => item.path);
+qq.cl(t);
 </script>
-<script>alert(0);</script>
+<script>alert(2);</script>
 </body>
 </html>
