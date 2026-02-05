@@ -23,12 +23,12 @@ async function getRepos (username,token) {
 };
 //==/=
 //alert(getRepos);
-qq.cl(15);
+qq.cl(16);
 let repos=await getRepos('slachinov',qq.ls('token'));
 
 
 qq.cl('length='+repos.length)
-qq.cl(repos.map(r => r.name).join('<br>'));
+qq.cl(repos.map(r => r.url).join('<br>'));
 
 
 
