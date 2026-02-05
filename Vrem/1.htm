@@ -8,10 +8,10 @@
 </head>
 <body>
 <script type="module">alert(1);
-
+qq.cl(0);
 import getAllTree from 'https://slachinov.github.io/Lib/github/getall.js';
-//qq.cl(getAllTree);
 
+qq.cl(2);
 
 const gh = {
   owner: 'slachinov',
@@ -19,13 +19,12 @@ const gh = {
   token:qq.ls('token'),
   branch: 'master'
 };
-//let tree=await getAllTree(gh);
 const tree = await getAllTree(gh);
 
 
 let t=tree.map(item => item.path).join('<br>');
 qq.cl(t);
 </script>
-<script>alert(3);</script>
+<script>alert(4);</script>
 </body>
 </html>
