@@ -9,7 +9,7 @@
 <body>
 <script type="module">alert(1);
 
-async function getAllTree () {
+async function getAllTree (o) {
   const { owner, repo, token, branch = 'main' } = o;
 
 
@@ -51,6 +51,6 @@ const gh = github{
 let tree=getAllTree(gh);
 qq.cl(tree);*/
 </script>
-<script>alert(3);</script>
+<script>alert(5);</script>
 </body>
 </html>
