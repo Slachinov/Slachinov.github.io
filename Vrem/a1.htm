@@ -7,7 +7,7 @@
   <script type="module" src="/js/console.js"></script>
 </head>
 <body>
-<script type="module">
+<script type="module">alert(1);
 
 async function getAllTree () {
   const { owner, repo, token, branch = 'main' } = o;
@@ -41,7 +41,16 @@ async function getAllTree () {
 //===
 qq.cl(getAllTree);
 
+
+const gh = github{
+  owner: 'slachinov',
+  repo: 'slachinov.github.io',
+  token:qq.ls('token'),
+  branch: 'master'
+};
+let tree=getAllTree(gh);
+qq.cl(tree);
 </script>
-<script></script>
+<script>alert(0);</script>
 </body>
 </html>
