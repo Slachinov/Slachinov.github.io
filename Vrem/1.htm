@@ -3,14 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <script src="js/qqv34.js"></script>
-  <script type="module" src="js/console.js"></script>
+  <script src="/js/qqv34.js"></script>
+  <script type="module" src="/js/console.js"></script>
 </head>
 <body>
-<script type="module">
+<script type="module">alert(1);
+
+import getAllTree from 'https://slachinov.github.io/Lib/github/getall.js';
+//qq.cl(getAllTree);
 
 
+const gh = {
+  owner: 'slachinov',
+  repo: 'slachinov.github.io',
+  token:qq.ls('token'),
+  branch: 'master'
+};
+//let tree=await getAllTree(gh);
+const tree = await getAllTree(gh);
+
+
+let t=tree.map(item => item.path).join('<br>');
+qq.cl(t);
 </script>
-<script></script>
+<script>alert(3);</script>
 </body>
 </html>
