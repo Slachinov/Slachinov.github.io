@@ -54,9 +54,9 @@ const gh = {
 const tree = await getAllTree(gh);
 
 
-let t=tree.map(item => item.path);
+let t=tree.map(item => item.path).join('\n');
 qq.cl(t);
 </script>
-<script>alert(2);</script>
+<script>alert(3);</script>
 </body>
 </html>
