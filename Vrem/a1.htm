@@ -39,10 +39,12 @@ async function getAllTree (o) {
   return treeData.tree;
 };
 //===
+
+
 qq.cl(getAllTree);
 
 
-const gh = github{
+const gh = {
   owner: 'slachinov',
   repo: 'slachinov.github.io',
   token:qq.ls('token'),
@@ -51,6 +53,6 @@ const gh = github{
 let tree=getAllTree(gh);
 qq.cl(tree);
 </script>
-<script>alert(6);</script>
+<script>alert(7);</script>
 </body>
 </html>
