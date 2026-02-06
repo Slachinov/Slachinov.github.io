@@ -152,7 +152,7 @@ this.innerHTML=""; },
 //====
 if(skin.ns)el.ns=skin.ns;
 
-if(skin.action){};
+if(skin.action){qq.f.extend(skin.event,{click:function(e){this.ns.set(skin.action,1)}}};
 if(skin.subs){};
 //====
   if (skin.style) for (let u in skin.style) el.style[u] = skin.style[u];
