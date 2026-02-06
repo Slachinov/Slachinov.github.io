@@ -149,8 +149,10 @@ this.innerHTML=""; },
 
 
   qq.f.extend(skin, eventBase);
-
-
+//====
+if(skin.action){};
+if(skin.subs){};
+//====
   if (skin.style) for (let u in skin.style) el.style[u] = skin.style[u];
   if (skin.attr) for (let u in skin.attr) el.setAttribute(u, skin.attr[u]);
   if (skin.class) el.className = skin.class;
