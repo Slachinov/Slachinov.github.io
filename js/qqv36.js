@@ -150,6 +150,8 @@ this.innerHTML=""; },
 
   qq.f.extend(skin, eventBase);
 //====
+if(skin.ns)el.ns=skin.ns;
+
 if(skin.action){};
 if(skin.subs){};
 //====
