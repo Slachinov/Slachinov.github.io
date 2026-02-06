@@ -153,7 +153,7 @@ this.innerHTML=""; },
 if(skin.ns)el.ns=skin.ns;
 
 if(skin.action){qq.f.extend(skin.event,{click:function(e){this.ns.set(skin.action,1)}}};
-if(skin.subs){};
+if(skin.subs){this.ns.subscribe(skin.susc,function(this){})};
 //====
   if (skin.style) for (let u in skin.style) el.style[u] = skin.style[u];
   if (skin.attr) for (let u in skin.attr) el.setAttribute(u, skin.attr[u]);
