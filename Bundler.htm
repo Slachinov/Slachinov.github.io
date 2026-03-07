@@ -190,16 +190,13 @@ qq.ce(fs,{
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: '===>',event:{click:function(){/*inp.innerText='--';inp.n++; editor.innerText=ns.c[inp.n]*/}}
-});
+    it: '===>',event:{click:function(){/*inp.innerText='--';inp.n++; editor.innerText=ns.c[inp.n]*/}}});
 //==
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
     it: 'save',event:{click:function(){
-navigator.clipboard.writeText(editor.innerText)
-}}
-});
+navigator.clipboard.writeText(editor.innerText)}}});
   // ---------- кнопки подсветки ----------
   const colors = [
     {name: 'Blue', color: '#cce5ff', ref: 'path1'},
