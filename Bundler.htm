@@ -144,7 +144,6 @@ const html = range.cloneContents();
 //navigator.clipboard.writeText(text);
 }};
   {  let range = document.createRange();
-let lastNode =frame.contentDocument.body.lastChild;alert(lastNode.textContent);
 range.setStartAfter(mm[mm.length-1]);
 range.setEndAfter(editor); 
 const text = range.toString();
@@ -161,7 +160,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save5',
+    it: 'Save7',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
@@ -171,8 +170,19 @@ return;
       }
     }
   });
+//====
 
 
+let Panel=qq.ce({
+    tag: 'div',
+    parent: lsPanel});
+
+
+qq.ce({
+    tag: 'button',
+    parent: Panel,
+    it: '<===',style:{'font-size':'25px'}}
+);
   // ---------- кнопки подсветки ----------
   const colors = [
     {name: 'Blue', color: '#cce5ff', ref: 'path1'},
