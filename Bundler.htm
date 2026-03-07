@@ -161,7 +161,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save6',
+    it: 'Save7',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
@@ -181,11 +181,13 @@ qq.ce(fs,{
     parent: Panel,
     it: '<===' ,event:{click:function(){}} });
 //==
- inp=qq.ce(fs,{
+alert(inp);
+inp={};
+ /*inp=qq.ce(fs,{
     tag: 'button',
     parent: Panel,
     it: '. ',style:{'min-width':'100px'}});
-alert(8);
+alert(8);*/
 //===
 alert(9);
 qq.ce(fs,{
