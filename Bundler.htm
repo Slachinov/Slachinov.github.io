@@ -117,8 +117,8 @@ let ns={};
     it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {let cont=[];let y=0;let inp;
-      ns.c=cont;  
+      click() {let cont=[];let y=0;
+      ns.c=cont;
 const mm = frame.contentDocument.querySelectorAll('span');if(!mm.length){return;}else{
 const range = frame.contentDocument.createRange();
 range.setStart(frame.contentDocument.body, 0); 
@@ -151,7 +151,7 @@ const text = range.toString();
 cont[y]=text;y++;
 };
 //cont.forEach(function(txt){alert(txt);});
- inp.innerText='b--0';inp.n=0;
+ ns.i.innerText='b--0';ns.i.n=0;
 editor.innerText=cont[0];
       }
     }
@@ -181,13 +181,12 @@ qq.ce(fs,{
     parent: Panel,
     it: '<===' ,event:{click:function(){}} });
 //==
-alert(inp);
-inp={};
- /*inp=qq.ce(fs,{
+ns.i=qq.ce(fs,{
     tag: 'button',
     parent: Panel,
     it: '. ',style:{'min-width':'100px'}});
-alert(8);*/
+
+
 //===
 alert(9);
 qq.ce(fs,{
@@ -196,7 +195,7 @@ qq.ce(fs,{
     it: '===>'});
 
 
-/*,event:{click:function(){inp.innerText='--';inp.n++; editor.innerText=ns.c[inp.n]}}});*/
+/*,event:{click:function(){ns.i.innerText='--';ns.i.n++; editor.innerText=ns.c[ns.i.n]}}});*/
 //==
 qq.ce(fs,{
     tag: 'button',
