@@ -124,7 +124,7 @@ const range = frame.contentDocument.createRange();
 range.setStart(frame.contentDocument.body, 0); 
 range.setEndBefore(mm[0]);
 const text = range.toString(); alert(text)
-};/*
+};
 if(mm.length>1){
 
 for(let i=0;i<mm.length-1;i++){
@@ -139,12 +139,13 @@ const text = range.toString();
 alert(text); // чистый текст
 const html = range.cloneContents();
 //navigator.clipboard.writeText(text);
-};
+};/*
   {  let range = document.createRange();
 let lastNode = document.body.lastChild; 
 range.setEndAfter(lastNode, lastNode.length || 0); 
 range.setStartAfter(mm[mm.length]);
-range.setEndBefore(m2);
+
+
 const text = range.toString();
 alert(text);};*/
 
@@ -157,7 +158,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save6',
+    it: 'Save7',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
