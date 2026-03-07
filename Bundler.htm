@@ -151,7 +151,7 @@ const text = range.toString();
 cont[y]=text;y++;
 };
 //cont.forEach(function(txt){alert(txt);});
- inp.innerText='b--0';
+ inp.innerText='b--0';inp.n=0;
 editor.innerText=cont[0];
       }
     }
@@ -192,7 +192,7 @@ qq.ce(fs,{
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: '===>',event:{click:function(){inp.innerText=y+'--';y++; editor.innerText=cont[y]}}
+    it: '===>',event:{click:function(){inp.innerText='--';inp.n++; editor.innerText=cont[inp.n]}}
 });
 //==
 qq.ce(fs,{
