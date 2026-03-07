@@ -9,6 +9,73 @@
 
 
 <script type="module">
+import fall from 'https://slachinov.github.io/Lib/pan/all1.js';
+let all=fall();all.hide();
+//====
+function insertHtmlAtCursor (html) {//alert(html);
+  const sel = frame.contentWindow.getSelection();//alert(sel);
+  if (!sel || sel.rangeCount === 0) return;
+
+
+  const range = sel.getRangeAt(0);
+  range.deleteContents(); // удаляем выделенный текст, если есть
+
+
+  // создаём DocumentFragment из HTML
+  const fragment = range.createContextualFragment(html);//alert(fragment);
+
+
+  // вставляем в позицию курсора
+  range.insertNode(fragment);
+
+
+  // перемещаем курсор после вставленного фрагмента
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+//===/
+function insertAtCursor2(edit, text) {
+  edit.focus(); // обязательно фокусируем див
+
+//alert(edit);alert(text);
+  /*const sel = edit.ownerDocument.getSelection();*/ // берём Selection из 
+const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
+  if (!sel) return;//alert(4);
+
+
+  let range;
+  if (sel.rangeCount > 0) {
+    range = sel.getRangeAt(0);
+    range.deleteContents(); // удаляем выделенный текст, если есть
+  } else {
+    // создаём range в начале div
+    range = edit.ownerDocument.createRange();
+    range.setStart(edit, 0);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+
+  // создаём текстовый узел
+  const textNode = edit.ownerDocument.createTextNode(text);
+  range.insertNode(textNode);
+
+
+  // сдвигаем курсор после вставленного текста
+  range.setStartAfter(textNode);
+  range.collapse(true);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+// вставка текста в позицию курсора
+
+
+
+// пример использования
+
+
   // ---------- Верхний контейнер с двумя панелями ----------
   const topContainer = qq.ce({
     tag: 'div',
@@ -18,7 +85,7 @@
       top: '0',
       left: '0',
       right: '0',
-      zIndex: 10,
+      zIndex: 4,
       background: '#eee'
     }
   });
@@ -47,27 +114,56 @@
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Load',
+    it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {
-        if (!editor) return;
-        const txt = localStorage.getItem(lsKey) || '';
-        editor.innerHTML = txt;
+        
+const mm = frame.contentDocument.querySelectorAll('span');if(mm.length){
+const range = frame.contentDocument.createRange();
+range.setStart(frame.contentDocument.body, 0); 
+range.setEndBefore(mm[0]);
+const text = range.toString(); alert(text)
+};
+if(mm.length>1){
+
+for(let i=0;i<mm.length-1;i++){
+
+const m1=mm[i];
+const m2=mm[i+1];
+const range = frame.contentDocument.createRange();
+//range.setStart(m1); 
+range.setStartAfter(m1);
+range.setEndBefore(m2);
+const text = range.toString();
+alert(text); // чистый текст
+const html = range.cloneContents();
+//navigator.clipboard.writeText(text);
+};
+  {  let range = document.createRange();
+let lastNode = document.body.lastChild; 
+range.setEndAfter(lastNode, lastNode.length || 0); 
+range.setStartAfter(mm[mm.length]);
+range.setEndBefore(m2);
+const text = range.toString();
+alert(text);};
+
+    
       }
     }
   });
 
-
+let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save',
+    it: 'Save5',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {
+      click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
+return;
         if (!editor) return;
-        localStorage.setItem(lsKey, editor.innerHTML);
+        
       }
     }
   });
@@ -135,10 +231,11 @@
     editor.style.width = '100%';
     editor.style.height = '100%';
     editor.style.overflow = 'auto';
-
+    editor.style.fontSize='22px';
 
     // запрет контекстного меню, выделение сохраняется
     editor.addEventListener('contextmenu', e => e.preventDefault());
+ createLocalStoragePanel (topContainer,editor,all);
   });
 
 
@@ -158,6 +255,131 @@
     childList: true,
     subtree: true
   });
+//===========
+function createLocalStoragePanel(
+  parent,      // куда вставлять панель
+  edit,        // editor div
+  allPanel,    // панель со списком ключей
+  mr = '3px',
+  fs = 18
+, skin) {
+
+
+  // === контейнер панели ===
+  const container = qq.ce({
+    tag: 'div',
+    parent: parent,
+    style: {
+      margin: '1px 0',
+      background: '#ffe4e1',
+      padding: '4px'
+    }
+  });
+
+
+  // === input key ===
+  const keyInput = qq.ce({
+    tag: 'input',
+    parent: container,
+    attr: {
+      type: 'text',
+      placeholder: 'localStorage key'
+    },
+    style: {
+      marginRight: '5px'
+    }
+  });
+
+
+  // helper для кнопок
+  const btnStyle = () => {
+    let s = { margin: mr, 'font-size': fs + 'px' };
+    if (skin) Object.assign(s, skin);
+    return s;
+  };
+
+
+  // === Load ===
+  qq.ce({
+    tag: 'button',
+    it: 'Load',
+    parent: container,
+    style: btnStyle(),
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        let v = localStorage.getItem(key);
+alert('2'+edit);
+        edit.innerText = v ?? '';
+      }
+    }
+  });
+
+
+  // === Save ===
+  qq.ce({
+    tag: 'button',
+    it: 'Save',
+    parent: container,
+    style: btnStyle(),
+    event: {
+      click() {
+        let key = keyInput.value.trim();
+        if (!key) return;
+        localStorage.setItem(key, edit.innerText);
+      }
+    }
+  });
+
+
+  // === All ===
+  qq.ce({
+    tag: 'button',
+    it: 'All',
+    parent: container,
+    style: btnStyle(),
+    event: {
+      click() {
+        if (!allPanel) return;
+
+
+        allPanel.innerHTML = '';
+        allPanel.show?.();
+
+
+        for (let i = 0; i < localStorage.length; i++) {
+          let key = localStorage.key(i);
+          let value = localStorage.getItem(key);
+
+
+          qq.ce({
+            tag: 'div',
+            parent: allPanel,
+            it: key,
+            style: {
+              cursor: 'pointer',
+              padding: '2px 4px',
+              border: '1px solid gray',
+              margin: '2px 0',
+              borderRadius: '3px'
+            },
+            event: {
+              click() {
+                keyInput.value = key;
+                edit.innerText = value;
+                allPanel.hide?.();
+              }
+            }
+          });
+        }
+      }
+    }
+  });
+
+
+  return container;
+};
 
 
 </script>
