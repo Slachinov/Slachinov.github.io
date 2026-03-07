@@ -117,7 +117,7 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
     it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {
+      click() {/*
         
 const mm = frame.contentDocument.querySelectorAll('span');if(mm.length){
 const range = frame.contentDocument.createRange();
@@ -146,7 +146,7 @@ range.setEndAfter(lastNode, lastNode.length || 0); 
 range.setStartAfter(mm[mm.length]);
 range.setEndBefore(m2);
 const text = range.toString();
-alert(text);};
+alert(text);};*/
 
     
       }
@@ -157,7 +157,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save5',
+    it: 'Save54',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
