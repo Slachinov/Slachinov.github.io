@@ -176,13 +176,26 @@ return;
 let Panel=qq.ce({
     tag: 'div',
     parent: lsPanel});
-
-
-qq.ce({
+let fs={style:{'font-size':'25px'}};
+qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: '<===',style:{'font-size':'25px'}}
-);
+    it: '<==='});
+//==
+let inp=qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it: '',style:{'min-width':'100px'}});
+//===
+qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it: '===>'});
+//==
+qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it: 'save'});
   // ---------- кнопки подсветки ----------
   const colors = [
     {name: 'Blue', color: '#cce5ff', ref: 'path1'},
