@@ -117,14 +117,14 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
     it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {/*
+      click() {
         
 const mm = frame.contentDocument.querySelectorAll('span');if(mm.length){
 const range = frame.contentDocument.createRange();
 range.setStart(frame.contentDocument.body, 0); 
 range.setEndBefore(mm[0]);
 const text = range.toString(); alert(text)
-};
+};/*
 if(mm.length>1){
 
 for(let i=0;i<mm.length-1;i++){
@@ -157,7 +157,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save54',
+    it: 'Save6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
