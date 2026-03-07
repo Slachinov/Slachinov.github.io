@@ -143,7 +143,7 @@ const html = range.cloneContents();
   {  let range = document.createRange();
 let lastNode = document.body.lastChild; 
 range.setStartAfter(mm[mm.length-1]);
-range.setEndAfter(lastNode, lastNode.length || 0); 
+range.setEndAfter(lastNode); 
 const text = range.toString();
 alert(text);};
 
@@ -156,7 +156,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save9',
+    it: 'Save0',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
