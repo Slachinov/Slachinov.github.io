@@ -119,7 +119,7 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
     event: {
       click() {
         
-const mm = frame.contentDocument.querySelectorAll('span');alert(mm.length);
+const mm = frame.contentDocument.querySelectorAll('span');//alert(mm.length);
 /*
  // начало документа
 range.setEndBefore(firstMarker);               // перед меткой*/
@@ -131,7 +131,8 @@ range.setStart(frame.contentDocument.body, 0); 
 range.setEndBefore(m1);
 const text = range.toString(); // чистый текст
 const html = range.cloneContents();
-alert(text);alert(html);
+navigator.clipboard.writeText(text);
+alert(text);//alert(html);
  // фрагмент DOM
 return;
     
