@@ -117,13 +117,15 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
     it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {
+      click() {let cont=[];let y=0;
         
-const mm = frame.contentDocument.querySelectorAll('span');if(mm.length){
+const mm = frame.contentDocument.querySelectorAll('span');if(!mm.length){return;}else{
 const range = frame.contentDocument.createRange();
 range.setStart(frame.contentDocument.body, 0); 
 range.setEndBefore(mm[0]);
-const text = range.toString(); alert(text)
+const text = range.toString();
+cont[y]=text;y++;
+//alert(text)
 };
 if(mm.length>1){
 
@@ -136,7 +138,8 @@ const range = frame.contentDocument.createRange();
 range.setStartAfter(m1);
 range.setEndBefore(m2);
 const text = range.toString();
-alert(text); // чистый текст
+cont[y]=text;y++;
+//alert(text); // чистый текст
 const html = range.cloneContents();
 //navigator.clipboard.writeText(text);
 }};
@@ -145,8 +148,10 @@ let lastNode =frame.contentDocument.body.lastChild;alert(lastNode.textContent);
 range.setStartAfter(mm[mm.length-1]);
 range.setEndAfter(lastNode); 
 const text = range.toString();
-alert(text);};
-
+//alert(text);
+cont[y]=text;y++;
+};
+cont.forEach(function(txt){alert(txt);});
     
       }
     }
@@ -156,7 +161,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save3',
+    it: 'Save4',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
