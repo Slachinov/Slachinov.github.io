@@ -141,7 +141,7 @@ const text = range.toString();
 cont[y]=text;y++;
 //alert(text); // чистый текст
 const html = range.cloneContents();
-//navigator.clipboard.writeText(text);
+//;
 }};
   {  let range = document.createRange();
 range.setStartAfter(mm[mm.length-1]);
@@ -198,7 +198,9 @@ qq.ce(fs,{
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: 'save',event:{click:function(){}}
+    it: 'save',event:{click:function(){
+navigator.clipboard.writeText(editor.innerText)
+}}
 });
   // ---------- кнопки подсветки ----------
   const colors = [
