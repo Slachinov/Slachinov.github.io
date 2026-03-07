@@ -110,7 +110,7 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
   // ---------- кнопки localStorage ----------
   const lsKey = 'myEditorText';
 
-
+let ns={};
   qq.ce({
     tag: 'button',
     parent: lsPanel,
@@ -118,7 +118,7 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {let cont=[];let y=0;let inp;
-        
+      ns.c=cont;  
 const mm = frame.contentDocument.querySelectorAll('span');if(!mm.length){return;}else{
 const range = frame.contentDocument.createRange();
 range.setStart(frame.contentDocument.body, 0); 
@@ -161,7 +161,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save9',
+    it: 'Save0',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
@@ -172,8 +172,6 @@ return;
     }
   });
 //====
-
-
 let Panel=qq.ce({
     tag: 'div',
     parent: lsPanel});
@@ -192,7 +190,7 @@ qq.ce(fs,{
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: '===>',event:{click:function(){inp.innerText='--';inp.n++; editor.innerText=cont[inp.n]}}
+    it: '===>',event:{click:function(){inp.innerText='--';inp.n++; editor.innerText=ns.c[inp.n]}}
 });
 //==
 qq.ce(fs,{
