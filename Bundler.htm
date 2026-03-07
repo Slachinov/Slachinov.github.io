@@ -186,13 +186,13 @@ qq.ce(fs,{
  inp=qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: ' ',style:{'min-width':'100px'}
+    it: ' .',style:{'min-width':'100px'}
 });
 //===
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: '===>',event:{click:function(){inp.innerText=y+'--'+(y+1);y++}}
+    it: '===>',event:{click:function(){inp.innerText=y+'--';y++; editor.innerText=cont[y]}}
 });
 //==
 qq.ce(fs,{
