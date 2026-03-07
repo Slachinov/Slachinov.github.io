@@ -117,7 +117,7 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
     it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {let cont=[];let y=0;
+      click() {let cont=[];let y=0;let inp;
         
 const mm = frame.contentDocument.querySelectorAll('span');if(!mm.length){return;}else{
 const range = frame.contentDocument.createRange();
@@ -150,8 +150,9 @@ const text = range.toString();
 //alert(text);
 cont[y]=text;y++;
 };
-cont.forEach(function(txt){alert(txt);});
-    
+//cont.forEach(function(txt){alert(txt);});
+ inp.innerText='b--0';
+editor.innerText=cont[0];
       }
     }
   });
@@ -160,7 +161,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save8',
+    it: 'Save9',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
@@ -182,7 +183,7 @@ qq.ce(fs,{
     parent: Panel,
     it: '<===' ,event:{click:function(){}} });
 //==
-let inp=qq.ce(fs,{
+ inp=qq.ce(fs,{
     tag: 'button',
     parent: Panel,
     it: ' ',style:{'min-width':'100px'}
@@ -191,7 +192,7 @@ let inp=qq.ce(fs,{
 qq.ce(fs,{
     tag: 'button',
     parent: Panel,
-    it: '===>',event:{click:function(){}}
+    it: '===>',event:{click:function(){inp.innerText=y+'--'+(y+1);y++}}
 });
 //==
 qq.ce(fs,{
