@@ -69,7 +69,8 @@ o.repo='slachinov.github.io';
 
 
     // input для репозитория / path
-    let repoInput = qq.ce({
+    let repoInput 
+let pathInput= qq.ce({
         tag: 'input',
         parent: container,
         style: { width: '180px', marginLeft: '6px', marginRight: '6px' },
@@ -117,18 +118,18 @@ qq.ce({
     it: 'All',
     parent: container,
     event: {
-        click: async () => {alert(5);
+        click: async () => {
             const path = repoInput.value.trim();
            
 
 
             try {
                 // импорт функции getAllTree
-                const { default: getAllTree } = await import('https://slachinov.github.io/Lib/github/getall.js');alert(getAllTree);
+                const { default: getAllTree } = await import('https://slachinov.github.io/Lib/github/getall.js');
 
 
                 
-                const tree = await getAllTree({ owner:o.owner, repo:o.repo, token: o.token, branch: o.branch || 'main' });alert(tree);
+                const tree = await getAllTree({ owner:o.owner, repo:o.repo, token: o.token, branch: o.branch || 'main' });
 
 
                 // отобразим спис
@@ -143,7 +144,7 @@ qq.ce({
                         style: { border: '1px solid #aaa', padding: '2px', margin: '2px', cursor: 'pointer', borderRadius: '3px', background:'#fff' },
                         event: {
                             click: () => {
-                                edit.innerText = item.path;
+                                pathInput.value = item.path;
                                 all.hide();
                             }
                         }
