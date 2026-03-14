@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/qqv34.js"></script>
-  <script src="js/qqns.js"></script>
-  <script type="module" src="js/console.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="js/qqv34.js"></script>
+<script src="js/qqns.js"></script>
+<script type="module" src="js/console.js"></script>
 </head>
 <body>
 <script type="module">
@@ -14,11 +14,13 @@
 import {m} from 'https://slachinov.github.io/Lib/pan/main.js';
 
 
-GhPanel({edit:m.edit, all:m.all, parent:m.topPanel});
+GhPanel({edit: m.edit, all: m.all, parent: m.topPanel});
 
 
 async function GhPanel(par = {}) {
-    let { edit, all, parent } = par;
+    const edit = par.edit;
+    const all = par.all;
+    const parent = par.parent;
 
 
     let o = {
@@ -30,122 +32,122 @@ async function GhPanel(par = {}) {
 
 
     async function loadFile(path) {
-        const { owner, repo, token, branch } = o;
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+        const url = `https://api.github.com/repos/${o.owner}/${o.repo}/contents/${path}?ref=${o.branch}`;
         const response = await fetch(url, {
             headers: {
-                'Authorization': `token ${token}`,
+                'Authorization': `token ${o.token}`,
                 'Accept': 'application/vnd.github.v3+json'
             }
         });
         if (!response.ok) throw new Error(`Failed to load file: ${response.statusText}`);
         const data = await response.json();
-        return { content: decodeURIComponent(escape(atob(data.content))), sha: data.sha };
+        const content = decodeURIComponent(escape(atob(data.content)));
+        return { content, sha: data.sha };
     }
 
 
-    async function saveFile(path, content, message, sha) {
-        const { owner, repo, token, branch } = o;
+    async function saveFile(path, content, sha) {
         if (!sha) {
-            try { sha = (await loadFile(path)).sha; } catch(e) {}
+            try { sha = (await loadFile(path)).sha; } 
+            catch(e){/* файл не существует, sha не нужен */}
         }
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-        const body = { message: message || 'Update file', content: btoa(unescape(encodeURIComponent(content))), branch };
+        const body = { message: 'Update file', content: btoa(unescape(encodeURIComponent(content))), branch: o.branch };
         if (sha) body.sha = sha;
-        const res = await fetch(url, { method:'PUT', headers:{'Authorization': `token ${token}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'}, body: JSON.stringify(body) });
+        const url = `https://api.github.com/repos/${o.owner}/${o.repo}/contents/${path}`;
+        const res = await fetch(url, { method: 'PUT', headers: { 'Authorization': `token ${o.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type':'application/json' }, body: JSON.stringify(body) });
         if (!res.ok) throw new Error(`Failed to save file: ${res.statusText}`);
         return await res.json();
     }
 
 
-    async function deleteFile(path, sha, message) {
-        const { owner, repo, token, branch } = o;
-        if (!sha) sha = (await loadFile(path)).sha;
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-        const body = { message: message || 'Delete file', sha, branch };
-        const res = await fetch(url, { method:'DELETE', headers:{'Authorization': `token ${token}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'}, body: JSON.stringify(body) });
+    async function deleteFile(path, sha) {
+        const body = { message: 'Delete file', sha, branch: o.branch };
+        const url = `https://api.github.com/repos/${o.owner}/${o.repo}/contents/${path}`;
+        const res = await fetch(url, { method: 'DELETE', headers: { 'Authorization': `token ${o.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type':'application/json' }, body: JSON.stringify(body) });
         if (!res.ok) throw new Error(`Failed to delete file: ${res.statusText}`);
         return await res.json();
     }
 
 
-    const skin = { style: { fontSize:'18px', margin:'3px' } };
+    const skin = { style: { fontSize: '18px', margin: '3px' } };
     let mysk = qq.cs(skin, par.skinbutt||{});
 
 
-    let container = qq.ce({
-        tag:'div', parent, style:{ background:'#f9f9f9', border:'1px solid #ccc', padding:'6px', borderRadius:'6px', display:'inline-block' }
+    const container = qq.ce({
+        tag:'div', parent, style:{background:'#f9f9f9', border:'1px solid #ccc', padding:'6px', borderRadius:'6px', display:'inline-block'}
     });
 
 
-    qq.ce({ tag:'span', parent:container, it:'Gh0', style:{ color:'darkblue', background:'white', fontSize:'16px' } });
-    qq.ce({ tag:'button', it:'CL', parent:container, event:{ click(){ pathInput.value=''; } } });
+    qq.ce({tag:'span', parent:container, it:'Gh0', style:{color:'darkblue', background:'white', fontSize:'16px'}});
 
 
-    let pathInput = qq.ce({ tag:'input', parent:container, style:{ width:'180px', margin:'0 6px' }, attr:{ type:'text', placeholder:'Введите path' } }, mysk);
-    let keyInput = qq.ce({ tag:'input', parent:container, style:{ width:'120px', margin:'0 6px' }, attr:{ type:'text', placeholder:'Ключ' } }, mysk);
+    let pathInput = qq.ce({tag:'input', parent:container, style:{width:'180px', margin:'0 6px'}, attr:{type:'text', placeholder:'Введите path'}}, mysk);
 
 
-    qq.ce({ tag:'button', it:'Load', parent:container, event:{
-        click: async ()=> {
-            try {
-                let path = pathInput.value.trim(); if(!path) return;
-                let file = await loadFile(path);
-                edit.innerText = file.content;
-            } catch(err){ qq.cl('Ошибка загрузки: ' + err.message); }
-        }
-    }}, mysk);
+    // Load
+    qq.ce({tag:'button', it:'Load', parent:container, style:{...mysk.style}, event:{click: async () => {
+        const path = pathInput.value.trim();
+        if (!path) return;
+        try{
+            const file = await loadFile(path);
+            edit.innerText = file.content;
+            all.clear();
+        } catch(err){qq.cl('Ошибка загрузки: '+err.message);}
+    }}});
 
 
-    qq.ce({ tag:'button', it:'All', parent:container, event:{
-        click: async ()=> {
-            try {
-                const { default: getAllTree } = await import('https://slachinov.github.io/Lib/github/getall.js');
-                let tree = await getAllTree(o);
-                all.clear?.(); all.innerHTML=''; all.show();
-                tree.forEach(item => {
-                    qq.ce({
-                        tag:'div', parent:all, it:item.path, className:'gh-item', style:{ border:'1px solid #aaa', padding:'2px', margin:'2px', cursor:'pointer', borderRadius:'3px', background:'#fff' },
-                        event:{ click: async ()=> { pathInput.value=item.path; let file = await loadFile(item.path); edit.innerText=file.content; all.hide(); } }
-                    });
-                });
-            } catch(err){ qq.cl('Ошибка загрузки: ' + err.message); }
-        }
-    }}, mysk);
+    // All
+    qq.ce({tag:'button', it:'All', parent:container, style:{...mysk.style}, event:{click: async () => {
+        all.clear();
+        try{
+            const {default: getAllTree} = await import('https://slachinov.github.io/Lib/github/getall.js');
+            const tree = await getAllTree({owner:o.owner, repo:o.repo, token:o.token, branch:o.branch});
+            all.show();
+            tree.forEach(item=>{
+                qq.ce({tag:'div', parent:all, it:item.path, style:{border:'1px solid #aaa', padding:'2px', margin:'2px', cursor:'pointer', borderRadius:'3px', background:'#fff'}, event:{click: async ()=>{
+                    pathInput.value = item.path;
+                    try{edit.innerText = (await loadFile(item.path)).content;} catch(e){qq.cl('Ошибка: '+e.message);}
+                    all.hide();
+                }}})});
+        } catch(err){qq.cl('Ошибка загрузки: '+err.message);}
+    }}});
 
 
-    qq.ce({ tag:'button', it:'Write', parent:container, event:{
-        click: async ()=> {
-            try {
-                let path = pathInput.value.trim(); if(!path) return;
-                let key = keyInput.value.trim(); if(!key) return;
-                await saveFile(path, edit.innerText, `Update key: ${key}`);
-                qq.cl(`Записано: "${key}"`);
-            } catch(err){ qq.cl('Ошибка записи: ' + err.message); }
-        }
-    }}, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
+    // Write
+    qq.ce({tag:'button', it:'Write', parent:container, style:{...mysk.style, background:'red', color:'white'}, event:{click: async ()=>{
+        const path = pathInput.value.trim();
+        if(!path) return;
+        try{
+            await saveFile(path, edit.innerText);
+            all.clear();
+            qq.cl(`Файл "${path}" записан`);
+        } catch(e){qq.cl('Ошибка записи: '+e.message);}
+    }}});
 
 
-    qq.ce({ tag:'button', it:'Delete', parent:container, event:{
-        click: async ()=>{
-            const path = pathInput.value.trim(); if(!path) return;
-            all.clear?.(); all.innerHTML=''; all.show();
-            qq.ce({ tag:'div', parent:all, it:'Вы действительно хотите удалить: '+path, style:{ marginBottom:'10px' } });
+    // Delete
+    qq.ce({tag:'button', it:'Delete', parent:container, style:{...mysk.style, background:'red', color:'white'}, event:{click: async ()=>{
+        const path = pathInput.value.trim();
+        if(!path) return;
+        all.clear();
+        // Панель подтверждения
+        all.show();
+        qq.ce({tag:'div', parent:all, it:`Удалить "${path}"?`, style:{padding:'4px', margin:'4px'}});
+        qq.ce({tag:'button', parent:all, it:'Да', style:{background:'red', color:'white', margin:'4px', padding:'4px 8px'}, event:{click: async ()=>{
+            try{
+                const sha = (await loadFile(path)).sha;
+                await deleteFile(path, sha);
+                edit.innerText='';
+                all.clear();
+                qq.cl(`Файл "${path}" удалён`);
+            } catch(e){qq.cl('Ошибка удаления: '+e.message);}
+        }}});
+        qq.ce({tag:'button', parent:all, it:'Нет', style:{margin:'4px', padding:'4px 8px'}, event:{click:()=>all.clear()}});
+    }}});
 
 
-            const btnYes = qq.ce({ tag:'button', parent:all, it:'Да', style:{ background:'red', color:'white', fontSize:'20px', margin:'10px 10px 10px 0', padding:'6px 12px', cursor:'pointer' } });
-            btnYes.addEventListener('click', async ()=>{
-                try { await deleteFile(path); edit.innerText=''; qq.cl(`Удалено: ${path}`); all.hide(); } catch(err){ qq.cl('Ошибка удаления: '+err.message); }
-            });
-
-
-            const btnNo = qq.ce({ tag:'button', parent:all, it:'Нет', style:{ fontSize:'20px', margin:'10px 0 10px 10px', padding:'6px 12px', cursor:'pointer' } });
-            btnNo.addEventListener('click', ()=>{ all.hide(); });
-        }
-    }}, qq.cs(mysk, { style:{ background:'red', color:'white' } }));
-
-
-    qq.ce({ tag:'button', parent:container, it:'⚙️', style:{ fontSize:'18px', padding:'2px 6px' }, event:{ click: ()=>{ qq.cl('Нажата кнопка шестеренка'); } } });
+    // Панель шестерёнка
+    qq.ce({tag:'button', parent:container, it:'\u2699', style:{fontSize:'18px', padding:'2px 6px'}, event:{click:()=>qq.cl('Нажата кнопка шестеренка')}});
 
 
     return container;
