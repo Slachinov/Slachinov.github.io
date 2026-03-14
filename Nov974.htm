@@ -24,9 +24,8 @@ import  LsCreateGithubPanel from 'https://slachinov.github.io/Editor/panelGh.V
 LsCreateGithubPanel ({edit:m.edit,parent:m.topPanel,all:m.all});*/
 
 //=========
-
-
-export default function GhPanel(par = {}) {
+GhPanel ({edit:m.edit,parent:m.topPanel,all:m.all});
+function GhPanel (par = {}) {
     let edit = par.edit;
     let all = par.all;
     let parent = par.parent;
