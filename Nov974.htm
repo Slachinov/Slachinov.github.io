@@ -178,7 +178,7 @@ let pathInput= qq.ce({
 //=====
 qq.ce({
     tag: 'button',
-    it: 'All1',
+    it: 'All',
     parent: container,
     event: {
         click: async () => {
@@ -206,11 +206,21 @@ qq.ce({
                         className: 'gh-item',
                         style: { border: '1px solid #aaa', padding: '2px', margin: '2px', cursor: 'pointer', borderRadius: '3px', background:'#fff' },
                         event: {
-                            click: () => {
-                                pathInput.value = item.path;
-                                all.hide();
-                            }
-                        }
+    click: async () => {
+        try {
+            pathInput.value = item.path;
+
+
+            const file = await loadFile(item.path);
+            edit.innerText = file.content;
+
+
+            all.hide();
+        } catch (err) {
+            qq.cl('Ошибка загрузки: ' + err.message);
+        }
+    }
+}
                     });
                 });
             } catch (err) {
