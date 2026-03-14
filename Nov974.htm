@@ -22,7 +22,7 @@ CreateLocalStoragePanel ({edit:m.edit,parent:m.topPanel,all:m.all});/*
 import  LsCreateGithubPanel from 'https://slachinov.github.io/Editor/panelGh.V1.js';
 
 LsCreateGithubPanel ({edit:m.edit,parent:m.topPanel,all:m.all});*/
-
+//=====///
 //=========
 GhPanel ({edit:m.edit,parent:m.topPanel,all:m.all});
 function GhPanel (par = {}) {
@@ -37,6 +37,38 @@ o.branch='master';
 o.owner='slachinov';
 o.repo='slachinov.github.io';
 
+//====
+function loadFile(o, path) {
+    const { owner, repo, token, branch = 'main' } = o;
+
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+
+
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+
+
+    if (!response.ok) {
+        throw new Error(`Failed to load file: ${response.statusText}`);
+    }
+
+
+    const data = await response.json();
+
+
+    const content = decodeURIComponent(escape(atob(data.content)));
+
+
+    return {
+        content,
+        sha: data.sha
+    };
+}
 //====
     const skin = { style: { fontSize: '18px', margin: '3px' } };
     let mysk = qq.cs(skin, par.skinbutt || {});
@@ -81,14 +113,14 @@ let pathInput= qq.ce({
     // Load репозиторий
     qq.ce({
         tag: 'button',
-        it: 'Load',
+        it: 'Load1',
         parent: container,
         event: {
             click: async () => {
-                let path = repoInput.value.trim();
+                let path = pathInput.value.trim();
                 if (!path) return;
-                let items = await par.githubLoadRepo(path);
-                renderItems(items);
+                let items = await loadFile(path);
+                alert(items);
             }
         }
     }, mysk);
