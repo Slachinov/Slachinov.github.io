@@ -136,14 +136,15 @@ let pathInput= qq.ce({
     // Load репозиторий
     qq.ce({
         tag: 'button',
-        it: 'Load2',
+        it: 'Load3',
         parent: container,
         event: {
             click: async () => {
                 let path = pathInput.value.trim();
                 if (!path) return;
                 let items = await loadFile(path);
-                alert(items);
+                alert(items.content);
+edit.innerText=items.content;
             }
         }
     }, mysk);
