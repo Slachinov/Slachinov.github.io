@@ -81,8 +81,31 @@ async function GhPanel(par = {}) {
     qq.ce({ tag: 'span', parent: container, it: 'Gh', style: { color: 'darkblue', background: 'white', fontSize: '16px' } });
 
 
+// Кнопка очистки pathInput
+let pathInput;
+const clButton = qq.ce({
+    tag: 'button',
+    it: 'CL',
+    parent: container,  // куда вставляем, например твой контейнер
+    style: { 
+        fontSize: '18px', 
+        margin: '6px', 
+        padding: '4px 10px',
+        background: '#eee',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        cursor: 'pointer'
+    },
+    event: { 
+        click() {
+            pathInput.value = '';
+            all.clear();   // очищаем панель all
+            all.hide();    // скрываем панель all
+        } 
+    }
+});
     // input для path
-    let pathInput = qq.ce({ tag: 'input', parent: container, style: { width: '180px', marginLeft: '6px', marginRight: '6px' }, attr: { type: 'text', placeholder: 'Введите path' } }, mysk);
+    pathInput = qq.ce({ tag: 'input', parent: container, style: { width: '180px', marginLeft: '6px', marginRight: '6px' }, attr: { type: 'text', placeholder: 'Введите path' } }, mysk);
 
 
     // Load
