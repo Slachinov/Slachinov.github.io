@@ -259,7 +259,8 @@ qq.loadscript = function(url) {
     document.head.appendChild(el);
   });
 };
-
-
+qq.wait = function(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+};
 qq.ce = qq.f.crElem;
 qq.cs = qq.f.createSkin;
