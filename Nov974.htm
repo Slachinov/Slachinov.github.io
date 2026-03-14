@@ -30,7 +30,14 @@ function GhPanel (par = {}) {
     let all = par.all;
     let parent = par.parent;
 
+//====
+let o={};
+o.token=qq.ls('token');
+o.branch='master';
+o.owner='slachinov';
+o.repo='slachinov.github.io';
 
+//====
     const skin = { style: { fontSize: '18px', margin: '3px' } };
     let mysk = qq.cs(skin, par.skinbutt || {});
 
@@ -91,7 +98,7 @@ function GhPanel (par = {}) {
 
 
     // кнопки All / Write / Delete
-    qq.ce({
+ /*   qq.ce({
         tag: 'button',
         it: 'All',
         parent: container,
@@ -103,7 +110,52 @@ function GhPanel (par = {}) {
                 renderItems(items);
             }
         }
-    }, mysk);
+    }, mysk);*/
+//=====
+qq.ce({
+    tag: 'button',
+    it: 'All',
+    parent: container,
+    event: {
+        click: async () => {
+            const path = repoInput.value.trim();
+           
+
+
+            try {
+                // импорт функции getAllTree
+                const { default: getAllTree } = await import('https://slachinov.github.io/Lib/github/getall.js');
+
+
+                
+                const tree = await getAllTree({ owner, repo, token: par.token, branch: par.branch || 'main' });
+
+
+                // отобразим список путей в all
+                all.innerHTML = '';
+                all.show();
+                tree.forEach(item => {
+                    qq.ce({
+                        tag: 'div',
+                        parent: all,
+                        it: item.path,
+                        className: 'gh-item',
+                        style: { border: '1px solid #aaa', padding: '2px', margin: '2px', cursor: 'pointer', borderRadius: '3px', background:'#fff' },
+                        event: {
+                            click: () => {
+                                edit.innerText = item.path;
+                                all.hide();
+                            }
+                        }
+                    });
+                });
+            } catch (err) {
+                qq.cl('Ошибка загрузки: ' + err.message);
+            }
+        }
+    }
+}, mysk);
+//=====
 qq.ce({tag:'button',parent:container, it:'?'});
 
 
