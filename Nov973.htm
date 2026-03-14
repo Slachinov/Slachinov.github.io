@@ -155,14 +155,14 @@ async function GhPanel(par = {}) {
             qq.ce({
                 tag: 'div',
                 parent: all,
-                it: 'Вы 5действительно хотите удалить: ' + path,
+                it: 'Вы 56действительно хотите удалить: ' + path,
                 style: { border: '1px solid #f00', padding: '4px', margin: '2px', background:'#fee' }
             });
-            qq.ce({ tag: 'button', parent: all, it: 'Да', event: async () => {alert(8);
+            qq.ce({ tag: 'button', parent: all, it: 'Да', event: {click:async function() {alert(8);
                 await deleteFile(path);
                 edit.innerText = '';
                 all.hide();
-                qq.cl(`Удалено: "${path}"`);
+                qq.cl(`Удалено: "${path}"`);}
             }});
             qq.ce({ tag: 'button', parent: all, it: 'Нет', event: () => all.hide() });
         }
