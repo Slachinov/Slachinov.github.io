@@ -104,6 +104,7 @@ function GhPanel (par = {}) {
             }
         }
     }, mysk);
+qq.ce({tag:'button',parent:container, it:'?'});
 
 
     qq.ce({
@@ -165,6 +166,18 @@ function GhPanel (par = {}) {
             });
         }
     }
+//===
+qq.ce({
+    tag: 'button',
+    parent: container, // куда вставляем
+    it: '\u2699', // ⚙️ через Unicode
+    style: { fontSize: '18px', padding: '2px 6px' },
+    event: {
+        click: () => {
+            qq.cl('Нажата кнопка шестеренка');
+        }
+    }
+});
 
 
     return container;
