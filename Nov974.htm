@@ -136,17 +136,24 @@ let pathInput= qq.ce({
     // Load репозиторий
     qq.ce({
         tag: 'button',
-        it: 'Load3',
+        it: 'Load4',
         parent: container,
-        event: {
-            click: async () => {
-                let path = pathInput.value.trim();
-                if (!path) return;
-                let items = await loadFile(path);
-                alert(items.content);
-edit.innerText=items.content;
-            }
+       event: {
+    click: async () => {
+        try {
+            pathInput.value = item.path;
+
+
+            const file = await loadFile(item.path);
+            edit.innerText = file.content;
+
+
+            all.hide();
+        } catch (err) {
+            qq.cl('Ошибка загрузки: ' + err.message);
         }
+    }
+}
     }, mysk);
 
 
