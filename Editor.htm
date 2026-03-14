@@ -142,15 +142,46 @@ const clButton = qq.ce({
         }
     }, mysk);
 
-
+/*
     // Write
     qq.ce({
         tag: 'button', parent: container, it: 'Write',
         style: qq.cs(mysk, { style: { background: 'red', color: 'white' } }).style,
         event: { click: async () => { const path = pathInput.value.trim(); if (!path) return; try { await saveFile(path, edit.innerText); qq.cl(`Записано: "${path}"`); } catch(e){ qq.cl('Ошибка: '+e.message); } } }
-    });
+    });*/
+//====//
+
+const writeButton = qq.ce({
+    tag: 'button',
+    it: 'Write',
+    parent: container,
+    style: { background: 'red', color: 'white', fontSize: '16px', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer' },
+    event: {
+        click: async () => {
+            let path = pathInput.value.trim();
+            if (!path) return;
+            let value = edit.innerText;
 
 
+            // меняем цвет на бледно-розовый при нажатии
+            writeButton.style.background = '#ffc0cb'; 
+
+
+            try {
+                await par.githubWrite(path, value, value); // пример вызова функции записи
+                // правильный ответ — через 200 мс возвращаем красный
+                setTimeout(() => {
+                    writeButton.style.background = 'red';
+                }, 200);
+            } catch (err) {
+                // если ошибка — можно сделать другой цвет
+                writeButton.style.background = '#ff9999'; // более яркий красно-розовый
+                console.error('Ошибка записи:', err);
+            }
+        }
+    }
+});
+//=======/
     // Delete
     qq.ce({
         tag: 'button', parent: container, it: 'Delete',
