@@ -136,15 +136,15 @@ let pathInput= qq.ce({
     // Load репозиторий
     qq.ce({
         tag: 'button',
-        it: 'Load4',
+        it: 'Load5',
         parent: container,
        event: {
     click: async () => {
         try {
-            pathInput.value = item.path;
+            let path=pathInput.value ;
 
 
-            const file = await loadFile(item.path);
+            const file = await loadFile(path);
             edit.innerText = file.content;
 
 
