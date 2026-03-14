@@ -148,7 +148,7 @@ let pathInput= qq.ce({
             edit.innerText = file.content;
 
 
-            all.hide();
+            
         } catch (err) {
             qq.cl('Ошибка загрузки: ' + err.message);
         }
@@ -178,11 +178,11 @@ let pathInput= qq.ce({
 //=====
 qq.ce({
     tag: 'button',
-    it: 'All',
+    it: 'All1',
     parent: container,
     event: {
         click: async () => {
-            const path = repoInput.value.trim();
+            const path;
            
 
 
