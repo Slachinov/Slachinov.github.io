@@ -138,7 +138,7 @@ async function GhPanel(par = {}) {
                 const sha = (await loadFile(path)).sha;
                 await deleteFile(path, sha);
                 edit.innerText='';
-                all.clear();
+                all.clear();all.hide();
                 qq.cl(`Файл "${path}" удалён`);
             } catch(e){qq.cl('Ошибка удаления: '+e.message);}
         }}});
