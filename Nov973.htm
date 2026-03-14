@@ -155,10 +155,10 @@ async function GhPanel(par = {}) {
             qq.ce({
                 tag: 'div',
                 parent: all,
-                it: 'Вы действительно хотите удалить: ' + path,
+                it: 'Вы 5действительно хотите удалить: ' + path,
                 style: { border: '1px solid #f00', padding: '4px', margin: '2px', background:'#fee' }
             });
-            qq.ce({ tag: 'button', parent: all, it: 'Да', event: async () => {
+            qq.ce({ tag: 'button', parent: all, it: 'Да', event: async () => {alert(8);
                 await deleteFile(path);
                 edit.innerText = '';
                 all.hide();
