@@ -23,63 +23,52 @@ import  LsCreateGithubPanel from 'https://slachinov.github.io/Editor/panelGh.V
 
 LsCreateGithubPanel ({edit:m.edit,parent:m.topPanel,all:m.all});*/
 
-//=== ======
-GhPanel ({edit:m.edit,parent:m.topPanel,all:m.all});
-function GhPanel(par = {}) {
-    let edit = par.edit;      // textarea или div для вывода/редактирования
-    let all = par.all;        // контейнер для списка элементов
-    let parent = par.parent;  // куда вставлять панель
+//=========
 
 
+export default function GhPanel(par = {}) {
+    let edit = par.edit;
+    let all = par.all;
+    let parent = par.parent;
 
 
     const skin = { style: { fontSize: '18px', margin: '3px' } };
     let mysk = qq.cs(skin, par.skinbutt || {});
 
 
-
-
     // контейнер с мягким фоном и бордером
     let container = qq.ce({
         tag: 'div',
         parent: parent,
-        style: { background: '#f0f8ff', border: '1px solid #ccc', padding: '6px', borderRadius: '6px', display: 'inline-block' }
+        style: { background: '#f9f9f9', border: '1px solid #ccc', padding: '6px', borderRadius: '6px', display: 'inline-block' }
     });
 
 
-
-
-    // метка
+    // метка Gh без маргинов и паддингов
     qq.ce({
         tag: 'span',
         parent: container,
         it: 'Gh',
-        style: { color: 'darkblue', background: 'white', marginRight: '6px', fontSize: '16px', padding: '2px 4px', borderRadius: '3px' }
+        style: { color: 'darkblue', background: 'white', fontSize: '16px' }
     });
 
 
-
-
-    // кнопка очистки input
+    // кнопка очистки path без mysk
     qq.ce({
         tag: 'button',
         it: 'CL',
         parent: container,
         event: { click() { repoInput.value = ''; } }
-    }, mysk);
-
-
+    });
 
 
     // input для репозитория / path
     let repoInput = qq.ce({
         tag: 'input',
         parent: container,
-        style: { width: '300px', marginLeft: '6px', marginRight: '6px' },
+        style: { width: '180px', marginLeft: '6px', marginRight: '6px' },
         attr: { type: 'text', placeholder: 'Введите path' }
     }, mysk);
-
-
 
 
     // Load репозиторий
@@ -91,29 +80,20 @@ function GhPanel(par = {}) {
             click: async () => {
                 let path = repoInput.value.trim();
                 if (!path) return;
-                let items = await par.githubLoadRepo(path); // твоя функция получения элементов репозитория
+                let items = await par.githubLoadRepo(path);
                 renderItems(items);
             }
         }
     }, mysk);
 
 
-
-
-    qq.ce({ tag: 'br', parent: container });
-
-
-
-
-    // input для ключа / имени элемента
+    // input для ключа / элемента короткий
     let keyInput = qq.ce({
         tag: 'input',
         parent: container,
-        style: { width: '250px', marginRight: '6px', marginTop: '3px' },
-        attr: { type: 'text', placeholder: 'Введите имя элемента' }
+        style: { width: '150px', marginLeft: '6px', marginRight: '6px' },
+        attr: { type: 'text', placeholder: 'Элемент' }
     }, mysk);
-
-
 
 
     // кнопки All / Write / Delete
@@ -132,8 +112,6 @@ function GhPanel(par = {}) {
     }, mysk);
 
 
-
-
     qq.ce({
         tag: 'button',
         it: 'Write',
@@ -149,9 +127,7 @@ function GhPanel(par = {}) {
                 qq.cl(`Записано: "${key}"`);
             }
         }
-    }, mysk);
-
-
+    }, qq.cs(mysk, { style: { background: 'red', color: 'white' } }));
 
 
     qq.ce({
@@ -169,9 +145,7 @@ function GhPanel(par = {}) {
                 qq.cl(`Удалено: "${key}"`);
             }
         }
-    }, mysk);
-
-
+    }, qq.cs(mysk, { style: { background: 'red', color: 'white' } }));
 
 
     // рендер списка элементов
@@ -197,8 +171,6 @@ function GhPanel(par = {}) {
             });
         }
     }
-
-
 
 
     return container;
