@@ -124,14 +124,14 @@ qq.ce({
 
             try {
                 // импорт функции getAllTree
-                const { default: getAllTree } = await import('https://slachinov.github.io/Lib/github/getall.js');
+                const { default: getAllTree } = await import('https://slachinov.github.io/Lib/github/getall.js');alert(getAllTree);
 
 
                 
-                const tree = await getAllTree({ owner, repo, token: par.token, branch: par.branch || 'main' });
+                const tree = await getAllTree({ owner:o.owner, repo:o.repo, token: o.token, branch: o.branch || 'main' });alert(tree);
 
 
-                // отобразим список путей в all
+                // отобразим спис
                 all.innerHTML = '';
                 all.show();
                 tree.forEach(item => {
