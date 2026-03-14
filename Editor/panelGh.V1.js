@@ -1,33 +1,28 @@
-export default function GitHubPanel(par = {}) {
+export default function GhPanel(par = {}) {
     let edit = par.edit;      // textarea или div для вывода/редактирования
     let all = par.all;        // контейнер для списка элементов
     let parent = par.parent;  // куда вставлять панель
 
 
-    const skin = { style: { fontSize: '20px', margin: '2px' } };
+    const skin = { style: { fontSize: '18px', margin: '3px' } };
     let mysk = qq.cs(skin, par.skinbutt || {});
 
 
-    // контейнер
-    let container = qq.ce({ tag: 'div', parent: parent });
+    // контейнер с мягким фоном и бордером
+    let container = qq.ce({
+        tag: 'div',
+        parent: parent,
+        style: { background: '#f0f8ff', border: '1px solid #ccc', padding: '6px', borderRadius: '6px', display: 'inline-block' }
+    });
 
 
     // метка
     qq.ce({
         tag: 'span',
         parent: container,
-        it: 'GitHub',
-        style: { color: 'blue', background: 'white', marginRight: '6px', fontSize: '16px' }
+        it: 'Gh',
+        style: { color: 'darkblue', background: 'white', marginRight: '6px', fontSize: '16px', padding: '2px 4px', borderRadius: '3px' }
     });
-
-
-    // input для адреса репозитория / API
-    let repoInput = qq.ce({
-        tag: 'input',
-        parent: container,
-        style: { width: '300px', marginRight: '6px' },
-        attr: { type: 'text', placeholder: 'Введите репозиторий или API URL' }
-    }, mysk);
 
 
     // кнопка очистки input
@@ -36,60 +31,91 @@ export default function GitHubPanel(par = {}) {
         it: 'CL',
         parent: container,
         event: { click() { repoInput.value = ''; } }
-    });
+    }, mysk);
 
 
-    qq.ce({ tag: 'br', parent: container });
+    // input для репозитория / path
+    let repoInput = qq.ce({
+        tag: 'input',
+        parent: container,
+        style: { width: '300px', marginLeft: '6px', marginRight: '6px' },
+        attr: { type: 'text', placeholder: 'Введите path' }
+    }, mysk);
 
 
-    // All
+    // Load репозиторий
     qq.ce({
         tag: 'button',
-        it: 'All',
+        it: 'Load',
         parent: container,
         event: {
             click: async () => {
-                let repo = repoInput.value.trim();
-                if (!repo) return;
-                // вызываем твою функцию для получения всех элементов
-                let items = await par.githubAll(repo); // должна вернуть массив
+                let path = repoInput.value.trim();
+                if (!path) return;
+                let items = await par.githubLoadRepo(path); // твоя функция получения элементов репозитория
                 renderItems(items);
             }
         }
     }, mysk);
 
 
-    // Write
+    qq.ce({ tag: 'br', parent: container });
+
+
+    // input для ключа / имени элемента
+    let keyInput = qq.ce({
+        tag: 'input',
+        parent: container,
+        style: { width: '250px', marginRight: '6px', marginTop: '3px' },
+        attr: { type: 'text', placeholder: 'Введите имя элемента' }
+    }, mysk);
+
+
+    // кнопки All / Write / Delete
+    qq.ce({
+        tag: 'button',
+        it: 'All',
+        parent: container,
+        event: {
+            click: async () => {
+                let path = repoInput.value.trim();
+                if (!path) return;
+                let items = await par.githubAll(path);
+                renderItems(items);
+            }
+        }
+    }, mysk);
+
+
     qq.ce({
         tag: 'button',
         it: 'Write',
         parent: container,
         event: {
             click: async () => {
-                let repo = repoInput.value.trim();
-                if (!repo) return;
+                let path = repoInput.value.trim();
+                if (!path) return;
                 let key = keyInput.value.trim();
                 if (!key) return;
                 let value = edit.innerText;
-                await par.githubWrite(repo, key, value);
+                await par.githubWrite(path, key, value);
                 qq.cl(`Записано: "${key}"`);
             }
         }
     }, mysk);
 
 
-    // Delete
     qq.ce({
         tag: 'button',
         it: 'Delete',
         parent: container,
         event: {
             click: async () => {
-                let repo = repoInput.value.trim();
-                if (!repo) return;
+                let path = repoInput.value.trim();
+                if (!path) return;
                 let key = keyInput.value.trim();
                 if (!key) return;
-                await par.githubDelete(repo, key);
+                await par.githubDelete(path, key);
                 edit.innerText = '';
                 qq.cl(`Удалено: "${key}"`);
             }
@@ -97,38 +123,7 @@ export default function GitHubPanel(par = {}) {
     }, mysk);
 
 
-    // Load
-    qq.ce({
-        tag: 'button',
-        it: 'Load',
-        parent: container,
-        event: {
-            click: async () => {
-                let repo = repoInput.value.trim();
-                if (!repo) return;
-                let key = keyInput.value.trim();
-                if (!key) return;
-                let value = await par.githubLoad(repo, key);
-                edit.innerText = value || '';
-                if (!value) qq.cl(`Нет значения: "${key}"`);
-            }
-        }
-    }, mysk);
-
-
-    qq.ce({ tag: 'br', parent: container });
-
-
-    // input для ключа / имени файла / элемента
-    let keyInput = qq.ce({
-        tag: 'input',
-        parent: container,
-        style: { width: '250px', marginRight: '6px' },
-        attr: { type: 'text', placeholder: 'Введите имя элемента' }
-    }, mysk);
-
-
-    // контейнер для рендеринга элементов
+    // рендер списка элементов
     function renderItems(items) {
         if (!items || items.length === 0) return;
         all.innerHTML = '';
@@ -138,11 +133,13 @@ export default function GitHubPanel(par = {}) {
                 tag: 'div',
                 parent: all,
                 it: key,
-                style: { border: '1px solid black', padding: '2px', margin: '2px', cursor: 'pointer' },
+                style: { border: '1px solid #aaa', padding: '2px', margin: '2px', cursor: 'pointer', borderRadius: '3px', background:'#fff' },
                 event: {
-                    click() {
+                    click: async () => {
                         keyInput.value = key;
-                        edit.innerText = ''; // можно вызвать githubLoad по клику, если нужно
+                        let path = repoInput.value.trim();
+                        if (!path) return;
+                        edit.innerText = await par.githubLoad(path, key) || '';
                         all.hide();
                     }
                 }
