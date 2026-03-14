@@ -25,7 +25,7 @@ LsCreateGithubPanel ({edit:m.edit,parent:m.topPanel,all:m.all});*/
 //=====///
 //=========
 GhPanel ({edit:m.edit,parent:m.topPanel,all:m.all});
-function GhPanel (par = {}) {
+async function GhPanel (par = {}) {
     let edit = par.edit;
     let all = par.all;
     let parent = par.parent;
@@ -38,8 +38,8 @@ o.owner='slachinov';
 o.repo='slachinov.github.io';
 
 //====
-function loadFile(o, path) {
-    const { owner, repo, token, branch = 'main' } = o;
+function loadFile(path) {
+    const { owner, repo, token, branch} = o;
 
 
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
@@ -113,7 +113,7 @@ let pathInput= qq.ce({
     // Load репозиторий
     qq.ce({
         tag: 'button',
-        it: 'Load1',
+        it: 'Load2',
         parent: container,
         event: {
             click: async () => {
