@@ -38,11 +38,11 @@ o.owner='slachinov';
 o.repo='slachinov.github.io';
 
 //====
-function loadFile(path) {
+async function loadFile(path) {
     const { owner, repo, token, branch} = o;
 
 
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;alert(url);alert(token);}/*
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;alert(url);alert(token);
 
 
     const response = await fetch(url, {
