@@ -168,14 +168,14 @@ const writeButton = qq.ce({
 
 
             try {
-                await par.githubWrite(path, value, value); // пример вызова функции записи
-                // правильный ответ — через 200 мс возвращаем красный
+                await saveFile(path, edit.innerText); // пример выз
+                // правильны красный
                 setTimeout(() => {
                     writeButton.style.background = 'red';
                 }, 200);
             } catch (err) {
-                // если ошибка — можно сделать другой цвет
-                writeButton.style.background = '#ff9999'; // более яркий красно-розовый
+                // если ошибка — 
+                writeButton.style.background = '#ff9999'; // более яркий красн
                 console.error('Ошибка записи:', err);
             }
         }
