@@ -1,4 +1,4 @@
-async function GhPanel(par = {}) {
+export default async function GhPanel(par = {}) {
     const edit = par.edit;
     const all = par.all;
     const parent = par.parent;
