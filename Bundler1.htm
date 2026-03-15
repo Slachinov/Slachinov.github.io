@@ -110,35 +110,68 @@ const sel = frame.contentWindow.getSelection();//alert(3);alert(sel);
   // ---------- кнопки localStorage ----------
   const lsKey = 'myEditorText';
 
-
+let ns={};
   qq.ce({
     tag: 'button',
     parent: lsPanel,
     it: 'Load6',
     style: { margin: '2px', fontSize: '14px' },
     event: {
-      click() {
-        
-const mm = frame.contentDocument.querySelectorAll('span');//alert(mm.length);
-/*
- // начало документа
-range.setEndBefore(firstMarker);               // перед меткой*/
-const m1=mm[0];
-const m2=mm[1];
+      click() {let cont=[];let y=0;
+      ns.c=cont;
+const mm = frame.contentDocument.querySelectorAll('span');if(!mm.length){return;}else{
 const range = frame.contentDocument.createRange();
 range.setStart(frame.contentDocument.body, 0); 
-//range.setStartAfter(m1);
-range.setEndBefore(m1);
-const text = range.toString(); // чистый текст
+range.setEndBefore(mm[0]);
+//const text = range.toString();
+//====
+const range = document.createRange();
+range.setStartAfter(m1);
+range.setEndBefore(m2);
+
+
+// Создаём временный div
+const container = document.createElement('div');
+
+
+// Клонируем содержимое Range внутрь контейнера
+container.appendChild(range.cloneContents());
+
+
+// Получаем текст с переносами
+const text = container.innerText;
+
+
+//======
+cont[y]=text;y++;
+//alert(text)
+};
+if(mm.length>1){
+
+for(let i=0;i<mm.length-1;i++){
+
+const m1=mm[i];
+const m2=mm[i+1];
+const range = frame.contentDocument.createRange();
+//range.setStart(m1); 
+range.setStartAfter(m1);
+range.setEndBefore(m2);
+const text = range.toString();
+cont[y]=text;y++;
+//alert(text); // чистый текст
 const html = range.cloneContents();
-navigator.clipboard.writeText(text);
-alert(text);//alert(html);
- // фрагмент DOM
-return;
-    
-
-
-    
+//;
+}};
+  {  let range = document.createRange();
+range.setStartAfter(mm[mm.length-1]);
+range.setEndAfter(editor); 
+const text = range.toString();
+//alert(text);
+cont[y]=text;y++;
+};
+//cont.forEach(function(txt){alert(txt);});
+ ns.i.innerText='b--0';ns.i.n=0;
+editor.innerText=cont[0];
       }
     }
   });
@@ -147,7 +180,7 @@ let n=1;
   qq.ce({
     tag: 'button',
     parent: lsPanel,
-    it: 'Save5',
+    it: 'Save2',
     style: { margin: '2px', fontSize: '14px' },
     event: {
       click() {insertHtmlAtCursor ('<span data-mark="1" style="background: yellow;">'+n+'</span>');n++;
@@ -157,8 +190,36 @@ return;
       }
     }
   });
+//====
+let Panel=qq.ce({
+    tag: 'div',
+    parent: lsPanel});
+let fs={style:{'font-size':'25px'}};
+qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it: '<===' ,event:{click:function(){
+if(ns.i==0)return;ns.i.n--;ns.i.innerText='--'+ns.i.n;
+editor.innerText=ns.c[ns.i.n]
+}} });
+//==
+ns.i=qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it: '. ',style:{'min-width':'100px'}});
 
 
+//===
+qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it: '===>',event:{click:function(){if(ns.i.n==ns.c.length-1)return;ns.i.innerText=(ns.i.n+1)+'--';ns.i.n++;if(ns.i.n==ns.c.length-1)ns.i.innerText+='e';else ns.i.innerText+=ns.i.n+1; editor.innerText=ns.c[ns.i.n]}}});
+//==
+qq.ce(fs,{
+    tag: 'button',
+    parent: Panel,
+    it:"\u{1F4CB}",event:{click:function(){
+navigator.clipboard.writeText(editor.innerText)}}});
   // ---------- кнопки подсветки ----------
   const colors = [
     {name: 'Blue', color: '#cce5ff', ref: 'path1'},
