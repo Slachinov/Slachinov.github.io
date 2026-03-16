@@ -131,6 +131,7 @@ async function listDBs() {
 
 
 // Показываем список стора для выбранной базы
+
 async function showStore(dbName) {
   if (!dbName) return;
   currentDB = dbName;
@@ -140,10 +141,19 @@ async function showStore(dbName) {
   openReq.onupgradeneeded = () => {};
   openReq.onsuccess = () => {
     const db = openReq.result;
-    storeSelect.innerHTML = ''; // очистка предыдущих стора
+
+
+    // очистка предыдущих стора
+    storeSelect.innerHTML = '';
+
+
+    // добавляем стора в селект
     Array.from(db.objectStoreNames).forEach(name => {
       qq.ce({ tag: 'option', parent: storeSelect, val: name, it: name });
     });
+
+
+    // сразу показать записи первого стора
     if (db.objectStoreNames.length) showRecords(dbName, db.objectStoreNames[0]);
   };
 }
@@ -178,6 +188,6 @@ async function showRecords(dbName, storeName) {
 listDBs();
 </script>
 //====$$
-<script>alert(2)</script>
+<script>alert(42)</script>
 </body>
 </html>
