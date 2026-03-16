@@ -7,7 +7,7 @@
   <script type="module" src="js/console.js"></script>
 </head>
 <body>
-<script type="module">
+<script type="module">/*
 //alert(3);qq.cl(89);
 import {createFullscreenPanel} from 'https://slachinov.github.io/Lib/pan/1all1.js';
 
@@ -71,6 +71,113 @@ qq.ce({tag:'br',parent:topp});
 };
 listDBs();
 </script>
+//======
+<script type="module">
+import { createFullscreenPanel } from 'https://slachinov.github.io/Lib/pan/1all1.js';
+import f2p from 'https://slachinov.github.io/Lib/pan/2pv2.js';
+
+
+let m = createFullscreenPanel({});
+let pns = f2p();
+let topp = pns[0];
+qq.ce(topp, { style: { background: 'plum', border: '1px solid black', padding: '10px' } });
+
+
+let currentDB = null; // текущая база видна для всех функций
+let storeSelect = null; // глобально
+
+
+// Создаем селект базы данных и список стора
+async function listDBs() {
+  const dbSelect = qq.ce({
+    tag: 'select',
+    parent: topp,
+    style: { fontSize: '26px', display: 'block', margin: '10px auto 0' },
+    event: {
+      change: async (e) => { await showStore(e.target.value); }
+    }
+  });
+
+
+  // Получаем список баз IndexedDB
+  const dbs = await indexedDB.databases();
+  dbs.forEach(e => {
+    qq.ce({
+      tag: 'option',
+      parent: dbSelect,
+      val: e.name,
+      it: e.name + ' (v' + e.version + ')'
+    });
+  });
+
+
+  // Переключаемся на первую базу по умолчанию
+  if (dbs.length) showStore(dbs[0].name);
+
+
+  qq.ce({ tag: 'br', parent: topp });
+
+
+  // создаём storeSelect один раз
+  storeSelect = qq.ce({
+    tag: 'select',
+    parent: topp,
+    style: { fontSize: '26px', marginTop: '20px', display: 'block' },
+    event: {
+      change: async (ev) => { await showRecords(currentDB, ev.target.value); }
+    }
+  });
+}
+
+
+// Показываем список стора для выбранной базы
+async function showStore(dbName) {
+  if (!dbName) return;
+  currentDB = dbName;
+
+
+  const openReq = indexedDB.open(dbName);
+  openReq.onupgradeneeded = () => {};
+  openReq.onsuccess = () => {
+    const db = openReq.result;
+    storeSelect.innerHTML = ''; // очистка предыдущих стора
+    Array.from(db.objectStoreNames).forEach(name => {
+      qq.ce({ tag: 'option', parent: storeSelect, val: name, it: name });
+    });
+    if (db.objectStoreNames.length) showRecords(dbName, db.objectStoreNames[0]);
+  };
+}
+
+
+// Показываем записи выбранного стора
+async function showRecords(dbName, storeName) {
+  if (!dbName || !storeName) return;
+  const openReq = indexedDB.open(dbName);
+  openReq.onsuccess = () => {
+    const db = openReq.result;
+    const tx = db.transaction(storeName, 'readonly');
+    const store = tx.objectStore(storeName);
+    const request = store.getAll();
+
+
+    request.onsuccess = () => {
+      // Удаляем предыдущий список, если есть
+      let prev = document.getElementById('recordList');
+      if (prev) prev.remove();
+
+
+      let div = qq.ce({ tag: 'div', parent: topp, id: 'recordList', style: { marginTop: '20px' } });
+      request.result.forEach(r => {
+        qq.ce({ tag: 'div', parent: div, it: JSON.stringify(r) });
+      });
+    };
+  };
+}
+
+
+listDBs();*/
+</script>
+//====$$
 <script>alert(2)</script>
 </body>
 </html>
