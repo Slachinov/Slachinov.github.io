@@ -139,7 +139,7 @@ export default async function GhPanel(par = {}) {
                             tag: 'div',
                             parent: all,
                             it: item.path,
-                            style: { border: '1px solid #aaa', padding: '2px', margin: '2px', cursor: 'pointer', borderRadius: '3px', background: '#fff' },
+                            style: { border: '1px solid #aaa', padding: '2px', margin: '2px', cursor: 'pointer', borderRadius: '3px', background: '#fff','font-size':'24px' },
                             event: {
                                 click: async () => {
                                     pathInput.value = item.path;
