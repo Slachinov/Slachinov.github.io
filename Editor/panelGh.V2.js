@@ -169,10 +169,10 @@ export default async function GhPanel(par = {}) {
                 writeButton.style.background = '#ffc0cb';
                 try {
                     await saveFile(path, value);
-                    setTimeout(() => { writeButton.style.background = 'red'; }, 200);
+                    qq.wait(200); writeButton.style.background = 'red';
                 } catch (err) {
                     writeButton.style.background = '#ff9999';
-                    console.error('Ошибка записи:', err);
+                    qq.er('Ошибка записи:', err);
                 }
             }
         }
