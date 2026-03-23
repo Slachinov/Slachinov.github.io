@@ -156,6 +156,7 @@ qq.ce({tag:'br', parent: container});
         style:{ border:'1px solid black', padding:'2px', margin:'2px' },
         event:{
           click(){
+localStorage.setItem('localstorage',key);
             keyInput.value = key;
             edit.innerText = value;
             all.hide(); localStorage.setItem('localstorage',key);
