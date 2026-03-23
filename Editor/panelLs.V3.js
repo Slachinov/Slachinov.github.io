@@ -174,7 +174,7 @@ localStorage.setItem('localstorage',key);
     it: 'Save',
     parent: container,
     event: {
-      click() {
+      click() {localStorage.setItem('localstorage',key);
         let key = keyInput.value.trim();
         if(!key) return;
         localStorage.setItem(key, edit.innerText);
