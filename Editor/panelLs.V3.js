@@ -65,8 +65,9 @@ keyInput.value=qq.ls('localstorage');
     it: 'Load',
     parent: container,
     event: {
-      click() {localStorage.setItem('localstorage',key);
+      click() {
         let key = keyInput.value.trim();
+localStorage.setItem('localstorage',key);
         if (!key) return;
         let value = localStorage.getItem(key);
         edit.innerText = value !== null ? value : '';
@@ -174,8 +175,9 @@ localStorage.setItem('localstorage',key);
     it: 'Save',
     parent: container,
     event: {
-      click() {localStorage.setItem('localstorage',key);
+      click() {
         let key = keyInput.value.trim();
+localStorage.setItem('localstorage',key);
         if(!key) return;
         localStorage.setItem(key, edit.innerText);
         qq.cl(`Сохранено: "${key}"`);
