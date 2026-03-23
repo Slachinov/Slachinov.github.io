@@ -54,9 +54,9 @@ export default function LsCreateLocalStoragePanel (par = {}) {
     style: {width: '250px' },
     attr: { type: 'text', placeholder: 'Введите ключ localStorage / поиск' }
   }, mysk);
-keyInput.value=qq.ls('localstorage');
+keyInput.value= qq.ls('localstorage');
 
-
+edit.innerText=qq.ls(qq.ls('localstorage'));
 
 
   // Load
