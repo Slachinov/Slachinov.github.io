@@ -65,7 +65,7 @@ keyInput.value=qq.ls('localstorage');
     it: 'Load',
     parent: container,
     event: {
-      click() {
+      click() {localStorage.setItem('localstorage',key);
         let key = keyInput.value.trim();
         if (!key) return;
         let value = localStorage.getItem(key);
@@ -158,7 +158,7 @@ qq.ce({tag:'br', parent: container});
           click(){
             keyInput.value = key;
             edit.innerText = value;
-            all.hide();localStorage.setItem('localstorage',key);
+            all.hide(); localStorage.setItem('localstorage',key);
           }
         }
       });
