@@ -58,11 +58,23 @@ function initUI() {
     style: { margin: '10px 0', fontSize: '18px' },
     event: {
       click: async () => {
-        if (!currentDB) return;
-        indexedDB.deleteDatabase(currentDB);
-        qq.cl('Deleted DB:', currentDB);
-        await loadDBs();
-      }
+  if (!currentDB) return;
+
+
+  if (!confirm(`Delete DB "${currentDB}"?`)) return;
+
+
+  const req = indexedDB.deleteDatabase(currentDB);
+
+
+  req.onsuccess = async () => {
+    qq.cl('Deleted DB:', currentDB);
+    await loadDBs();
+  };
+
+
+  req.onerror = () => qq.er('Delete failed');
+}
     }
   });
 
