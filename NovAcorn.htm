@@ -9,9 +9,19 @@
 <body>
 <script type="module">
 import {parse} from 'https://esm.sh/acorn@8.16.0/es2022/acorn.mjs';
-alert(parse);
+//alert(parse);
 let ast=parse('let a=5;');alert(ast);
 qq.cl(JSON.stringify(ast, null, 2));
+/*
+import { parse } from "https://esm.sh/acorn@8.16.0/es2022/acorn.mjs";*/
+import { generate } from "https://esm.sh/astring";
+/*
+const ast = parse("let a = 1 + 2;", {
+  ecmaVersion: "latest"
+});*/
+
+
+qq.cl(generate(ast));
 </script>
 <script></script>
 </body>
