@@ -1,22 +1,12 @@
 // myFilesDB.js
 const DB_NAME = 'MyFilesDB';
 const STORE_NAME = 'files';
-const DB_VERSION = 1;
 
 
 // Открываем базу
 function openDB() {
   return new Promise((resolve, reject) => {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
-
-
-    req.onupgradeneeded = function(event) {
-      const db = event.target.result;
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME);
-      }
-    };
-
 
     req.onsuccess = function(event) {
       resolve(event.target.result);
