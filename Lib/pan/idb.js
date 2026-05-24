@@ -6,7 +6,7 @@ const STORE_NAME = 'files';
 // Открываем базу
 function openDB() {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    const req = indexedDB.open(DB_NAME);
 
     req.onsuccess = function(event) {
       resolve(event.target.result);
