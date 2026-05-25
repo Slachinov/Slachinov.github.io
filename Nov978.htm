@@ -141,14 +141,14 @@ async function openDBView(dbName) {
 
     const storeNames = Array.from(db.objectStoreNames);
 
-
+/*
     //
     // TOP LIST (simple view)
     //
     for (const storeName of storeNames) {
       const count = await countStore(dbName, storeName);
 
-/*
+
       qq.ce({
         tag: 'div',
         parent: storeBox,
