@@ -189,12 +189,12 @@ async function openDBView(dbName) {
 
       const auto = store.autoIncrement ? 'true' : 'false';
 
-
+const indexCount = store.indexNames.length;
       qq.ce({
         tag: 'option',
         parent: storeSelect,
         val: storeName,
-        it: `${storeName}, ${keyPath}, ${auto}, ${count} items`
+        it: `${storeName}, ${keyPath}, ${auto}, ${indexCount} indexes, ${count} items`
       });
     }
 
