@@ -10,6 +10,58 @@
 <script type="module">
 import upg from "https://slachinov.github.io/Lib/idb/Store.js";
 alert(upg);
+await upg({
+  dbName: "TestDB",
+
+
+  deleteStores: [],
+
+
+  stores: [
+    {
+      name: "users",
+      options: {
+        keyPath: "id",
+        autoIncrement: true
+      },
+      indexes: [
+        {
+          name: "email_idx",
+          keyPath: "email",
+          unique: true
+        },
+        {
+          name: "age_idx",
+          keyPath: "age",
+          unique: false
+        }
+      ]
+    },
+
+
+    {
+      name: "posts",
+      options: {
+        keyPath: "postId"
+      },
+      indexes: [
+        {
+          name: "title_idx",
+          keyPath: "title"
+        },
+        {
+          name: "tags_idx",
+          keyPath: "tags",
+          multiEntry: true
+        },
+        {
+          name: "created_idx",
+          keyPath: "createdAt"
+        }
+      ]
+    }
+  ]
+});
 </script>
 <script></script>
 </body>
