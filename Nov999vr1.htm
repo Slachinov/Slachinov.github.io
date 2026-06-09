@@ -6,6 +6,11 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
+html, body { height: 100%; }
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 html {background:green}
 body {
 display: grid;
@@ -16,7 +21,7 @@ background: red;
 </style>
 </head>
 <body>
-<div style="grid-column:1/-1;grid-row:1;background:red">333</div>
+<div style="grid-column:1/-1;grid-row:1;background:red">444</div>
 <div style="grid-column:1;grid-row:2/4;background:lightblue"></div>
 <div style="grid-column:2;grid-row:2;background:lightgreen"></div>
 <div style="grid-column:2;grid-row:3;background:orange"></div>
