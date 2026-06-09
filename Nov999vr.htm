@@ -3,34 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <style>
+
 body {
-  margin: 0;
   display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 80px 1fr 80px;
-  height: 100vh;
-  gap: 5px;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 10px 1fr 10px 5px;
+  min-height: 100vh;
+  margin: 0;
 }
 
 
-div {
-  border: 2px solid black;
-  background: lightgray;
+/* 1. Верхняя — вся ширина */
+.top {
+  grid-column: 1 / -1;
+  background: red;
 }
 
 
-.top {color:red;
-  grid-column: 1 / 3;
+/* 3. Левая — span 2 строки (2 и 3) */
+.left {
+  grid-column: 1;
+  grid-row: 2 / 4;
   background: lightblue;
 }
 
 
-.left {
-  grid-row: 2;
-  background: orange;
-}
-
-
+/* 4. Правая верхняя */
 .right-top {
   grid-column: 2;
   grid-row: 2;
@@ -38,17 +36,19 @@ div {
 }
 
 
+/* 5. Правая нижняя */
 .right-bottom {
   grid-column: 2;
-  grid-row: 2;
-  align-self: end;
-  background: pink;
+  grid-row: 3;
+  min-height: 10px;
+  background: orange;
 }
 
 
+/* 2. Нижняя — вся ширина */
 .bottom {
-  grid-column: 1 / 3;
-  background: violet;
+  grid-column: 1 / -1;
+  background: blue;
 }
 </style>
 </head>
@@ -57,11 +57,12 @@ div {
 <body>
 
 
-<div class="top">TOP77</div>
-<div class="left">LEFT</div>
-<div class="right-top">RIGHT TOP</div>
-<div class="right-bottom">RIGHT BOTTOM</div>
-<div class="bottom">BOTTOM</div>
+
+<div class="top">12345</div>
+<div class="left"></div>
+<div class="right-top"></div>
+<div class="right-bottom"></div>
+<div class="bottom"></div>
 
 
 </body>
