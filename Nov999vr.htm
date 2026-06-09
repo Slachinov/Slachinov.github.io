@@ -6,121 +6,82 @@
 
 
 <style>
-html,
-body {
-    margin: 0;
-    height: 100%;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 
 body {
-    display: grid;
+  display: grid;
 
 
-    /* 2 колонки */
-    grid-template-columns:
-        minmax(100px, max-content)
-        1fr;
+  grid-template-columns: minmax(100px, max-content) 1fr;
+  grid-template-rows: auto 1fr 1fr auto;
 
 
-    /* 5 строк */
-    grid-template-rows:
-        minmax(10px, max-content)
-        1fr
-        1fr
-        1fr
-        max-content;
+  grid-template-areas:
+    "top top"
+    "left rightTop"
+    "left rightBottom"
+    "bottom bottom";
 
 
-    height: 100vh;
-    gap: 6px;
-    padding: 6px;
-    box-sizing: border-box;
-
-
-    background: #f3f3f3;
+  gap: 6px;
+  padding: 6px;
+  box-sizing: border-box;
 }
 
 
-/* 1. верхняя панель */
+/* зоны */
 .top {
-    grid-column: 1 / 3;
-
-
-    min-height: 10px;
-
-
-    background: #d8e8ff;
-    padding: 10px;
+  grid-area: top;
+  min-height: 10px;
+  background: #cfe3ff;
+  padding: 10px;
 }
 
 
-/* 2. нижняя панель */
-.bottom {
-    grid-column: 1 / 3;
-
-
-    background: #e7d8ff;
-    padding: 10px;
-}
-
-
-/* слева */
 .left {
-    grid-row: 2 / 5;
-
-
-    min-width: 100px;
-
-
-    background: #ffe7c7;
-    padding: 10px;
+  grid-area: left;
+  min-width: 100px;
+  background: #ffe7c7;
+  padding: 10px;
 }
 
 
-/* 3. справа */
 .right-top {
-    background: lightgreen;
-    padding: 10px;
+  grid-area: rightTop;
+  background: lightgreen;
+  padding: 10px;
 }
 
 
-/* 4. справа ниже */
 .right-bottom {
-    min-height: 10px;
+  grid-area: rightBottom;
+  min-height: 10px;
+  background: #ffd9d9;
+  padding: 10px;
+}
 
 
-    background: #ffd9d9;
-    padding: 10px;
+.bottom {
+  grid-area: bottom;
+  background: #e6d9ff;
+  padding: 10px;
 }
 </style>
+
+
 </head>
 <body>
 
 
-<div class="top">
-    Верхняя панель
-</div>
-
-
-<div class="left">
-    Левая панель
-</div>
-
-
-<div class="right-top">
-    Правая верхняя
-</div>
-
-
-<div class="right-bottom">
-    Правая нижняя
-</div>
-
-
-<div class="bottom">
-    Нижняя панель
-</div>
+<div class="top">Верхняя панель999</div>
+<div class="left">Левая панель</div>
+<div class="right-top">Правая верхняя</div>
+<div class="right-bottom">Правая нижняя</div>
+<div class="bottom">Нижняя панель</div>
 
 
 </body>
