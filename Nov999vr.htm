@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-
 body {
   display: grid;
   grid-template-columns: 100px 1fr;
@@ -13,14 +12,13 @@ body {
 }
 
 
-/* 1. Верхняя — вся ширина */
 .top {
   grid-column: 1 / -1;
+  grid-row: 1;
   background: red;
 }
 
 
-/* 3. Левая — span 2 строки (2 и 3) */
 .left {
   grid-column: 1;
   grid-row: 2 / 4;
@@ -28,7 +26,6 @@ body {
 }
 
 
-/* 4. Правая верхняя */
 .right-top {
   grid-column: 2;
   grid-row: 2;
@@ -36,7 +33,6 @@ body {
 }
 
 
-/* 5. Правая нижняя */
 .right-bottom {
   grid-column: 2;
   grid-row: 3;
@@ -45,22 +41,19 @@ body {
 }
 
 
-/* 2. Нижняя — вся ширина */
 .bottom {
   grid-column: 1 / -1;
+  grid-row: 4;
   background: blue;
 }
 </style>
 </head>
-
-
 <body>
 
 
-
-<div class="top">12345</div>
-<div class="left"></div>
+<div class="top">5555</div>
 <div class="right-top"></div>
+<div class="left"></div>
 <div class="right-bottom"></div>
 <div class="bottom"></div>
 
