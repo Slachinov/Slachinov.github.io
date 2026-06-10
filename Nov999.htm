@@ -4,12 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <script src="/js/qqv34.js"></script>
-  <script type="module" src="/js/console.js"></script>
 </head>
 <body>
 <script type="module">
 alert(document.body.children.length);
-alert(Array.from(document.body.children).map(c=>c.tagName+':'+getComputedStyle(c).gridRow).join(' / '));
+alert(Array.from(body.children).map(c=>c.tagName).join(' / '));
 </script>
 <script></script>
 </body>
