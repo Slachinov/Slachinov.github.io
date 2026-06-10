@@ -16,7 +16,7 @@ body,html {height:100%;margin:0}
 const body = document.body;
 qq.ce(body, {style:{
   display:'grid',
-  gridTemplateColumns:'100px 1fr',
+  gridTemplateColumns:'auto 1fr',
   gridTemplateRows:'auto 1fr 30px 5px',
   height:'100%',
   background:'red'
@@ -46,7 +46,9 @@ const bottom = qq.ce({tag:'div', parent:body, style:{
   gridColumn:'1/-1', gridRow:'4', background:'blue'
 }});
 //===
-qq.ce({tag:'button',it:'run', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){left.toggle()}}})
+qq.ce({tag:'button',it:'run', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){left.toggle()}}});
+//==
+qq.ce({tag:'span',parent:left,it:'tratatatatatata'})
 </script>
 <script></script>
 </body>
