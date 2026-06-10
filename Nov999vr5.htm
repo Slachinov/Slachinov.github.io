@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="/js/qqv34.js"></script>
+  
+</head>
+<body>
+<script type="module">
+
+
+const body = document.body;
+qq.ce(body, {style:{
+  display:'grid',
+  gridTemplateColumns:'100px 1fr',
+  gridTemplateRows:'20px 1fr 30px 5px',
+  height:'100%',
+  background:'red'
+}});
+
+
+const top = qq.ce({tag:'div', parent:body, style:{
+  gridColumn:'1/-1', gridRow:'1', background:'red'
+}});
+
+
+const left = qq.ce({tag:'div', parent:body, style:{
+  gridColumn:'1', gridRow:'2/4', background:'lightblue'
+}});
+
+
+const rightTop = qq.ce({tag:'div', parent:body, style:{
+  gridColumn:'2', gridRow:'2', background:'lightgreen'
+}});
+
+
+const rightBottom = qq.ce({tag:'div', parent:body, style:{
+  gridColumn:'2', gridRow:'3', background:'orange'
+}});
+
+
+const bottom = qq.ce({tag:'div', parent:body, style:{
+  gridColumn:'1/-1', gridRow:'4', background:'blue'
+}});
+</script>
+<script></script>
+</body>
+</html>
