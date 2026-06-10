@@ -20,8 +20,8 @@ gridTemplateColumns:'auto 1fr',
 gridTemplateRows:'auto 1fr 30px 5px',
 height:'100%',
 background:'red'
-}});alert(body.children.length);
-
+}});
+alert(Array.from(document.body.children).map(c=>c.tagName).join(' / '));
 
 const topp= qq.ce({tag:'div', parent:body, style:{
 gridColumn:'1/-1', gridRow:'1', background:'gray'
@@ -46,7 +46,7 @@ const bottom = qq.ce({tag:'div', parent:body, style:{
 gridColumn:'1/-1', gridRow:'4', background:'blue'
 }});
 //===
-qq.ce({tag:'button',it:'run', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
+qq.ce({tag:'button',it:'run112', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
 left.style.display = left.style.display === 'none' ? '' : 'none';alert(left.getStyle('display'));
 alert(qq.f.getStyle('margin-left',body));
 alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
