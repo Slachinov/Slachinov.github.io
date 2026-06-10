@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
 body,html {height:100%;margin:0}
+head, meta, style, script { display: none; }
 </style>
   <script src="/js/qqv34.js"></script>
   
@@ -45,7 +46,7 @@ const bottom = qq.ce({tag:'div', parent:body, style:{
 gridColumn:'1/-1', gridRow:'4', background:'blue'
 }});
 //===
-qq.ce({tag:'button',it:'run', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
+qq.ce({tag:'button',it:'run1', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
 left.style.display = left.style.display === 'none' ? '' : 'none';alert(left.getStyle('display'));
 alert(qq.f.getStyle('margin-left',body));
 alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
