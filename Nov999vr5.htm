@@ -14,39 +14,39 @@ body,html {height:100%;margin:0}
 
 const body = document.body;
 qq.ce(body, {style:{
-  display:'grid',
-  gridTemplateColumns:'auto 1fr',
-  gridTemplateRows:'auto 1fr 30px 5px',
-  height:'100%',
-  background:'red'
+display:'grid',
+gridTemplateColumns:'auto 1fr',
+gridTemplateRows:'auto 1fr 30px 5px',
+height:'100%',
+background:'red'
 }});
 
 
 const topp= qq.ce({tag:'div', parent:body, style:{
-  gridColumn:'1/-1', gridRow:'1', background:'gray'
+gridColumn:'1/-1', gridRow:'1', background:'gray'
 }});
 
 const left = qq.ce({tag:'div', parent:body, style:{
-  gridColumn:'1', gridRow:'2/4', background:'lightblue','min-width':'0px'
+gridColumn:'1', gridRow:'2/4', background:'lightblue','min-width':'0px'
 }});
 
 
 const rightTop = qq.ce({tag:'div', parent:body,it:12345, style:{
-  gridColumn:'2', gridRow:'2', background:'lightgreen'
+gridColumn:'2', gridRow:'2', background:'lightgreen'
 }});
 
 
 const rightBottom = qq.ce({tag:'div', parent:body, style:{
-  gridColumn:'2', gridRow:'3', background:'orange'
+gridColumn:'2', gridRow:'3', background:'orange'
 }});
 
 
 const bottom = qq.ce({tag:'div', parent:body, style:{
-  gridColumn:'1/-1', gridRow:'4', background:'blue'
+gridColumn:'1/-1', gridRow:'4', background:'blue'
 }});
 //===
-qq.ce({tag:'button',it:'run5', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
-  left.style.display = left.style.display === 'none' ? '' : 'none';alert(left.getStyle('display'));
+qq.ce({tag:'button',it:'run1115', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
+left.style.display = left.style.display === 'none' ? '' : 'none';alert(left.getStyle('display'));
 alert(qq.f.getStyle('margin-left',body));
 alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
 alert(getComputedStyle(body).gridTemplateColumns + ' / ' + getComputedStyle(body).gridTemplateRows);
