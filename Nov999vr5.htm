@@ -23,22 +23,22 @@ gridColumn:'1/-1', gridRow:'1', background:'gray'
 }});
 
 const left = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'1', gridRow:'2/4', background:'lightblue','min-width':'0px'
+gridColumn:'1', gridRow:'2/-2', background:'lightblue','min-width':'0px'
 }});
 
 
-const rightTop = qq.ce({tag:'textarea', parent:body,it:12345, style:{
+const rightTop = qq.ce({tag:'textarea', parent:body,it:54322, style:{
 gridColumn:'2', gridRow:'2', background:'lightgreen'
 }});
 
 
 const rightBottom = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'2', gridRow:'3', background:'orange'
+gridColumn:'2', gridRow:'-2', background:'orange'
 }});
 
 
 const bottom = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'1/-1', gridRow:'4', background:'blue'
+gridColumn:'1/-1', gridRow:'-1', background:'blue'
 }});
 //===
 qq.ce({tag:'button',it:'run111', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
