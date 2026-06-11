@@ -12,7 +12,7 @@ const body = document.body;//alert(body.children.length);
 qq.ce(body, {style:{
 display:'grid',
 gridTemplateColumns:'auto 1fr',
-gridTemplateRows:'auto 1fr 30px 5px',
+gridTemplateRows:'auto auto 1fr 30px 5px',
 height:'100%',
 background:'red'
 }});
@@ -27,8 +27,13 @@ gridColumn:'1', gridRow:'2/-2', background:'lightblue','min-width':'0px'
 }});
 
 
+const rightT = qq.ce({tag:'div', parent:body, style:{
+gridColumn:'2', gridRow:'2', background:'lightgray','min-width':'10px'
+}});
+
+
 const rightTop = qq.ce({tag:'textarea', parent:body,it:54322, style:{
-gridColumn:'2', gridRow:'2', background:'lightgreen'
+gridColumn:'2', gridRow:'3', background:'lightgreen'
 }});
 
 
@@ -41,7 +46,7 @@ const bottom = qq.ce({tag:'div', parent:body, style:{
 gridColumn:'1/-1', gridRow:'-2', background:'blue'
 }});
 //===
-qq.ce({tag:'button',it:'run', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
+qq.ce({tag:'button',it:'run122', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
 left.style.display = left.style.display === 'none' ? '' : 'none';/*alert(left.getStyle('display'));
 alert(qq.f.getStyle('margin-left',body));
 alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
