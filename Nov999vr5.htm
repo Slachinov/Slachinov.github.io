@@ -7,14 +7,8 @@
 body,html {height:100%;margin:0}
 </style>
 <script src="/js/qqv34.js"></script>
-<script>alert(8);
-alert(document.body.children.length);
-alert(document.head.children.length);
-</script>
 <script type="module">
-alert(document.body.children.length);
-alert(document.head.children.length);
-const body = document.body;alert(body.children.length);
+const body = document.body;//alert(body.children.length);
 qq.ce(body, {style:{
 display:'grid',
 gridTemplateColumns:'auto 1fr',
@@ -22,7 +16,7 @@ gridTemplateRows:'auto 1fr 30px 5px',
 height:'100%',
 background:'red'
 }});
-alert(Array.from(document.body.children).map(c=>c.tagName).join(' / '));
+//alert(Array.from(document.body.children).map(c=>c.tagName).join(' / '));
 
 const topp= qq.ce({tag:'div', parent:body, style:{
 gridColumn:'1/-1', gridRow:'1', background:'gray'
@@ -33,7 +27,7 @@ gridColumn:'1', gridRow:'2/4', background:'lightblue','min-width':'0px'
 }});
 
 
-const rightTop = qq.ce({tag:'div', parent:body,it:12345, style:{
+const rightTop = qq.ce({tag:'textarea', parent:body,it:12345, style:{
 gridColumn:'2', gridRow:'2', background:'lightgreen'
 }});
 
@@ -48,13 +42,13 @@ gridColumn:'1/-1', gridRow:'4', background:'blue'
 }});
 //===
 qq.ce({tag:'button',it:'run111', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
-left.style.display = left.style.display === 'none' ? '' : 'none';alert(left.getStyle('display'));
+left.style.display = left.style.display === 'none' ? '' : 'none';/*alert(left.getStyle('display'));
 alert(qq.f.getStyle('margin-left',body));
 alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
 alert(getComputedStyle(body).gridTemplateColumns + ' / ' + getComputedStyle(body).gridTemplateRows);
 alert(body.children.length);
 alert(Array.from(body.children).map(c=>c.tagName).join(' / '));
-alert(Array.from(body.children).map(c=>c.tagName+':'+getComputedStyle(c).gridRow).join(' / '));
+alert(Array.from(body.children).map(c=>c.tagName+':'+getComputedStyle(c).gridRow).join(' / '));*/
 }}});
 //==
 qq.ce({tag:'span',parent:left,it:'tratatatatatata'})
