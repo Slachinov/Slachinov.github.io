@@ -1,100 +1,63 @@
-async function upgradeDB({
-  dbName,
-  stores = [],
-  deleteStores = []
-}) {
-  const list = await indexedDB.databases();
-  const info = list.find(d => d.name === dbName);
-  const currentVersion = info?.version || 0;
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+body,html {height:100%;margin:0}
+</style>
+<script src="/js/qqv34.js"></script>
+<script type="module">
+const body = document.body;//alert(body.children.length);
+qq.ce(body, {style:{
+display:'grid',
+gridTemplateColumns:'auto 1fr',
+gridTemplateRows:'auto auto 1fr 30px 5px',
+height:'100%',
+background:'red'
+}});
+//alert(Array.from(document.body.children).map(c=>c.tagName).join(' / '));
+
+const topp= qq.ce({tag:'div', parent:body, style:{
+gridColumn:'1/-1', gridRow:'1', background:'gray'
+}});
+
+const left = qq.ce({tag:'div', parent:body, style:{
+gridColumn:'1', gridRow:'2/-2', background:'lightblue','min-width':'0px'
+}});
 
 
-  const req = indexedDB.open(dbName, currentVersion + 1);
+const rightT = qq.ce({tag:'div', parent:body, style:{
+gridColumn:'2', gridRow:'2', background:'lightgray','min-height':'10px'
+}});
 
 
-  return new Promise((resolve, reject) => {
+const rightTop = qq.ce({tag:'textarea', parent:body,it:54322, style:{
+gridColumn:'2', gridRow:'3', background:'lightgreen'
+}});
 
 
-    req.onblocked = () => {
-      qq.er("blocked");
-    };
+const rightBottom = qq.ce({tag:'div', parent:body, style:{
+gridColumn:'2', gridRow:'-3', background:'orange'
+}});
 
 
-    req.onerror = (e) => reject(e);
-
-
-    req.onupgradeneeded = (e) => {
-      const db = e.target.result;
-
-
-      db.onversionchange = () => {
-        qq.cl("versionchange");
-        db.close();
-      };
-
-
-      // 1. DELETE STORES
-      for (const name of deleteStores) {
-        if (db.objectStoreNames.contains(name)) {
-          db.deleteObjectStore(name);
-        }
-      }
-
-
-      // 2. CREATE / UPDATE STORES
-      for (const s of stores) {
-
-
-        let store;
-
-
-        if (!db.objectStoreNames.contains(s.name)) {
-          store = db.createObjectStore(
-            s.name,
-            s.options || {}
-          );
-        } else {
-          store = req.transaction.objectStore(s.name);
-        }
-
-
-        // 3. DELETE INDEXES
-        for (const idxName of (s.deleteIndexes || [])) {
-          if (store.indexNames.contains(idxName)) {
-            store.deleteIndex(idxName);
-          }
-        }
-
-
-        // 4. CREATE INDEXES
-        for (const idx of (s.indexes || [])) {
-          if (!store.indexNames.contains(idx.name)) {
-            store.createIndex(
-              idx.name,
-              idx.keyPath,
-              { unique: !!idx.unique }
-            );
-          }
-        }
-      }
-    };
-
-
-    req.onsuccess = (e) => {
-      const db = e.target.result;
-
-
-      db.onversionchange = () => {
-        qq.cl("versionchange");
-        db.close();
-      };
-
-
-      db.close();
-
-
-      resolve(db);
-    };
-
-
-  });
-}
+const bottom = qq.ce({tag:'div', parent:body, style:{
+gridColumn:'1/-1', gridRow:'-2', background:'blue'
+}});
+//===
+qq.ce({tag:'button',it:'run1552', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
+left.style.display = left.style.display === 'none' ? '' : 'none';/*alert(left.getStyle('display'));
+alert(qq.f.getStyle('margin-left',body));
+alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
+alert(getComputedStyle(body).gridTemplateColumns + ' / ' + getComputedStyle(body).gridTemplateRows);
+alert(body.children.length);
+alert(Array.from(body.children).map(c=>c.tagName).join(' / '));
+alert(Array.from(body.children).map(c=>c.tagName+':'+getComputedStyle(c).gridRow).join(' / '));*/
+}}});
+//==
+qq.ce({tag:'span',parent:left,it:'tratatatatatata'})
+</script></head>
+<body>
+</body>
+</html>
