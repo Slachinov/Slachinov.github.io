@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Radio Toggle Without JavaScript</title>
+<style>
+.demo {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+}
+.demo input[type="radio"] {
+    display: none;
+}
+.tile {
+    position: relative;
+}
+.select {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #999;
+    cursor: pointer;
+    user-select: none;
+}
+/* Выбранная кнопка */
+.tile:has(input:checked) .select {
+    border-color: #09c;
+    background: #e8f7ff;
+}
+/* Невидимый слой для второго клика */
+.reset {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+/* Если radio выбран, включаем слой */
+.tile:has(input:checked) .reset {
+    pointer-events: auto;
+}
+</style>
+</head>
+<body>
+ <div class="demo">
+     <input type="radio" name="demo" id="none" checked>
+     <div class="tile">
+        <input type="radio" name="demo" id="a">
+        <label class="select" for="a">Pure</label>
+        <label class="reset" for="none"></label>
+    </div>
+     <div class="tile">
+        <input type="radio" name="demo" id="b">
+        <label class="select" for="b">CSS</label>
+        <label class="reset" for="none"></label>
+    </div>
+     <div class="tile">
+        <input type="radio" name="demo" id="c">
+        <label class="select" for="c">Toggle</label>
+        <label class="reset" for="none"></label>
+    </div>
+ </div>
+ </body>
+</html>
