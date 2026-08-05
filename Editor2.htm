@@ -19,7 +19,7 @@ body{
 <script type="module">
 
 
-import { m } from 'https://slachinov.github.io/Lib/pan/main.js';
+import { m, butonsEditPanel ,bottomPanel} from 'https://slachinov.github.io/Lib/pan/main.js';
 
 
 import {} from 'https://slachinov.github.io/Editor/buttonsEdit3.js';
@@ -31,7 +31,7 @@ import GhPanel from 'https://slachinov.github.io/Editor/panelGh.V2.js';
 GhPanel({ edit: m.edit, all: m.all, parent: m.topPanel });
 import  'https://slachinov.github.io/Editor/panelIdb.js';
 
-
+qq.ce({parent:butonsEditPanel,tag:'button', it:'\n',event:{click:function(){alert(m.edit.innerText);}}});
 
 
 
