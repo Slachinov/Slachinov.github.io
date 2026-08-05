@@ -31,7 +31,13 @@ import GhPanel from 'https://slachinov.github.io/Editor/panelGh.V2.js';
 GhPanel({ edit: m.edit, all: m.all, parent: m.topPanel });
 import  'https://slachinov.github.io/Editor/panelIdb.js';
 
-qq.ce({parent:butonsEditPanel,tag:'button', it:'\n',event:{click:function(){alert(m.edit.innerText);}}});
+qq.ce({parent:butonsEditPanel,tag:'button', it:'Пустые',event:{click:function(){
+let text=m.edit.innerText;
+let lines = text.split('\n');
+lines = lines.filter(line => line.trim() !== '');
+text = lines.join('\n');
+m.edit.innerText=text;
+}}});
 
 
 
