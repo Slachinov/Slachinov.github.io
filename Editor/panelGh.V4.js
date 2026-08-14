@@ -165,7 +165,7 @@ export default async function GhPanel(par = {}) {
             click: async () => {
                 const path = pathInput.value.trim();
                 if (!path) return;
-                const value = edit.innerText;
+                let value = edit.innerText;
 value=value.replace(/\u00A0/g,' ');
                 writeButton.style.background = '#ffc0cb';
                 try {
