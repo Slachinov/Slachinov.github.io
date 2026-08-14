@@ -39,7 +39,44 @@ text = lines.join('\n');
 m.edit.innerText=text;
 }}});
 
+//=====
+qq.ce({
+    parent: butonsEditPanel,
+    tag: 'button',
+    it: '\uD83D\uDCE5', // 📥 Вставить
+    title: 'Вставить',
+    event: {
+        click: async function () {
+            try {
+                let text = await navigator.clipboard.readText();
+              //  text = text.replace(/&nbsp;/g, ' ');
+                text = text.replace(/\u00A0/g, ' ');
+                m.edit.innerText = text;
+            } catch (err) {
+                qq.er(err);
+            }
+        }
+    }
+});
 
+
+qq.ce({
+    parent: butonsEditPanel,
+    tag: 'button',
+    it: '\uD83D\uDCCB', // 📋 Копировать
+    title: 'Копировать',
+    event: {
+        click: async function () {
+            try {
+                await navigator.clipboard.writeText(m.edit.innerText);
+            } catch (err) {
+                qq.er(err);
+            }
+        }
+    }
+});
+
+//=====
 
 
 </script>
