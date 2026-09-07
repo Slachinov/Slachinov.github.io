@@ -30,7 +30,9 @@ tag: 'div',
 parent: desktop,
 style: {
 background: '#8d8',
-flex: '1'
+flex: '1',
+overflow:'hidden'
+
 }
 });
 
