@@ -29,6 +29,7 @@ const main = qq.ce({
 tag: 'div',
 parent: desktop,
 style: {
+position:'relative',
 background: '#8d8',
 flex: '1',
 overflow:'hidden'
