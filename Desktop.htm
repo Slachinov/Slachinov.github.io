@@ -17,13 +17,7 @@ margin:0;
 </head>
 <body>
 <script type="module">
-const ns=qq.ns();alert(ns);
-
-
-alert(Object.prototype.toString.call(ns));
-
-
-alert(ns.constructor.name);
+const ns=qq.ns();
 const desktop = qq.ce({
 tag: 'div',
 style: {
@@ -64,7 +58,7 @@ tag: 'div',
 parent: desktop,
 style: {
 background: '#88d',
-padding: '10px'
+padding: '5px'
 }
 });
 
@@ -82,7 +76,10 @@ document.exitFullscreen();
 }
 }
 });
-
+ns.set('topDesktop',header);
+ns.set('mainDesktop',main);
+ns.set('bottomDesktop',footer);
+export default ns;
 </script>
 </body>
 </html>
