@@ -20,14 +20,78 @@ margin:0;
 import desktop from '/Desktop/main.js';
 
 
+//===
+function createWindow(x, y) {
 
 
+    const win = qq.ce({
+        tag: 'div',
+        parent: desktop.get('mainDesktop'),
+        style: {
+            position: 'absolute',
+            left: x + 'px',
+            top: y + 'px',
+            width: '100px',
+            height: '200px',
+            zIndex:z,
+            border: '1px solid #555',
+            background: '#eee',
+            display: 'flex',
+            flexDirection: 'column'
+        }
+    });
 
 
+    const titlebar = qq.ce({
+        tag: 'div',
+        parent: win,
+        style: {
+            background: '#ccc',
+            padding: '3px',
+            display: 'flex'
+        }
+    });
 
 
+    qq.ce({
+        tag: 'button',
+        parent: titlebar,
+        it: '—'
+    });
 
 
+    qq.ce({
+        tag: 'button',
+        parent: titlebar,
+        it: '□'
+    });
+
+
+    qq.ce({
+        tag: 'button',
+        parent: titlebar,
+        it: '×'
+    });
+
+
+    const client = qq.ce({
+        tag: 'div',
+        parent: win,
+        style: {
+            flex: '1',
+            background: '#fff'
+        }
+    });
+
+
+    return win;
+}
+//===
+createWindow(20, 20, 1);
+createWindow(50, 50, 2);
+createWindow(80, 80, 3);
+//===
+/*
 const win = qq.ce({
     tag: 'div',
     parent: desktop.get('mainDesktop'),
@@ -84,7 +148,7 @@ const client = qq.ce({
         flex: '1',
         background: '#fff'
     }
-});
+});*/
 /*
 const ns=qq.ns();
 const desktop = qq.ce({
