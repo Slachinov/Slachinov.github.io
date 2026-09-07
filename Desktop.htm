@@ -18,6 +18,73 @@ margin:0;
 <body>
 <script type="module">
 import desktop from '/Desktop/main.js';
+
+
+
+
+
+
+
+
+
+
+const win = qq.ce({
+    tag: 'div',
+    parent: desktop.get('mainDesktop'),
+    style: {
+        position: 'absolute',
+        left: '100px',
+        top: '100px',
+        width: '400px',
+        height: '300px',
+        border: '1px solid #555',
+        background: '#eee',
+        display: 'flex',
+        flexDirection: 'column'
+    }
+});
+
+
+const titlebar = qq.ce({
+    tag: 'div',
+    parent: win,
+    style: {
+        background: '#ccc',
+        padding: '3px',
+        display: 'flex'
+    }
+});
+
+
+qq.ce({
+    tag: 'button',
+    parent: titlebar,
+    it: '—'
+});
+
+
+qq.ce({
+    tag: 'button',
+    parent: titlebar,
+    it: '□'
+});
+
+
+qq.ce({
+    tag: 'button',
+    parent: titlebar,
+    it: '×'
+});
+
+
+const client = qq.ce({
+    tag: 'div',
+    parent: win,
+    style: {
+        flex: '1',
+        background: '#fff'
+    }
+});
 /*
 const ns=qq.ns();
 const desktop = qq.ce({
