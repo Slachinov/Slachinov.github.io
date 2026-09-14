@@ -127,7 +127,7 @@
 </style>
 
 
- <header>
+<header>
 <h1>AI Chat</h1>
 <div>
 <button class="btn" onclick="openSettings()">⚙</button>
@@ -146,11 +146,11 @@
 
 
 <!-- Settings Modal -->
- <div id="settings" class="modal hidden">
+<div id="settings" class="modal hidden">
 <div class="modal-box">
 <h2>Настройки</h2>
 <label>OpenRouter API Key</label>
-<input type="password" id="apiKey" placeholder="s42k-or-v1-...">
+<input type="password" id="apiKey" placeholder="s8k-or-v1-...">
 <label>Модель</label>
 <select id="model">
 <option value="google/gemma-2-9b-it:free">Gemma 2 9B</option>
@@ -158,14 +158,14 @@
 <option value="microsoft/phi-3-mini-128k-instruct:free">Phi-3 Mini</option>
 <option value="qwen/qwen-2-7b-instruct:free">Qwen 2 7B</option>
 <option value="openrouter/free">Авто (free)</option>
- </select>
+</select>
 <button class="btn" style="width:100%;background:#2563eb;padding:12px" onclick="saveSettings()">Сохранить</button>
 <button class="btn" style="width:100%;margin-top:8px" onclick="closeSettings()">Отмена</button>
 </div>
 </div>
 
 
- <script>
+<script>
     const chatEl = document.getElementById('chat');
     const inputEl = document.getElementById('input');
     const sendBtn = document.getElementById('send');
@@ -296,5 +296,5 @@
 //====
 alert(document.head.innerHTML);
 alert(document.body.innerHTML);
-  </script>
+ </script>
 
