@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AI Chat</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f0f0f;
+      color: #e5e5e5;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 12px 16px;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { font-size: 16px; font-weight: 600; }
+    .btn {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .btn:active { background: #444; }
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      line-height: 1.45;
+      font-size: 15px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .user {
+      align-self: flex-end;
+      background: #2563eb;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .assistant {
+      align-self: flex-start;
+      background: #1f1f1f;
+      border: 1px solid #333;
+      border-bottom-left-radius: 4px;
+    }
+    .error { background: #7f1d1d; border-color: #991b1b; }
+    footer {
+      padding: 12px;
+      background: #1a1a1a;
+      border-top: 1px solid #333;
+      display: flex;
+      gap: 8px;
+    }
+    #input {
+      flex: 1;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+      max-height: 120px;
+    }
+    #send {
+      background: #2563eb;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #send:disabled { background: #333; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #1a1a1a;
+      padding: 24px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 360px;
+    }
+    .modal-box h2 { margin-bottom: 12px; font-size: 18px; }
+    .modal-box input, .modal-box select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 16px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: white;
+      font-size: 15px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Chat</h1>
+    <div>
+      <button class="btn" onclick="openSettings()">⚙</button>
+      <button class="btn" onclick="clearChat()">🗑</button>
+    </div>
+  </header>
+
+
+  <div id="chat"></div>
+
+
+  <footer>
+    <textarea id="input" rows="1" placeholder="Напиши сообщение..." oninput="autoResize(this)"></textarea>
+    <button id="send" onclick="sendMessage()">➤</button>
+  </footer>
+
+
+  <!-- Settings Modal -->
+  <div id="settings" class="modal hidden">
+    <div class="modal-box">
+      <h2>Настройки</h2>
+      <label>OpenRouter API Key</label>
+      <input type="password" id="apiKey" placeholder="sk-or-v1-...">
+      <label>Модель</label>
+      <select id="model">
+        <option value="google/gemma-2-9b-it:free">Gemma 2 9B</option>
+        <option value="meta-llama/llama-3.2-3b-instruct:free">Llama 3.2 3B</option>
+        <option value="microsoft/phi-3-mini-128k-instruct:free">Phi-3 Mini</option>
+        <option value="qwen/qwen-2-7b-instruct:free">Qwen 2 7B</option>
+        <option value="openrouter/free">Авто (free)</option>
+      </select>
+      <button class="btn" style="width:100%;background:#2563eb;padding:12px" onclick="saveSettings()">Сохранить</button>
+      <button class="btn" style="width:100%;margin-top:8px" onclick="closeSettings()">Отмена</button>
+    </div>
+  </div>
+
+
+  <script>
+    const chatEl = document.getElementById('chat');
+    const inputEl = document.getElementById('input');
+    const sendBtn = document.getElementById('send');
+
+
+    let messages = JSON.parse(localStorage.getItem('chat_history') || '[]');
+    let apiKey = localStorage.getItem('or_key') || '';
+    let model = localStorage.getItem('or_model') || 'google/gemma-2-9b-it:free';
+
+
+    // Init
+    if (!apiKey) openSettings();
+    renderMessages();
+
+
+    function autoResize(el) {
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+    }
+
+
+    function openSettings() {
+      document.getElementById('apiKey').value = apiKey;
+      document.getElementById('model').value = model;
+      document.getElementById('settings').classList.remove('hidden');
+    }
+
+
+    function closeSettings() {
+      document.getElementById('settings').classList.add('hidden');
+    }
+
+
+    function saveSettings() {
+      apiKey = document.getElementById('apiKey').value.trim();
+      model = document.getElementById('model').value;
+      localStorage.setItem('or_key', apiKey);
+      localStorage.setItem('or_model', model);
+      closeSettings();
+    }
+
+
+    function clearChat() {
+      if (confirm('Очистить историю?')) {
+        messages = [];
+        localStorage.removeItem('chat_history');
+        renderMessages();
+      }
+    }
+
+
+    function renderMessages() {
+      chatEl.innerHTML = '';
+      messages.forEach(m => {
+        const div = document.createElement('div');
+        div.className = `msg ${m.role}`;
+        div.textContent = m.content;
+        chatEl.appendChild(div);
+      });
+      chatEl.scrollTop = chatEl.scrollHeight;
+    }
+
+
+    async function sendMessage() {
+      const text = inputEl.value.trim();
+      if (!text || !apiKey) return;
+
+
+      messages.push({ role: 'user', content: text });
+      inputEl.value = '';
+      autoResize(inputEl);
+      renderMessages();
+      sendBtn.disabled = true;
+
+
+      const loading = document.createElement('div');
+      loading.className = 'msg assistant';
+      loading.textContent = 'Думаю...';
+      chatEl.appendChild(loading);
+      chatEl.scrollTop = chatEl.scrollHeight;
+
+
+      try {
+        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': location.href,
+            'X-Title': 'GitHub Pages Chat'
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: messages.map(m => ({ role: m.role, content: m.content }))
+          })
+        });
+
+
+        const data = await res.json();
+
+
+        if (!res.ok) {
+          throw new Error(data.error?.message || 'Ошибка API');
+        }
+
+
+        const reply = data.choices[0].message.content;
+        messages.push({ role: 'assistant', content: reply });
+        localStorage.setItem('chat_history', JSON.stringify(messages));
+      } catch (err) {
+        messages.push({ role: 'assistant', content: 'Ошибка: ' + err.message });
+      }
+
+
+      renderMessages();
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+
+
+    // Enter to send
+    inputEl.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
