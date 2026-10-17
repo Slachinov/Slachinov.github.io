@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<textarea rows="10" style="width:100%;box-sizing:border-box"></textarea>
+<button>Вставить из буфера</button>
+<script>
+document.querySelector('button').onclick = async () => {
+try {
+document.querySelector('textarea').value = await navigator.clipboard.readText();
+} catch (e) {
+alert('Нет доступа к буферу обмена');
+}
+};
+</script>
+</body>
+</html>
