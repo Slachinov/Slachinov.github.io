@@ -77,8 +77,8 @@ parent: app,
 it: 'put',
 data: { id: 'put' },
 event: {
-click: function() {alert(this);alert(this.dataset);alert(this.dataset.id);
-ns.set('dispatch', 'put')
+click: function() {
+ns.set('dispatch', this.dataset.id)
 }
 }
 })
