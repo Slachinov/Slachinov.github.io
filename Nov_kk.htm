@@ -20,63 +20,63 @@ margin:0;
 
 
 const app = qq.ce({
-  tag: 'div',
-  style: {
-    position: 'absolute',
-    left: '20px',
-    top: '20px',
-    width: '240px',
-    minHeight: '150px',
-    zIndex: '5',
-    background: 'lightblue',
-    padding: '10px'
-  }
+tag: 'div',
+style: {
+position: 'absolute',
+left: '20px',
+top: '20px',
+width: '240px',
+minHeight: '150px',
+zIndex: '5',
+background: 'lightblue',
+padding: '10px'
+}
 })
 const out = qq.ce({
-  tag: 'div',
-  parent: app,
-  style: { whiteSpace: 'pre-wrap' }
+tag: 'div',
+parent: app,
+style: { whiteSpace: 'pre-wrap' }
 })
-const ns = qq.ns()
+const ns = qq.ns();alert(ns);
 const queue = []
 let busy = false
 
 
 function execute(message) {
-  out.innerText += message + '\n'
-  busy = true
-  setTimeout(() => {
-    busy = false
-    next()
-  }, 3000)
+out.innerText += message + '\n'
+busy = true
+setTimeout(() => {
+busy = false
+next()
+}, 3000)
 }
 
-
+alert(execute);
 function next() {
-  if (busy || !queue.length) return
-  execute(queue.shift())
+if (busy || !queue.length) return
+execute(queue.shift())
 }
 
-
+alert(next);
 function dispatch(message) {
-  queue.push(message)
-  next()
+queue.push(message)
+next()
 }
 
 
 ns('dispatch').subscribe(dispatch)
 
-
+alert(9);
 qq.ce({
-  tag: 'button',
-  parent: app,
-  it: 'put',
-  data: { id: 'put' },
-  event: {
-    click: function() {
-      ns('dispatch').set(this.data.id)
-    }
-  }
+tag: 'button',
+parent: app,
+it: 'put',
+data: { id: 'put' },
+event: {
+click: function() {
+ns('dispatch').set(this.data.id)
+}
+}
 })
 
 
