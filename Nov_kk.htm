@@ -77,7 +77,7 @@ qq.ce({
   it: 'put',
   data: { id: 'put' },
   event: {
-    click: function() {
+    click: function() {alert(this);alert(this.data.id);
       ns.set('dispatch', this.data.id)
     }
   }
