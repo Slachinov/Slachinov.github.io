@@ -77,7 +77,7 @@ this.innerHTML=""; },
   if (skin.it) el.innerText = skin.it;
   if (skin.val) el.value = skin.val;
   if (skin.prop) for (let u in skin.prop) el[u] = skin.prop[u];
-
+if (skin.data) el.data = skin.data;
 
   if (skin.event) {
     for (let u in skin.event) {
