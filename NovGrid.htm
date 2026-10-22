@@ -52,8 +52,8 @@ gridColumn:'2',gridRow:'3',overflow:'auto', minHeight:'0'}}));
 ns.set('buttons',qq.ce({tag:'div',parent:app,style:{
 gridColumn:'2',gridRow:'-3',background:'orange'
 },event:{click:function(){
-qq.cl(ns.get('editorPanel').offsetHeight);qq.cl(ns.get('editor').scrollHeight)
-qq.cl(ns.get('editorPanel').offsetHeight);qq.cl(ns.get('editor').scrollHeight)
+qq.cl(ns.get('editorPanel').offsetHeight);qq.cl(ns.get('editor').clientHeight)
+qq.cl(ns.get('editorPanel').scrollHeight);qq.cl(ns.get('editor').scrollHeight)
 
 
 }}}));
