@@ -79,11 +79,13 @@ margin:'0',
 padding:'4px'
 },
 //===
+
+
 event:{
 swiperight:function(){qq.cl('swipe');
 const text=this.gettext();
 this.remove();
-const div=qq.ce({skinDiv,{parent:ns.get('editor')});
+const div=qq.ce({skinDiv,{parent:ns.get('editor')}});
 div.settext(text);qq.cl('swipeend');
 }
 }
