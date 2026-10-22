@@ -17,8 +17,6 @@ margin:0;
 </head>
 <body>
 <script type='module'>
-alert(55);alert(qq.cl);
-qq.cl(77);
 //==
 const ns=qq.ns();qq.cl(ns);
 const app=qq.ce({tag:'div',style:{
@@ -61,103 +59,6 @@ ns.set('bottom',qq.ce({tag:'div',it:554,parent:app,style:{
 gridColumn:'1/-1',gridRow:'-2',background:'blue'
 }}));
 qq.cl('end');
-</script>
-<script>alert(9);/*
-alert(qq.cl);
-
-qq.cl(77);
-const ns=qq.ns();qq.cl(ns);
-const app=qq.ce({tag:'div',style:{
-display:'grid',
-gridTemplateColumns:'auto 1fr',
-gridTemplateRows:'auto auto 1fr 30px auto',
-width:'100%',
-height:'100%',
-gap:'1px'
-}});qq.cl(app);
-ns.set('app',app);
-
-
-ns.set('topp',qq.ce({tag:'div',parent:app,style:{
-gridColumn:'1/-1',gridRow:'1',background:'gray'
-}}));
-
-
-ns.set('left',qq.ce({tag:'div',it:'zzzzzzxxxxx',parent:app,style:{
-gridColumn:'1',gridRow:'2/-2',background:'lightblue',minWidth:'0px'
-}}));
-
-
-ns.set('rightT',qq.ce({tag:'div',it:567,parent:app,style:{
-gridColumn:'2',gridRow:'2',background:'lightgray',minHeight:'10px'
-}}));
-
-
-ns.set('rightTop',qq.ce({tag:'textarea',parent:app,it:54322,style:{
-gridColumn:'2',gridRow:'3',background:'lightgreen'
-}}));
-
-
-ns.set('rightBottom',qq.ce({tag:'div',parent:app,style:{
-gridColumn:'2',gridRow:'-3',background:'orange'
-}}));
-
-
-ns.set('bottom',qq.ce({tag:'div',it:554,parent:app,style:{
-gridColumn:'1/-1',gridRow:'-2',background:'blue'
-}}));
-qq.cl('end');*/
-/*
-const body = document.body;//alert(body.children.length);
-qq.ce(body, {style:{
-display:'grid',
-gridTemplateColumns:'auto 1fr',
-gridTemplateRows:'auto auto 1fr 30px auto',
-height:'100%',
-gap:'1px'
-}});
-//alert(Array.from(document.body.children).map(c=>c.tagName).join(' / '));
-
-const topp= qq.ce({tag:'div', parent:body, style:{
-gridColumn:'1/-1', gridRow:'1', background:'gray'
-}});
-
-const left = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'1', gridRow:'2/-2', background:'lightblue','min-width':'0px'
-}});
-
-
-const rightT = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'2', gridRow:'2', background:'lightgray','min-height':'10px'
-}});
-
-
-const rightTop = qq.ce({tag:'textarea', parent:body,it:54322, style:{
-gridColumn:'2', gridRow:'3', background:'lightgreen'
-}});
-
-
-const rightBottom = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'2', gridRow:'-3', background:'orange'
-}});
-
-
-const bottom = qq.ce({tag:'div', parent:body, style:{
-gridColumn:'1/-1', gridRow:'-2', background:'blue'
-}});
-//===
-qq.ce({tag:'button',it:'run1552', parent:topp,style :{'font-size':'25px'} ,event:{click:function(){
-left.style.display = left.style.display === 'none' ? '' : 'none';bottom.style.height='50px';alert(left.getStyle('display'));
-alert(qq.f.getStyle('margin-left',body));
-alert(getComputedStyle(body).paddingLeft + ' / ' + getComputedStyle(body).paddingBottom);
-alert(getComputedStyle(body).gridTemplateColumns + ' / ' + getComputedStyle(body).gridTemplateRows);
-alert(body.children.length);
-alert(Array.from(body.children).map(c=>c.tagName).join(' / '));
-alert(Array.from(body.children).map(c=>c.tagName+':'+getComputedStyle(c).gridRow).join(' / '));
-}}});
-//==
-qq.ce({tag:'span',parent:left,it:'tratatatatatata'})
-*/
 </script>
 </body>
 </html>
