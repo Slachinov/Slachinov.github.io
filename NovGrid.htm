@@ -111,6 +111,14 @@ overflow:'auto',
 outline:'none',
 padding:'4px',
 background:'lightgreen'
+},
+event:{
+swiperight:function(){
+const text=this.gettext();
+this.remove();
+const textarea=qq.ce(skinTextarea,{parent:ns.get('editor')});
+textarea.settext(text);
+}
 }
 };
 qq.ce(skinTextarea,{parent:ns.get('editor')});
