@@ -85,6 +85,7 @@ swiperight:function(){qq.cl('swipe');
 const text=this.gettext();
 this.remove();
 const div=qq.ce(skinDiv,{parent:ns.get('editorPanel')});
+ns.set('editor',div);
 div.settext(text);qq.cl('swipeend');
 }
 }
@@ -115,11 +116,12 @@ swiperight:function(){
 const text=this.gettext();
 this.remove();
 const textarea=qq.ce(skinTextarea,{parent:ns.get('editorPanel')});
+ns.set('editor',textarea);
 textarea.settext(text);
 }
 }
 };
-qq.ce(skinTextarea,{parent:ns.get('editorPanel')});
+ns.set('editor',qq.ce(skinTextarea,{parent:ns.get('editorPanel')}));
 export default ns
 qq.cl('enddd');
 </script>
