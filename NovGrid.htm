@@ -46,7 +46,7 @@ gridColumn:'2',gridRow:'2',background:'lightgray',minHeight:'10px'
 
 
 ns.set('editorPanel',qq.ce({tag:'div',parent:app,style:{
-gridColumn:'2',gridRow:'3',overflow:'hidden'}}));
+gridColumn:'2',gridRow:'3',overflow:'hidden', minHeight:'0'}}));
 
 
 ns.set('buttons',qq.ce({tag:'div',parent:app,style:{
@@ -111,7 +111,8 @@ outline:'none',
 padding:'4px',
 background:'lightgreen',
 overflowWrap:'anywhere',
-whiteSpace:'pre-wrap'
+whiteSpace:'pre-wrap',
+minHeight:'0'
 },
 event:{
 swiperight:function(){
