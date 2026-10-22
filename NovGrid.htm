@@ -18,9 +18,8 @@ margin:0;
 <body>
 <script type="module">
 
-
-
-const ns=qq.ns();
+qq.cl(77);
+const ns=qq.ns();qq.cl(ns);
 const app=qq.ce({tag:'div',style:{
 display:'grid',
 gridTemplateColumns:'auto 1fr',
@@ -28,7 +27,7 @@ gridTemplateRows:'auto auto 1fr 30px auto',
 width:'100%',
 height:'100%',
 gap:'1px'
-}});
+}});qq.cl(app);
 ns.set('app',app);
 
 
@@ -60,8 +59,7 @@ gridColumn:'2',gridRow:'-3',background:'orange'
 ns.set('bottom',qq.ce({tag:'div',it:554,parent:app,style:{
 gridColumn:'1/-1',gridRow:'-2',background:'blue'
 }}));
-
-
+qq.cl('end');
 /*
 const body = document.body;//alert(body.children.length);
 qq.ce(body, {style:{
