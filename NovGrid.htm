@@ -96,8 +96,8 @@ const skinDiv={
 tag:'div',
 attr:{contenteditable:'true'},
 prop:{
-gettext:function(){return this.innerHTML},
-settext:function(text){this.innerHTML=text},
+gettext:function(){return this.innerText},
+settext:function(text){this.innerText=text},
 clear:function(){this.innerHTML=''},
 edit:function(){this.contentEditable='true'},
 noedit:function(){this.contentEditable='false'}
