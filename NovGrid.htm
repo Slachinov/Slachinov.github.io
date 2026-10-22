@@ -84,7 +84,7 @@ padding:'4px'
 },
 //===
 
-
+/*
 event:{
 swiperight:function(){qq.cl('swipe');
 const text=this.gettext();
@@ -93,7 +93,7 @@ const div=qq.ce(skinDiv,{parent:ns.get('editorPanel')});
 ns.set('editor',div);
 div.settext(text);qq.cl('swipeend');
 }
-}
+}*/
 //===
 };
 
@@ -118,7 +118,7 @@ background:'lightgreen',
 overflowWrap:'anywhere',
 whiteSpace:'pre-wrap',
 minHeight:'0'
-},
+},/*
 event:{
 swiperight:function(){
 const text=this.gettext();
@@ -127,7 +127,7 @@ const textarea=qq.ce(skinTextarea,{parent:ns.get('editorPanel')});
 ns.set('editor',textarea);
 textarea.settext(text);
 }
-}
+}*/
 };
 ns.set('editor',qq.ce(skinTextarea,{parent:ns.get('editorPanel')}));
 export default ns
