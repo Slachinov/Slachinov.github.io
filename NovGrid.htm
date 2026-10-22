@@ -95,8 +95,7 @@ div.settext(text);qq.cl('swipeend');
 const skinDiv={
 tag:'div',
 attr:{contenteditable:'true'},
-prop:{
-gettext:function(){return this.innerText},
+prop:{gettext:function(){return this.innerText.replace(/\u00A0/g,' ')},
 settext:function(text){this.innerText=text},
 clear:function(){this.innerHTML=''},
 edit:function(){this.contentEditable='true'},
