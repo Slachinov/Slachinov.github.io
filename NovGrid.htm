@@ -59,6 +59,50 @@ ns.set('bottom',qq.ce({tag:'div',it:554,parent:app,style:{
 gridColumn:'1/-1',gridRow:'-2',background:'blue'
 }}));
 qq.cl('end');
+//===
+const skinTextarea={
+tag:'textarea',
+prop:{
+gettext:function(){return this.value},
+settext:function(text){this.value=text},
+clear:function(){this.value=''},
+edit:function(){this.readOnly=false},
+noedit:function(){this.readOnly=true}
+},
+style:{
+width:'100%',
+height:'100%',
+boxSizing:'border-box',
+resize:'none',
+border:'0',
+margin:'0',
+padding:'4px'
+}
+};
+
+
+const skinDiv={
+tag:'div',
+attr:{contenteditable:'true'},
+prop:{
+gettext:function(){return this.innerHTML},
+settext:function(text){this.innerHTML=text},
+clear:function(){this.innerHTML=''},
+edit:function(){this.contentEditable='true'},
+noedit:function(){this.contentEditable='false'}
+},
+style:{
+width:'100%',
+height:'100%',
+boxSizing:'border-box',
+overflow:'auto',
+outline:'none',
+padding:'4px',
+background:'white'
+}
+};
+qq.ce(textarea,{parent:ns.get('editor')});
+qq.cl('enddd');
 </script>
 </body>
 </html>
