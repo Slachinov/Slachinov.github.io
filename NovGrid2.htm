@@ -30,14 +30,14 @@ gap:'1px'
 }
 
 
-ns.set('topPanel',qq.ce({tag:'div',it:444,parent:ns.get('app'),style:{
+ns.set('topPanel',qq.ce({tag:'div',parent:ns.get('app'),style:{
 gridColumn:'1/-1',gridRow:'1',background:'gray'
 }}));
 
 
 ns.set('leftPanel',qq.ce({tag:'div',it:'zzzzzzxxxxx',parent:ns.get('app'),style:{
 gridColumn:'1',gridRow:'2/-2',background:'lightblue',minWidth:'0px'
-}}));
+}}));ns.get('leftPanel').hide();
 
 
 ns.set('panels',qq.ce({tag:'div',it:567,parent:ns.get('app'),style:{
