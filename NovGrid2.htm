@@ -140,8 +140,9 @@ ns.get('editor').settext(await navigator.clipboard.readText());
 
 qq.ce({tag:'button',it:'noedit',parent:buttons,style:{fontSize:fs}});
 }
-
-
+qq.ce({tag:'button',it:'leftpanel',parent:ns.get('topPanel'),style:{fontSize:'22px'},event:{click:function(){
+ns.get('leftPanel').toggle();
+}}});
 export default ns;
 </script>
 </body>
