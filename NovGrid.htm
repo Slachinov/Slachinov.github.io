@@ -130,6 +130,18 @@ textarea.settext(text);
 }*/
 };
 ns.set('editor',qq.ce(skinDiv,{parent:ns.get('editorPanel')}));
+//=====
+qq.ce({tag:'button',it:'eval',parent:ns.get('buttons'),event:{
+click:function(){
+try{
+eval(ns.get('editor').gettext());
+}catch(e){
+qq.cl(e);
+}
+}
+}});
+
+//===/=/
 export default ns
 qq.cl('enddd');
 </script>
