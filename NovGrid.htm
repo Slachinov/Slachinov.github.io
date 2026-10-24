@@ -131,7 +131,7 @@ textarea.settext(text);
 };
 ns.set('editor',qq.ce(skinDiv,{parent:ns.get('editorPanel')}));
 //=====
-qq.ce({tag:'button',it:'eval',parent:ns.get('buttons'),event:{
+qq.ce({tag:'button',it:'eval',style:{fontSize:'22px'},parent:ns.get('buttons'),event:{
 click:function(){
 try{
 eval(ns.get('editor').gettext());
@@ -140,6 +140,27 @@ qq.cl(e);
 }
 }
 }});
+{
+let fs='24px';
+const buttons=ns.get('buttons');
+
+
+qq.ce({tag:'button',it:'clear',parent:buttons,style:{fontSize:fs},event:{click:function(){
+ns.get('editor').clear();
+}}});
+
+
+qq.ce({tag:'button',it:'\u29C9',parent:buttons,style:{fontSize:fs},event:{click:async function(){
+await navigator.clipboard.writeText(ns.get('editor').gettext());
+}}});
+
+
+qq.ce({tag:'button',it:'\uD83D\uDCE5',parent:buttons,style:{fontSize:fs},event:{click:async function(){
+ns.get('editor').settext(await navigator.clipboard.readText());
+}}});
+
+
+qq.ce({tag:'button',it:'noedit',parent:buttons,style:{fontSize:fs}});}
 
 //===/=/
 export default ns
