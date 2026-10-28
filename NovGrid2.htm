@@ -112,7 +112,8 @@ ns.set('editor',qq.ce(skinDiv,{parent:ns.get('editorPanel')}));
 qq.ce({tag:'button',it:'markdown',style:{fontSize:'22px'},parent:ns.get('topPanel'),event:{
 click:function(){
 try{if(this.edit){this.text=ns.get('editor').gettext(); ns.get('editor').remove(); ns.set('editor',qq.ce(skinTextarea,{parent:ns.get('editorPanel')}));this.edit=0;
-}else{ns.set('editor',qq.ce(skinDiv,{parent:ns.get('editorPanel')}));this.edit=1;
+}else{ns.get('editor').remove();
+ns.set('editor',qq.ce(skinDiv,{parent:ns.get('editorPanel')}));this.edit=1;
 }
 }catch(e){}
 }
