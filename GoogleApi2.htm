@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+<button onclick="askGemini()">Спросить Gemini</button>
+
+<script>
+async function askGemini() {
+let apiKey = localStorage.getItem('gemini_api_key');
+if (!apiKey) {
+apiKey = prompt('Вставьте ваш API-ключ:');
+if (!apiKey) return;
+localStorage.setItem('gemini_api_key', apiKey.trim());
+}
+
+const url = `https://googleapis.com{apiKey}`;
+const res = await fetch(url, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+contents: [{ parts: [{ text: 'Объясни в двух словах, как работает ИИ' }] }]
+})
+});
+
+const data = await res.json();
+alert(data.candidates.content.parts.text);
+}
+</script>
+</body>
+</html>
