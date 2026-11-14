@@ -1,0 +1,76 @@
+async function idb(dbName) {
+
+const list = await indexedDB.databases();
+
+if (!list.some(d => d.name === dbName)) {
+qq.er(`❌ DB not found: ${dbName}`);
+return;
+}
+
+const req = indexedDB.open(dbName);
+
+const db = await new Promise((resolve, reject) => {
+req.onsuccess = () => resolve(req.result);
+req.onerror = () => reject(req.error);
+});
+
+try {
+
+const result = {};
+
+qq.cl('****************************************');
+qq.cl(`📦 DB: ${dbName}`);
+qq.cl(`Version: ${db.version}`);
+qq.cl('----------------------------------------');
+
+for (const name of db.objectStoreNames) {
+
+const tx = db.transaction(name, 'readonly');
+const store = tx.objectStore(name);
+
+const indexes = {};
+
+result[name] = {
+options: {
+keyPath: store.keyPath,
+autoIncrement: store.autoIncrement
+},
+indexes
+};
+
+qq.cl(`📁 STORE: ${name}`);
+qq.cl('Options:');
+qq.cl(` keyPath: ${store.keyPath}`);
+qq.cl(` autoIncrement: ${store.autoIncrement}`);
+
+for (const idxName of store.indexNames) {
+
+const idx = store.index(idxName);
+
+indexes[idxName] = {
+keyPath: idx.keyPath,
+unique: idx.unique,
+multiEntry: idx.multiEntry
+};
+
+qq.cl(` 🔍 INDEX: ${idxName}`);
+qq.cl(` keyPath: ${idx.keyPath}`);
+qq.cl(` unique: ${idx.unique}`);
+qq.cl(` multiEntry: ${idx.multiEntry}`);
+}
+
+qq.cl('----------------------------------------');
+}
+
+qq.cl(`✔ END DB: ${dbName}`);
+qq.cl('****************************************');
+qq.cl('');
+
+return result;
+
+} finally {
+db.close();
+}
+}
+
+idb('clone');
