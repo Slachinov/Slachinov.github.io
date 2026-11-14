@@ -1,0 +1,7 @@
+/*это коментарий не исполняц
+И выполняй по очереди сама без счетчика команд
+*/
+https://slachinov.github.io/Txt/idb/prog0.txt
+https://slachinov.github.io/Txt/idb/com1.txt
+https://slachinov.github.io/Txt/idb/com2.txt
+https://slachinov.github.io/Txt/idb/com3.txt
