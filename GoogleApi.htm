@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-<button id="askBtn">Спросить Gemini 5 </button>
+<button id="askBtn">Спросить Gemini 544 </button>
 
 <script type="module">
 import { GoogleGenAI } from 'https://esm.run';
 alert(GoogleGenAI);
 document.getElementById('askBtn').onclick = async () => {
-let apiKey = localStorage.getItem( ' gemini_api_key ');
+let apiKey = localStorage.getItem( 'gemini_api_key');alert(apiKey);
 if (!apiKey) {
 apiKey = prompt('Вставьте ваш API-ключ:');
 if (!apiKey) return;
