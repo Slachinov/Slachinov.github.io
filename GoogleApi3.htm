@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Спросить Gemini</button>
+<button onclick="localStorage.clear(); alert('Ключ удален')" style="font-size: 20px; padding: 10px;">Сброс</button>
+<pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
+
+<script>
+async function askGemini() {
+const out = document.getElementById('out');
+let apiKey = localStorage.getItem('gemini_api_key');
+
+if (!apiKey) {
+apiKey = prompt('Вставьте ваш API-ключ:');
+if (!apiKey) return;
+localStorage.setItem('gemini_api_key', apiKey.trim());
+}
+
+out.textContent = 'Думаю...';
+
+try {
+const url = `https://googleapis.com{apiKey}`;
+const res = await fetch(url, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+contents: [{ parts: [{ text: 'Объясни в двух словах, как работает ИИ' }] }]
+})
+});
+
+const data = await res.json();
+
+if (data.error) {
+out.textContent = 'Ошибка Google: ' + data.error.message;
+} else {
+out.textContent = data.candidates.at(0).content.parts.at(0).text;
+}
+} catch (err) {
+out.textContent = 'Ошибка сети: ' + err.message;
+}
+}
+</script>
+</body>
+</html>
