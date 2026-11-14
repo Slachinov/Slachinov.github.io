@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+<button id="askBtn">Спросить Gemini</button>
+
+<script type="module">
+import { GoogleGenAI } from 'https://esm.run';
+
+document.getElementById('askBtn').onclick = async () => {
+let apiKey = localStorage.getItem( ' gemini_api_key ');
+if (!apiKey) {
+apiKey = prompt('Вставьте ваш API-ключ:');
+if (!apiKey) return;
+localStorage.setItem('gemini_api_key', apiKey.trim());
+}
+
+const ai = new GoogleGenAI({ apiKey: apiKey });
+const response = await ai.models.generateContent({
+model: 'gemini-2.5-flash',
+contents: 'Объясни в двух словах, как работает ИИ',
+});
+
+alert(response.text);
+};
+</script>
+</body>
+</html>
