@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Спросить Gemini meny</button>
-<button alert('Ключ удален')" style="font-size: 20px; padding: 10px;">Сброс</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Спросить Gemini meny 3.8</button>
+<button  style="font-size: 20px; padding: 10px;">Сброс</button>
 <pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
 <script>
@@ -25,7 +25,7 @@ out.textContent = 'Думаю...';
 
 try {
 const host = 'https://generativelanguage.googleapis.com';
-const path = '/v1beta/models/gemini-2.5-flash:generateContent';
+const path = '/v1beta/models/gemini-3.8-flash:generateContent';
 const url = host + path;
 
 const res = await fetch(url, {
