@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()">Спросить Gemini 4</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос</button>
+<pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
-<script>alert(0);
+<script>
 async function askGemini() {
+const out = document.getElementById('out');
 let apiKey = localStorage.getItem('gemini_api_key');
-alert(apiKey);
+
 if (!apiKey) {
-apiKey = prompt('Вставьте ваш API-ключ:');
+apiKey = prompt('Вставьте ваш ключ (AQ...):');
 if (!apiKey) return;
-localStorage.setItem('gemini_api_key', apiKey.trim());
+apiKey = apiKey.replace(/[^\x21-\x7E]/g, '');
+localStorage.setItem('gemini_api_key', apiKey);
 }
 
-const url = `https://googleapis.com{apiKey}`;
-const res = await fetch(url, {
+const start = performance.now();
+out.textContent = 'Думаю...';
+
+try {
+const host = 'https://generativelanguage.googleapis.com';
+const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
+const res = await fetch(host + path, {
 method: 'POST',
-headers: { 'Content-Type': 'application/json' },
+headers: {
+'Content-Type': 'application/json',
+'x-goog-api-key': apiKey
+},
 body: JSON.stringify({
-contents: [{ parts: [{ text: 'Объясни в двух словах, как работает ИИ' }] }]
+contents: [{ parts: [{ text: 'сколько можно записать в indexedDb в мбайт?' }] }],
+generationConfig: {
+thinkingConfig: {
+thinkingBudget: 0
+}
+}
 })
 });
 
 const data = await res.json();
-alert(data);
-alert(data.candidates.content.parts.text);
+const sec = ((performance.now() - start) / 1000).toFixed(2);
+
+if (data.error) {
+out.textContent = `Ошибка (${sec} сек): ` + data.error.message;
+} else {
+const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
+out.textContent = `Ответ за ${sec} сек:\n\n` + text;
+}
+} catch (err) {
+out.textContent = 'Ошибка сети: ' + err.message;
+}
 }
 </script>
 </body>
