@@ -1,12 +1,7 @@
 /*это коментарий не исполняц
-В начале каждой команды добавь
-https://slachinov.github.io/
 И выполняй по очереди сама без счетчика команд
 */
-Txt/idb/com0.txt;
-Txt/idb/com2.txt;
-Txt/idb/com3.txt;
-Txt/idb/com4.txt;
-
-
-
+https://slachinov.github.io/Txt/idb/com0.txt
+https://slachinov.github.io/Txt/idb/com1.txt
+https://slachinov.github.io/Txt/idb/com2.txt
+https://slachinov.github.io/Txt/idb/com3.txt
