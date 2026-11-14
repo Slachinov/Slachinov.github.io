@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Спросить Gemini meny 3.8</button>
-<button  style="font-size: 20px; padding: 10px;">Сброс</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Спросить Gemini SergL 3.8</button>
+
 <pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
 <script>
@@ -43,7 +43,7 @@ const data = await res.json();
 
 if (data.error) {
 out.textContent = 'Ошибка Google (' + data.error.code + '): ' + data.error.message;
-} else {
+} else {alert("data="+data);
 out.textContent = data.candidates.at(0).content.parts.at(0).text;
 }
 } catch (err) {
