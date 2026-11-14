@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Gemini SergLach 3.8 c</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Gemini SergLach 3.8 </button>
 
 <pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
@@ -26,7 +26,7 @@ out.textContent = 'Думаю...';
 try {
 const host = 'https://generativelanguage.googleapis.com';
 const path = '/v1beta/models/gemini-3.8-flash:generateContent';
-const url = host + path;alert(url);
+const url = host + path;
 
 const res = await fetch(url, {
 method: 'POST',
@@ -39,11 +39,11 @@ contents: [{ parts: [{ text: 'какие api есть в браузере,я и�
 })
 });
 
-const data = await res.json();alert(1);
+const data = await res.json();
 
 if (data.error) {
 out.textContent = 'Ошибка Google (' + data.error.code + '): ' + data.error.message;
-} else {alert("data="+data);
+} else {
 out.textContent = data.candidates.at(0).content.parts.at(0).text;
 }
 } catch (err) {
