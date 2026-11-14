@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос5</button>
 <pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
 <script>
@@ -33,12 +33,7 @@ headers: {
 'x-goog-api-key': apiKey
 },
 body: JSON.stringify({
-contents: [{ parts: [{ text: 'сколько можно записать в indexedDb в мбайт?' }] }],
-generationConfig: {
-thinkingConfig: {
-thinkingBudget: 0
-}
-}
+contents: [{ parts: [{ text: 'сколько можно записать в indexedDb в мбайт?' }] }]
 })
 });
 
