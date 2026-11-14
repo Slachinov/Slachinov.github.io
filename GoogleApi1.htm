@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Спросить Gemini 3.8 about ii</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Gemini flash lite 3.8 </button>
+
 <pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
 <script>
@@ -23,30 +24,30 @@ localStorage.setItem('gemini_api_key', apiKey);
 out.textContent = 'Думаю...';
 
 try {
-const host = 'https://googleapis.com';
-const path = '/v1beta/models/gemini-3.8-flash:generateContent';
-const res = await fetch(host + path, {
+const host = 'https://generativelanguage.googleapis.com';
+const path = '/v1beta/models/gemini-3.8-flash-lite:generateContent';
+const url = host + path;
+
+const res = await fetch(url, {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json',
 'x-goog-api-key': apiKey
 },
 body: JSON.stringify({
-contents: [{ parts: [{ text: 'Объясни в двух словах, как работает ИИ' }] }]
+contents: [{ parts: [{ text: 'как из.браузера записать на диск андроид?' }] }]
 })
 });
 
-const rawText = await res.text();
-const data = JSON.parse(rawText);
+const data = await res.json();
 
 if (data.error) {
 out.textContent = 'Ошибка Google (' + data.error.code + '): ' + data.error.message;
 } else {
-const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
-out.textContent = text ? text : 'Сырой ответ сервера:\n' + rawText;
+out.textContent = data.candidates.at(0).content.parts.at(0).text;
 }
 } catch (err) {
-out.textContent = 'Ошибка кода или сети: ' + err.message;
+out.textContent = 'Ошибка сети: ' + err.message;
 }
 }
 </script>
