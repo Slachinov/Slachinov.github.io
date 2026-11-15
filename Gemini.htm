@@ -21,8 +21,17 @@ qq.cl('begin fsend');
 import ns from "/Gemini/main.js"
 
 import  "/Gemini/buttons.js"
-qq.cl('fsend');
 
+
+
+
+
+function f(){
+  qq.cl('Событие fsend получено!');
+}
+
+
+ns.subscribe('fsend',f);
 </script>
 </body>
 </html>
