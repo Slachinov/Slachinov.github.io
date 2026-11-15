@@ -105,7 +105,51 @@ click:function(){}
 //=====
 
 
+const header=ns.get('header');
 
+
+ns.set('panelButton',qq.ce({tag:'button',parent:header,it:'☰',style:{
+position:'absolute',
+right:'100px',
+top:'4px',
+width:'32px',
+height:'32px',
+borderRadius:'50%',
+border:'0',
+background:'white',
+color:'#333',
+fontSize:'20px',
+lineHeight:'1',
+padding:'0'
+},event:{
+click:function(){
+ns.get('panel').show();
+}
+}}));
+
+
+ns.set('branchButton',qq.ce({tag:'button',parent:header,it:'✎',style:{
+position:'absolute',
+right:'55px',
+top:'4px',
+border:'0',
+background:'transparent',
+fontSize:'22px',
+color:'white',
+padding:'4px'
+}}));
+
+
+ns.set('menuButton',qq.ce({tag:'button',parent:header,it:'⋮',style:{
+position:'absolute',
+right:'10px',
+top:'4px',
+border:'0',
+background:'transparent',
+fontSize:'24px',
+color:'white',
+padding:'4px'
+}}));
 
 
 
