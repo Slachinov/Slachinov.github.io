@@ -1,5 +1,26 @@
-
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+html,
+body{
+width:100%;
+height:100%;
+margin:0;
+}
+</style>
+<script src="js/qqv34.js"></script>
+<script src="js/qqns.js"></script>
+<script type="module" src="js/console.js"></script>
+</head>
+<body>
+<script type="module">
+import ns from "/Gemini/main.js'
+/*
 const ns=qq.ns();
+
 
 ns.set('app',qq.ce({tag:'div',style:{
 display:'flex',
@@ -13,11 +34,12 @@ left:0,
 top:0
 }}));
 
-ns.set('header',qq.ce({tag:'div',parent:ns.get('app'),style:{
-minHeight:'40px',
+
+ns.set('header',qq.ce({tag:'div',parent:ns.get('app'),style:{minHeight:'40px',
 flex:'0 0 auto',
 background:'gray'
 }}));
+
 
 ns.set('dialog',qq.ce({tag:'div',parent:ns.get('app'),style:{
 flex:'1 1 auto',
@@ -25,7 +47,7 @@ minHeight:'0',
 overflow:'auto',
 background:'lightgray'
 }}));
-
+//===
 ns.set('composer',qq.ce({tag:'div',parent:ns.get('app'),style:{
 display:'flex',
 flexDirection:'column',
@@ -43,6 +65,9 @@ gap:'6px',
 overflow:'hidden'
 }}));
 
+
+
+
 ns.set('editor',qq.ce({tag:'div',parent:ns.get('composer'),
 attr:{contentEditable:true},
 style:{
@@ -55,13 +80,98 @@ borderRadius:'12px',
 padding:'6px'
 }}));
 
+
+
+
 ns.set('buttons',qq.ce({tag:'div',parent:ns.get('composer'),style:{
 flex:'0 0 25px',
 background:'lightgreen',
 borderRadius:'12px',
 padding:'6px'
 }}));
+//=====
+ns.set('size',qq.ce({tag:'button',it:'fullscreen',parent:ns.get('buttons'),style:{margin:'0 4px'}, event:{
+click:function(){
+try{
+const composer=ns.get('composer');
+const editor=ns.get('editor');
+const button=ns.get('size');
 
+
+
+
+if(button.textContent==='fullscreen'){
+composer.style.maxHeight='none';
+composer.style.top='0';
+composer.style.left='0';
+composer.style.right='0';
+composer.style.bottom='0';
+composer.style.borderRadius='0';
+editor.style.maxHeight='none';
+editor.style.minHeight='0';
+editor.style.overflow='auto';
+editor.style.flex='1 1 auto';
+button.textContent='shrink';
+}else{
+composer.style.top='';
+composer.style.left='10px';
+composer.style.right='10px';
+composer.style.bottom='10px';
+composer.style.borderRadius='18px';
+editor.style.maxHeight='200px';
+editor.style.minHeight='40px';
+button.textContent='fullscreen';
+}
+}catch(e){qq.er(e)}
+}
+}}));
+//====
+{
+const buttons=ns.get('buttons');
+
+
+
+
+ns.set('copy',qq.ce({tag:'button',it:'\u29C9',style:{margin:'0 4px'},
+parent:buttons,event:{
+click:async function(){
+try{
+await navigator.clipboard.writeText(ns.get('editor').innerText);
+}catch(e){qq.er(e)}
+}
+}}));
+
+
+
+
+ns.set('paste',qq.ce({tag:'button',it:'\uD83D\uDCE5',
+style:{margin:'0 4px'},
+parent:buttons,event:{
+click:async function(){
+try{
+ns.get('editor').innerText=await navigator.clipboard.readText();
+}catch(e){qq.er(e)}
+}
+}}));
+
+
+
+
+ns.set('send',qq.ce({tag:'button',it:'↑',parent:buttons,style:{
+margin:'0 4px',
+background:'#1684e8',
+color:'white',
+border:'0',
+borderRadius:'50%',
+width:'32px',
+height:'32px',
+fontSize:'22px',
+fontWeight:'bold'
+},event:{
+click:function(){}
+}}));
+}
+//=====
 ns.set('panel',qq.ce({tag:'div',parent:ns.get('app'),style:{
 display:'flex',
 flexDirection:'row',
@@ -74,6 +184,9 @@ height:'100%',
 background:'transparent'
 }}));
 
+
+
+
 ns.set('panelLeft',qq.ce({tag:'div',parent:ns.get('panel'),style:{
 width:'80%',
 height:'100%',
@@ -82,15 +195,29 @@ background:'white',
 overflow:'auto'
 }}));
 
+
+
+
 ns.set('panelRight',qq.ce({tag:'div',parent:ns.get('panel'),style:{
 flex:'1 1 auto',
 height:'100%',
 background:'rgba(0,0,0,0.35)'
 },
-event:{
-click:function(){
-ns.get('panel').hide();
-}
-}}));
+event:{click:function(){ns.get('panel').hide();}}}));
 
-export default ns;
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
