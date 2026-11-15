@@ -1,0 +1,124 @@
+
+import ns from "/Gemini/main.js"
+qq.cl('begin');
+qq.cl(ns);
+//=====
+ns.set('size',qq.ce({tag:'button',it:'fullscreen',parent:ns.get('buttons'),style:{margin:'0 4px'},event:{
+click:function(){
+try{
+const composer=ns.get('composer');
+const editor=ns.get('editor');
+const button=ns.get('size');
+if(button.textContent==='fullscreen'){
+composer.style.maxHeight='none';
+composer.style.top='0';
+composer.style.left='0';
+composer.style.right='0';
+composer.style.bottom='0';
+composer.style.borderRadius='0';
+editor.style.maxHeight='none';
+editor.style.minHeight='0';
+editor.style.overflow='auto';
+editor.style.flex='1 1 auto';
+button.textContent='shrink';
+}else{
+composer.style.top='';
+composer.style.left='10px';
+composer.style.right='10px';
+composer.style.bottom='10px';
+composer.style.borderRadius='18px';
+editor.style.maxHeight='200px';
+editor.style.minHeight='40px';
+button.textContent='fullscreen';
+}
+}catch(e){qq.er(e)}
+}
+}}));
+//====
+{
+const buttons=ns.get('buttons');
+
+ns.set('copy',qq.ce({tag:'button',it:'\u29C9',style:{margin:'0 4px'},parent:buttons,event:{
+click:async function(){
+try{
+await navigator.clipboard.writeText(ns.get('editor').innerText);
+}catch(e){qq.er(e)}
+}
+}}));
+
+ns.set('paste',qq.ce({tag:'button',it:'\uD83D\uDCE5',style:{margin:'0 4px'},parent:buttons,event:{
+click:async function(){
+try{
+ns.get('editor').innerText=await navigator.clipboard.readText();
+}catch(e){qq.er(e)}
+}
+}}));
+
+ns.set('send',qq.ce({tag:'button',it:'↑',parent:buttons,style:{
+margin:'0 4px',
+background:'#1684e8',
+color:'white',
+border:'0',
+borderRadius:'50%',
+width:'32px',
+height:'32px',
+fontSize:'22px',
+fontWeight:'bold'
+},event:{
+click:function(){
+ns.set('fsend',1);
+}
+}}));
+}
+//=====
+const header=ns.get('header');
+
+ns.set('panelButton',qq.ce({tag:'button',parent:header,it:'☰',style:{
+position:'absolute',
+left:'20px',
+top:'4px',
+width:'32px',
+height:'32px',
+borderRadius:'50%',
+border:'0',
+background:'white',
+color:'#333',
+fontSize:'20px',
+lineHeight:'1',
+padding:'0'
+},event:{
+click:function(){
+ns.get('panel').show();
+}
+}}));
+
+ns.set('branchButton',qq.ce({tag:'button',parent:header,it:'✎',style:{
+position:'absolute',
+right:'55px',
+top:'4px',
+border:'0',
+background:'transparent',
+fontSize:'22px',
+color:'white',
+padding:'4px'
+},event:{
+click:function(){
+ns.set('fbranch',1);
+}
+}}));
+
+ns.set('menuButton',qq.ce({tag:'button',parent:header,it:'⋮',style:{
+position:'absolute',
+right:'10px',
+top:'4px',
+border:'0',
+background:'transparent',
+fontSize:'24px',
+color:'white',
+padding:'4px'
+},event:{
+click:function(){
+ns.set('fmenu',1);
+}
+}}));
+
