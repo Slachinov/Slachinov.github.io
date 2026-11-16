@@ -5,11 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c textarea 5</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c textarea 2.5</button>
 <textarea id="txt" style="min-height:50px"></textarea>
-<pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
+<div id="out" style="font-size: 16px; margin-top: 20px;"></div>
 
 <script type="module">
+//alert('begin gemini marked');
+
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@18.2.0/lib/marked.esm.js';
+//alert('marked');
 async function askGemini() {
 const out = document.getElementById('out');
 let apiKey = localStorage.getItem('gemini_api_key');
@@ -20,13 +24,12 @@ if (!apiKey) return;
 apiKey = apiKey.replace(/[^\x21-\x7E]/g, '');
 localStorage.setItem('gemini_api_key', apiKey);
 }
-
 const start = performance.now();
-out.textContent = 'Думаю...';
-
+out.innerText = 'Думаю...';
 try {
 const host = 'https://generativelanguage.googleapis.com';
-const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
+//const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
+const path = '/v1beta/models/gemini-2.5-flash-lite:generateContent';
 const res = await fetch(host + path, {
 method: 'POST',
 headers: {
@@ -45,12 +48,14 @@ if (data.error) {
 out.textContent = `Ошибка (${sec} сек): ` + data.error.message;
 } else {
 const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
-out.textContent = `Ответ за ${sec} сек:\n\n` + text;
+out.innerHTML = marked.parse(text);
 }
 } catch (err) {
 out.textContent = 'Ошибка сети: ' + err.message;
 }
 }
+//==
+window.askGemini = askGemini;
 </script>
 </body>
 </html>
