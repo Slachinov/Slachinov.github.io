@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c gemini 2.0</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c gemini 3.5</button>
 <textarea id="txt" style="min-height:50px"></textarea>
 <div id="out" style="font-size: 16px; margin-top: 20px;"></div>
 
@@ -28,8 +28,8 @@ const start = performance.now();
 out.innerText = 'Думаю...';
 try {
 const host = 'https://generativelanguage.googleapis.com';
-//const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
-const path = '/v1beta/models/gemini-2.0-flash-lite:generateContent';
+
+const path = '/v1beta/models/gemini-3.5-flash-lite:generateContent';
 const res = await fetch(host + path, {
 method: 'POST',
 headers: {
