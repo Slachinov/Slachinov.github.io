@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c textarea 15</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c textarea 22</button>
 <textarea id="txt" style="min-height:50px"></textarea>
 <div id="out" style="font-size: 16px; margin-top: 20px;"></div>
 
 <script type="module">
-alert('begin gemini marked');
+//alert('begin gemini marked');
 
 import { marked } from 'https://cdn.jsdelivr.net/npm/marked@18.2.0/lib/marked.esm.js';
-alert('marked');
-async function askGemini() {alert(99);
+//alert('marked');
+async function askGemini() {
 const out = document.getElementById('out');
 let apiKey = localStorage.getItem('gemini_api_key');
 
@@ -24,10 +24,8 @@ if (!apiKey) return;
 apiKey = apiKey.replace(/[^\x21-\x7E]/g, '');
 localStorage.setItem('gemini_api_key', apiKey);
 }
-alert(5);
 const start = performance.now();
 out.innerText = 'Думаю...';
-alert(4);
 try {
 const host = 'https://generativelanguage.googleapis.com';
 const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
