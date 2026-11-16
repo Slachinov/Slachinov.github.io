@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c textarea</button>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c textarea 5</button>
 <textarea id="txt" style="min-height:50px"></textarea>
 <pre id="out" style="white-space: pre-wrap; font-size: 16px; margin-top: 20px;"></pre>
 
-<script>
+<script type="module">
 async function askGemini() {
 const out = document.getElementById('out');
 let apiKey = localStorage.getItem('gemini_api_key');
