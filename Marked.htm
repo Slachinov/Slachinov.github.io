@@ -17,9 +17,10 @@ margin:0;
 </head>
 <body>
 <script type="module">
-qq.cl("begin");
+qq.cl("begin 18.2");/*
 
-import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';*/
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@18.2.0/lib/marked.esm.js';
 qq.cl('marked');
 const html=marked.parse('# Привет!\n\nЭто **жирный текст**');
 qq.cl(html);
