@@ -17,7 +17,7 @@ margin:0;
 </head>
 <body>
 <script type="module">
-qq.cl('begin fsend56');
+qq.cl('begin fsend565');
 
 import ns from "/Gemini/main.js"
 import "/Gemini/buttons.js"
@@ -69,6 +69,56 @@ ns.get('dialog').innerText='Ошибка: ' + err.message;
 
 
 ns.subscribe('fsend', askGemini);
+//===========
+ns.subscribe('fbranch', async () => {
+  const dialog = ns.get('dialog');
+  dialog.innerHTML = '';
+
+
+  const keys = await idb.getAllKeys();
+
+
+  for (let i = 0; i < keys.length; i++) {
+    const data = await idb.get(keys[i]);
+
+
+    const message = qq.ce({
+      tag: 'div',
+      parent: dialog,
+      style: {
+        padding: '12px'
+      }
+    });
+
+
+    qq.ce({
+      tag: 'div',
+      parent: message,
+      it: data.question
+    });
+
+
+    qq.ce({
+      tag: 'div',
+      parent: message,
+      ih: marked.parse(data.answer)
+    });
+
+
+    if (i < keys.length - 1) {
+      qq.ce({
+        tag: 'hr',
+        parent: dialog,
+        style: {
+          border: 'none',
+          borderTop: '2px solid #888',
+          margin: '16px 0'
+        }
+      });
+    }
+  }
+});
+
 </script>
 </body>
 </html>
