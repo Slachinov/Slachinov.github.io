@@ -17,7 +17,7 @@ margin:0;
 </head>
 <body>
 <script type="module">
-qq.cl('begin fsend5');
+qq.cl('begin fsend55');
 
 import ns from "/Gemini/main.js"
 import "/Gemini/buttons.js"
@@ -44,7 +44,7 @@ headers: {
 'x-goog-api-key': apiKey
 },
 body: JSON.stringify({
-contents: [{ parts: [{ text: ns.get('editor') }] }]
+contents: [{ parts: [{ text: ns.get('editor').innerText}] }]
 })
 });
 const data = await res.json();
@@ -55,11 +55,11 @@ ns.get('dialog').innerText=`Ошибка (${sec} сек): ${data.error.message}`
 } else {
 const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
 await idb.put({
-question: ns.get('editor'),
+question: ns.get('editor').innerText,
 answer: text,
 time: Date.now()
 });
-ns.get('dialog').innerText=marked.parse(text);
+ns.get('dialog').innerHTML=marked.parse(text);
 }
 } catch (err) {
 ns.get('dialog').innerText='Ошибка: ' + err.message;
