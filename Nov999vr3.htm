@@ -16,16 +16,16 @@ margin:0;
 <script src="js/qqns.js"></script>
 <script type="module" src="js/console.js"></script>
 </head>
-<body><div>55585</div>
+<body><div>55585tratata</div>
 <script type="module">
 
-alert('start');
-import('https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/+esm')
-  .then(m => alert('ok ' + typeof m.default.highlightAll))
-  .catch(e => alert('ERR ' + e));
+
+
+const m = await import('https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/+esm');
+const hljs = m.default ?? m.hljs ?? m;
+
+
 qq.cl(typeof hljs.highlightAll);
-
-
 qq.cl('hg');
 
 
