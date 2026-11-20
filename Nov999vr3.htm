@@ -18,13 +18,18 @@ margin:0;
 </head>
 <body><div>55588ttty11115</div>
 <script type="module">
-import('https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/+esm')
-  .then(m => qq.cl(typeof m.default.highlightAll))
-  .catch(e => qq.cl('ERR: ' + e.message));
+
+
+import * as hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/es/index.js';
+
+
+qq.cl(typeof hljs.highlightAll);
+
+
 qq.cl('hg');
 
 
-qq.ce({it:54544,
+qq.ce({it:54,
 tag: 'div',
 parent: document.body,
 style: {
