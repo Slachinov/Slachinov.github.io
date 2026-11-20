@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<button onclick="askGemini()" style="font-size: 20px; padding: 10px;">Быстрый запрос c gemini flash lite latest</button>
+<textarea id="txt" style="min-height:50px"></textarea>
+<div id="out" style="font-size: 16px; margin-top: 20px;"></div>
+
+<script type="module">
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@18.2.0/lib/marked.esm.js';
+import { createIdbApi } from '/Lib/idb/f2.js';
+
+const idb = createIdbApi('Gemini', 'answers');
+
+async function askGemini() {
+const out = document.getElementById('out');
+let apiKey = localStorage.getItem('gemini_api_key');
+
+if (!apiKey) {
+apiKey = prompt('Вставьте ваш ключ (AQ...):');
+if (!apiKey) return;
+apiKey = apiKey.replace(/[^\x21-\x7E]/g, '');
+localStorage.setItem('gemini_api_key', apiKey);
+}
+
+const start = performance.now();
+out.innerText = 'Думаю...';
+
+try {
+const host = 'https://generativelanguage.googleapis.com';
+const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
+
+const res = await fetch(host + path, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'x-goog-api-key': apiKey
+},
+body: JSON.stringify({
+contents: [{ parts: [{ text: txt.value }] }]
+})
+});
+
+const data = await res.json();
+const sec = ((performance.now() - start) / 1000).toFixed(2);
+
+if (data.error) {
+out.textContent = `Ошибка (${sec} сек): ` + data.error.message;
+} else {
+const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
+
+await idb.put({
+question: txt.value,
+answer: text,
+time: Date.now()
+});
+
+out.innerHTML = marked.parse(text);
+}
+} catch (err) {
+out.textContent = 'Ошибка: ' + err.message;
+}
+}
+
+window.askGemini = askGemini;
+</script>
+</body>
+</html>
