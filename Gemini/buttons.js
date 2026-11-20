@@ -1,7 +1,7 @@
 
 import ns from "/Gemini/main.js"
 qq.cl('begin');
-qq.cl(ns);
+//qq.cl(ns);
 //=====
 ns.set('size',qq.ce({tag:'button',it:'fullscreen',parent:ns.get('buttons'),style:{margin:'0 4px'},event:{
 click:function(){
