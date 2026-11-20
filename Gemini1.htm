@@ -17,7 +17,7 @@ margin:0;
 </head>
 <body>
 <script type="module">
-qq.cl('begin fsend 05');
+qq.cl('begin fsend 0');
 
 import ns from "/Gemini/main.js"
 import "/Gemini/buttons.js"
@@ -101,7 +101,7 @@ ns.subscribe('fbranch', async () => {
     qq.ce({
       tag: 'div',
       parent: message,
-      it: marked.parse(data.answer)
+      ih: marked.parse(data.answer)
     });
 
 
