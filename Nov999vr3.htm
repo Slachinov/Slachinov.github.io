@@ -21,6 +21,25 @@ margin:0;
 qq.cl('begin');
 /*
 import hljs from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/index.min.js';*/
+const s = qq.ce({
+  tag: 'script',
+  parent: document.head,
+  attr: {
+    src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js'
+  },
+  event: {
+    load: () => {
+      qq.cl('HLJS LOADED');
+      qq.cl(typeof hljs);
+    },
+    error: () => {
+      qq.cl('HLJS ERROR');
+    }
+  }
+});
+
+
+qq.cl('SCRIPT ADDED');
 
 
 //hljs.highlightAll();
@@ -30,7 +49,7 @@ qq.cl('hg');
 qq.ce({
 tag: 'div',
 parent: document.body,
-style: {
+style: {it:55,
 position: 'fixed',
 inset: '0',
 zIndex: '5',
