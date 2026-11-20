@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+html,
+body{
+width:100%;
+height:100%;
+margin:0;
+}
+</style>
+<script src="js/qqv34.js"></script>
+<script src="js/qqns.js"></script>
+<script type="module" src="js/console.js"></script>
+</head>
+<body>
+<script type="module">
+qq.cl('begin fsend');
+
+import ns from "/Gemini/main.js"
+import "/Gemini/buttons.js"
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@18.2.0/lib/marked.esm.js';
+import { createIdbApi } from '/Lib/idb/f2.js';
+
+
+const idb = createIdbApi('ai_dialogs', 'gemini');
+
+
+async function askGemini() {
+const apiKey = localStorage.getItem('gemini_api_key');
+const start = performance.now();
+try {
+const host = 'https://generativelanguage.googleapis.com';
+const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
+const res = await fetch(host + path, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'x-goog-api-key': apiKey
+},
+body: JSON.stringify({
+contents: [{ parts: [{ text: ns.get('editor') }] }]
+})
+});
+const data = await res.json();
+const sec = ((performance.now() - start) / 1000).toFixed(2);
+if (data.error) {
+ns.set('dialog', `Ошибка (${sec} сек): ${data.error.message}`);
+} else {
+const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
+await idb.put({
+question: ns.get('editor'),
+answer: text,
+time: Date.now()
+});
+ns.set('dialog', marked.parse(text));
+}
+} catch (err) {
+ns.set('dialog', 'Ошибка: ' + err.message);
+}
+}
+
+
+ns.subscribe('fsend', askGemini);
+</script>
+</body>
+</html>
