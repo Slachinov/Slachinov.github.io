@@ -16,19 +16,14 @@ margin:0;
 <script src="js/qqns.js"></script>
 <script type="module" src="js/console.js"></script>
 </head>
-<body><div>55588ttty4444</div>
+<body><div>55588ttty5566</div>
 <script type="module">
 
 
-import('https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js')
-  .then(m => {
-    qq.cl('OK');
-    qq.cl(Object.keys(m));
-  })
-  .catch(e => {
-    qq.cl(e.name);
-    qq.cl(e.message);
-  });
+import('https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/+esm')
+  .then(m => qq.cl(typeof m.default.highlightAll))
+  .catch(e => qq.cl('ERR: ' + e.message));
+
 
 
 
