@@ -29,8 +29,11 @@ const idb = createIdbApi('ai_dialogs', 'gemini');
 
 
 async function askGemini() {
+qq.cl('askGemini');
+qq.cl(ns.get('editor'));
 const apiKey = localStorage.getItem('gemini_api_key');
 const start = performance.now();
+ns.set('dialog','думаю...');
 try {
 const host = 'https://generativelanguage.googleapis.com';
 const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
