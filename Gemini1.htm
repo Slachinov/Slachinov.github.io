@@ -17,7 +17,7 @@ margin:0;
 </head>
 <body>
 <script type="module">
-qq.cl('begin fsend55');
+qq.cl('begin fsend56');
 
 import ns from "/Gemini/main.js"
 import "/Gemini/buttons.js"
@@ -57,6 +57,7 @@ const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
 await idb.put({
 question: ns.get('editor').innerText,
 answer: text,
+data,
 time: Date.now()
 });
 ns.get('dialog').innerHTML=marked.parse(text);
