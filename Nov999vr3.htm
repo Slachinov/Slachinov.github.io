@@ -16,13 +16,13 @@ margin:0;
 <script src="js/qqns.js"></script>
 <script type="module" src="js/console.js"></script>
 </head>
-<body><div>55588ttty11115</div>
+<body><div>55585</div>
 <script type="module">
 
-
-import * as hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/es/index.js';
-
-
+alert('start');
+import('https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/+esm')
+  .then(m => alert('ok ' + typeof m.default.highlightAll))
+  .catch(e => alert('ERR ' + e));
 qq.cl(typeof hljs.highlightAll);
 
 
