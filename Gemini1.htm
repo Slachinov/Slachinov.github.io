@@ -17,7 +17,7 @@ margin:0;
 </head>
 <body>
 <script type="module">
-qq.cl('begin fsend');
+qq.cl('begin fsend5');
 
 import ns from "/Gemini/main.js"
 import "/Gemini/buttons.js"
@@ -30,10 +30,10 @@ const idb = createIdbApi('ai_dialogs', 'gemini');
 
 async function askGemini() {
 qq.cl('askGemini');
-qq.cl(ns.get('editor'));
+qq.cl(ns.get('editor').innerText);
 const apiKey = localStorage.getItem('gemini_api_key');
 const start = performance.now();
-ns.set('dialog','думаю...');
+ns.get('dialog').innerText='думаю...';
 try {
 const host = 'https://generativelanguage.googleapis.com';
 const path = '/v1beta/models/gemini-flash-lite-latest:generateContent';
@@ -48,9 +48,10 @@ contents: [{ parts: [{ text: ns.get('editor') }] }]
 })
 });
 const data = await res.json();
+qq.cl('data');
 const sec = ((performance.now() - start) / 1000).toFixed(2);
 if (data.error) {
-ns.set('dialog', `Ошибка (${sec} сек): ${data.error.message}`);
+ns.get('dialog').innerText=`Ошибка (${sec} сек): ${data.error.message}`;
 } else {
 const text = data.candidates?.at(0)?.content?.parts?.at(0)?.text;
 await idb.put({
@@ -58,10 +59,10 @@ question: ns.get('editor'),
 answer: text,
 time: Date.now()
 });
-ns.set('dialog', marked.parse(text));
+ns.get('dialog').innerText=marked.parse(text);
 }
 } catch (err) {
-ns.set('dialog', 'Ошибка: ' + err.message);
+ns.get('dialog').innerText='Ошибка: ' + err.message;
 }
 }
 
