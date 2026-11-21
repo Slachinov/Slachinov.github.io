@@ -180,14 +180,41 @@ overflow:'auto'
 }))
 //======
 qq.ce({
+tag:'button',
+parent:ns.get('buttonsApps'),
+it:'!Idb',
+event:{
+click:()=>ns.get('eval')(localStorage.getItem('Idb'))
+}
+})
+//-------
+qq.ce({
   tag:'button',
   parent:ns.get('buttonsApps'),
-  it:'!Idb',
+  it:'upgradeDB',
   event:{
-    click:()=>ns.get('eval')(localStorage.getItem('Idb'))
+    click:()=>{
+      const source = localStorage.getItem('upgradeDB')
+      const params = ns.get('editor').value
+
+
+      if (!source) {
+        qq.er('upgradeDB: функция не найдена в localStorage')
+        return
+      }
+
+
+      ns.get('eval')(`(async()=>{
+        try{
+          ${source}
+          await upgradeDB(${params})
+        }catch(e){
+          qq.er(e)
+        }
+      })()`)
+    }
   }
 })
-
 
 //======
 
