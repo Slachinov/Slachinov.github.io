@@ -216,7 +216,10 @@ qq.er(e)
 }
 })
 //-------
-ns.get('eval')(qq.ls('Buttons'));
+let scr=qq.ls('Buttons') ;
+qq.cl(scr);
+qq.cl(ns.get('eval'));
+ns.get('eval')( scr);
 //======
 
 
