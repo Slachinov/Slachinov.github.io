@@ -25,16 +25,16 @@ const ns = qq.ns()
 
 
 ns.set('app',qq.ce({
-  tag:'div',
-  style:{
-    position:'absolute',
-    inset:0,
-    zIndex:25,
-    display:'grid',
-    gridTemplateRows:'44px minmax(120px,2fr) 42px 42px minmax(80px,3fr)',
-    background:'#263238',
-    boxSizing:'border-box'
-  }
+tag:'div',
+style:{
+position:'absolute',
+inset:0,
+zIndex:25,
+display:'grid',
+gridTemplateRows:'44px minmax(120px,2fr) 42px 42px minmax(80px,3fr)',
+background:'#263238',
+boxSizing:'border-box'
+}
 }))
 
 
@@ -42,142 +42,154 @@ const app = ns.get('app')
 
 
 const top = qq.ce({
-  tag:'div',
-  parent:app,
-  style:{
-    background:'#455A64',
-    display:'flex',
-    justifyContent:'flex-end',
-    alignItems:'center',
-    padding:'2px'
-  }
+tag:'div',
+parent:app,
+style:{
+background:'#455A64',
+display:'flex',
+justifyContent:'flex-end',
+alignItems:'center',
+padding:'2px'
+}
 })
 
 
 qq.ce({
-  tag:'button',
-  parent:top,
-  it:'×',
-  style:{
-    width:'40px',
-    height:'40px',
-    background:'#D32F2F',
-    color:'white',
-    border:'none',
-    borderRadius:'4px',
-    fontSize:'26px'
-  },
-  event:{
-    click:()=>app.hide()
-  }
+tag:'button',
+parent:top,
+it:'×',
+style:{
+width:'40px',
+height:'40px',
+background:'#D32F2F',
+color:'white',
+border:'none',
+borderRadius:'4px',
+fontSize:'26px'
+},
+event:{
+click:()=>app.hide()
+}
 })
 
 
 const editor = qq.ce({
-  tag:'textarea',
-  parent:app,
-  style:{
-    width:'100%',
-    height:'100%',
-    boxSizing:'border-box',
-    resize:'none',
-    background:'#ECEFF1',
-    color:'#263238',
-    border:'none',
-    padding:'8px',
-    fontSize:'15px'
-  }
+tag:'textarea',
+parent:app,
+style:{
+width:'100%',
+height:'100%',
+boxSizing:'border-box',
+resize:'none',
+background:'#ECEFF1',
+color:'#263238',
+border:'none',
+padding:'8px',
+fontSize:'15px'
+}
 })
 
 
 const buttons = qq.ce({
-  tag:'div',
-  parent:app,
-  style:{
-    background:'#00695C',
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'space-around',
-    gap:'5px',
-    padding:'3px'
-  }
+tag:'div',
+parent:app,
+style:{
+background:'#00695C',
+display:'flex',
+alignItems:'center',
+justifyContent:'space-around',
+gap:'5px',
+padding:'3px'
+}
 })
 
 
 ns.set('eval',function(script){
-  return eval(script)
+return eval(script)
 })
 
 
 const makeButton = (parent,name,fn) => qq.ce({
-  tag:'button',
-  parent,
-  it:name,
-  style:{
-    flex:'1',
-    height:'34px',
-    background:'#B2DFDB',
-    color:'#004D40',
-    border:'none',
-    borderRadius:'4px',
-    fontSize:'14px'
-  },
-  event:{click:fn}
+tag:'button',
+parent,
+it:name,
+style:{
+flex:'1',
+height:'34px',
+background:'#B2DFDB',
+color:'#004D40',
+border:'none',
+borderRadius:'4px',
+fontSize:'14px'
+},
+event:{click:fn}
 })
 
 
 makeButton(buttons,'eval',()=>{
-  try{
-    ns.get('eval')(editor.value)
-  }catch(e){
-    qq.er(e)
-  }
+try{
+ns.get('eval')(editor.value)
+}catch(e){
+qq.er(e)
+}
 })
 
 
 makeButton(buttons,'clear',()=>{
-  editor.value = ''
+editor.value = ''
 })
 
 
 makeButton(buttons,'copy',async()=>{
-  try{
-    await navigator.clipboard.writeText(editor.value)
-  }catch(e){
-    qq.er(e)
-  }
+try{
+await navigator.clipboard.writeText(editor.value)
+}catch(e){
+qq.er(e)
+}
 })
 
 
 makeButton(buttons,'paste',async()=>{
-  try{
-    editor.value = await navigator.clipboard.readText()
-  }catch(e){
-    qq.er(e)
-  }
+try{
+editor.value = await navigator.clipboard.readText()
+}catch(e){
+qq.er(e)
+}
 })
 
 
 ns.set('buttonsApps',qq.ce({
-  tag:'div',
-  parent:app,
-  style:{
-    background:'#8D6E63'
-  }
+tag:'div',
+parent:app,
+style:{
+background:'#8D6E63'
+}
 }))
 
 
 ns.set('panelApp',qq.ce({
-  tag:'div',
-  parent:app,
-  style:{
-    minHeight:0,
-    border:'2px solid #7B1FA2',
-    boxSizing:'border-box',
-    background:'#F3E5F5',
-    overflow:'auto'
-  }
+tag:'div',
+parent:app,
+style:{
+minHeight:0,
+border:'2px solid #7B1FA2',
+boxSizing:'border-box',
+background:'#F3E5F5',
+overflow:'auto'
+}
 }))
+//======
+qq.ce({
+  tag:'button',
+  parent:ns.get('buttonsApps'),
+  it:'idb',
+  event:{
+    click:()=>ns.get('eval')(localStorage.getItem('idb'))
+  }
+})
+
+
+//======
 
 
 export default ns
