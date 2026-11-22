@@ -1,6 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+html,
+body{
+width:100%;
+height:100%;
+margin:0;
+}
+</style>
+<script src="js/qqv34.js"></script>
+<script src="js/qqns.js"></script>
+<script type="module" src="js/console.js"></script>
+</head>
+<body>
+<script type="module">
+
+
 const ns = qq.ns()
 
+
 {
+
 
 ns.set('app',qq.ce({
 tag:'div',
@@ -15,7 +38,9 @@ boxSizing:'border-box'
 }
 }))
 
+
 const app = ns.get('app')
+
 
 const topPanel = qq.ce({
 tag:'div',
@@ -28,6 +53,7 @@ alignItems:'center',
 padding:'2px'
 }
 })
+
 
 qq.ce({
 tag:'button',
@@ -47,6 +73,7 @@ click:()=>app.hide()
 }
 })
 
+
 const editor2 = qq.ce({
 tag:'textarea',
 parent:app,
@@ -63,7 +90,9 @@ fontSize:'14px'
 }
 })
 
+
 ns.set('editor2',editor2)
+
 
 const buttons2 = qq.ce({
 tag:'div',
@@ -75,7 +104,9 @@ background:'#546E7A'
 }
 })
 
+
 ns.set('buttons2',buttons2)
+
 
 const editor = qq.ce({
 tag:'textarea',
@@ -93,7 +124,9 @@ fontSize:'15px'
 }
 })
 
+
 ns.set('editor',editor)
+
 
 const buttons = qq.ce({
 tag:'div',
@@ -107,6 +140,7 @@ gap:'5px',
 padding:'3px'
 }
 })
+
 
 const makeButton = (parent,name,fn) => qq.ce({
 tag:'button',
@@ -124,6 +158,7 @@ fontSize:'14px'
 event:{click:fn}
 })
 
+
 makeButton(buttons,'eval',()=>{
 try{
 ns.get('eval')(editor.value)
@@ -132,9 +167,11 @@ qq.er(e)
 }
 })
 
+
 makeButton(buttons,'clear',()=>{
 editor.value = ''
 })
+
 
 makeButton(buttons,'copy',async()=>{
 try{
@@ -144,6 +181,7 @@ qq.er(e)
 }
 })
 
+
 makeButton(buttons,'paste',async()=>{
 try{
 editor.value = await navigator.clipboard.readText()
@@ -152,6 +190,7 @@ qq.er(e)
 }
 })
 
+
 ns.set('buttonsApps',qq.ce({
 tag:'div',
 parent:app,
@@ -159,6 +198,7 @@ style:{
 background:'#8D6E63'
 }
 }))
+
 
 ns.set('panelApp',qq.ce({
 tag:'div',
@@ -172,12 +212,19 @@ overflow:'auto'
 }
 }))
 
+
 }
+
 
 ns.set('eval',function(script){
 return eval(script)
 })
 
+
 ns.get('eval')(qq.ls('Buttons'))
 
+
 export default ns
+</script>
+</body>
+</html>
