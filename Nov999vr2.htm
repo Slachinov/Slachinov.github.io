@@ -18,9 +18,11 @@ margin:0;
 <body>
 <script type="module">
 
+
 const ns = qq.ns();
 
 
+// --- APP ---
 ns.set('app', qq.ce({
   tag: 'div',
   style: {
@@ -52,8 +54,8 @@ ns.set('chat', qq.ce({
 }));
 
 
-// шапка чата
-qq.ce({
+// шапка
+const header = qq.ce({
   tag: 'div',
   parent: ns.get('chat'),
   style: {
@@ -67,23 +69,14 @@ qq.ce({
 });
 
 
-const header = ns.get('chat').lastChild;
-
-
-// кнопка ≡ - открыть список веток
-const menuBtn = qq.ce({
+qq.ce({
   tag: 'button',
   parent: header,
   it: '≡',
-  style: {
-    fontSize: '22px',
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer'
-  },
+  style: { fontSize: '22px', border: 'none', background: 'none', cursor: 'pointer' },
   event: {
     click: function() {
-      ns.get('sidebar').show();
+      ns.get('sidebar').style.display = 'flex';
     }
   }
 });
@@ -93,22 +86,15 @@ qq.ce({
   tag: 'div',
   parent: header,
   it: 'Чат',
-  style: {
-    fontSize: '18px',
-    fontWeight: 'bold'
-  }
+  style: { fontSize: '18px', fontWeight: 'bold' }
 });
 
 
-// зона сообщений
+// сообщения
 ns.set('messages', qq.ce({
   tag: 'div',
   parent: ns.get('chat'),
-  style: {
-    flex: '1',
-    overflowY: 'auto',
-    padding: '10px'
-  }
+  style: { flex: '1', overflowY: 'auto', padding: '10px' }
 }));
 
 
@@ -131,14 +117,10 @@ ns.set('editor', qq.ce({
 const editor = ns.get('editor');
 
 
-// поле ввода
-qq.ce({
+const input = qq.ce({
   tag: 'textarea',
   parent: editor,
-  attr: {
-    placeholder: 'Сообщение...',
-    rows: '1'
-  },
+  attr: { placeholder: 'Сообщение...', rows: '1' },
   style: {
     flex: '1',
     resize: 'none',
@@ -146,56 +128,120 @@ qq.ce({
     borderRadius: '20px',
     padding: '10px 14px',
     fontSize: '16px',
-    outline: 'none'
+    outline: 'none',
+    maxHeight: '120px',
+    overflowY: 'auto'
+  },
+  event: {
+    input: function() {
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight + 'px';
+    }
   }
 });
 
 
-// кнопка развернуть в полный экран
 const expandBtn = qq.ce({
   tag: 'button',
   parent: editor,
   it: '⤢',
-  style: {
-    border: 'none',
-    background: 'none',
-    fontSize: '20px',
-    cursor: 'pointer'
+  style: { border: 'none', background: 'none', fontSize: '20px', cursor: 'pointer' },
+  event: {
+    click: function() {
+      editor.style.position = 'absolute';
+      editor.style.top = '0';
+      editor.style.left = '0';
+      editor.style.width = '100%';
+      editor.style.height = '100%';
+      editor.style.zIndex = '10';
+      editor.style.flexDirection = 'column';
+      expandBtn.style.display = 'none';
+      collapseBtn.style.display = 'block';
+      input.style.maxHeight = 'none';
+      input.style.flex = '1';
+    }
   }
 });
 
 
-// кнопка отправить
 qq.ce({
   tag: 'button',
   parent: editor,
   it: '↑',
   style: {
-    width: '36px',
-    height: '36px',
-    borderRadius: '50%',
-    border: 'none',
-    background: '#007aff',
-    color: '#fff',
-    fontSize: '18px',
-    cursor: 'pointer',
-    flexShrink: '0'
+    width: '36px', height: '36px', borderRadius: '50%',
+    border: 'none', background: '#007aff', color: '#fff',
+    fontSize: '18px', cursor: 'pointer', flexShrink: '0'
   }
 });
 
 
-// кнопка выйти из полноэкранного - скрыта в обычном состоянии
 const collapseBtn = qq.ce({
   tag: 'button',
   parent: editor,
   it: '⤢',
-  style: {
-    border: 'none',
-    background: 'none',
-    fontSize: '20px',
-    cursor: 'pointer',
-    display: 'none'
+  style: { border: 'none', background: 'none', fontSize: '20px', cursor: 'pointer', display: 'none' },
+  event: {
+    click: function() {
+      editor.style.position = '';
+      editor.style.top = '';
+      editor.style.left = '';
+      editor.style.width = '';
+      editor.style.height = '';
+      editor.style.zIndex = '';
+      editor.style.flexDirection = '';
+      collapseBtn.style.display = 'none';
+      expandBtn.style.display = 'block';
+      input.style.maxHeight = '120px';
+      input.style.height = 'auto';
+    }
   }
+});
+
+
+// --- СЛОЙ 2: СПИСОК ВЕТОК ---
+ns.set('sidebar', qq.ce({
+  tag: 'div',
+  parent: ns.get('app'),
+  style: {
+    position: 'absolute',
+    top: '0', left: '0',
+    width: '80%', maxWidth: '300px', height: '100%',
+    background: '#f5f5f5',
+    borderRight: '1px solid #ddd',
+    display: 'none',
+    flexDirection: 'column',
+    zIndex: '20'
+  }
+}));
+
+
+const sidebar = ns.get('sidebar');
+
+
+qq.ce({
+  tag: 'div',
+  parent: sidebar,
+  it: 'Ветки',
+  style: { padding: '14px', fontWeight: 'bold', borderBottom: '1px solid #ddd' }
+});
+
+
+qq.ce({
+  tag: 'div',
+  parent: sidebar,
+  it: 'Ветка 1',
+  style: { padding: '12px 14px', borderBottom: '1px solid #eee', cursor: 'pointer' },
+  event: { click: function() { sidebar.style.display = 'none'; } }
+});
+
+
+qq.ce({
+  tag: 'div',
+  parent: sidebar,
+  it: 'Ветка 2',
+  style: { padding: '12px 14px', borderBottom: '1px solid #eee', cursor: 'pointer' },
+  event: { click: function() { sidebar.style.display = 'none'; } }
 });
 </script>
 </body>
