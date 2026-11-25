@@ -166,6 +166,14 @@ gap: '4px'
 }
 });
 
+
+// --- запоминаем высоту ---
+
+
+let isExpanded = false;
+let savedInputHeight = '';
+
+
 const expandBtn = qq.ce({
 tag: 'button',
 parent: toolbarRight,
@@ -173,25 +181,56 @@ it: '⤢',
 style: { width: '36px', height: '36px', border: 'none', background: 'none', fontSize: '20px', cursor: 'pointer' },
 event: {
 click: function() {
-editor.style.position = 'absolute';
-editor.style.top = '5px';
-editor.style.left = '5px';
-editor.style.right = '5px';
-editor.style.bottom = '5px';
-editor.style.width = 'auto';
-editor.style.height = 'auto';
-editor.style.zIndex = '10';
-editor.style.border = '1px solid #ddd';
-editor.style.borderRadius = '16px';
-expandBtn.style.display = 'none';
-collapseBtn.style.display = 'block';
-input.style.maxHeight = 'none';
-input.style.flex = '1';
-input.style.height = 'auto';
+if (!isExpanded) {
+  // 1. запоминаем реальную высоту, а не style.height
+  savedInputHeight = input.offsetHeight + 'px';
+  isExpanded = true;
+
+
+  editor.style.position = 'absolute';
+  editor.style.top = '5px';
+  editor.style.left = '5px';
+  editor.style.right = '5px';
+  editor.style.bottom = '5px';
+  editor.style.width = 'auto';
+  editor.style.height = 'auto';
+  editor.style.zIndex = '10';
+  editor.style.border = '1px solid #ddd';
+  editor.style.borderRadius = '16px';
+
+
+  input.style.maxHeight = 'none';
+  input.style.flex = '1';
+  input.style.height = 'auto';
+
+
+  expandBtn.textContent = '⤡'; // меняем именно текст в DOM, а не .it
+} else {
+  // 2. возвращаем
+  isExpanded = false;
+
+
+  editor.style.position = '';
+  editor.style.top = '';
+  editor.style.left = '';
+  editor.style.right = '';
+  editor.style.bottom = '';
+  editor.style.width = '';
+  editor.style.height = '';
+  editor.style.zIndex = '';
+  editor.style.borderRadius = '';
+
+
+  input.style.maxHeight = '120px';
+  input.style.flex = '';
+  input.style.height = savedInputHeight; // ставим запомненную
+
+
+  expandBtn.textContent = '⤢';
+}
 }
 }
 });
-
 qq.ce({
 tag: 'button',
 parent: toolbarRight,
@@ -210,30 +249,7 @@ fontSize: '18px', cursor: 'pointer', flexShrink: '0'
 }
 });
 
-const collapseBtn = qq.ce({
-tag: 'button',
-parent: toolbarRight,
-it: '⤡',
-style: { width: '36px', height: '36px', border: 'none', background: 'none', fontSize: '20px', cursor: 'pointer', display: 'none' },
-event: {
-click: function() {
-editor.style.position = '';
-editor.style.top = '';
-editor.style.left = '';
-editor.style.right = '';
-editor.style.bottom = '';
-editor.style.width = '';
-editor.style.height = '';
-editor.style.zIndex = '';
-editor.style.borderRadius = '';
-collapseBtn.style.display = 'none';
-expandBtn.style.display = 'block';
-input.style.maxHeight = '120px';
-input.style.flex = '';
-input.style.height = 'auto';
-}
-}
-});
+
 
 // --- СЛОЙ 2: СПИСОК ВЕТОК ---
 // Теперь это оверлей на весь экран: слева панель, справа полупрозрачный фон
