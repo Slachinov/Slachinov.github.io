@@ -126,6 +126,8 @@ error(...args){write('ERR',args)},
 hide(){if(consoleBox)consoleBox.hide()},
 show(){if(consoleBox)consoleBox.show()}
 }
+qq.cl=qq.console.log;
+qq.er=qq.console.error;
 console.log=qq.console.log
 console.error=qq.console.error
 createBox()
