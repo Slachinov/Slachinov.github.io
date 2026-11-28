@@ -12,26 +12,227 @@ margin:0;
 }
 </style>
 <script src="js/qqv34.js"></script>
-<script src="js/qqns.js"></script>
+<script src="js/qqns1.js"></script>
 <script type="module" src="js/console.js"></script>
 </head>
 <body>
 <script type="module">
-qq.cl('begin fsend');
+
+
+qq.cl('begin fsend 0');
+
+
 import ns from "/Gemini/main.js"
-
-import  "/Gemini/buttons.js"
-
-
-
+import "/Gemini/buttons.js"
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@18.2.0/lib/marked.esm.js';
+import { createIdbApi } from '/Lib/idb/f2.js';
 
 
-function f(){
-  qq.cl('Событие fsend получено!');
+const idb = createIdbApi('ai_dialogs', 'gemini');
+
+
+const providerSelect = qq.ce({
+  tag: 'select',
+  parent: ns.get('header'),
+  style: {
+    padding: '6px',
+    margin: '5px'
+  }
+});
+
+
+qq.ce({
+  tag: 'option',
+  parent: providerSelect,
+  val: 'gemini',
+  it: 'Gemini'
+});
+
+
+qq.ce({
+  tag: 'option',
+  parent: providerSelect,
+  val: 'openrouter',
+  it: 'OpenRouter'
+});
+
+
+
+
+async function askAI() {
+  qq.cl('askAI');
+
+
+  const provider = providerSelect.value;
+  const question = ns.get('editor').innerText;
+  const start = performance.now();
+
+
+  qq.cl({provider, question});
+
+
+  const dialog = ns.get('dialog');
+  dialog.innerText = 'думаю...';
+
+
+  try {
+    let res;
+    let data;
+    let text;
+
+
+    if (provider === 'gemini') {
+      const apiKey = localStorage.getItem('gemini_api_key');
+
+
+      res = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': apiKey
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{text: question}]
+            }]
+          })
+        }
+      );
+
+
+      data = await res.json();
+      text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+
+    } else if (provider === 'openrouter') {
+      const apiKey = localStorage.getItem('Openrouter');
+
+
+      res = await fetch(
+        'https://openrouter.ai/api/v1/chat/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + apiKey,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: 'openrouter/free',
+            messages: [{
+              role: 'user',
+              content: question
+            }]
+          })
+        }
+      );
+
+
+      data = await res.json();
+      text = data.choices?.[0]?.message?.content;
+    }
+
+
+    const sec = ((performance.now() - start) / 1000).toFixed(2);
+
+
+    if (!res.ok || data.error) {
+      throw new Error(data.error?.message || `HTTP ${res.status}`);
+    }
+
+
+    if (typeof text !== 'string' || !text) {
+      throw new Error('Текст ответа не найден');
+    }
+
+
+    await idb.put({
+      provider,
+      question,
+      answer: text,
+      data,
+      time: Date.now()
+    });
+
+
+    dialog.innerHTML = marked.parse(text);
+
+
+    qq.cl('Ответ получен за ' + sec + ' сек');
+
+
+  } catch (err) {
+    dialog.innerText = 'Ошибка: ' + err.message;
+    qq.cl(err);
+  }
 }
 
 
-ns.subscribe('fsend',f);
+
+
+ns.subscribe('fsend', askAI);
+
+
+
+
+//===========
+ns.subscribe('fbranch', async () => {
+  const dialog = ns.get('dialog');
+  dialog.innerHTML = '';
+
+
+  const keys = await idb.getAllKeys();
+
+
+  for (let i = 0; i < keys.length; i++) {
+    const data = await idb.get(keys[i]);
+
+
+    const message = qq.ce({
+      tag: 'div',
+      parent: dialog,
+      style: {
+        padding: '12px'
+      }
+    });
+
+
+    qq.ce({
+      tag: 'div',
+      parent: message,
+      it: data.provider + ' — ' + data.question
+    });
+
+
+    qq.ce({
+      tag: 'div',
+      parent: message,
+      ih: marked.parse(data.answer)
+    });
+
+
+    if (i < keys.length - 1) {
+      qq.ce({
+        tag: 'hr',
+        parent: dialog,
+        style: {
+          border: 'none',
+          borderTop: '2px solid #888',
+          margin: '16px 0'
+        }
+      });
+    }
+  }
+
+
+  qq.ce({
+    tag: 'div',
+    parent: dialog,
+    style: {height: '1000px'}
+  });
+});
+
 </script>
 </body>
 </html>
