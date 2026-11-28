@@ -36,7 +36,7 @@ const providerSelect = qq.ce({
   parent: ns.get('header'),
   style: {
     padding: '6px',
-    marginLeft: '205px'
+    marginLeft: '125px'
   }
 });
 
@@ -66,8 +66,7 @@ async function askAI() {
   const provider = providerSelect.value;
   const question = ns.get('editor').innerText;
   const start = performance.now();
-
-
+ns.get('editor').innerHTML="";
   qq.cl({provider, question});
 
 
