@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Пример вкладок (Tabs)</title>
+<style>
+body {
+font-family: sans-serif;
+margin: 20px;
+}
+
+/* Верхняя панель с названиями (Tab Bar) */
+.tab-bar {
+display: flex;
+border-bottom: 2px solid #ccc;
+background-color: #f1f1f1;
+}
+
+/* Кнопки-вкладки */
+.tab-btn {
+padding: 12px 20px;
+border: none;
+background: none;
+cursor: pointer;
+font-size: 16px;
+transition: 0.2s;
+}
+
+.tab-btn:hover {
+background-color: #ddd;
+}
+
+/* Стиль активной вкладки */
+.tab-btn.active {
+background-color: #fff;
+border-top: 2px solid #007bff;
+border-left: 1px solid #ccc;
+border-right: 1px solid #ccc;
+margin-bottom: -2px; /* Перекрывает нижнюю линию */
+font-weight: bold;
+}
+
+/* Нижнее большое пространство с контентом (Tab Panel) */
+.tab-panel {
+display: none; /* По умолчанию все панели скрыты */
+padding: 20px;
+border: 1px solid #ccc;
+border-top: none;
+min-height: 200px;
+}
+
+/* Показываем только активную панель */
+.tab-panel.active {
+display: block;
+}
+</style>
+</head>
+<body>
+
+<!-- Верхняя строка с названиями панелей -->
+<div class="tab-bar">
+<button class="tab-btn active" onclick="openTab(event, 'panel1')">Вкладка 1</button>
+<button class="tab-btn" onclick="openTab(event, 'panel2')">Вкладка 2</button>
+<button class="tab-btn" onclick="openTab(event, 'panel3')">Вкладка 3</button>
+</div>
+
+<!-- Нижнее пространство с самими панелями -->
+<div id="panel1" class="tab-panel active">
+<h2>Содержимое первой панели</h2>
+<p>Здесь находится большой контент первой вкладки.</p>
+</div>
+
+<div id="panel2" class="tab-panel">
+<h2>Содержимое второй панели</h2>
+<p>Этот текст появился после клика по второй вкладке.</p>
+</div>
+
+<div id="panel3" class="tab-panel">
+<h2>Содержимое третьей панели</h2>
+<p>А здесь настройки или любая другая информация.</p>
+</div>
+
+<script>
+function openTab(event, panelId) {
+// 1. Скрываем все нижние панели
+const panels = document.querySelectorAll('.tab-panel');
+panels.forEach(panel => panel.classList.remove('active'));
+
+// 2. Убираем подсветку со всех верхних кнопок
+const buttons = document.querySelectorAll('.tab-btn');
+buttons.forEach(btn => btn.classList.remove('active'));
+
+// 3. Показываем нужную панель и подсвечиваем нажатую кнопку
+document.getElementById(panelId).classList.add('active');
+event.currentTarget.classList.add('active');
+}
+</script>
+
+</body>
+</html>
